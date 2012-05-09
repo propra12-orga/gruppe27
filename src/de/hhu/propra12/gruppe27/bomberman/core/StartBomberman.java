@@ -7,6 +7,10 @@ public class StartBomberman {
 	 */
 
 	public static void main(String[] args) {
+		Level0 pg = new Level0(101, 101);
+		pg.draw();
+
+		// TODO Auto-generated method stub
 
 	}
 

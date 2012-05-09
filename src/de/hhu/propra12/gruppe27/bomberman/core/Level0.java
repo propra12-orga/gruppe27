@@ -27,8 +27,8 @@ public class Level0 {
 		// Minimum 10 x 10 Felder
 		// Länge und Breite müssen ungerade sein
 
-		if ((laenge < 10) || (breite < 10) || (laenge % 2 != 0)
-				|| (breite % 2 != 0)) {
+		if ((laenge < 10) || (breite < 10) || (laenge % 2 == 0)
+				|| (breite % 2 == 0)) {
 			System.out.println("Spielfeld entspricht nicht den Anforderungen");
 		}
 
@@ -84,7 +84,7 @@ public class Level0 {
 
 	public void draw() {
 		for (int i = 0; i < laenge; i++) {
-			System.out.println("|");
+			System.out.println(" ");
 			for (int j = 0; j < breite; j++) {
 				System.out.print(laxbr[i][j].toChar());
 			}
