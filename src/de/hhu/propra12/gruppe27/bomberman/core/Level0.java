@@ -41,26 +41,26 @@ public class Level0 {
 					// Aussenwände
 					if ((i == 0) || (i == laenge - 1) || (j == 0)
 							|| (j == breite - 1)) {
-						laxbr[i][j] = new Wall('W');
+						laxbr[i][j] = new Wall('+');
 					}
 
 					// Innenblocks
 					else if ((i % 2 == 0) && (j % 2 == 0)) {
-						laxbr[i][j] = new Wall('W');
+						laxbr[i][j] = new Wall('+');
 					}
 
 					// Startfeld Spieler 1
 					else if ((i == 1) && (j == 1)) {
-						laxbr[i][j] = new Wall('c');
+						laxbr[i][j] = new Wall('S');
 					}
 
 					// Begehbare Felder mit zerstörbaren Objekten
 					else {
 						freioderzerst = randomBoolean();
 						if (freioderzerst == true) {
-							laxbr[i][j] = new Wall('c');
+							laxbr[i][j] = new Wall('-');
 						} else {
-							laxbr[i][j] = new Wall('c');
+							laxbr[i][j] = new Wall('-');
 						}
 
 					}
