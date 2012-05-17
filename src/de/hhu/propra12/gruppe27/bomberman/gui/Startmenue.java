@@ -1,5 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +18,6 @@ public class Startmenue {
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel bild = new JLabel("Platzhalter Bild");
-		JLabel wahl = new JLabel("Triff deine Wahl");
 		JPanel panel = new JPanel();
 
 		framemenue.add(panel);
@@ -28,18 +30,16 @@ public class Startmenue {
 		JButton buttonS3 = new JButton("Spiel verlassen");
 		panel.add(buttonS3);
 
+		buttonS2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Optionmenue option = new Optionmenue();
+				option.optionaufruf();
+			}
+		});
+
 		return (1);
 	}
-	// Fenster
-
-	// Bild oben
-
-	// 3 Buttons
-
-	// Button Spielstart
-
-	// Button Spiel beenden
-
-	// Optionen
-
 }
