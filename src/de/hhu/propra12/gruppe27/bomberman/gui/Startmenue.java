@@ -1,5 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,17 +21,32 @@ public class Startmenue {
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel bild = new JLabel("Platzhalter Bild");
-		JPanel panel = new JPanel();
-
+		JPanel panel = new JPanel(new GridBagLayout());
 		framemenue.add(panel);
+
+		framemenue.getContentPane().add(panel, BorderLayout.SOUTH);
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.gridx = 0;
+		c.gridy = 0;
 		panel.add(bild);
 
 		JButton buttonS1 = new JButton("Spiel starten");
-		panel.add(buttonS1);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1.0;
+		panel.add(buttonS1, c);
+
 		JButton buttonS2 = new JButton("Optionen");
-		panel.add(buttonS2);
+		c.gridx = 0;
+		c.gridy = 2;
+		panel.add(buttonS2, c);
+
 		JButton buttonS3 = new JButton("Spiel verlassen");
-		panel.add(buttonS3);
+		c.gridx = 0;
+		c.gridy = 3;
+		panel.add(buttonS3, c);
 
 		buttonS2.addActionListener(new ActionListener() {
 
@@ -37,6 +55,15 @@ public class Startmenue {
 
 				Optionmenue option = new Optionmenue();
 				option.optionaufruf();
+			}
+		});
+
+		buttonS3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				System.exit(0);
 			}
 		});
 
