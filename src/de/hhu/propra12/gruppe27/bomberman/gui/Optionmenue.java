@@ -12,7 +12,9 @@ public class Optionmenue {
 		JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
 		frameoption.setSize(400, 400);
-		frameoption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //DISPOSE statt EXIT!
+		frameoption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // DISPOSE
+																		// statt
+																		// EXIT!
 
 		JLabel optionbild = new JLabel("Platzhalter Bild");
 		JPanel optionpanel = new JPanel();
