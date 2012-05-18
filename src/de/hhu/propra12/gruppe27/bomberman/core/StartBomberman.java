@@ -14,6 +14,8 @@ public class StartBomberman {
 		Startmenue start = new Startmenue();
 		start.menueaufruf();
 
+		Player player1 = new Player(1, 1, 1, 1, "Spieler1");
+
 		Level0 pg = new Level0(11, 11, 1);
 		pg.textout();
 
