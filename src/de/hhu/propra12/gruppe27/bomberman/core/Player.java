@@ -8,6 +8,8 @@ public class Player {
 	int bombstr; // Bombenstärke 1 pro Feld
 	int bombanz; // Bombenanzahl
 
+	// int speed;
+
 	String name;
 
 	// Konstruktor
@@ -20,5 +22,20 @@ public class Player {
 		this.name = p1name;
 
 	}
+
+	// Bewegungs-Methoden
+
+	/*
+	 * 
+	 * moveleft (){ }
+	 * 
+	 * moveright (){ }
+	 * 
+	 * moveup (){ }
+	 * 
+	 * movedown (){ }
+	 * 
+	 * laybomb() { }
+	 */
 
 }
