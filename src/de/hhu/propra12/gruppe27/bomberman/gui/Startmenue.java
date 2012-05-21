@@ -48,6 +48,18 @@ public class Startmenue {
 		c.gridy = 3;
 		panel.add(buttonS3, c);
 
+		buttonS1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				GameWindow s = new GameWindow(0, 15, 15, 1); // bitte in werte
+																// aus
+																// dem menü
+				// ändern
+			}
+		});
+
 		buttonS2.addActionListener(new ActionListener() {
 
 			@Override

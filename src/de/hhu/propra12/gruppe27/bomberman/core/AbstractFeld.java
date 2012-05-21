@@ -1,5 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.awt.Color;
+
 public abstract class AbstractFeld {
 	// (?)sollte ein feld seine eigenen koordinaten kennen? vllt sinnvoll um
 	// später
@@ -11,6 +13,14 @@ public abstract class AbstractFeld {
 	// Feld zerstörbar
 	public static boolean zerstoer;
 
+	private Color c;
+
 	public abstract char toChar();// bis noch kein gui da ist...
+
+	// public Image im;
+
+	public Color getColor() {
+		return c;
+	}
 
 }

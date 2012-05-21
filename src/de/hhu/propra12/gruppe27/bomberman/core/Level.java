@@ -6,7 +6,8 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 public abstract class Level {
 	int laenge;
 	int breite;
-	AbstractFeld laxbr[][];
+	String name;
+	protected AbstractFeld laxbr[][];
 
 	public Level(int laenge, int breite) {// initialisiert länge breite und
 											// spielfeld"laxbr" (bin für
@@ -26,6 +27,20 @@ public abstract class Level {
 			}
 
 		}
+	}
+
+	public AbstractFeld getFeld(int x, int y) {
+		return laxbr[x][y];
+	}
+
+	public abstract int[] getStartposition(int spielernummer);
+
+	public int getlaenge() {
+		return laenge;
+	}
+
+	public int getbreite() {
+		return breite;
 	}
 
 }

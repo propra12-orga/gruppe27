@@ -12,6 +12,7 @@ public class Level0 extends Level {
 
 	public Level0(int laenge, int breite, int spielerzahl) {
 		super(laenge, breite);
+		this.name = "Testlevel";
 
 		// Wenn Feld zu klein Abbruch
 		// Minimum 10 x 10 Felder
@@ -31,12 +32,12 @@ public class Level0 extends Level {
 					// Aussenwände
 					if ((i == 0) || (i == laenge - 1) || (j == 0)
 							|| (j == breite - 1)) {
-						laxbr[i][j] = new Wall('W');
+						laxbr[i][j] = new Wall();
 					}
 
 					// Innenblocks
 					else if ((i % 2 == 0) && (j % 2 == 0)) {
-						laxbr[i][j] = new Wall('W');
+						laxbr[i][j] = new Wall();
 					}
 
 					// Begehbare Felder mit zerstörbaren Objekten
@@ -58,8 +59,6 @@ public class Level0 extends Level {
 													// die erste bombe den tod
 													// bedeutet!)
 						laxbr[1][2] = new Path();
-						// 1 spieler minimum für weitere spieler später switch
-						// auf spielerzahl...
 
 					}
 
@@ -78,6 +77,12 @@ public class Level0 extends Level {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public int[] getStartposition(int spielernummer) {
+		int[] a = { 1, 1 };
+		return a;
 	}
 
 }
