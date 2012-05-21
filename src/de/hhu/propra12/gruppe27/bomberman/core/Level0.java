@@ -80,6 +80,7 @@ public class Level0 extends Level {
 	}
 
 	@Override
+	// führ mehr spieler anzupassen!
 	public int[] getStartposition(int spielernummer) {
 		int[] a = { 1, 1 };
 		return a;

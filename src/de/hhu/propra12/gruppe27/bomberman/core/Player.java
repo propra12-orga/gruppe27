@@ -1,43 +1,94 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.awt.event.KeyEvent;
+
+import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
 public class Player {
 
-	int posx; // entspricht i im Array
-	int posy; // enstpricht j im Array
+	private boolean alive;
 
-	int bombstr; // Bombenstärke 1 pro Feld
+	boolean pleft, pright, pup, pdown;
+
+	private int posx; // entspricht i im Array
+	private int posy; // enstpricht j im Array
+
+	int bombstr; // Bombenstï¿½rke 1 pro Feld
 	int bombanz; // Bombenanzahl
+	int bombcount;// Bombenanzahl aktuell
 
+	Spielfeld owner;
 	// int speed;
 
 	String name;
 
 	// Konstruktor
-	Player(int posx, int posy, int bombstr, int bombanz, String p1name) {
-
+	public Player(int posx, int posy, String pname, Spielfeld owner) {
+		alive = true;
 		this.posx = posx;
 		this.posy = posy;
-		this.bombstr = bombstr;
-		this.bombanz = bombanz;
-		this.name = p1name; // Warum p1name? Warum nicht einfach pname? Da es
-							// ein Konstruktor ist kann mann doch mehr als nur
-							// einen Spieler erstellen?!
+		bombstr = 1;
+		bombanz = 1;
+		name = pname;
+		pleft = false;
+		pright = false;
+		pup = false;
+		pdown = false;
+		bombcount = 1;
+		this.owner = owner;
 
 	}
 
-	// Bewegungs-Methoden
+	public boolean isAlive() {
+		return alive;
+	}
 
-	/*
-	 * 
-	 * moveleft (){ }
-	 * 
-	 * moveright (){ }
-	 * 
-	 * moveup (){ }
-	 * 
-	 * movedown (){ }
-	 * 
-	 * laybomb() { }
-	 */
+	public int getX() {
+		return posx;
+	}
 
+	public int getY() {
+		return posy;
+	}
+
+	public void update(int keycode, boolean pressed) {
+		// player1
+		switch (keycode) {
+		case KeyEvent.VK_W:
+			pup = pressed;
+			break;
+		case KeyEvent.VK_A:
+			pleft = pressed;
+			break;
+		case KeyEvent.VK_S:
+			pdown = pressed;
+			break;
+		case KeyEvent.VK_D:
+			pright = pressed;
+			break;
+		case KeyEvent.VK_SPACE: {
+			pright = pressed;
+			if (bombcount < 0)
+
+				break;
+		}
+		default:
+			break;
+		}
+
+	}
+
+	public void move() {
+		// player 1
+		if (pup) {
+
+		} else if (pleft) {
+
+		} else if (pdown) {
+
+		} else if (pright) {
+
+		}
+
+	}
 }

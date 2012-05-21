@@ -19,8 +19,12 @@ public abstract class AbstractFeld {
 
 	// public Image im;
 
-	public Color getColor() {
+	public Color getColor() {// später ersetzen durch bildausgabe
 		return c;
 	}
+
+	public abstract void explodeOn(); // bombe explodiert an stelle
+
+	public abstract AbstractFeld destroy();// von bombenexplosion betroffen
 
 }

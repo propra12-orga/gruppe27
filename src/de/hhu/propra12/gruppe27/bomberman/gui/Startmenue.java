@@ -53,10 +53,7 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				GameWindow s = new GameWindow(0, 15, 15, 1); // bitte in werte
-																// aus
-																// dem menü
-				// ändern
+				GameWindow s = new GameWindow(0, 15, 15, 1);
 			}
 		});
 
