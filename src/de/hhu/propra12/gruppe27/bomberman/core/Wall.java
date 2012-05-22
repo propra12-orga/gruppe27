@@ -10,6 +10,7 @@ public class Wall extends AbstractFeld {
 	public Wall(int x, int y, Level owner) {
 		super(x, y, owner);
 		frei = false;
+		zerstoer = false;
 	}
 
 	@Override

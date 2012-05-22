@@ -53,7 +53,6 @@ public class Player {
 	}
 
 	public void update(int keycode, boolean pressed) {
-		System.out.println("update: " + posx + " " + posy);
 		switch (keycode) {
 		case KeyEvent.VK_W:
 			pup = pressed;
@@ -68,10 +67,8 @@ public class Player {
 			pright = pressed;
 			break;
 		case KeyEvent.VK_SPACE: {
-			pright = pressed;
-			if (bombcount < 0)
-
-				break;
+			plant = pressed;
+			break;
 		}
 		default:
 			break;
@@ -80,7 +77,6 @@ public class Player {
 	}
 
 	public void move() {
-		System.out.println(owner.getFeld(posx, posy).isFrei());
 		if (pup) {
 			if (owner.getFeld(posx, posy - 1).isFrei())
 				posy--;
@@ -93,8 +89,13 @@ public class Player {
 		} else if (pright) {
 			if (owner.getFeld(posx + 1, posy).isFrei())
 				posx++;
-		} else
-			;
+		} else if (plant) {
+			if (bombcount > 0) {
+				owner.b1 = new Bomb(this, bombstr, 7);
+				bombcount--;
+			}
+		}
+		;
 
 	}
 }

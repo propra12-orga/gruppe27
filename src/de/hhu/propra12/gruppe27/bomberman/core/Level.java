@@ -33,6 +33,10 @@ public abstract class Level {
 		return laxbr[x][y];
 	}
 
+	public void setFeld(AbstractFeld input, int x, int y) {
+		laxbr[x][y] = input;
+	}
+
 	public abstract int[] getStartposition(int spielernummer);
 
 	public int getlaenge() {

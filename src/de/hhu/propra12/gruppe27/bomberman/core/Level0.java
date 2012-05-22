@@ -79,7 +79,7 @@ public class Level0 extends Level {
 
 		// int r = (int) Math.random() * 10;
 
-		if (Math.random() < 0.7) {
+		if (Math.random() < 0.25) {
 			return true;
 		} else {
 			return false;

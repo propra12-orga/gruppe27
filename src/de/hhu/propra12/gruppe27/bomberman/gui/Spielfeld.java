@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
+import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Player;
@@ -22,6 +23,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public Level level;
 	public Player p1;
 	private Timer t;
+	public Bomb b1;
 
 	private static Level loadlevel(int levelnr, int laenge, int breite,
 			int spielerzahl) {
@@ -44,19 +46,30 @@ public class Spielfeld extends JPanel implements ActionListener {
 		level.textout();
 		this.repaint();
 		this.startgame();
+		b1 = new Bomb();
 	}
 
 	private void startgame() {
-		t = new Timer(300, this);
+		t = new Timer(500, this);
 		t.start();
 
+	}
+
+	private void StatusUpdate() {
+		if (b1.isPlanted())
+			b1.check();// später automatisch alle bomben auf spielfeld
 	}
 
 	public AbstractFeld getFeld(int x, int y) {
 		return level.getFeld(x, y);
 	}
 
+	public void setFeld(AbstractFeld input, int x, int y) {
+		level.setFeld(input, x, y);
+	}
+
 	protected void paintComponent(Graphics g) {
+		StatusUpdate();
 		for (int i = 0; i < level.getlaenge(); i++)
 			for (int j = 0; j < level.getbreite(); j++) {
 				g.setColor(level.getFeld(i, j).getColor());
@@ -68,6 +81,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 				p1.getY() * 32 + 32);
 		g.drawLine(p1.getX() * 32 + 32, p1.getY() * 32, p1.getX() * 32,
 				p1.getY() * 32 + 32);
+		if (b1.isPlanted()) {
+			g.drawOval(b1.getPosx() * 32, b1.getPosy() * 32, 32, 32);
+		}
 
 	}
 
@@ -75,6 +91,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		p1.move();
 		repaint();
+
 	}
 
 	public static void main(String[] args) {// um nicht immer durch Startmenü zu
@@ -86,7 +103,6 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			p1.update(e.getKeyCode(), true);
-			System.out.println("Key Pressed");
 		}
 
 		public void keyReleased(KeyEvent e) {

@@ -7,6 +7,7 @@ public class Path extends AbstractFeld {
 	public Path(int x, int y, Level owner) {
 		super(x, y, owner);
 		frei = true;
+		zerstoer = true;
 		// TODO Auto-generated constructor stub
 	}
 

@@ -3,10 +3,11 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.Color;
 
 public abstract class AbstractFeld {
-	public static final int DIR_TOP = 0;
-	public static final int DIR_LEFT = 1;
-	public static final int DIR_RIGHT = 2;
-	public static final int DIR_BOTTOM = 3;
+	public static final int DIR_NULL = 0;
+	public static final int DIR_TOP = 1;
+	public static final int DIR_LEFT = 2;
+	public static final int DIR_RIGHT = 3;
+	public static final int DIR_BOTTOM = 4;
 
 	// (?)sollte ein feld seine eigenen koordinaten kennen? vllt sinnvoll um
 	// später
@@ -16,7 +17,9 @@ public abstract class AbstractFeld {
 	protected boolean frei;
 
 	// Feld zerstörbar
-	private boolean zerstoer;
+	protected boolean zerstoer;
+
+	private boolean bombplanted;
 
 	private int posx, posy;
 
@@ -40,22 +43,26 @@ public abstract class AbstractFeld {
 	}
 
 	public final AbstractFeld destroy(int str, int direction) {
-		if (zerstoer)
+		if (zerstoer) {
+			System.out.println("dest");
 			return new Path(posx, posy, owner);
-		else {
+		} else {
 			if (str > 1) {
 				switch (direction) {
 				case DIR_TOP:
-					owner.getFeld(posx - 1, posy).destroy(str - 1, DIR_TOP);
+					owner.setFeld((owner.getFeld(posx - 1, posy).destroy(
+							str - 1, DIR_RIGHT)), posx - 1, posy);
 					break;
 				case DIR_LEFT:
-					owner.getFeld(posx, posy - 1).destroy(str - 1, DIR_LEFT);
-					break;
+					owner.setFeld((owner.getFeld(posx, posy - 1).destroy(
+							str - 1, DIR_RIGHT)), posx, posy - 1);
 				case DIR_BOTTOM:
-					owner.getFeld(posx + 1, posy).destroy(str - 1, DIR_BOTTOM);
+					owner.setFeld((owner.getFeld(posx + 1, posy).destroy(
+							str - 1, DIR_RIGHT)), posx + 1, posy);
 					break;
 				case DIR_RIGHT:
-					owner.getFeld(posx, posy + 1).destroy(str - 1, DIR_RIGHT);
+					owner.setFeld((owner.getFeld(posx, posy + 1).destroy(
+							str - 1, DIR_RIGHT)), posx, posy + 1);
 					break;
 				default:
 					break;
@@ -65,7 +72,12 @@ public abstract class AbstractFeld {
 		}
 	}
 
-	public void explodeOn(int i) {
+	public void explodeOn(int str) {
+		owner.getFeld(posx - 1, posy).destroy(str, DIR_TOP);
+		owner.getFeld(posx, posy - 1).destroy(str, DIR_LEFT);
+		owner.getFeld(posx + 1, posy).destroy(str, DIR_BOTTOM);
+		owner.getFeld(posx + 1, posy).destroy(str, DIR_RIGHT);
+		this.destroy(0, DIR_NULL);
 
 	}
 
