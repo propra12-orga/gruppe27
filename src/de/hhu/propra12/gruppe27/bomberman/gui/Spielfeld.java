@@ -62,7 +62,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	private void StatusUpdate() {
-		if ((p1.getX() == e.getPosx()) && (p1.getX() == e.getPosy()))
+		if ((p1.getX() == e.getX()) && (p1.getY() == e.getY()))
 			e.doOnExit(this);
 		if (b1.isPlanted())
 			b1.check();// TODO später automatisch alle bomben auf spielfeld
@@ -92,7 +92,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 		if (b1.isPlanted()) {
 			g.drawOval(b1.getPosx() * 32, b1.getPosy() * 32, 32, 32);
 		}
-		g.drawOval(e.getPosx() * 32, e.getPosy() * 32, 32, 32);
+		g.setColor(Color.pink);
+		g.drawOval(e.getX() * 32, e.getY() * 32, 32, 32);
 
 	}
 

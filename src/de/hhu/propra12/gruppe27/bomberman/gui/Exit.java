@@ -13,7 +13,7 @@ public class Exit {
 		// TODO
 	}
 
-	public int getPosx() {
+	public int getX() {
 		return posx;
 	}
 
@@ -21,7 +21,7 @@ public class Exit {
 		this.posx = posx;
 	}
 
-	public int getPosy() {
+	public int getY() {
 		return posy;
 	}
 
