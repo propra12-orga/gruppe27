@@ -15,6 +15,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
+import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.Player;
 
 public class Spielfeld extends JPanel implements ActionListener {
@@ -22,8 +23,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	public Level level;
 	public Player p1;
-	private Timer t;
+	Timer t;
 	public Bomb b1;
+	public Exit e;
 
 	private static Level loadlevel(int levelnr, int laenge, int breite,
 			int spielerzahl) {
@@ -44,6 +46,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 		this.setSize(laenge * 32, breite * 32 + 500);
 		this.setVisible(true);
 		level.textout();
+		level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
+				breite - 2); // platz für ausgang schaffen später auch durch
+								// level übernommen
+		e = new Exit(laenge - 2, breite - 2); // asugang plazieren
 		this.repaint();
 		this.startgame();
 		b1 = new Bomb();
@@ -56,8 +62,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	private void StatusUpdate() {
+		if ((p1.getX() == e.getPosx()) && (p1.getX() == e.getPosy()))
+			e.doOnExit(this);
 		if (b1.isPlanted())
-			b1.check();// später automatisch alle bomben auf spielfeld
+			b1.check();// TODO später automatisch alle bomben auf spielfeld
 	}
 
 	public AbstractFeld getFeld(int x, int y) {
@@ -84,6 +92,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 		if (b1.isPlanted()) {
 			g.drawOval(b1.getPosx() * 32, b1.getPosy() * 32, 32, 32);
 		}
+		g.drawOval(e.getPosx() * 32, e.getPosy() * 32, 32, 32);
 
 	}
 

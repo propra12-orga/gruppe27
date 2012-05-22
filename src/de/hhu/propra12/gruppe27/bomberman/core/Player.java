@@ -91,7 +91,7 @@ public class Player {
 				posx++;
 		} else if (plant) {
 			if (bombcount > 0) {
-				owner.b1 = new Bomb(this, bombstr, 7);
+				owner.b1 = new Bomb(this, 1, 7);
 				bombcount--;
 			}
 		}
