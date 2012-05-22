@@ -13,11 +13,17 @@ import javax.swing.JPanel;
 
 public class Startmenue {
 
+	/*
+	 * Variablen um das Spielfeld zu erstellen
+	 */
+
+	int opwall = 5; // Mauerdichte
+
 	public int menueaufruf() {
 
 		JFrame framemenue = new JFrame("Bomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setSize(500, 500);
+		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel bild = new JLabel("Platzhalter Bild");
