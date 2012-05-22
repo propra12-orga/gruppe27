@@ -11,7 +11,7 @@ public class Exit {
 	public void doOnExit(Spielfeld owner) {
 		owner.t.stop();
 		// TODO
-	}
+	}u
 
 	public int getPosx() {
 		return posx;
