@@ -11,13 +11,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+
 public class Startmenue {
 
 	/*
 	 * Variablen um das Spielfeld zu erstellen
 	 */
 
-	int opwall = 5; // Mauerdichte
+	// int opwall = 5; // Mauerdichte
+
+	// Systemeinstellungen sind "default" gesetzt
+	SysEinst system = new SysEinst();
 
 	public int menueaufruf() {
 
@@ -60,6 +65,7 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				GameWindow s = new GameWindow(0, 15, 15, 1);
+				// Variablen können aus "system" gezogen werden
 			}
 		});
 
