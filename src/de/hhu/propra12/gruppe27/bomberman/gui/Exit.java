@@ -11,9 +11,9 @@ public class Exit {
 	public void doOnExit(Spielfeld owner) {
 		owner.t.stop();
 		// TODO
-	}u
+	}
 
-	public int getPosx() {
+	public int getX() {
 		return posx;
 	}
 
@@ -21,7 +21,7 @@ public class Exit {
 		this.posx = posx;
 	}
 
-	public int getPosy() {
+	public int getY() {
 		return posy;
 	}
 
