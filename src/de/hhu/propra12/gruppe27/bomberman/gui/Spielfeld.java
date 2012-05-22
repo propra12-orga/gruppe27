@@ -104,11 +104,14 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	}
 
+	// Mainfunktion nur zum testen um Menü zu überspringen
 	public static void main(String[] args) {// um nicht immer durch Startmenü zu
 											// müssen später entfernen.
 		@SuppressWarnings("unused")
 		JFrame f = new GameWindow(0, 13, 13, 1);
 	}
+
+	// ------------------------------------------------------
 
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {

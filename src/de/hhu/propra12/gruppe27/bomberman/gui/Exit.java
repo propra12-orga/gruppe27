@@ -9,7 +9,10 @@ public class Exit {
 	}
 
 	public void doOnExit(Spielfeld owner) {
+		owner.setVisible(false);
 		owner.t.stop();
+		System.out.println("Sie haben das ende erreicht");
+
 		// TODO
 	}
 
