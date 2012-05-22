@@ -32,33 +32,40 @@ public class Level0 extends Level {
 					// Aussenwände
 					if ((i == 0) || (i == laenge - 1) || (j == 0)
 							|| (j == breite - 1)) {
-						laxbr[i][j] = new Wall();
+						laxbr[i][j] = new Wall(i, j, this);
 					}
 
 					// Innenblocks
 					else if ((i % 2 == 0) && (j % 2 == 0)) {
-						laxbr[i][j] = new Wall();
+						laxbr[i][j] = new Wall(i, j, this);
 					}
 
 					// Begehbare Felder mit zerstörbaren Objekten
 					else {
 						freioderzerst = randomBoolean();
 						if (freioderzerst == true) {
-							laxbr[i][j] = new Block();
+							laxbr[i][j] = new Block(i, j, this);
 						} else {
-							laxbr[i][j] = new Path();
+							laxbr[i][j] = new Path(i, j, this);
 						}
-						laxbr[1][1] = new Path();// Startfelder nachträglich
-													// einfügen macht es
-													// einfacher später
-													// untschschiedliche
-													// spielerzahlen zu händeln
-						laxbr[2][1] = new Path();// neben den Startpositionen
-													// müssen jeweils freie
-													// felder liegen(da sonst
-													// die erste bombe den tod
-													// bedeutet!)
-						laxbr[1][2] = new Path();
+						laxbr[1][1] = new Path(1, 1, this);// Startfelder
+															// nachträglich
+															// einfügen macht es
+															// einfacher später
+															// untschschiedliche
+															// spielerzahlen zu
+															// händeln
+						laxbr[2][1] = new Path(2, 1, this);// neben den
+															// Startpositionen
+															// müssen jeweils
+															// freie
+															// felder liegen(da
+															// sonst
+															// die erste bombe
+															// den
+															// tod
+															// bedeutet!)
+						laxbr[1][2] = new Path(1, 2, this);
 
 					}
 

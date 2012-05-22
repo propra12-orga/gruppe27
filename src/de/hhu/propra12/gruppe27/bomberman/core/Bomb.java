@@ -1,5 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+
 public class Bomb {
 	int bombstr;
 	Player owner;
@@ -15,6 +16,8 @@ public class Bomb {
 	}
 
 	public void explode() {
+		owner.bombcount++;
+		owner.owner.getFeld(posx, posy).explodeOn(bombstr + 1);
 
 	}
 }

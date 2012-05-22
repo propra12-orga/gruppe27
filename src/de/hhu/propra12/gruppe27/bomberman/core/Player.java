@@ -52,7 +52,7 @@ public class Player {
 	}
 
 	public void update(int keycode, boolean pressed) {
-		// player1
+		System.out.println("update: " + posx + " " + posy);
 		switch (keycode) {
 		case KeyEvent.VK_W:
 			pup = pressed;
@@ -79,14 +79,22 @@ public class Player {
 	}
 
 	public void move() {
-		// player 1
+		System.out.println("move");
 		if (pup) {
+			// if (owner.getFeld(posx, posy - 1).frei)
+			posy--;
 
 		} else if (pleft) {
+			// if (owner.getFeld(posx - 1, posy).frei)
+			posx--;
 
 		} else if (pdown) {
+			// if (owner.getFeld(posx, posy + 1).frei)
+			posy++;
 
 		} else if (pright) {
+			// if (owner.getFeld(posx + 1, posy).frei)
+			posx++;
 
 		}
 

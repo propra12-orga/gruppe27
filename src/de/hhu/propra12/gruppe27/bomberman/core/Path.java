@@ -4,6 +4,11 @@ import java.awt.Color;
 
 public class Path extends AbstractFeld {
 
+	public Path(int x, int y, Level owner) {
+		super(x, y, owner);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public char toChar() {
 		// TODO Auto-generated method stub
@@ -13,4 +18,5 @@ public class Path extends AbstractFeld {
 	public Color getColor() {
 		return Color.white;
 	}
+
 }

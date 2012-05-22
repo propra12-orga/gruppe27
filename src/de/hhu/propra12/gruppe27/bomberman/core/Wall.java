@@ -9,7 +9,8 @@ public class Wall extends AbstractFeld {
 	static boolean zerstoer = false;
 	private char testchar = 'W';
 
-	public Wall() {
+	public Wall(int x, int y, Level owner) {
+		super(x, y, owner);
 
 	}
 
@@ -22,4 +23,10 @@ public class Wall extends AbstractFeld {
 		return testchar;
 
 	}
+
+	@Override
+	public void explodeOn(int i) {
+
+	}
+
 }
