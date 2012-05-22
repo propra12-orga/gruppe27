@@ -13,10 +13,10 @@ public abstract class AbstractFeld {
 	// einfacher nachbarfelder abzufragen(?) in dem fall zusätzliche methoden
 	// nord/sued/ost/west o.ä.
 	// Feld begehbar
-	public boolean frei;
+	protected boolean frei;
 
 	// Feld zerstörbar
-	public static boolean zerstoer;
+	private boolean zerstoer;
 
 	private int posx, posy;
 
@@ -28,6 +28,7 @@ public abstract class AbstractFeld {
 		posx = x;
 		posy = y;
 		this.owner = owner;
+
 	}
 
 	public abstract char toChar();// bis noch kein gui da ist...
@@ -66,6 +67,10 @@ public abstract class AbstractFeld {
 
 	public void explodeOn(int i) {
 
+	}
+
+	public final boolean isFrei() {
+		return frei;
 	}
 
 }

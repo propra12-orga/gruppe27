@@ -6,6 +6,7 @@ public class Block extends AbstractFeld {
 
 	public Block(int x, int y, Level owner) {
 		super(x, y, owner);
+		frei = false;
 		// TODO Auto-generated constructor stub
 	}
 

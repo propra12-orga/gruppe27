@@ -5,13 +5,11 @@ import java.awt.Color;
 // Feld - Aussenwände
 public class Wall extends AbstractFeld {
 
-	static boolean frei = false;
-	static boolean zerstoer = false;
 	private char testchar = 'W';
 
 	public Wall(int x, int y, Level owner) {
 		super(x, y, owner);
-
+		frei = false;
 	}
 
 	@Override

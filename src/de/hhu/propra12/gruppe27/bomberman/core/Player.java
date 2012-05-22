@@ -8,7 +8,7 @@ public class Player {
 
 	private boolean alive;
 
-	boolean pleft, pright, pup, pdown;
+	boolean pleft, pright, pup, pdown, plant;
 
 	private int posx; // entspricht i im Array
 	private int posy; // enstpricht j im Array
@@ -34,6 +34,7 @@ public class Player {
 		pright = false;
 		pup = false;
 		pdown = false;
+		plant = false;
 		bombcount = 1;
 		this.owner = owner;
 
@@ -79,24 +80,21 @@ public class Player {
 	}
 
 	public void move() {
-		System.out.println("move");
+		System.out.println(owner.getFeld(posx, posy).isFrei());
 		if (pup) {
-			// if (owner.getFeld(posx, posy - 1).frei)
-			posy--;
-
+			if (owner.getFeld(posx, posy - 1).isFrei())
+				posy--;
 		} else if (pleft) {
-			// if (owner.getFeld(posx - 1, posy).frei)
-			posx--;
-
+			if (owner.getFeld(posx - 1, posy).isFrei())
+				posx--;
 		} else if (pdown) {
-			// if (owner.getFeld(posx, posy + 1).frei)
-			posy++;
-
+			if (owner.getFeld(posx, posy + 1).isFrei())
+				posy++;
 		} else if (pright) {
-			// if (owner.getFeld(posx + 1, posy).frei)
-			posx++;
-
-		}
+			if (owner.getFeld(posx + 1, posy).isFrei())
+				posx++;
+		} else
+			;
 
 	}
 }
