@@ -64,7 +64,8 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				GameWindow s = new GameWindow(0, 15, 15, 1);
+				GameWindow s = new GameWindow(0, system.getfeldx(), system
+						.getfeldy(), 1);
 				// Variablen können aus "system" gezogen werden
 			}
 		});
