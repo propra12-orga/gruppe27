@@ -15,11 +15,10 @@ public class StartBomberman {
 		start.menueaufruf();
 
 		// wird später vom Startmenue übergeben
-		Player player1 = new Player(1, 1, 1, 1, "Spieler1");
+		// Player player1 = new Player(1, 1, "Spieler1");
 
 		// größe des Levels wird später vom Startmenue übergeben
-		Level0 pg = new Level0(11, 11, 1);
-		pg.textout();
+		// Level0 pg = new Level0(11, 11, 1);
 
 	}
 }

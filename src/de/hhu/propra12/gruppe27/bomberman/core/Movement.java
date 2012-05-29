@@ -1,11 +1,11 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
-/*
-//Es fehlt nocht ein KeyListener. Er sollte auf das Spielfeld fokusiert sein, dann kann ich diesen hier einbinden.
-//Hier wird im Grunde bei jeder Tasteneingabe abgefragt, ob das genannte Feld frei ist. Wenn es frei ist, wird die variable posx oder posy verändert.
-//Da das Spielfeld sowieso ständig neu gezeichnet wird sollte das verändern der Positionsvariable reichen.
 
-public class Movement {
+//Es fehlt nocht ein KeyListener. Er sollte auf das Spielfeld fokusiert sein, dann kann ich diesen hier einbinden.
+//Hier wird im Grunde bei jeder Tasteneingabe abgefragt, ob das genannte Feld frei ist. Wenn es frei ist, wird die variable posx oder posy verï¿½ndert.
+//Da das Spielfeld sowieso stï¿½ndig neu gezeichnet wird sollte das verï¿½ndern der Positionsvariable reichen.
+
+/*
 	
 	public static void move(char taste){
 		

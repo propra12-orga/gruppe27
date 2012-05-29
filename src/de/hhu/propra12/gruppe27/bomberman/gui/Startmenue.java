@@ -11,13 +11,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+
 public class Startmenue {
+
+	/*
+	 * Variablen um das Spielfeld zu erstellen
+	 */
+
+	// int opwall = 5; // Mauerdichte
+
+	// Systemeinstellungen sind "default" gesetzt
+	SysEinst system = new SysEinst();
 
 	public int menueaufruf() {
 
 		JFrame framemenue = new JFrame("Bomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setSize(500, 500);
+		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel bild = new JLabel("Platzhalter Bild");
@@ -47,6 +58,17 @@ public class Startmenue {
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(buttonS3, c);
+
+		buttonS1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				GameWindow s = new GameWindow(0, system.getfeldx(), system
+						.getfeldy(), 1);
+				// Variablen können aus "system" gezogen werden
+			}
+		});
 
 		buttonS2.addActionListener(new ActionListener() {
 
