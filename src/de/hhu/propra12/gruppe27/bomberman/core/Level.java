@@ -1,50 +1,49 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
-
-//oberklasse fÃ¼r alle levels, enthÃ¤lt methode textout um level testweise in der konsole ausgeben zu lassen, spÃ¤ter weitere methoden wie draw(),...
-//generierungsregeln fÃ¼r level sind von Level abgeleitet,
+//oberklasse für alle levels, enthält methode textout um level testweise in der konsole ausgeben zu lassen, später weitere methoden wie draw(),...
+//generierungsregeln für level sind von Level abgeleitet,
 //(?)level in seperates package(?)
 public abstract class Level {
-	int laenge;
-	int breite;
-	String name;
-	protected AbstractFeld laxbr[][];
+int laenge;
+int breite;
+String name;
+protected AbstractFeld laxbr[][];
 
-	public Level(int laenge, int breite) {// initialisiert lÃ¤nge breite und
-											// spielfeld"laxbr" (bin fÃ¼r
-											// umbenennung in spielfeld o.Ã¤.
-											// ;-))
-		this.laenge = laenge;
-		this.breite = breite;
-		laxbr = new AbstractFeld[laenge][breite];
+public Level(int laenge, int breite) {// initialisiert länge breite und
+// spielfeld"laxbr" (bin für
+// umbenennung in spielfeld o.ä.
+// ;-))
+this.laenge = laenge;
+this.breite = breite;
+laxbr = new AbstractFeld[laenge][breite];
 
-	}
+}
 
-	public void textout() {// gibt level in konsole aus
-		for (int i = 0; i < laenge; i++) {
-			System.out.println(" ");
-			for (int j = 0; j < breite; j++) {
-				System.out.print(laxbr[i][j].toChar());
-			}
+public void textout() {// gibt level in konsole aus
+for (int i = 0; i < laenge; i++) {
+System.out.println(" ");
+for (int j = 0; j < breite; j++) {
+System.out.print(laxbr[i][j].toChar());
+}
 
-		}
-	}
+}
+}
 
-	public AbstractFeld getFeld(int x, int y) {
-		return laxbr[x][y];
-	}
+public AbstractFeld getFeld(int x, int y) {
+return laxbr[x][y];
+}
 
-	public void setFeld(AbstractFeld input, int x, int y) {
-		laxbr[x][y] = input;
-	}
+public void setFeld(AbstractFeld input, int x, int y) {
+laxbr[x][y] = input;
+}
 
-	public abstract int[] getStartposition(int spielernummer);
+public abstract int[] getStartposition(int spielernummer);
 
-	public int getlaenge() {
-		return laenge;
-	}
+public int getlaenge() {
+return laenge;
+}
 
-	public int getbreite() {
-		return breite;
-	}
+public int getbreite() {
+return breite;
+}
 
 }

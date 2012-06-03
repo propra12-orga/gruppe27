@@ -1,5 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
-
+/**
+ * @author Max Mustermann
+ */
 import java.awt.Color;
 
 public class Block extends AbstractFeld {
