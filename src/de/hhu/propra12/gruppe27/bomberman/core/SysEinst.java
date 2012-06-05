@@ -5,11 +5,13 @@ package de.hhu.propra12.gruppe27.bomberman.core;
  * Anzahl der Spieler 	-> players
  * Feldgröße			-> feldx, feldy
  * densWall				-> Mauerdichte
+ * namePlayer1			-> Name von Spieler1
+ * namePlayer2			-> Name von Spieler2
  */
 
 public class SysEinst {
 
-	int players = 1;
+	int amplayer = 1;
 	int feldx = 15;
 	int feldy = 15;
 	int densWall = 1;
@@ -19,8 +21,8 @@ public class SysEinst {
 
 	// get-Methoden
 
-	public int getplayers() {
-		return players;
+	public int getamplayer() {
+		return amplayer;
 	}
 
 	public int getfeldx() {
@@ -45,8 +47,8 @@ public class SysEinst {
 
 	// set-Methoden
 
-	public void setplayers(int players) {
-		this.players = players;
+	public void setamplayer(int players) {
+		this.amplayer = players;
 	}
 
 	public void setfeldx(int feldx) {
@@ -68,5 +70,4 @@ public class SysEinst {
 	public void setnamePlayer2(String namePlayer2) {
 		this.namePlayer2 = namePlayer2;
 	}
-
 }

@@ -16,10 +16,10 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 public class Startmenue {
 
 	/*
-	 * Variablen um das Spielfeld zu erstellen
+	 * grafisches Startmenü
+	 * 
+	 * Einstellungen setzen
 	 */
-
-	// int opwall = 5; // Mauerdichte
 
 	// Systemeinstellungen sind "default" gesetzt
 	SysEinst system = new SysEinst();
@@ -64,6 +64,7 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				System.out.println(system.getamplayer());
 				GameWindow s = new GameWindow(0, system.getfeldx(), system
 						.getfeldy(), 1);
 				// Variablen können aus "system" gezogen werden
@@ -76,7 +77,8 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				Optionmenue option = new Optionmenue();
-				option.optionaufruf();
+				system = option.optionaufruf(system);
+				System.out.println(system.getamplayer());
 			}
 		});
 

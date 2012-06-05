@@ -11,11 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+
 public class Optionmenue {
 
 	int opwall;
 
-	public int optionaufruf() {
+	public SysEinst optionaufruf(SysEinst system) {
+
+		final SysEinst sys = system;
 
 		final JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
@@ -62,7 +66,7 @@ public class Optionmenue {
 
 		});
 
-		buttonO3.addActionListener(new ActionListener() {
+		buttonO2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -71,6 +75,17 @@ public class Optionmenue {
 
 		});
 
-		return (1);
+		buttonO3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sys.setamplayer(2);
+				System.out.println(sys.getamplayer());
+				frameoption.dispose();
+			}
+
+		});
+
+		return (sys);
 	}
 }

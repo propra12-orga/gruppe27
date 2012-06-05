@@ -47,6 +47,7 @@ public final class OptionWall {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				opwall = 0;
+				// system.setdensWall(0);
 				framemauer.dispose();
 			}
 
