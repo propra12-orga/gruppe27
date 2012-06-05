@@ -1,10 +1,20 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+/**
+ * Ein Programm zur Erstellung der W‰nde
+ * Dies ist ein Javadoc Kommentar
+ * @version 1.0
+ */
+
 import java.awt.Color;
 
 // Feld - Aussenw√§nde
 public class Wall extends AbstractFeld {
 
+	/**
+	 * Hauptpgrogramm
+	 *@help
+	 */
 	private char testchar = 'W';
 
 	public Wall(int x, int y, Level owner) {
