@@ -24,9 +24,14 @@ public class Startmenue {
 	// Systemeinstellungen sind "default" gesetzt
 	SysEinst system = new SysEinst();
 
+	/*
+	 * Methode menueaufruf
+	 * 
+	 * Das Menue-Fenster wird geöffnet
+	 */
 	public int menueaufruf() {
 
-		JFrame framemenue = new JFrame("Bomberman Startmenue");
+		JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
 		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +47,11 @@ public class Startmenue {
 		c.gridy = 0;
 		panel.add(bild);
 
+		/*
+		 * Button 1 - buttonS1
+		 * 
+		 * Spiel Starten
+		 */
 		JButton buttonS1 = new JButton("Spiel starten");
 		c.gridx = 0;
 		c.gridy = 1;
@@ -49,28 +59,50 @@ public class Startmenue {
 		c.weightx = 1.0;
 		panel.add(buttonS1, c);
 
+		/*
+		 * Button 2 - buttonS2
+		 * 
+		 * Optionsmenue öffnen
+		 */
 		JButton buttonS2 = new JButton("Optionen");
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(buttonS2, c);
 
+		/*
+		 * Button 3 - buttonS3
+		 * 
+		 * Spiel beenden / schließen
+		 */
 		JButton buttonS3 = new JButton("Spiel verlassen");
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(buttonS3, c);
 
+		/*
+		 * Aktionen für Button 1
+		 * 
+		 * Spielfeld wird generiert und gestartet
+		 */
 		buttonS1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println(system.getamplayer());
+				// Ausgabe der Einstellung-Parameter
+				system.printSysEinst();
 				GameWindow s = new GameWindow(0, system.getfeldx(), system
 						.getfeldy(), 1);
 				// Variablen können aus "system" gezogen werden
 			}
 		});
 
+		/*
+		 * Aktionen für Button 2
+		 * 
+		 * Optionsmenue wird in neuem Fenster aufgerufen Änderungen der Optionen
+		 * werden übernommen und in der system-Instanz gespeichert
+		 */
 		buttonS2.addActionListener(new ActionListener() {
 
 			@Override
@@ -78,10 +110,14 @@ public class Startmenue {
 
 				Optionmenue option = new Optionmenue();
 				system = option.optionaufruf(system);
-				System.out.println(system.getamplayer());
 			}
 		});
 
+		/*
+		 * Aktionen für Button 3
+		 * 
+		 * Alle Fenster und das Spiel werden geschlossen
+		 */
 		buttonS3.addActionListener(new ActionListener() {
 
 			@Override

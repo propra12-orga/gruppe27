@@ -70,4 +70,15 @@ public class SysEinst {
 	public void setnamePlayer2(String namePlayer2) {
 		this.namePlayer2 = namePlayer2;
 	}
+
+	// andere Methoden
+	public void printSysEinst() {
+		System.out.println("Spieleranzahl = " + getamplayer());
+		System.out.println("Feldx = " + getfeldx());
+		System.out.println("Feldy = " + getfeldy());
+		System.out.println("Walldensity = " + getdensWall());
+		System.out.println("Name Spieler1 = " + getnamePlayer1());
+		System.out.println("Name Spieler2 = " + getnamePlayer2());
+	}
+
 }
