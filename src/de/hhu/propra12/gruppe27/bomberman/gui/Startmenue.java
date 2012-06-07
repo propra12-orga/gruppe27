@@ -13,15 +13,17 @@ import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
+/*
+ * grafisches Startmenü
+ * 
+ * Einstieg für:
+ * Spiel starten
+ * Multiplayer joinen und hosten
+ * Einstellungen setzen
+ */
+
 public class Startmenue {
 
-	/*
-	 * grafisches Startmenü
-	 * 
-	 * Einstellungen setzen
-	 */
-
-	// Systemeinstellungen sind "default" gesetzt
 	SysEinst system = new SysEinst();
 
 	/*
@@ -29,9 +31,9 @@ public class Startmenue {
 	 * 
 	 * Das Menue-Fenster wird geöffnet
 	 */
-	public int menueaufruf() {
+	public SysEinst menueaufruf() {
 
-		JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
+		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
 		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +54,7 @@ public class Startmenue {
 		 * 
 		 * Spiel Starten
 		 */
-		JButton buttonS1 = new JButton("Spiel starten");
+		JButton buttonS1 = new JButton("Spiel starten (Solo)");
 		c.gridx = 0;
 		c.gridy = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -62,22 +64,42 @@ public class Startmenue {
 		/*
 		 * Button 2 - buttonS2
 		 * 
-		 * Optionsmenue öffnen
+		 * Multiplayer Verbinden
 		 */
-		JButton buttonS2 = new JButton("Optionen");
+		JButton buttonS2 = new JButton("Multiplayer (Join Game)");
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(buttonS2, c);
 
 		/*
-		 * Button 3 - buttonS3
+		 * Button 3 - buttonS2
 		 * 
-		 * Spiel beenden / schließen
+		 * Multiplayer Hosten
 		 */
-		JButton buttonS3 = new JButton("Spiel verlassen");
+		JButton buttonS3 = new JButton("Multiplayer (Host Game)");
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(buttonS3, c);
+
+		/*
+		 * Button 4 - buttonS2
+		 * 
+		 * Optionsmenue öffnen
+		 */
+		JButton buttonS4 = new JButton("Optionen");
+		c.gridx = 0;
+		c.gridy = 4;
+		panel.add(buttonS4, c);
+
+		/*
+		 * Button 5 - buttonS3
+		 * 
+		 * Spiel beenden / schließen
+		 */
+		JButton buttonS5 = new JButton("Spiel verlassen");
+		c.gridx = 0;
+		c.gridy = 5;
+		panel.add(buttonS5, c);
 
 		/*
 		 * Aktionen für Button 1
@@ -90,20 +112,43 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				// Ausgabe der Einstellung-Parameter
+
 				system.printSysEinst();
 				GameWindow s = new GameWindow(0, system.getfeldx(), system
 						.getfeldy(), 1);
+
+				// framemenue.dispose();
 				// Variablen können aus "system" gezogen werden
 			}
 		});
 
+		buttonS3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				// Vorbereitung
+
+			}
+		});
+
+		buttonS4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				// Vorbereitung
+
+			}
+		});
+
 		/*
-		 * Aktionen für Button 2
+		 * Aktionen für Button 4
 		 * 
 		 * Optionsmenue wird in neuem Fenster aufgerufen Änderungen der Optionen
 		 * werden übernommen und in der system-Instanz gespeichert
 		 */
-		buttonS2.addActionListener(new ActionListener() {
+		buttonS4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -114,11 +159,11 @@ public class Startmenue {
 		});
 
 		/*
-		 * Aktionen für Button 3
+		 * Aktionen für Button 5
 		 * 
 		 * Alle Fenster und das Spiel werden geschlossen
 		 */
-		buttonS3.addActionListener(new ActionListener() {
+		buttonS5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -127,6 +172,6 @@ public class Startmenue {
 			}
 		});
 
-		return (1);
+		return (system);
 	}
 }

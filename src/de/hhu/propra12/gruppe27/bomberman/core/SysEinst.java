@@ -18,6 +18,8 @@ public class SysEinst {
 
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";
+	String namePlayer3 = "Spieler 3";
+	String namePlayer4 = "Spieler 4";
 
 	// get-Methoden
 
@@ -43,6 +45,14 @@ public class SysEinst {
 
 	public String getnamePlayer2() {
 		return namePlayer2;
+	}
+
+	public String getnamePlayer3() {
+		return namePlayer3;
+	}
+
+	public String getnamePlayer4() {
+		return namePlayer4;
 	}
 
 	// set-Methoden
@@ -71,7 +81,17 @@ public class SysEinst {
 		this.namePlayer2 = namePlayer2;
 	}
 
-	// andere Methoden
+	public void setnamePlayer3(String namePlayer3) {
+		this.namePlayer3 = namePlayer3;
+	}
+
+	public void setnamePlayer4(String namePlayer4) {
+		this.namePlayer4 = namePlayer4;
+	}
+
+	/*
+	 * Methode zur Ausgabe aller Werte der System-Einstellungen
+	 */
 	public void printSysEinst() {
 		System.out.println("Spieleranzahl = " + getamplayer());
 		System.out.println("Feldx = " + getfeldx());
@@ -79,6 +99,8 @@ public class SysEinst {
 		System.out.println("Walldensity = " + getdensWall());
 		System.out.println("Name Spieler1 = " + getnamePlayer1());
 		System.out.println("Name Spieler2 = " + getnamePlayer2());
+		System.out.println("Name Spieler3 = " + getnamePlayer3());
+		System.out.println("Name Spieler4 = " + getnamePlayer4());
 	}
 
 }
