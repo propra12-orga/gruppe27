@@ -116,6 +116,7 @@ public class Startmenue {
 				system.printSysEinst();
 				GameWindow s = new GameWindow(0, system.getfeldx(), system
 						.getfeldy(), 1);
+				framemenue.setVisible(false);
 
 				// framemenue.dispose();
 				// Variablen können aus "system" gezogen werden
