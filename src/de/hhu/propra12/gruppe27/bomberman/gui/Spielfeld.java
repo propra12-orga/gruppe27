@@ -16,13 +16,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
-import de.hhu.propra12.gruppe27.bomberman.core.Player;
+import de.hhu.propra12.gruppe27.bomberman.core.Player1;
 
 public class Spielfeld extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
-	public Player p1;
+	public Player1 p1;
 	Timer t;
 	public Bomb b1;
 	public Exit e;
@@ -39,7 +39,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		// for(int i=0; i< spielerzal; i++){ //für mehr spieler anzupassen!
 		// int[] pos = level.getStartposition(0);
-		p1 = new Player(1, 1, "Hernman", this);
+		p1 = new Player1(1, 1, "Hernman", this);
 		// }
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);

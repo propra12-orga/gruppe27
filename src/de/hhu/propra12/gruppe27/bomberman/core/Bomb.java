@@ -2,13 +2,15 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 public class Bomb {
 	int bombstr;
-	Player owner;
+	// Player owner;
+	AbstractPlayer owner;
 	int time;
 	private int posx;
 	private int posy;
 	private boolean planted;
 
-	public Bomb(Player owner, int bombstr, int time) {
+	// public Bomb(AbstractPlayer owner, int bombstr, int time) {
+	public Bomb(AbstractPlayer owner, int bombstr, int time) {
 		planted = true;
 		this.bombstr = bombstr;
 		this.owner = owner;
