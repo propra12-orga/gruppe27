@@ -2,7 +2,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
-public class AbstractPlayer {
+public abstract class AbstractPlayer {
 
 	boolean alive;
 

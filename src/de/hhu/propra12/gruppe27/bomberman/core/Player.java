@@ -4,23 +4,7 @@ import java.awt.event.KeyEvent;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
-public class Player {
-
-	private boolean alive;
-
-	boolean pleft, pright, pup, pdown, plant;
-
-	private int posx; // entspricht i im Array
-	private int posy; // enstpricht j im Array
-
-	int bombstr; // Bombenst�rke 1 pro Feld
-	int bombanz; // Bombenanzahl
-	int bombcount;// Bombenanzahl aktuell
-
-	Spielfeld owner;
-	// int speed;
-
-	String name;
+public class Player extends AbstractPlayer {
 
 	// Konstruktor
 	public Player(int posx, int posy, String pname, Spielfeld owner) {
@@ -40,17 +24,14 @@ public class Player {
 
 	}
 
-	public boolean isAlive() {
-		return alive;
-	}
-
-	public int getX() {
-		return posx;
-	}
-
-	public int getY() {
-		return posy;
-	}
+	/*
+	 * TODO kann gelöscht werden, ist jetzt in AbstractPlayer public boolean
+	 * isAlive() { return alive; }
+	 * 
+	 * public int getX() { return posx; }
+	 * 
+	 * public int getY() { return posy; }
+	 */
 
 	public void update(int keycode, boolean pressed) {
 		switch (keycode) {
@@ -96,6 +77,6 @@ public class Player {
 			}
 		}
 		;
-
 	}
+
 }

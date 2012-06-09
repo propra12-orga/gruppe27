@@ -6,8 +6,7 @@ public class Bomb {
 	// Player owner;
 	AbstractPlayer owner;
 	int time;
-	private int posx;
-	private int posy;
+	public AbstractFeld Feld;
 	private boolean planted;
 
 	// public Bomb(AbstractPlayer owner, int bombstr, int time) {
@@ -16,8 +15,7 @@ public class Bomb {
 		this.bombstr = bombstr;
 		this.owner = owner;
 		this.time = time;
-		posx = owner.getX();
-		posy = owner.getY();
+		Feld = owner.owner.getFeld(owner.posx, owner.posy);
 
 	}
 
@@ -39,18 +37,16 @@ public class Bomb {
 
 	public void explode() {
 		owner.bombcount++;
-		owner.owner.getFeld(getPosx(), getPosy()).explodeOn(bombstr);
+		Feld.explodeOn(bombstr);
 		planted = false;
 
 	}
 
-	public int getPosx() {
-		return posx;
-	}
-
-	public int getPosy() {
-		return posy;
-	}
+	/*
+	 * public int getPosx() { return Feld.; }
+	 * 
+	 * public int getPosy() { return posy; }
+	 */
 
 	public boolean isPlanted() {
 		return planted;

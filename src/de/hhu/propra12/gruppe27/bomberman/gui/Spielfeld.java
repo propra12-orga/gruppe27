@@ -17,13 +17,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
-import de.hhu.propra12.gruppe27.bomberman.core.Player1;
+import de.hhu.propra12.gruppe27.bomberman.core.Player;
 
 public class Spielfeld extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
-	public Player1 p1;
+	public Player p1;
 	Timer t;
 	public Bomb b1;
 	public Exit e;
@@ -40,7 +40,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		// for(int i=0; i< spielerzal; i++){ //für mehr spieler anzupassen!
 		// int[] pos = level.getStartposition(0);
-		p1 = new Player1(1, 1, "Hernman", this);
+		p1 = new Player(1, 1, "Hernman", this);
 		// }
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
@@ -91,7 +91,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 		g.drawLine(p1.getX() * 32 + 32, p1.getY() * 32, p1.getX() * 32,
 				p1.getY() * 32 + 32);
 		if (b1.isPlanted()) {
-			g.drawOval(b1.getPosx() * 32, b1.getPosy() * 32, 32, 32);
+			g.drawOval(b1.Feld.getX() * 32, b1.Feld.getY() * 32, 32, 32);
 		}
 		g.setColor(Color.pink);
 		g.drawOval(e.getX() * 32, e.getY() * 32, 32, 32);

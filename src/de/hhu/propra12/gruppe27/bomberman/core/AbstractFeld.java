@@ -37,6 +37,13 @@ public abstract class AbstractFeld {
 	public abstract char toChar();// bis noch kein gui da ist...
 
 	// public Image im;
+	public int getX() {
+		return posx;
+	}
+
+	public int getY() {
+		return posy;
+	}
 
 	public Color getColor() {// später ersetzen durch bildausgabe
 		return c;
