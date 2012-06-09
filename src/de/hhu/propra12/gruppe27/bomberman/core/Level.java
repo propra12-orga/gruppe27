@@ -1,49 +1,65 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
-//oberklasse für alle levels, enthält methode textout um level testweise in der konsole ausgeben zu lassen, später weitere methoden wie draw(),...
-//generierungsregeln für level sind von Level abgeleitet,
+
+//oberklasse fï¿½r alle levels, enthï¿½lt methode textout um level testweise in der konsole ausgeben zu lassen, spï¿½ter weitere methoden wie draw(),...
+//generierungsregeln fï¿½r level sind von Level abgeleitet,
 //(?)level in seperates package(?)
 public abstract class Level {
-int laenge;
-int breite;
-String name;
-protected AbstractFeld laxbr[][];
+	int laenge;
+	int breite;
+	String name;
+	protected AbstractFeld laxbr[][];
 
-public Level(int laenge, int breite) {// initialisiert länge breite und
-// spielfeld"laxbr" (bin für
-// umbenennung in spielfeld o.ä.
-// ;-))
-this.laenge = laenge;
-this.breite = breite;
-laxbr = new AbstractFeld[laenge][breite];
+	public Level(int laenge, int breite) {// initialisiert lï¿½nge breite und
+		// spielfeld"laxbr" (bin fï¿½r
+		// umbenennung in spielfeld o.ï¿½.
+		// ;-))
+		this.laenge = laenge;
+		this.breite = breite;
+		laxbr = new AbstractFeld[laenge][breite];
 
-}
+	}
 
-public void textout() {// gibt level in konsole aus
-for (int i = 0; i < laenge; i++) {
-System.out.println(" ");
-for (int j = 0; j < breite; j++) {
-System.out.print(laxbr[i][j].toChar());
-}
+	public void textout() {// gibt level in konsole aus
+		for (int i = 0; i < laenge; i++) {
+			System.out.println(" ");
+			for (int j = 0; j < breite; j++) {
+				System.out.print(laxbr[i][j].toChar());
+			}
 
-}
-}
+		}
+	}
 
-public AbstractFeld getFeld(int x, int y) {
-return laxbr[x][y];
-}
+	// Ã¼berladene funktion DestroyFeld ersetzt Feld , bzw. Feld an [x][y] durch
+	// ein freies feld, falls zerstÃ¶rbar ist
 
-public void setFeld(AbstractFeld input, int x, int y) {
-laxbr[x][y] = input;
-}
+	public boolean DestroyFeld(int x, int y) {
+		if (laxbr[x][y].zerstoer) {
+			laxbr[x][y] = new Path(x, y, this);
+			return true;
+		} else
+			return false;
+	}
 
-public abstract int[] getStartposition(int spielernummer);
+	public boolean DesroyFeld(AbstractFeld Feld) {
+		return DestroyFeld(Feld.getX(), Feld.getY());
+	}
 
-public int getlaenge() {
-return laenge;
-}
+	public AbstractFeld getFeld(int x, int y) {
+		return laxbr[x][y];
+	}
 
-public int getbreite() {
-return breite;
-}
+	public void setFeld(AbstractFeld input, int x, int y) {
+		laxbr[x][y] = input;
+	}
+
+	public abstract int[] getStartposition(int spielernummer);
+
+	public int getlaenge() {
+		return laenge;
+	}
+
+	public int getbreite() {
+		return breite;
+	}
 
 }
