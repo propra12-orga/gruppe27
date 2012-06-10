@@ -61,45 +61,52 @@ public class Startmenue {
 		c.weightx = 1.0;
 		panel.add(buttonS1, c);
 
-		/*
-		 * Button 2 - buttonS2
-		 * 
-		 * Multiplayer Verbinden
-		 */
-		JButton buttonS2 = new JButton("Multiplayer (Join Game)");
+		JButton buttonS2 = new JButton("Spiel starten (2 SPieler-Modus)");
 		c.gridx = 0;
 		c.gridy = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1.0;
 		panel.add(buttonS2, c);
 
 		/*
-		 * Button 3 - buttonS2
+		 * Button 3 - buttonS3
 		 * 
-		 * Multiplayer Hosten
+		 * Multiplayer Verbinden
 		 */
-		JButton buttonS3 = new JButton("Multiplayer (Host Game)");
+		JButton buttonS3 = new JButton("Multiplayer (Join Game)");
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(buttonS3, c);
 
 		/*
-		 * Button 4 - buttonS2
+		 * Button 4 - buttonS4
 		 * 
-		 * Optionsmenue öffnen
+		 * Multiplayer Hosten
 		 */
-		JButton buttonS4 = new JButton("Optionen");
+		JButton buttonS4 = new JButton("Multiplayer (Host Game)");
 		c.gridx = 0;
 		c.gridy = 4;
 		panel.add(buttonS4, c);
 
 		/*
-		 * Button 5 - buttonS3
+		 * Button 5 - buttonS5
 		 * 
-		 * Spiel beenden / schließen
+		 * Optionsmenue öffnen
 		 */
-		JButton buttonS5 = new JButton("Spiel verlassen");
+		JButton buttonS5 = new JButton("Optionen");
 		c.gridx = 0;
 		c.gridy = 5;
 		panel.add(buttonS5, c);
+
+		/*
+		 * Button 6 - buttonS6
+		 * 
+		 * Spiel beenden / schließen
+		 */
+		JButton buttonS6 = new JButton("Spiel verlassen");
+		c.gridx = 0;
+		c.gridy = 6;
+		panel.add(buttonS6, c);
 
 		/*
 		 * Aktionen für Button 1
@@ -115,7 +122,25 @@ public class Startmenue {
 
 				system.printSysEinst();
 				GameWindow s = new GameWindow(0, system.getfeldx(), system
-						.getfeldy(), 1);
+						.getfeldy(), system.getamplayer());
+				framemenue.setVisible(false);
+
+				// framemenue.dispose();
+				// Variablen können aus "system" gezogen werden
+			}
+		});
+
+		buttonS2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				system.setamplayer(2);
+				// Ausgabe der Einstellung-Parameter
+				system.printSysEinst();
+
+				GameWindow s = new GameWindow(0, system.getfeldx(), system
+						.getfeldy(), system.getamplayer());
 				framemenue.setVisible(false);
 
 				// framemenue.dispose();
@@ -144,12 +169,12 @@ public class Startmenue {
 		});
 
 		/*
-		 * Aktionen für Button 4
+		 * Aktionen für Button 5
 		 * 
 		 * Optionsmenue wird in neuem Fenster aufgerufen Änderungen der Optionen
 		 * werden übernommen und in der system-Instanz gespeichert
 		 */
-		buttonS4.addActionListener(new ActionListener() {
+		buttonS5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -160,11 +185,11 @@ public class Startmenue {
 		});
 
 		/*
-		 * Aktionen für Button 5
+		 * Aktionen für Button 6
 		 * 
 		 * Alle Fenster und das Spiel werden geschlossen
 		 */
-		buttonS5.addActionListener(new ActionListener() {
+		buttonS6.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {

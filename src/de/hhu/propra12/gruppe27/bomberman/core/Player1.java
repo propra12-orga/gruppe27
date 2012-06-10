@@ -57,26 +57,13 @@ public class Player1 extends AbstractPlayer {
 
 	}
 
-	public void move() {
-		if (pup) {
-			if (owner.getFeld(posx, posy - 1).isFrei())
-				posy--;
-		} else if (pleft) {
-			if (owner.getFeld(posx - 1, posy).isFrei())
-				posx--;
-		} else if (pdown) {
-			if (owner.getFeld(posx, posy + 1).isFrei())
-				posy++;
-		} else if (pright) {
-			if (owner.getFeld(posx + 1, posy).isFrei())
-				posx++;
-		} else if (plant) {
-			if (bombcount > 0) {
-				owner.b1 = new Bomb(this, 1, 7);
-				bombcount--;
-			}
-		}
-		;
-	}
+	/*
+	 * public void move() { if (pup) { if (owner.getFeld(posx, posy -
+	 * 1).isFrei()) posy--; } else if (pleft) { if (owner.getFeld(posx - 1,
+	 * posy).isFrei()) posx--; } else if (pdown) { if (owner.getFeld(posx, posy
+	 * + 1).isFrei()) posy++; } else if (pright) { if (owner.getFeld(posx + 1,
+	 * posy).isFrei()) posx++; } else if (plant) { if (bombcount > 0) { owner.b1
+	 * = new Bomb(this, 1, 7); bombcount--; } } ; }
+	 */
 
 }

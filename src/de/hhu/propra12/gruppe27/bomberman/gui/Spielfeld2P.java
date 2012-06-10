@@ -19,7 +19,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.Player;
 
-public class Spielfeld extends JPanel implements ActionListener {
+public class Spielfeld2P extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
@@ -35,7 +35,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	// Konstruktor
-	public Spielfeld(int levelnr, int laenge, int breite, int spielerzal) {
+	public Spielfeld2P(int levelnr, int laenge, int breite, int spielerzal) {
 
 		level = loadlevel(0, laenge, breite, spielerzal);
 		level.textout();// testweise spielfeld in konsole zeichnen
@@ -43,7 +43,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 		// for(int i=0; i< spielerzal; i++){ //für mehr spieler anzupassen!
 		// int[] pos = level.getStartposition(0);
 		p1 = new Player(1, 1, "Hernman", this, 1);
-		// p2 = new Player(laenge - 2, breite - 2, "Buhman", this, 2);
+		p2 = new Player(laenge - 2, 1, "Buhman", this, 2);
 		// }
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
@@ -68,8 +68,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private void StatusUpdate() {
 		if ((p1.getX() == e.getX()) && (p1.getY() == e.getY()))
 			e.doOnExit(this);
-		// if ((p2.getX() == e.getX()) && (p2.getY() == e.getY()))
-		// e.doOnExit(this);
+		if ((p2.getX() == e.getX()) && (p2.getY() == e.getY()))
+			e.doOnExit(this);
 		if (b1.isPlanted())
 			b1.check();// TODO später automatisch alle bomben auf spielfeld
 	}
@@ -96,12 +96,13 @@ public class Spielfeld extends JPanel implements ActionListener {
 		g.drawLine(p1.getX() * 32 + 32, p1.getY() * 32, p1.getX() * 32,
 				p1.getY() * 32 + 32);
 
-		/*
-		 * g.setColor(Color.BLUE); // g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 *
-		 * 32); g.drawLine(p2.getX() * 32, p2.getY() * 32, p2.getX() * 32 + 32,
-		 * p2.getY() * 32 + 32); g.drawLine(p2.getX() * 32 + 32, p2.getY() * 32,
-		 * p2.getX() * 32, p2.getY() * 32 + 32);
-		 */
+		g.setColor(Color.BLUE);
+		// g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 *32);
+		g.drawLine(p2.getX() * 32, p2.getY() * 32, p2.getX() * 32 + 32,
+				p2.getY() * 32 + 32);
+		g.drawLine(p2.getX() * 32 + 32, p2.getY() * 32, p2.getX() * 32,
+				p2.getY() * 32 + 32);
+
 		if (b1.isPlanted()) {
 			g.drawOval(b1.Feld.getX() * 32, b1.Feld.getY() * 32, 32, 32);
 		}
@@ -112,8 +113,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		p1.move();
-		// p2.move();
+		p1.move(1);
+		p2.move(1);
 		repaint();
 
 	}
@@ -130,12 +131,12 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			p1.update(e.getKeyCode(), true);
-			// p2.update(e.getKeyCode(), true);
+			p2.update(e.getKeyCode(), true);
 		}
 
 		public void keyReleased(KeyEvent e) {
 			p1.update(e.getKeyCode(), false);
-			// p2.update(e.getKeyCode(), false);
+			p2.update(e.getKeyCode(), false);
 		}
 	}
 

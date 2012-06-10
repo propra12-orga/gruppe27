@@ -12,9 +12,15 @@ public class Exit {
 		owner.setVisible(false);
 		owner.t.stop();
 		System.out.println("Sie haben das ende erreicht");
-
-		// TODO
 	}
+
+	public void doOnExit(Spielfeld2P owner) {
+		owner.setVisible(false);
+		owner.t.stop();
+		System.out.println("Sie haben das ende erreicht");
+	}
+
+	// TODO
 
 	public int getX() {
 		return posx;

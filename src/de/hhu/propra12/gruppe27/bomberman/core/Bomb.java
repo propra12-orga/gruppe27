@@ -5,6 +5,7 @@ public class Bomb {
 	int bombstr;
 	// Player owner;
 	AbstractPlayer owner;
+
 	int time;
 	public AbstractFeld Feld;
 	private boolean planted;
