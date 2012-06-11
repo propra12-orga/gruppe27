@@ -14,7 +14,7 @@ public class BombManager {
 
 	public void CheckBombs() {
 		int i = 0;
-		while (i <= Bomblist.size()) {
+		while (i < Bomblist.size()) {
 			if (Bomblist.get(i).check()) {
 				Bomblist.remove(i);
 			} else
