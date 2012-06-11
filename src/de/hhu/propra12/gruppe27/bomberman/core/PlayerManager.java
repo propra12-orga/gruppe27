@@ -12,6 +12,19 @@ public class PlayerManager {
 		PlayerList = new ArrayList<AbstractPlayer>();
 	}
 
+	public void movePlayers() {
+		for (int i = 0; i < PlayerList.size(); i++) {
+			PlayerList.get(i).move();
+		}
+	}
+
+	public void updatePlayers(int keycode, boolean pressed) {
+		for (int i = 0; i < PlayerList.size(); i++) {
+			PlayerList.get(i).update(keycode, pressed);
+		}
+
+	}
+
 	// zählt lebende spieler
 	public int countPlayersAlive() {
 		int res = 0;
@@ -30,7 +43,7 @@ public class PlayerManager {
 
 	}
 
-	public void addPlayer(Player p) {
+	public void addPlayer(AbstractPlayer p) {
 		PlayerList.add(p);
 	}
 

@@ -20,15 +20,12 @@ import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
-import de.hhu.propra12.gruppe27.bomberman.core.Player;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 
 public class Spielfeld extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
-	public KeyPlayer p1;
-	public Player p2;
 	Timer t;
 	private PlayerManager Players;
 	private BombManager Bombs;
@@ -45,11 +42,6 @@ public class Spielfeld extends JPanel implements ActionListener {
 		level = loadlevel(0, laenge, breite, spielerzal);
 		level.textout();// testweise spielfeld in konsole zeichnen
 
-		// for(int i=0; i< spielerzal; i++){ //für mehr spieler anzupassen!
-		// int[] pos = level.getStartposition(0);
-		p1 = new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1));
-		// p2 = new Player(laenge - 2, breite - 2, "Buhman", this, 2);
-		// }
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
 		this.setSize(laenge * 32, breite * 32 + 500);
@@ -61,6 +53,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 		e = new Exit(laenge - 2, breite - 2); // asugang plazieren
 		Bombs = new BombManager(this);// init Bombmanager
 		Players = new PlayerManager(this);
+		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
+		// if (spielerzal > 1)
+		Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(2)));
 		this.repaint();
 		this.startgame();
 	}
@@ -72,9 +67,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	private void StatusUpdate() {
-		if ((p1.getX() == e.getX()) && (p1.getY() == e.getY()))
-			e.doOnExit(this);
-		// if ((p2.getX() == e.getX()) && (p2.getY() == e.getY()))
+		// if ((p1.getX() == e.getX()) && (p1.getY() == e.getY()))
+		// e.doOnExit(this);
+		// // if ((p2.getX() == e.getX()) && (p2.getY() == e.getY()))
 		// e.doOnExit(this);
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
@@ -104,12 +99,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 				g.setColor(level.getFeld(i, j).getColor());
 				g.fillRect(i * 32, j * 32, 32, 32);
 			}
-		g.setColor(Color.GREEN);// zeichne spieler
-		// g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 * 32);
-		g.drawLine(p1.getX() * 32, p1.getY() * 32, p1.getX() * 32 + 32,
-				p1.getY() * 32 + 32);
-		g.drawLine(p1.getX() * 32 + 32, p1.getY() * 32, p1.getX() * 32,
-				p1.getY() * 32 + 32);
+		Players.paintPlayers(g);
 
 		/*
 		 * g.setColor(Color.BLUE); // g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 *
@@ -127,7 +117,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		p1.move();
+		Players.movePlayers();
 		// p2.move();
 		repaint();
 
@@ -144,12 +134,12 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			p1.update(e.getKeyCode(), true);
+			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
 		}
 
 		public void keyReleased(KeyEvent e) {
-			p1.update(e.getKeyCode(), false);
+			Players.updatePlayers(e.getKeyCode(), false);
 			// p2.update(e.getKeyCode(), false);
 		}
 	}
