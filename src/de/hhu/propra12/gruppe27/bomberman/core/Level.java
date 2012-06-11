@@ -40,7 +40,7 @@ public abstract class Level {
 			return false;
 	}
 
-	public boolean DesroyFeld(AbstractFeld Feld) {
+	public boolean DestroyFeld(AbstractFeld Feld) {
 		return DestroyFeld(Feld.getX(), Feld.getY());
 	}
 

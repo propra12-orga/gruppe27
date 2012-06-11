@@ -1,11 +1,11 @@
 // <<<<<<< HEAD
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+
 public class Bomb {
 	int bombstr;
 	// Player owner;
 	AbstractPlayer owner;
-
 	int time;
 	public AbstractFeld Feld;
 	private boolean planted;
@@ -38,9 +38,14 @@ public class Bomb {
 
 	public void explode() {
 		owner.bombcount++;
-		Feld.explodeOn(bombstr);
 		planted = false;
+		Feld.owner.DestroyFeld(Feld.top());
 
+		Feld.owner.DestroyFeld(Feld.left());
+
+		Feld.owner.DestroyFeld(Feld.right());
+
+		Feld.owner.DestroyFeld(Feld.bottom());
 	}
 
 	/*

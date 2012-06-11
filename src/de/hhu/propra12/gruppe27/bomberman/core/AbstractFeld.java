@@ -25,7 +25,7 @@ public abstract class AbstractFeld {
 
 	private Color c;
 
-	private Level owner;
+	Level owner;
 
 	public AbstractFeld(int x, int y, Level owner) {
 		posx = x;
@@ -49,47 +49,41 @@ public abstract class AbstractFeld {
 		return c;
 	}
 
-	public final AbstractFeld destroy(int str, int direction) {
-		if (zerstoer) {
-			System.out.println("dest");
-			return new Path(posx, posy, owner);
-		} else {
-			if (str > 1) {
-				switch (direction) {
-				case DIR_TOP:
-					owner.setFeld((owner.getFeld(posx - 1, posy).destroy(
-							str - 1, DIR_RIGHT)), posx - 1, posy);
-					break;
-				case DIR_LEFT:
-					owner.setFeld((owner.getFeld(posx, posy - 1).destroy(
-							str - 1, DIR_RIGHT)), posx, posy - 1);
-				case DIR_BOTTOM:
-					owner.setFeld((owner.getFeld(posx + 1, posy).destroy(
-							str - 1, DIR_RIGHT)), posx + 1, posy);
-					break;
-				case DIR_RIGHT:
-					owner.setFeld((owner.getFeld(posx, posy + 1).destroy(
-							str - 1, DIR_RIGHT)), posx, posy + 1);
-					break;
-				default:
-					break;
-				}
-			}
-			return (this);
-		}
-	}
-
-	public void explodeOn(int str) {
-		owner.getFeld(posx - 1, posy).destroy(str, DIR_TOP);
-		owner.getFeld(posx, posy - 1).destroy(str, DIR_LEFT);
-		owner.getFeld(posx + 1, posy).destroy(str, DIR_BOTTOM);
-		owner.getFeld(posx + 1, posy).destroy(str, DIR_RIGHT);
-		this.destroy(0, DIR_NULL);
-
-	}
-
 	public final boolean isFrei() {
 		return frei;
+	}
+
+	public AbstractFeld top() {
+		if (posy > 0)
+			return owner.getFeld(posx, posy - 1);
+		else
+			return this;
+
+	}
+
+	public AbstractFeld left() {
+
+		if (posx > 0)
+			return owner.getFeld(posx - 1, posy);
+		else
+			return this;
+
+	}
+
+	public AbstractFeld right() {
+		if (posx < owner.breite - 1)
+			return owner.getFeld(posx + 1, posy);
+		else
+			return this;
+
+	}
+
+	public AbstractFeld bottom() {
+		if (posx <= owner.laenge + 1)
+			return owner.getFeld(posx, posy + 1);
+		else
+			return this;
+
 	}
 
 }

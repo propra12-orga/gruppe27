@@ -1,7 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 /**
- * Ein Programm zur Erstellung der Wände
+ * Ein Programm zur Erstellung der Wï¿½nde
  * Dies ist ein Javadoc Kommentar
  * @version 1.0
  */
@@ -13,7 +13,8 @@ public class Wall extends AbstractFeld {
 
 	/**
 	 * Hauptpgrogramm
-	 *@help
+	 * 
+	 * @help
 	 */
 	private char testchar = 'W';
 
@@ -30,11 +31,6 @@ public class Wall extends AbstractFeld {
 
 	public char toChar() {
 		return testchar;
-
-	}
-
-	@Override
-	public void explodeOn(int i) {
 
 	}
 
