@@ -19,6 +19,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.Player;
+import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 
 public class Spielfeld extends JPanel implements ActionListener {
 
@@ -27,6 +28,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public Player p1;
 	public Player p2;
 	Timer t;
+	private PlayerManager Players;
 	private BombManager Bombs;
 	public Exit e;
 
@@ -55,7 +57,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 				breite - 2); // platz für ausgang schaffen später auch durch
 								// level übernommen
 		e = new Exit(laenge - 2, breite - 2); // asugang plazieren
-		Bombs = new BombManager(this);
+		Bombs = new BombManager(this);// init Bombmanager
+		Players = new PlayerManager(this);
 		this.repaint();
 		this.startgame();
 	}
