@@ -3,7 +3,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.event.KeyEvent;
 
 public class Keyset {
-	private int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
+	public int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
 
 	public Keyset(int KeyUp, int KeyDown, int KeyLeft, int KeyRight, int KeyBomb) {
 		this.setKeyUp(KeyUp);

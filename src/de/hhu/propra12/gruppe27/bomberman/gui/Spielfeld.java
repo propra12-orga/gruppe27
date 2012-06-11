@@ -15,6 +15,8 @@ import javax.swing.Timer;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
+import de.hhu.propra12.gruppe27.bomberman.core.KeyPlayer;
+import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
@@ -25,7 +27,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
-	public Player p1;
+	public KeyPlayer p1;
 	public Player p2;
 	Timer t;
 	private PlayerManager Players;
@@ -45,7 +47,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		// for(int i=0; i< spielerzal; i++){ //für mehr spieler anzupassen!
 		// int[] pos = level.getStartposition(0);
-		p1 = new Player(1, 1, "Hernman", this, 1);
+		p1 = new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1));
 		// p2 = new Player(laenge - 2, breite - 2, "Buhman", this, 2);
 		// }
 		this.addKeyListener(new TAdapter());
