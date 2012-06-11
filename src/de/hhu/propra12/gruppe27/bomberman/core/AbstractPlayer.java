@@ -1,5 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld2P;
 
@@ -18,6 +21,7 @@ public abstract class AbstractPlayer {
 	int bombcount;// Bombenanzahl aktuell
 	int playerWER; // Welcher Spieler? 1 - 4
 
+	private Color playercolor = new Color(0, 255, 0);
 	Spielfeld owner;
 	Spielfeld2P owner2;
 	// int speed;
@@ -58,7 +62,7 @@ public abstract class AbstractPlayer {
 				bombcount--;
 			}
 		}
-		;
+
 	}
 
 	public void move(int i) {
@@ -80,7 +84,25 @@ public abstract class AbstractPlayer {
 				bombcount--;
 			}
 		}
-		;
+	}
+
+	public AbstractFeld getFeld() {
+		return owner.getFeld(posx, posy);
+	}
+
+	public void hit() {
+		alive = false;
+	}
+
+	// TODO überschreiben in abgeleiteten spielern mit bildausgabe an
+	// entsprechender stelle
+	public void draw(Graphics g) {
+		if (alive) {
+			g.setColor(playercolor);// zeichne spieler
+			// g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 * 32);
+			g.drawLine(posx * 32, posy * 32, posx * 32 + 32, posy * 32 + 32);
+			g.drawLine(posx * 32 + 32, posy * 32, posx * 32, posy * 32 + 32);
+		}
 	}
 
 }

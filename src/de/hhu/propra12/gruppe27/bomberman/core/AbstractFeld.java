@@ -19,7 +19,7 @@ public abstract class AbstractFeld {
 	// Feld zerstörbar
 	protected boolean zerstoer;
 
-	private boolean bombplanted;
+	// TODO private boolean bombplanted;
 
 	private int posx, posy;
 
