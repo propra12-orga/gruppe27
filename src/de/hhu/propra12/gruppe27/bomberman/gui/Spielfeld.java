@@ -14,6 +14,7 @@ import javax.swing.Timer;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
+import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
@@ -26,7 +27,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public Player p1;
 	public Player p2;
 	Timer t;
-	public Bomb b1;
+	private BombManager Bombs;
 	public Exit e;
 
 	private static Level loadlevel(int levelnr, int laenge, int breite,
@@ -54,9 +55,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 				breite - 2); // platz für ausgang schaffen später auch durch
 								// level übernommen
 		e = new Exit(laenge - 2, breite - 2); // asugang plazieren
+		Bombs = new BombManager(this);
 		this.repaint();
 		this.startgame();
-		b1 = new Bomb();
 	}
 
 	private void startgame() {
@@ -70,8 +71,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 			e.doOnExit(this);
 		// if ((p2.getX() == e.getX()) && (p2.getY() == e.getY()))
 		// e.doOnExit(this);
-		if (b1.isPlanted())
-			b1.check();// TODO später automatisch alle bomben auf spielfeld
+		if (!Bombs.isEmpty())
+			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
 	}
 
 	public AbstractFeld getFeld(int x, int y) {
@@ -82,6 +83,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 		level.setFeld(input, x, y);
 	}
 
+	public void plantBomb(Bomb b) {
+		Bombs.AddBomb(b);
+	}
+
 	protected void paintComponent(Graphics g) {
 		StatusUpdate();
 		for (int i = 0; i < level.getlaenge(); i++)
@@ -89,7 +94,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 				g.setColor(level.getFeld(i, j).getColor());
 				g.fillRect(i * 32, j * 32, 32, 32);
 			}
-		g.setColor(Color.GREEN);
+		g.setColor(Color.GREEN);// zeichne spieler
 		// g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 * 32);
 		g.drawLine(p1.getX() * 32, p1.getY() * 32, p1.getX() * 32 + 32,
 				p1.getY() * 32 + 32);
@@ -102,9 +107,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 		 * p2.getY() * 32 + 32); g.drawLine(p2.getX() * 32 + 32, p2.getY() * 32,
 		 * p2.getX() * 32, p2.getY() * 32 + 32);
 		 */
-		if (b1.isPlanted()) {
-			g.drawOval(b1.Feld.getX() * 32, b1.Feld.getY() * 32, 32, 32);
-		}
+		if (!Bombs.isEmpty())
+			Bombs.paintBombs(g);// ausgabe der bomben(später auch
+								// explosionsgrafiken)
 		g.setColor(Color.pink);
 		g.drawOval(e.getX() * 32, e.getY() * 32, 32, 32);
 

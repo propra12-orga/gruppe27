@@ -31,12 +31,18 @@ public abstract class Level {
 
 	// überladene funktion DestroyFeld ersetzt Feld , bzw. Feld an [x][y] durch
 	// ein freies feld, falls zerstörbar ist
-
+	// rückgabe true wenn explosion etwas getroffen hat und somit nich
+	// fortgesetzt werden soll
 	public boolean DestroyFeld(int x, int y) {
+		boolean warfrei = laxbr[x][y].frei;
 		if (laxbr[x][y].zerstoer) {
-			laxbr[x][y] = new Path(x, y, this);
+			if (!laxbr[x][y].frei) { // dann ist es ein block der zerstört wird
+				laxbr[x][y] = new Path(x, y, this);
+			}
+		}
+		if (warfrei)
 			return true;
-		} else
+		else
 			return false;
 	}
 

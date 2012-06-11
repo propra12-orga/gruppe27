@@ -12,6 +12,7 @@ public abstract class AbstractPlayer {
 	int posx; // entspricht i im Array
 	int posy; // enstpricht j im Array
 
+	int bombdelay = 7;// explosionsverzögerung
 	int bombstr; // Bombenst�rke 1 pro Feld
 	int bombanz; // Bombenanzahl
 	int bombcount;// Bombenanzahl aktuell
@@ -53,7 +54,7 @@ public abstract class AbstractPlayer {
 				posx++;
 		} else if (plant) {
 			if (bombcount > 0) {
-				owner.b1 = new Bomb(this, 1, 7);
+				owner.plantBomb(new Bomb(this, bombstr, bombdelay));
 				bombcount--;
 			}
 		}
