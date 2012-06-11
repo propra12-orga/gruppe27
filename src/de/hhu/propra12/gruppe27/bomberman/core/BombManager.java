@@ -24,7 +24,7 @@ public class BombManager {
 
 	public void hitBombs(AbstractFeld Feld) {
 		for (int i = 0; i < Bomblist.size(); i++) {
-			if (Feld.equals(Bomblist.get(i).Feld)) {
+			if (Feld == Bomblist.get(i).Feld) {
 				Bomblist.get(i).hit();
 			}
 		}
