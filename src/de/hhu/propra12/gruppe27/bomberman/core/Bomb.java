@@ -3,10 +3,13 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Graphics;
 
+import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
 public class Bomb {
 	int bombstr;
 	// Player owner;
 	AbstractPlayer owner;
+	Spielfeld pg;
 	int time;
 	public AbstractFeld Feld;
 	private boolean planted;
@@ -17,6 +20,7 @@ public class Bomb {
 		this.bombstr = bombstr;
 		this.owner = owner;
 		this.time = time;
+		this.pg = owner.owner;
 		Feld = owner.owner.getFeld(owner.posx, owner.posy);
 
 	}
@@ -43,19 +47,28 @@ public class Bomb {
 		if (planted) {
 			owner.bombcount++;
 			planted = false;
+			time = 0;
 			AbstractFeld Next;
 			Next = Feld.top();
-			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
 				Next = Next.top();
+			}
 			Next = Feld.left();
-			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
 				Next = Next.left();
+			}
 			Next = Feld.right();
-			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
 				Next = Next.right();
+			}
 			Next = Feld.bottom();
-			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
 				Next = Next.bottom();
+			}
 		}
 	}
 
@@ -71,6 +84,11 @@ public class Bomb {
 
 	public void draw(Graphics g) {
 		g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
+	}
+
+	public void hit() {
+		explode(bombstr);
+
 	}
 
 }

@@ -13,7 +13,7 @@ public class Player extends AbstractPlayer {
 		alive = true;
 		this.posx = posx;
 		this.posy = posy;
-		bombstr = 1;
+		bombstr = 2;
 		bombanz = 1;
 		name = pname;
 		pleft = false;
@@ -21,7 +21,7 @@ public class Player extends AbstractPlayer {
 		pup = false;
 		pdown = false;
 		plant = false;
-		bombcount = 1;
+		bombcount = 3;
 		this.owner = owner;
 
 		this.playerWER = playerWER;

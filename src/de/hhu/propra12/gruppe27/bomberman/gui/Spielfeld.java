@@ -87,6 +87,11 @@ public class Spielfeld extends JPanel implements ActionListener {
 		Bombs.AddBomb(b);
 	}
 
+	public void hitThings(AbstractFeld Feld) {
+		Bombs.hitBombs(Feld);// Bomben zerstören
+		// Players.hitPlayers(Feld);//später auch spieler treffen
+	}
+
 	protected void paintComponent(Graphics g) {
 		StatusUpdate();
 		for (int i = 0; i < level.getlaenge(); i++)

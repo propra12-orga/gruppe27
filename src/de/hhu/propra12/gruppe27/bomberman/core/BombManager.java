@@ -22,6 +22,15 @@ public class BombManager {
 		}
 	}
 
+	public void hitBombs(AbstractFeld Feld) {
+		for (int i = 0; i < Bomblist.size(); i++) {
+			if (Feld.equals(Bomblist.get(i).Feld)) {
+				Bomblist.get(i).hit();
+			}
+		}
+
+	}
+
 	public boolean isEmpty() {
 		return Bomblist.isEmpty();
 	}
