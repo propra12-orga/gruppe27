@@ -16,7 +16,7 @@ public class Level0 extends Level {
 
 		// Wenn Feld zu klein Abbruch
 		// Minimum 10 x 10 Felder
-		// Länge und Breite müssen ungerade sein
+		// Länge und Breite muessen ungerade sein
 
 		if ((laenge < 10) || (breite < 10) || (laenge % 2 == 0)
 				|| (breite % 2 == 0)) {
@@ -29,7 +29,7 @@ public class Level0 extends Level {
 			for (int i = 0; i < laenge; i++) {
 				for (int j = 0; j < breite; j++) {
 
-					// Aussenwände
+					// Aussenwaende
 					if ((i == 0) || (i == laenge - 1) || (j == 0)
 							|| (j == breite - 1)) {
 						laxbr[i][j] = new Wall(i, j, this);
@@ -40,7 +40,7 @@ public class Level0 extends Level {
 						laxbr[i][j] = new Wall(i, j, this);
 					}
 
-					// Begehbare Felder mit zerstörbaren Objekten
+					// Begehbare Felder mit zerstoerbaren Objekten
 					else {
 						freioderzerst = randomBoolean();
 						if (freioderzerst == true) {
@@ -50,14 +50,15 @@ public class Level0 extends Level {
 						}
 						laxbr[1][1] = new Path(1, 1, this);// Startfelder
 															// nachträglich
-															// einfügen macht es
+															// einfuegen macht
+															// es
 															// einfacher später
 															// untschschiedliche
 															// spielerzahlen zu
 															// händeln
 						laxbr[2][1] = new Path(2, 1, this);// neben den
 															// Startpositionen
-															// müssen jeweils
+															// muessen jeweils
 															// freie
 															// felder liegen(da
 															// sonst
@@ -87,7 +88,7 @@ public class Level0 extends Level {
 	}
 
 	@Override
-	// führ mehr spieler anzupassen!
+	// fuer mehr spieler anzupassen!
 	public int[] getStartposition(int spielernummer) {
 		int[] a = { 1, 1 };
 		return a;

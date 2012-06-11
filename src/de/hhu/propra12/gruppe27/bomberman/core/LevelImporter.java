@@ -4,33 +4,50 @@ import java.io.*;
 import java.util.Properties;
 
 public abstract class LevelImporter{
-/*
-	public LevelImporter(int laenge, int breite) {
+
+	public LevelImporter(String Levelpath) {
 		super(laenge, breite);
 		
-	}*/
-
-	public static void main(String[] args) throws IOException{	//Fürs erste Standaloneprojekt - FileInputStream könnte bei nicht Vorhanden sein der Datei Exception auswerfen 
-			
-			Properties levelstructure = new Properties();	//Properties verwenden, um  Datei zu lesen und Levelstruktur zu importieren
-			BufferedInputStream stream = new BufferedInputStream(new FileInputStream("level_1.bml")); //.bml (BomberManLevel) mit BIS einlesen
-			levelstructure.load(stream);					//load gehört zur properties-Lib
-			stream.close();									//Schließen des BufferedInputStream
-			String lvlstr = levelstructure.getProperty("LEVEL"); //Lese die Levelstruktur aus der Property-Datei aus
-			readLevel(lvlstr);																	
-		}
-	
-	private static void readLevel(String input) {
-	
-		char[][] test = new char[15][15];
-		
+		String input = readFile(Levelpath);							//Damit er die Datei nicht immer neu öffnen muss.
 		int i = 0;
 		int j = 0;
 		for (int k = 0; k < (input.length()-1); k++){				//Gesamten String einlesen und bis Länge-1 durchgehen
 			if (input.charAt(k) == ';') {j++; i = 0;}				//Bei Semikolon die erste Dimension um 1 erhöhen
-			else if (input.charAt(k) == '1') {test[j][i] = 'W';i++;}//Bei "1" neue feste Wand 
-			else if (input.charAt(k) == '2') {test[j][i] = 'B';i++;}//Bei "2" neue zerst. Wand
-			else {test[j][i] = ' '; i++;}							//Bei "0" oder allem anderem Leerzeichen einsetzen.
-		}
+			else if (input.charAt(k) == '1') {laxbr[i][j] = new Wall(i, j, this);i++;}//Bei "1" neue feste Wand 
+			else if (input.charAt(k) == '2') {laxbr[i][j] = new Block(i, j, this);i++;}//Bei "2" neue zerst. Wand
+			else {laxbr[i][j] = new Path(i, j, this); i++;}			//Bei "0" oder allem anderem Leerzeichen einsetzen.	
 	}
+
+	public String readFile(String Levelpath) throws IOException{	//Lese Leveldatei aus Pfad ein
+			
+			Properties levelstructure = new Properties();	//Properties verwenden, um  Datei zu lesen und Levelstruktur zu importieren
+			BufferedInputStream stream = new BufferedInputStream(new FileInputStream(Levelpath)); //.bml (BomberManLevel) mit BIS einlesen
+			levelstructure.load(stream);					//load gehört zur properties-Lib
+			stream.close();									//Schließen des BIS
+			String lvlstr = levelstructure.getProperty("LEVEL"); //Lese die Levelstruktur aus der Property-Datei aus
+			return lvlstr;
+		}
+	
+		
+	private int getlaenge(String input) {						//Die Funktion liest den String ein und zählt die Semikolons im
+		int value = 0;											//String, um herauszufinden wie lang das Level sein soll.
+		for (int pos = 0; pos < (input.length()-1); pos++){
+			if (input.charAt(pos) == ';') value++;
+		}
+		return value;
+	} 
+	
+	private int getbreite(String input) {						//Hier wird gezählt wie oft ein Zeichen vorkommt bis zu einem
+		int value = 0;											//Semikolon. Dadurch kriegt man die breite raus.
+		for (int pos = 0; pos < (input.length()-1); pos++){
+			if (input.charAt(pos) == ';') {
+				value = pos;
+			}
+		}
+		return value;
+	}
+	
+	
 }
+	
+
