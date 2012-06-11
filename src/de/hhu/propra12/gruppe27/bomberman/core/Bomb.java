@@ -1,7 +1,6 @@
 // <<<<<<< HEAD
 package de.hhu.propra12.gruppe27.bomberman.core;
 
-
 public class Bomb {
 	int bombstr;
 	// Player owner;
@@ -25,7 +24,7 @@ public class Bomb {
 		if (time > 0)
 			time--;
 		else {
-			explode();
+			explode(3);
 			System.out.println("BOOM!");
 		}
 
@@ -36,16 +35,24 @@ public class Bomb {
 
 	}
 
-	public void explode() {
-		owner.bombcount++;
-		planted = false;
-		Feld.owner.DestroyFeld(Feld.top());
-
-		Feld.owner.DestroyFeld(Feld.left());
-
-		Feld.owner.DestroyFeld(Feld.right());
-
-		Feld.owner.DestroyFeld(Feld.bottom());
+	public void explode(int radius) {
+		if (planted) {
+			owner.bombcount++;
+			planted = false;
+			AbstractFeld Next;
+			Next = Feld.top();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+				Next = Next.top();
+			Next = Feld.left();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+				Next = Next.left();
+			Next = Feld.right();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+				Next = Next.right();
+			Next = Feld.bottom();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--)
+				Next = Next.bottom();
+		}
 	}
 
 	/*
