@@ -1,7 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 /**
- * Ein Programm zur Erstellung der Wände
+ * Ein Programm zur Erstellung der Wï¿½nde
  * Dies ist ein Javadoc Kommentar
  * @version 1.0
  */
@@ -12,21 +12,19 @@ import java.awt.Color;
 
 /**
  * 
- * @author 
- * @verison 1.0
- *Klasse zur Erstellung der nicht zerstörbaren Wände
+ * @author
+ * @verison 1.0 Klasse zur Erstellung der nicht zerstï¿½rbaren Wï¿½nde
  */
 public class Wall extends AbstractFeld {
 
-
 	private char testchar = 'W';
-	
+
 	/**
 	 * 
 	 * @param x
 	 * @param y
 	 * @param owner
-	 * Eigenschaften der Wände (unzerstörbar)
+	 *            Eigenschaften der Wï¿½nde (unzerstï¿½rbar)
 	 */
 
 	public Wall(int x, int y, Level owner) {
@@ -34,7 +32,7 @@ public class Wall extends AbstractFeld {
 		frei = false;
 		zerstoer = false;
 	}
-	
+
 	/**
 	 * @return Color
 	 */
@@ -46,11 +44,6 @@ public class Wall extends AbstractFeld {
 
 	public char toChar() {
 		return testchar;
-
-	}
-
-	@Override
-	public void explodeOn(int i) {
 
 	}
 

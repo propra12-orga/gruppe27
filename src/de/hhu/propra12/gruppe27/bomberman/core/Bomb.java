@@ -1,19 +1,23 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.awt.Graphics;
+
+import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
 /**
  * 
- * @author 
+ * @author
  * @version 1.0
  */
 
 public class Bomb {
 	int bombstr;
-	Player owner;
+	AbstractPlayer owner;
+	Spielfeld pg;
 	int time;
-	private int posx;
-	private int posy;
+	public AbstractFeld Feld;
 	private boolean planted;
-	
+
 	/**
 	 * 
 	 * @param owner
@@ -21,72 +25,93 @@ public class Bomb {
 	 * @param time
 	 */
 
-	public Bomb(Player owner, int bombstr, int time) {
+	public Bomb(AbstractPlayer owner, int bombstr, int time) {
 		planted = true;
 		this.bombstr = bombstr;
 		this.owner = owner;
 		this.time = time;
-		posx = owner.getX();
-		posy = owner.getY();
-
+		this.pg = owner.owner;
+		Feld = owner.owner.getFeld(owner.posx, owner.posy);
 	}
+
 	/**
 	 * Wenn time=O, explodiert die Bombe
 	 */
 
-	public void check() {
+	public boolean check() {
 		System.out.println(time);
-		if (time > 0)
+		if (time > 0) {
 			time--;
-		else {
-			explode();
-			System.out.println("BOOM!");
+			return false;
+		} else {
+			explode(bombstr);
+			return true;
 		}
 
 	}
-	
 
+	/**
+	 * 
+	 */
 	public Bomb() {
 		planted = false;
 
 	}
-	
+
 	/**
 	 * Bombenzeit wird bestimmt
 	 */
 
-	public void explode() {
-		owner.bombcount++;
-		owner.owner.getFeld(getPosx(), getPosy()).explodeOn(bombstr);
-		planted = false;
-
+	public void explode(int radius) {
+		if (planted) {
+			owner.bombcount++;
+			planted = false;
+			time = 0;
+			AbstractFeld Next;
+			Next = Feld.top();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
+				Next = Next.top();
+			}
+			Next = Feld.left();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
+				Next = Next.left();
+			}
+			Next = Feld.right();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
+				Next = Next.right();
+			}
+			Next = Feld.bottom();
+			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
+				pg.hitThings(Next);
+				Next = Next.bottom();
+			}
+		}
 	}
-	
+
 	/**
 	 * 
-	 * @return Position x
+	 * @return
 	 */
 
-	public int getPosx() {
-		return posx;
-	}
-	
-	/**
-	 * 
-	 * @return Position y
-	 */
-
-	public int getPosy() {
-		return posy;
-	}
-
-	/**
-	 * 
-	 * @return 
-	 */
-	
 	public boolean isPlanted() {
 		return planted;
 	}
 
+	/**
+	 * @param g
+	 */
+	public void draw(Graphics g) {
+		g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
+	}
+
+	/**
+	 * 
+	 */
+	public void hit() {
+		explode(bombstr);
+
+	}
 }
