@@ -19,13 +19,15 @@ public class Bomb {
 
 	}
 
-	public void check() {
+	// returns true if bomb explodes
+	public boolean check() {
 		System.out.println(time);
-		if (time > 0)
+		if (time > 0) {
 			time--;
-		else {
-			explode(3);
-			System.out.println("BOOM!");
+			return false;
+		} else {
+			explode(bombstr);
+			return true;
 		}
 
 	}
