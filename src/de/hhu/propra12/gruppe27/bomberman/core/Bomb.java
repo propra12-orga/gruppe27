@@ -1,6 +1,8 @@
 // <<<<<<< HEAD
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.awt.Graphics;
+
 public class Bomb {
 	int bombstr;
 	// Player owner;
@@ -65,6 +67,10 @@ public class Bomb {
 
 	public boolean isPlanted() {
 		return planted;
+	}
+
+	public void draw(Graphics g) {
+		g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
 	}
 
 }
