@@ -54,9 +54,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 		Players = new PlayerManager(this);
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
 		// TODO menüanbindung Mehrspieler
-		// if (spielerzal > 1)
-		// Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new
-		// Keyset(2)));
+		if (spielerzal > 1)
+			Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(
+					2)));
 		this.repaint();
 		this.startgame();
 	}
