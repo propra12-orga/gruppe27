@@ -1,11 +1,15 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
+import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
+
 public class Exit {
 	private int posx, posy;
+	private AbstractFeld Feld;
 
-	public Exit(int x, int y) {
-		setPosx(x);
-		setPosy(y);
+	public Exit(AbstractFeld Feld) {
+		this.Feld = Feld;
+		posx = Feld.getX();
+		posy = Feld.getY();
 	}
 
 	public void doOnExit(Spielfeld owner) {
@@ -36,5 +40,9 @@ public class Exit {
 
 	public void setPosy(int posy) {
 		this.posy = posy;
+	}
+
+	public AbstractFeld getFeld() {
+		return Feld;
 	}
 }

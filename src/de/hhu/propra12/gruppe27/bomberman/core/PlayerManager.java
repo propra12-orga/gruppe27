@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 public class PlayerManager {
+	private Spielfeld owner;
 	private ArrayList<AbstractPlayer> PlayerList;
 
-	public PlayerManager(Spielfeld Owner) {
+	public PlayerManager(Spielfeld owner) {
 		PlayerList = new ArrayList<AbstractPlayer>();
+		this.owner = owner;
 	}
 
 	public void movePlayers() {
@@ -23,6 +25,23 @@ public class PlayerManager {
 			PlayerList.get(i).update(keycode, pressed);
 		}
 
+	}
+
+	// liefert true zurück wenn das spiel zu ende ist(also wenn ein spieler das
+	// Ende erreicht)
+	public boolean checkGameEnde() {// bedingungen für spielende
+		if (countPlayersAlive() < 1) // wenn keiner mehr lebt
+			return true;
+		for (int i = 0; i < PlayerList.size(); i++) {
+			if ((PlayerList.get(i).getX() == owner.e.getX())
+					&& (PlayerList.get(i).getY() == owner.e.getY())) {
+				System.out.println("X übereinstimmung!");
+				return true;
+
+			}
+		}
+
+		return false;
 	}
 
 	// zählt lebende spieler
