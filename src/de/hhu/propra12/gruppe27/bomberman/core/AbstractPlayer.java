@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
-import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld2P;
 
 public abstract class AbstractPlayer {
 
@@ -23,7 +22,6 @@ public abstract class AbstractPlayer {
 
 	private Color playercolor = new Color(0, 255, 0);
 	Spielfeld owner;
-	Spielfeld2P owner2;
 	// int speed;
 
 	String name;
@@ -63,27 +61,6 @@ public abstract class AbstractPlayer {
 			}
 		}
 
-	}
-
-	public void move(int i) {
-		if (pup) {
-			if (owner2.getFeld(posx, posy - 1).isFrei())
-				posy--;
-		} else if (pleft) {
-			if (owner2.getFeld(posx - 1, posy).isFrei())
-				posx--;
-		} else if (pdown) {
-			if (owner2.getFeld(posx, posy + 1).isFrei())
-				posy++;
-		} else if (pright) {
-			if (owner2.getFeld(posx + 1, posy).isFrei())
-				posx++;
-		} else if (plant) {
-			if (bombcount > 0) {
-				owner2.b1 = new Bomb(this, 1, 7);
-				bombcount--;
-			}
-		}
 	}
 
 	public AbstractFeld getFeld() {
