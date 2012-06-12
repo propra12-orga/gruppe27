@@ -6,7 +6,8 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 //Da das Spielfeld sowieso st�ndig neu gezeichnet wird sollte das ver�ndern der Positionsvariable reichen.
 
 /*
-	
+
+
 	public static void move(char taste){
 		
 		switch (taste){
