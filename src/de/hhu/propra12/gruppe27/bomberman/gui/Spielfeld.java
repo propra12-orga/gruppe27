@@ -19,7 +19,6 @@ import de.hhu.propra12.gruppe27.bomberman.core.KeyPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
-import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 
 public class Spielfeld extends JPanel implements ActionListener {
@@ -46,8 +45,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 		this.setSize(laenge * 32, breite * 32 + 500);
 		this.setVisible(true);
 		e = new Exit(level.getFeld(laenge - 2, breite - 2)); // asugang
-		level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
-				breite - 2);
+		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
+		// breite - 2);
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
@@ -101,21 +100,18 @@ public class Spielfeld extends JPanel implements ActionListener {
 				g.fillRect(i * 32, j * 32, 32, 32);
 			}
 		Players.paintPlayers(g);
-
-		/*
-		 * g.setColor(Color.BLUE); // g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 *
-		 * 32); g.drawLine(p2.getX() * 32, p2.getY() * 32, p2.getX() * 32 + 32,
-		 * p2.getY() * 32 + 32); g.drawLine(p2.getX() * 32 + 32, p2.getY() * 32,
-		 * p2.getX() * 32, p2.getY() * 32 + 32);
-		 */
 		if (!Bombs.isEmpty())
 			Bombs.paintBombs(g);// ausgabe der bomben(später auch
 								// explosionsgrafiken)
-
-		// TODO zauslagerung der Zeichenfunktion des Exit. //TODO
+		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
 		// implementierung eines ItemManagers
 		g.setColor(Color.pink);
-		g.drawOval(e.getX() * 32, e.getY() * 32, 32, 32);
+		g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
+		// Bei bedarf eingangüberzeichnen.
+		if (!getFeld(e.getX(), e.getY()).isFrei()) {
+			g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
+			g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+		}
 
 	}
 
