@@ -1,11 +1,24 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.io.*;
+
 import java.util.Properties;
+
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse um Level zu importieren
+ */
 
 public abstract class LevelImporter{
 
 	public LevelImporter(String Levelpath) {
+	}
+	
+	/**
+	 * Levelstrukturen einlesen
+	 */
 		super(laenge, breite);
 		
 		String input = readFile(Levelpath);							//Damit er die Datei nicht immer neu öffnen muss.
@@ -18,6 +31,13 @@ public abstract class LevelImporter{
 			else {laxbr[i][j] = new Path(i, j, this); i++;}			//Bei "0" oder allem anderem Leerzeichen einsetzen.	
 	}
 
+		/**
+		 * 
+		 * @param Levelpath
+		 * @return lvlstr
+		 * @throws IOException
+		 */
+		
 	public String readFile(String Levelpath) throws IOException{	//Lese Leveldatei aus Pfad ein
 			
 			Properties levelstructure = new Properties();	//Properties verwenden, um  Datei zu lesen und Levelstruktur zu importieren
@@ -28,6 +48,13 @@ public abstract class LevelImporter{
 			return lvlstr;
 		}
 	
+	/**
+	 * 
+	 * @param input
+	 * @return value
+	 * Bestimmung der Levellänge
+	 */
+	
 		
 	private int getlaenge(String input) {						//Die Funktion liest den String ein und zählt die Semikolons im
 		int value = 0;											//String, um herauszufinden wie lang das Level sein soll.
@@ -36,6 +63,13 @@ public abstract class LevelImporter{
 		}
 		return value;
 	} 
+	
+	/**
+	 * 
+	 * @param input
+	 * @return value#
+	 * Bestimmung der Levelbreite
+	 */
 	
 	private int getbreite(String input) {						//Hier wird gezählt wie oft ein Zeichen vorkommt bis zu einem
 		int value = 0;											//Semikolon. Dadurch kriegt man die breite raus.

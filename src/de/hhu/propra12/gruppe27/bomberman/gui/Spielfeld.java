@@ -2,6 +2,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse Spielfeld implementiert ActionListener
+ */
+
 public class Spielfeld extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +43,15 @@ public class Spielfeld extends JPanel implements ActionListener {
 			int spielerzahl) {
 		return new Level0(laenge, laenge, spielerzahl);
 	}
+	
+	/**
+	 * 
+	 * @param levelnr
+	 * @param laenge
+	 * @param breite
+	 * @param spielerzal
+	 * Konstruktur wird erstellt
+	 */
 
 	// Konstruktor
 	public Spielfeld(int levelnr, int laenge, int breite, int spielerzal) {
@@ -60,6 +77,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 		this.repaint();
 		this.startgame();
 	}
+	
+	/**
+	 * Spielstart
+	 */
 
 	private void startgame() {
 		t = new Timer(500, this);
@@ -67,6 +88,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Zeit von Bombe l�ft ab, wenn Ende Bombe explodiert
+	 */
+	
 	private void StatusUpdate() {
 
 		// TODO Extihandling
@@ -76,24 +101,52 @@ public class Spielfeld extends JPanel implements ActionListener {
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
 	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return level
+	 */
 
 	public AbstractFeld getFeld(int x, int y) {
 		return level.getFeld(x, y);
 	}
+	
+	/**
+	 * 
+	 * @param input
+	 * @param x
+	 * @param y
+	 */
 
 	public void setFeld(AbstractFeld input, int x, int y) {
 		level.setFeld(input, x, y);
 	}
+	
+	/**
+	 * 
+	 * @param b
+	 */
 
 	public void plantBomb(Bomb b) {
 		Bombs.AddBomb(b);
 	}
 
+	/**
+	 * 
+	 * @param Feld
+	 */
+	
 	public void hitThings(AbstractFeld Feld) {
 		Bombs.hitBombs(Feld);// Bomben zerstören
 		// TODO Spieler Töten
 		// Players.hitPlayers(Feld);//später auch spieler treffen
 	}
+	
+	/**
+	 * Einstellungen des Levels
+	 */
 
 	protected void paintComponent(Graphics g) {
 		StatusUpdate();
@@ -102,6 +155,11 @@ public class Spielfeld extends JPanel implements ActionListener {
 				g.setColor(level.getFeld(i, j).getColor());
 				g.fillRect(i * 32, j * 32, 32, 32);
 			}
+		
+		/**
+		 * Aussehen des Spielers wird festgelegt
+		 */
+		
 		Players.paintPlayers(g);
 
 		/*
@@ -120,6 +178,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 		g.drawOval(e.getX() * 32, e.getY() * 32, 32, 32);
 
 	}
+	
+
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -136,6 +196,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	// ------------------------------------------------------
+	
+	
 
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {

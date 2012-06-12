@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,13 @@ import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse für das Optionsmenü
+ */
+
 public class Optionmenue {
 
 	SysEinst sys = new SysEinst();
@@ -20,6 +28,13 @@ public class Optionmenue {
 	/*
 	 * Methode um das Optionsmenue aufzurufen
 	 */
+	/**
+	 * 
+	 * @param system
+	 * @return sys
+	 * Systemeinstellungen können getätigt werden, Buttons werden definiert
+	 */
+	
 	public SysEinst optionaufruf(SysEinst system) {
 
 		// lokale Variable fÃ¼r die System-Einstellungen
@@ -81,6 +96,11 @@ public class Optionmenue {
 		 * Ã–ffnen eines Fensters um die Mauerdichte einzustellen Ãœbernahme der
 		 * Mauerdichte in die lokale Variable sys
 		 */
+		
+		/**
+		 * Listener werden hinzugefügt, damit Buttons eine Funktion haben
+		 */
+		
 		buttonO1.addActionListener(new ActionListener() {
 
 			@Override

@@ -3,13 +3,32 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 // Level0 oder Probelevel
 // Aufbau "normal"
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse zur Erstellung eines Level0 extends Level
+ */
+
 public class Level0 extends Level {
 
 	// laenge = von links nach rechts
 	// breite = von oben nach unten
 
+	/**
+	 * frei oder zerstörbar
+	 */
+	
 	boolean freioderzerst;
 
+	/**
+	 * 
+	 * @param laenge
+	 * @param breite
+	 * @param spielerzahl
+	 * Level wird getestet
+	 */
+	
 	public Level0(int laenge, int breite, int spielerzahl) {
 		super(laenge, breite);
 		this.name = "Testlevel";
@@ -22,23 +41,39 @@ public class Level0 extends Level {
 				|| (breite % 2 == 0)) {
 			System.out.println("Spielfeld entspricht nicht den Anforderungen");
 		}
+		
+		/**
+		 * Wenn Feld den Anforderungen entspricht, kann das Feld aufgebaut werden
+		 */
 
 		else {
 
 			// Feldaufbau
 			for (int i = 0; i < laenge; i++) {
 				for (int j = 0; j < breite; j++) {
+					
+					/**
+					 * Bestimmung der Eigenschaften der Außenwände
+					 */
 
 					// Aussenwaende
 					if ((i == 0) || (i == laenge - 1) || (j == 0)
 							|| (j == breite - 1)) {
 						laxbr[i][j] = new Wall(i, j, this);
 					}
+					
+					/**
+					 * Bestimmung der Eigenschaften der Innenblocks
+					 */
 
 					// Innenblocks
 					else if ((i % 2 == 0) && (j % 2 == 0)) {
 						laxbr[i][j] = new Wall(i, j, this);
 					}
+					
+					/**
+					 * Bestimmung von begehbaren Feldern aber mit zerstörbaren Objekten 
+					 */
 
 					// Begehbare Felder mit zerstoerbaren Objekten
 					else {
@@ -75,6 +110,11 @@ public class Level0 extends Level {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @return true/false
+	 */
 
 	private boolean randomBoolean() {
 
@@ -87,6 +127,10 @@ public class Level0 extends Level {
 		}
 	}
 
+	/**
+	 * Spielernummer
+	 */
+	
 	@Override
 	// fuer mehr spieler anzupassen!
 	public int[] getStartposition(int spielernummer) {

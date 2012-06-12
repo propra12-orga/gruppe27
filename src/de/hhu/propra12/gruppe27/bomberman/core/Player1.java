@@ -4,6 +4,13 @@ import java.awt.event.KeyEvent;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
+/**
+ * 
+ * @author 
+ * @version
+ * Klasse für Einstellungen von Spieler 1 und seine Eigenschaften
+ */
+
 public class Player1 extends AbstractPlayer {
 
 	// Konstruktor
@@ -23,6 +30,8 @@ public class Player1 extends AbstractPlayer {
 		this.owner = owner;
 
 	}
+	
+	
 
 	/*
 	 * TODO kann gelÃ¶scht werden, ist jetzt in AbstractPlayer public boolean
@@ -31,6 +40,10 @@ public class Player1 extends AbstractPlayer {
 	 * public int getX() { return posx; }
 	 * 
 	 * public int getY() { return posy; }
+	 */
+	
+	/**
+	 * Bewegung des Spielers
 	 */
 
 	public void update(int keycode, boolean pressed) {

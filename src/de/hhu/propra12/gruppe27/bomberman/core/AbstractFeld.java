@@ -2,6 +2,13 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Color;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse zur Erstellung eines Feldes
+ */
+
 public abstract class AbstractFeld {
 	public static final int DIR_NULL = 0;
 	public static final int DIR_TOP = 1;
@@ -14,18 +21,35 @@ public abstract class AbstractFeld {
 	// einfacher nachbarfelder abzufragen(?) in dem fall zusätzliche methoden
 	// nord/sued/ost/west o.ä.
 	// Feld begehbar
+	
+	/**
+	 * Feld begehbar
+	 */
+	
 	protected boolean frei;
+	
+	/**
+	 * Feld zerst�rbar
+	 */
 
 	// Feld zerstörbar
 	protected boolean zerstoer;
 
 	// TODO private boolean bombplanted;
+	
 
 	private int posx, posy;
 
 	private Color c;
 
 	Level owner;
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param owner
+	 */
 
 	public AbstractFeld(int x, int y, Level owner) {
 		posx = x;
@@ -36,22 +60,48 @@ public abstract class AbstractFeld {
 
 	public abstract char toChar();// bis noch kein gui da ist...
 
+	/**
+	 * 
+	 * @return posyx
+	 */
+	
 	// public Image im;
 	public int getX() {
 		return posx;
 	}
 
+	/**
+	 * 
+	 * @return posy
+	 */
+	
 	public int getY() {
 		return posy;
 	}
+	
+	/**
+	 * 
+	 * @return c
+	 */
 
 	public Color getColor() {// später ersetzen durch bildausgabe
 		return c;
 	}
+	
+	/**
+	 * 
+	 * @return frei
+	 */
 
 	public final boolean isFrei() {
 		return frei;
 	}
+	
+  /**
+   * 
+   * @return this
+   * Abstract Feld oben
+   */
 
 	public AbstractFeld top() {
 		if (posy > 0)
@@ -60,6 +110,12 @@ public abstract class AbstractFeld {
 			return this;
 
 	}
+	
+	/**
+	 * 
+	 * @return this
+	 * Abstract Feld links
+	 */
 
 	public AbstractFeld left() {
 
@@ -67,8 +123,16 @@ public abstract class AbstractFeld {
 			return owner.getFeld(posx - 1, posy);
 		else
 			return this;
+	
 
 	}
+	
+	/**
+	 * 
+	 * @return this
+	 * Abstract Feld rechts
+	 * 
+	 */
 
 	public AbstractFeld right() {
 		if (posx < owner.breite - 1)
@@ -77,6 +141,12 @@ public abstract class AbstractFeld {
 			return this;
 
 	}
+	
+	/**
+	 * 
+	 * @return this
+	 * Abstract Feld Mitte
+	 */
 
 	public AbstractFeld bottom() {
 		if (posx <= owner.laenge + 1)

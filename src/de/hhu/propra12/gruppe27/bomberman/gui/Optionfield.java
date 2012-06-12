@@ -12,6 +12,13 @@ import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse für die Einstellungen des Optionsfeldes
+ */
+
 public class Optionfield {
 
 	SysEinst sysopfield = new SysEinst();
@@ -20,6 +27,12 @@ public class Optionfield {
 	 * Methode um die SpielfeldgrÃ¶ÃŸe einzurichten
 	 * 
 	 * Wahl zwischen 3 SpielfeldgrÃ¶ÃŸen Feld1 15x15 Feld2 19x19 Feld3 11x11
+	 */
+	
+	/**
+	 * Einstellungen für das Optionsmenü
+	 * @param system
+	 * @return sysopfield
 	 */
 
 	public SysEinst opfieldEinst(SysEinst system) {
@@ -77,6 +90,11 @@ public class Optionfield {
 		 * 
 		 * jeweils feldx und feldy setzen je nach ausgewÃ¤hlter GrÃ¶ÃŸe
 		 */
+		
+		/**
+		 * Listener wird ausgeführt, damit Knopfdruck bearbeitet werden kann
+		 */
+		
 		buttonopfield1.addActionListener(new ActionListener() {
 
 			@Override
@@ -86,6 +104,8 @@ public class Optionfield {
 				frameopfield.dispose();
 			}
 		});
+		
+	
 
 		buttonopfield2.addActionListener(new ActionListener() {
 
@@ -106,6 +126,7 @@ public class Optionfield {
 				frameopfield.dispose();
 			}
 		});
+		
 
 		return (sysopfield);
 	}

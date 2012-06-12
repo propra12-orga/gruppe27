@@ -2,6 +2,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
 import de.hhu.propra12.gruppe27.bomberman.core.Player;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * ActionListener wird in Klasse Spielfeld 2 Spieler implementiert
+ */
+
 public class Spielfeld2P extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +41,15 @@ public class Spielfeld2P extends JPanel implements ActionListener {
 			int spielerzahl) {
 		return new Level0(laenge, laenge, spielerzahl);
 	}
+	
+	/**
+	 * 
+	 * @param levelnr
+	 * @param laenge
+	 * @param breite
+	 * @param spielerzal
+	 * Konstruktur wird erstellt 
+	 */
 
 	// Konstruktor
 	public Spielfeld2P(int levelnr, int laenge, int breite, int spielerzal) {
@@ -58,12 +75,20 @@ public class Spielfeld2P extends JPanel implements ActionListener {
 		this.startgame();
 		b1 = new Bomb();
 	}
+	
+	/**
+	 * Start des Spiels wird festgelegt
+	 */
 
 	private void startgame() {
 		t = new Timer(500, this);
 		t.start();
 
 	}
+	
+	/**
+	 * Statusupdate
+	 */
 
 	private void StatusUpdate() {
 		if ((p1.getX() == e.getX()) && (p1.getY() == e.getY()))
@@ -73,14 +98,32 @@ public class Spielfeld2P extends JPanel implements ActionListener {
 		if (b1.isPlanted())
 			b1.check();// TODO später automatisch alle bomben auf spielfeld
 	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return level
+	 */
 
 	public AbstractFeld getFeld(int x, int y) {
 		return level.getFeld(x, y);
 	}
+	
+	/**
+	 * 
+	 * @param input
+	 * @param x
+	 * @param y
+	 */
 
 	public void setFeld(AbstractFeld input, int x, int y) {
 		level.setFeld(input, x, y);
 	}
+	
+	/**
+	 * Komponenten werden gezeichnet
+	 */
 
 	protected void paintComponent(Graphics g) {
 		StatusUpdate();
@@ -111,6 +154,8 @@ public class Spielfeld2P extends JPanel implements ActionListener {
 
 	}
 
+
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		p1.move(1);

@@ -5,6 +5,13 @@ import java.awt.event.KeyEvent;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld2P;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Eigenschaften des Spielers
+ */
+
 public class Player extends AbstractPlayer {
 
 	// Konstruktor
@@ -26,6 +33,15 @@ public class Player extends AbstractPlayer {
 
 		this.playerWER = playerWER;
 	}
+	
+	/**
+	 * 
+	 * @param posx
+	 * @param posy
+	 * @param pname
+	 * @param owner
+	 * @param playerWER
+	 */
 
 	public Player(int posx, int posy, String pname, Spielfeld2P owner,
 			int playerWER) {
@@ -57,6 +73,11 @@ public class Player extends AbstractPlayer {
 	 */
 
 	//
+	
+	/**
+	 * Bewegung des Spielers 
+	 */
+	
 	public void update(int keycode, boolean pressed) {
 
 		if (1 == playerWER) {
@@ -81,6 +102,10 @@ public class Player extends AbstractPlayer {
 				break;
 			}
 		}
+		
+		/**
+		 * Bewegung Spieler 2
+		 */
 
 		if (2 == playerWER) {
 			switch (keycode) {
