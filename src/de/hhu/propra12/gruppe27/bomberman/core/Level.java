@@ -9,9 +9,13 @@ public abstract class Level {
 	String name;
 	protected AbstractFeld laxbr[][];
 
-	public Level(int laenge, int breite) {// initialisiert l�nge breite und
-		// spielfeld"laxbr" (bin f�r
-		// umbenennung in spielfeld o.�.
+	public Level() {
+
+	}
+
+	public Level(int laenge, int breite) {// initialisiert laenge breite und
+		// spielfeld"laxbr" (bin fuer
+		// umbenennung in spielfeld o.ae.
 		// ;-))
 		this.laenge = laenge;
 		this.breite = breite;
