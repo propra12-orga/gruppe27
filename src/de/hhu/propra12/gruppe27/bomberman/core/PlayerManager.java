@@ -33,7 +33,12 @@ public class PlayerManager {
 		if (countPlayersAlive() < 1) // wenn keiner mehr lebt
 			return true;
 		for (int i = 0; i < PlayerList.size(); i++) {
-			if ((PlayerList.get(i).getX() == owner.e.getX())
+			if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
+															// warum der
+															// vergleich der
+															// felder nicht
+															// hingehauen hat
+															// (:-/)
 					&& (PlayerList.get(i).getY() == owner.e.getY())) {
 				System.out.println("X übereinstimmung!");
 				return true;
