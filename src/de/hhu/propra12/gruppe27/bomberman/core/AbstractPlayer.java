@@ -91,6 +91,7 @@ public abstract class AbstractPlayer {
 	}
 
 	public void hit() {
+		System.out.println(name + "tot!");
 		alive = false;
 	}
 

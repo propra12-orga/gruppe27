@@ -47,10 +47,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 		this.setVisible(true);
 		e = new Exit(level.getFeld(laenge - 2, breite - 2)); // asugang
 		level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
-				breite - 2); // platz für ausgang schaffen später auch durch
-								// level übernommen
-								// plazieren
-		Bombs = new BombManager(this);// init Bombmanager
+				breite - 2);
+		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
 		// TODO menüanbindung Mehrspieler
@@ -92,7 +90,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public void hitThings(AbstractFeld Feld) {
 		Bombs.hitBombs(Feld);// Bomben zerstören
 		// TODO Spieler Töten
-		// Players.hitPlayers(Feld);//später auch spieler treffen
+		Players.hitPlayers(Feld);// später auch spieler treffen
 	}
 
 	protected void paintComponent(Graphics g) {
