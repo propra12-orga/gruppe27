@@ -37,22 +37,23 @@ public class KeyPlayer extends AbstractPlayer {
 	 */
 	
 	public void update(int keycode, boolean pressed) {
-		if (keycode == Keys.KeyUp) {
-			pup = pressed;
+		if (alive) {
+			if (keycode == Keys.KeyUp) {
+				pup = pressed;
+			}
+			if (keycode == Keys.KeyLeft) {
+				pleft = pressed;
+			}
+			if (keycode == Keys.KeyDown) {
+				pdown = pressed;
+			}
+			if (keycode == Keys.KeyRight) {
+				pright = pressed;
+			}
+			if (keycode == Keys.KeyBomb) {
+				plant = pressed;
+			}
 		}
-		if (keycode == Keys.KeyLeft) {
-			pleft = pressed;
-		}
-		if (keycode == Keys.KeyDown) {
-			pdown = pressed;
-		}
-		if (keycode == Keys.KeyRight) {
-			pright = pressed;
-		}
-		if (keycode == Keys.KeyBomb) {
-			plant = pressed;
-		}
-
 	}
 	
 	/**

@@ -3,7 +3,6 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.event.KeyEvent;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
-import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld2P;
 
 /**
  * 
@@ -42,26 +41,6 @@ public class Player extends AbstractPlayer {
 	 * @param owner
 	 * @param playerWER
 	 */
-
-	public Player(int posx, int posy, String pname, Spielfeld2P owner,
-			int playerWER) {
-		alive = true;
-		this.posx = posx;
-		this.posy = posy;
-		bombstr = 1;
-		bombanz = 1;
-		name = pname;
-		pleft = false;
-		pright = false;
-		pup = false;
-		pdown = false;
-		plant = false;
-		bombcount = 1;
-		this.owner2 = owner;
-
-		this.playerWER = playerWER;
-
-	}
 
 	/*
 	 * TODO kann gelöscht werden, ist jetzt in AbstractPlayer public boolean

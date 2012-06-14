@@ -11,17 +11,9 @@ public class GameWindow extends JFrame {
 
 	public GameWindow(int levelnr, int laenge, int breite, int spielerzahl) {
 
-		if (1 == spielerzahl) {
-
-			add(new Spielfeld(levelnr, laenge, breite, spielerzahl));
-			setSize(laenge * 32, breite * 32 + 24);
-			setVisible(true);
-			repaint();
-		} else {
-			add(new Spielfeld2P(levelnr, laenge, breite, spielerzahl));
-			setSize(laenge * 32, breite * 32 + 24);
-			setVisible(true);
-			repaint();
-		}
+		add(new Spielfeld(levelnr, laenge, breite, spielerzahl));
+		setSize(laenge * 32, breite * 32 + 24);
+		setVisible(true);
+		repaint();
 	}
 }
