@@ -68,6 +68,7 @@ public class Bomb {
 			planted = false;
 			time = 0;
 			AbstractFeld Next;
+			pg.hitThings(Feld);
 			Next = Feld.top();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
