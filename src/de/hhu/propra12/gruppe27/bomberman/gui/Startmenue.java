@@ -31,6 +31,14 @@ public class Startmenue {
 	 * 
 	 * Das Menue-Fenster wird geöffnet
 	 */
+	public SysEinst menueaufruf(SysEinst system) {
+
+		this.system = system;
+		menueaufruf();
+
+		return (system);
+	}
+
 	public SysEinst menueaufruf() {
 
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -113,6 +121,7 @@ public class Startmenue {
 		 * 
 		 * Spielfeld wird generiert und gestartet
 		 */
+
 		buttonS1.addActionListener(new ActionListener() {
 
 			@Override
@@ -121,14 +130,30 @@ public class Startmenue {
 				// Ausgabe der Einstellung-Parameter
 
 				system.printSysEinst();
-				GameWindow s = new GameWindow(0, system.getfeldx(), system
-						.getfeldy(), system.getamplayer());
+				GameWindow s = new GameWindow(0, system);
 				framemenue.setVisible(false);
 
 				// framemenue.dispose();
 				// Variablen können aus "system" gezogen werden
 			}
 		});
+
+		// buttonS1.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		//
+		// // Ausgabe der Einstellung-Parameter
+		//
+		// system.printSysEinst();
+		// GameWindow s = new GameWindow(0, system.getfeldx(), system
+		// .getfeldy(), system.getamplayer());
+		// framemenue.setVisible(false);
+		//
+		// // framemenue.dispose();
+		// // Variablen können aus "system" gezogen werden
+		// }
+		// });
 
 		buttonS2.addActionListener(new ActionListener() {
 
@@ -139,8 +164,7 @@ public class Startmenue {
 				// Ausgabe der Einstellung-Parameter
 				system.printSysEinst();
 
-				GameWindow s = new GameWindow(0, system.getfeldx(), system
-						.getfeldy(), system.getamplayer());
+				GameWindow s = new GameWindow(0, system);
 				framemenue.setVisible(false);
 
 				// framemenue.dispose();

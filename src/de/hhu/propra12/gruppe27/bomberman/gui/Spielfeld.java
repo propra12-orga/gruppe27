@@ -2,14 +2,12 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,12 +19,12 @@ import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.Level0;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse Spielfeld implementiert ActionListener
+ * @author
+ * @version 1.0 Klasse Spielfeld implementiert ActionListener
  */
 
 public class Spielfeld extends JPanel implements ActionListener {
@@ -37,44 +35,54 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private PlayerManager Players;
 	private BombManager Bombs;
 	public Exit e;
+	private GameWindow owner;
+	SysEinst system = new SysEinst();
 
-	private static Level loadlevel(int levelnr, int laenge, int breite,
-			int spielerzahl) {
-		return new Level0(laenge, laenge, spielerzahl);
+	// private static Level loadlevel(int levelnr, int laenge, int breite,
+	// int spielerzahl) {
+	private static Level loadlevel(int levelnr, SysEinst system) {
+
+		// this.system = system;
+		return new Level0(system.getfeldx(), system.getfeldy(),
+				system.getamplayer());
 	}
-	
+
 	/**
 	 * 
 	 * @param levelnr
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 * Konstruktur wird erstellt
+	 *            Konstruktur wird erstellt
 	 */
 
 	// Konstruktor
-	public Spielfeld(int levelnr, int laenge, int breite, int spielerzal) {
+	public Spielfeld(int levelnr, SysEinst system, GameWindow owner) {
 
-		level = loadlevel(0, laenge, breite, spielerzal);
+		this.system = system;
+		this.owner = owner;
+
+		level = loadlevel(0, system);
 
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
-		this.setSize(laenge * 32, breite * 32 + 500);
+		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
-		e = new Exit(level.getFeld(laenge - 2, breite - 2)); // asugang
+		e = new Exit(
+				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // asugang
 		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
 		// breite - 2);
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
 		// TODO menüanbindung Mehrspieler
-		if (spielerzal > 1)
+		if (system.getamplayer() > 1)
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(
 					2)));
 		this.repaint();
 		this.startgame();
 	}
-	
+
 	/**
 	 * Spielstart
 	 */
@@ -86,19 +94,20 @@ public class Spielfeld extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Zeit von Bombe l�ft ab, wenn Ende Bombe explodiert
+	 * Zeit von Bombe laeuft ab, wenn Ende Bombe explodiert
 	 */
-	
+
 	private void StatusUpdate() {
 
-		// TODO Extihandling
+		// TODO Exithandling
 
-		if (Players.checkGameEnde())
-			e.doOnExit(this);
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
+		if (Players.checkGameEnde())
+			e.doOnExit(this);
+
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -109,7 +118,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public AbstractFeld getFeld(int x, int y) {
 		return level.getFeld(x, y);
 	}
-	
+
 	/**
 	 * 
 	 * @param input
@@ -120,7 +129,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	public void setFeld(AbstractFeld input, int x, int y) {
 		level.setFeld(input, x, y);
 	}
-	
+
 	/**
 	 * 
 	 * @param b
@@ -134,13 +143,13 @@ public class Spielfeld extends JPanel implements ActionListener {
 	 * 
 	 * @param Feld
 	 */
-	
+
 	public void hitThings(AbstractFeld Feld) {
 		Bombs.hitBombs(Feld);// Bomben zerstören
 		// TODO Spieler Töten
 		Players.hitPlayers(Feld);// später auch spieler treffen
 	}
-	
+
 	/**
 	 * Einstellungen des Levels
 	 */
@@ -152,11 +161,11 @@ public class Spielfeld extends JPanel implements ActionListener {
 				g.setColor(level.getFeld(i, j).getColor());
 				g.fillRect(i * 32, j * 32, 32, 32);
 			}
-		
+
 		/**
 		 * Aussehen des Spielers wird festgelegt
 		 */
-		
+
 		Players.paintPlayers(g);
 		if (!Bombs.isEmpty())
 			Bombs.paintBombs(g);// ausgabe der bomben(später auch
@@ -172,26 +181,12 @@ public class Spielfeld extends JPanel implements ActionListener {
 		}
 
 	}
-	
-
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Players.movePlayers();
 		repaint();
-
 	}
-
-	// Mainfunktion nur zum testen um Menü zu überspringen
-	public static void main(String[] args) {// um nicht immer durch Startmenü zu
-											// müssen später entfernen.
-		@SuppressWarnings("unused")
-		JFrame f = new GameWindow(0, 13, 13, 1);
-	}
-
-	// ------------------------------------------------------
-	
-	
 
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
@@ -205,4 +200,8 @@ public class Spielfeld extends JPanel implements ActionListener {
 		}
 	}
 
+	public void dispose() {
+
+		owner.dispose();
+	}
 }
