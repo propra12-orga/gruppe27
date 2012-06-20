@@ -1,8 +1,9 @@
 // <<<<<<< HEAD
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -36,13 +37,19 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private BombManager Bombs;
 	public Exit e;
 	private GameWindow owner;
-	SysEinst system = new SysEinst();
+	SysEinst system = SysEinst.getSystem();
+	final Image imagezerwand = Toolkit
+			.getDefaultToolkit()
+			.getImage(
+					"src/de/hhu/propra12/gruppe27/bomberman/graphics/ZerstoerbareWand.gif");
+	final Image imagewand = Toolkit.getDefaultToolkit().getImage(
+			"src/de/hhu/propra12/gruppe27/bomberman/graphics/Wand.gif");
 
-	// private static Level loadlevel(int levelnr, int laenge, int breite,
-	// int spielerzahl) {
-	private static Level loadlevel(int levelnr, SysEinst system) {
+	final Image imageexit = Toolkit.getDefaultToolkit().getImage(
+			"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
-		// this.system = system;
+	private Level loadlevel(int levelnr) {
+
 		return new Level0(system.getfeldx(), system.getfeldy(),
 				system.getamplayer());
 	}
@@ -57,12 +64,11 @@ public class Spielfeld extends JPanel implements ActionListener {
 	 */
 
 	// Konstruktor
-	public Spielfeld(int levelnr, SysEinst system, GameWindow owner) {
+	public Spielfeld(int levelnr, GameWindow owner) {
 
-		this.system = system;
 		this.owner = owner;
 
-		level = loadlevel(0, system);
+		level = loadlevel(0);
 
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
@@ -158,8 +164,21 @@ public class Spielfeld extends JPanel implements ActionListener {
 		StatusUpdate();
 		for (int i = 0; i < level.getlaenge(); i++)
 			for (int j = 0; j < level.getbreite(); j++) {
+
+				// TODO Checken wieso die nächsten 2 Zeilen nötig sind
 				g.setColor(level.getFeld(i, j).getColor());
 				g.fillRect(i * 32, j * 32, 32, 32);
+
+				if (level.getFeld(i, j).isFrei() == true) {
+				} else if (level.getFeld(i, j).isZerstoer() == true) {
+					g.drawImage(imagezerwand, level.getFeld(i, j).getX() * 32,
+							level.getFeld(i, j).getY() * 32, 32, 32, owner);
+				} else {
+					g.drawImage(imagewand, level.getFeld(i, j).getX() * 32,
+							level.getFeld(i, j).getY() * 32, 32, 32, owner);
+				}
+				// g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
+				// 32, pg);
 			}
 
 		/**
@@ -172,12 +191,17 @@ public class Spielfeld extends JPanel implements ActionListener {
 								// explosionsgrafiken)
 		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
 		// implementierung eines ItemManagers
-		g.setColor(Color.pink);
-		g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
+
+		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
+		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 		// Bei bedarf eingangüberzeichnen.
 		if (!getFeld(e.getX(), e.getY()).isFrei()) {
-			g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
-			g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+
+			g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
+					owner);
+
+			// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
+			// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
 		}
 
 	}

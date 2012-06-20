@@ -14,30 +14,28 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse f�r die Einstellungen des Optionsfeldes
+ * @author
+ * @version 1.0 Klasse f�r die Einstellungen des Optionsfeldes
  */
 
 public class Optionfield {
 
-	SysEinst sysopfield = new SysEinst();
+	SysEinst sysopfield = SysEinst.getSystem();
 
 	/*
 	 * Methode um die Spielfeldgröße einzurichten
 	 * 
 	 * Wahl zwischen 3 Spielfeldgrößen Feld1 15x15 Feld2 19x19 Feld3 11x11
 	 */
-	
+
 	/**
-	 * Einstellungen f�r das Optionsmen�
+	 * Einstellungen f�r das Optionsmen�
+	 * 
 	 * @param system
 	 * @return sysopfield
 	 */
 
-	public SysEinst opfieldEinst(SysEinst system) {
-
-		sysopfield = system;
+	public SysEinst opfieldEinst() {
 
 		final JFrame frameopfield = new JFrame("Spielfeldgröße");
 		frameopfield.setVisible(true);
@@ -90,11 +88,11 @@ public class Optionfield {
 		 * 
 		 * jeweils feldx und feldy setzen je nach ausgewählter Größe
 		 */
-		
+
 		/**
-		 * Listener wird ausgef�hrt, damit Knopfdruck bearbeitet werden kann
+		 * Listener wird ausgef�hrt, damit Knopfdruck bearbeitet werden kann
 		 */
-		
+
 		buttonopfield1.addActionListener(new ActionListener() {
 
 			@Override
@@ -104,8 +102,6 @@ public class Optionfield {
 				frameopfield.dispose();
 			}
 		});
-		
-	
 
 		buttonopfield2.addActionListener(new ActionListener() {
 
@@ -126,7 +122,6 @@ public class Optionfield {
 				frameopfield.dispose();
 			}
 		});
-		
 
 		return (sysopfield);
 	}

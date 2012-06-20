@@ -4,9 +4,8 @@ import java.awt.Color;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse zur Erstellung eines Feldes
+ * @author
+ * @version 1.0 Klasse zur Erstellung eines Feldes
  */
 
 public abstract class AbstractFeld {
@@ -21,29 +20,28 @@ public abstract class AbstractFeld {
 	// einfacher nachbarfelder abzufragen(?) in dem fall zusätzliche methoden
 	// nord/sued/ost/west o.ä.
 	// Feld begehbar
-	
+
 	/**
 	 * Feld begehbar
 	 */
-	
+
 	protected boolean frei;
-	
+
 	/**
-	 * Feld zerst�rbar
+	 * Feld zerst�rbar
 	 */
 
 	// Feld zerstörbar
 	protected boolean zerstoer;
 
 	// TODO private boolean bombplanted;
-	
 
 	private int posx, posy;
 
 	private Color c;
 
 	Level owner;
-	
+
 	/**
 	 * 
 	 * @param x
@@ -64,7 +62,7 @@ public abstract class AbstractFeld {
 	 * 
 	 * @return posyx
 	 */
-	
+
 	// public Image im;
 	public int getX() {
 		return posx;
@@ -74,11 +72,11 @@ public abstract class AbstractFeld {
 	 * 
 	 * @return posy
 	 */
-	
+
 	public int getY() {
 		return posy;
 	}
-	
+
 	/**
 	 * 
 	 * @return c
@@ -87,7 +85,7 @@ public abstract class AbstractFeld {
 	public Color getColor() {// später ersetzen durch bildausgabe
 		return c;
 	}
-	
+
 	/**
 	 * 
 	 * @return frei
@@ -96,12 +94,15 @@ public abstract class AbstractFeld {
 	public final boolean isFrei() {
 		return frei;
 	}
-	
-  /**
-   * 
-   * @return this
-   * Abstract Feld oben
-   */
+
+	public final boolean isZerstoer() {
+		return zerstoer;
+	}
+
+	/**
+	 * 
+	 * @return this Abstract Feld oben
+	 */
 
 	public AbstractFeld top() {
 		if (posy > 0)
@@ -110,11 +111,10 @@ public abstract class AbstractFeld {
 			return this;
 
 	}
-	
+
 	/**
 	 * 
-	 * @return this
-	 * Abstract Feld links
+	 * @return this Abstract Feld links
 	 */
 
 	public AbstractFeld left() {
@@ -123,14 +123,12 @@ public abstract class AbstractFeld {
 			return owner.getFeld(posx - 1, posy);
 		else
 			return this;
-	
 
 	}
-	
+
 	/**
 	 * 
-	 * @return this
-	 * Abstract Feld rechts
+	 * @return this Abstract Feld rechts
 	 * 
 	 */
 
@@ -141,11 +139,10 @@ public abstract class AbstractFeld {
 			return this;
 
 	}
-	
+
 	/**
 	 * 
-	 * @return this
-	 * Abstract Feld Mitte
+	 * @return this Abstract Feld Mitte
 	 */
 
 	public AbstractFeld bottom() {
