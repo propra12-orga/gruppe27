@@ -3,12 +3,13 @@ package de.hhu.propra12.gruppe27.bomberman.gui;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
@@ -25,6 +26,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 public class Startmenue {
 
 	SysEinst system = new SysEinst();
+
+	final Image image = Toolkit.getDefaultToolkit().getImage(
+			"warofstickmen.gif");
 
 	/*
 	 * Methode menueaufruf
@@ -46,7 +50,7 @@ public class Startmenue {
 		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel bild = new JLabel("Platzhalter Bild");
+		// JLabel bild = new JLabel("Platzhalter Bild");
 		JPanel panel = new JPanel(new GridBagLayout());
 		framemenue.add(panel);
 
@@ -55,7 +59,8 @@ public class Startmenue {
 
 		c.gridx = 0;
 		c.gridy = 0;
-		panel.add(bild);
+		// panel.add(image);
+		// panel.paintComponent(g);
 
 		/*
 		 * Button 1 - buttonS1
