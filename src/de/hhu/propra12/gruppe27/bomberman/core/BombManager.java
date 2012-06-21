@@ -1,9 +1,19 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Graphics;
+
 import java.util.ArrayList;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse BombManager
+ * 
+ *
+ */
 
 public class BombManager {
 	private ArrayList<Bomb> Bomblist;
@@ -11,6 +21,10 @@ public class BombManager {
 	public BombManager(Spielfeld Owner) {
 		Bomblist = new ArrayList<Bomb>();
 	}
+	
+	/**
+	 * 
+	 */
 
 	public void CheckBombs() {
 		int i = 0;

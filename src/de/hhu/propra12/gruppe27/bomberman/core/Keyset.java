@@ -2,6 +2,14 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * 
+ * @author 	
+ * @version 1.0
+ * Belegung der Tasten für Spieler 
+ *
+ */
+
 public class Keyset {
 	public int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
 
@@ -13,6 +21,12 @@ public class Keyset {
 		this.setKeyBomb(KeyBomb);
 
 	}
+	
+	/**
+	 * 
+	 * @param presetnumber
+	 * Tastenbelegung für 3 Spieler
+	 */
 
 	public Keyset(int presetnumber) {
 		if (presetnumber == 1) {
@@ -38,42 +52,92 @@ public class Keyset {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @return Keyup
+	 */
 
 	public int getKeyUp() {
 		return KeyUp;
 	}
+	
+	/**
+	 * 
+	 * @param keyUp
+	 */
 
 	public void setKeyUp(int keyUp) {
 		KeyUp = keyUp;
 	}
 
+	/**
+	 * 
+	 * @return KeyDown
+	 */
+	
 	public int getKeyDown() {
 		return KeyDown;
 	}
+	
+	/**
+	 * 
+	 * @param keyDown
+	 */
 
 	public void setKeyDown(int keyDown) {
 		KeyDown = keyDown;
 	}
+	
+	/**
+	 * 
+	 * @return KeyLeft
+	 */
 
 	public int getKeyLeft() {
 		return KeyLeft;
 	}
+	
+	/**
+	 * 
+	 * @param keyLeft
+	 */
 
 	public void setKeyLeft(int keyLeft) {
 		KeyLeft = keyLeft;
 	}
+	
+	/**
+	 * 
+	 * @return KeyRight
+	 */
 
 	public int getKeyRight() {
 		return KeyRight;
 	}
+	
+	/**
+	 * 
+	 * @param keyRight
+	 */
 
 	public void setKeyRight(int keyRight) {
 		KeyRight = keyRight;
 	}
+	
+	/**
+	 * 
+	 * @return KeyBomb
+	 */
 
 	public int getKeyBomb() {
 		return KeyBomb;
 	}
+	
+	/**
+	 * 
+	 * @param keyBomb
+	 */
 
 	public void setKeyBomb(int keyBomb) {
 		KeyBomb = keyBomb;

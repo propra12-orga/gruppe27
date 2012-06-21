@@ -100,7 +100,7 @@ public abstract class AbstractFeld {
   /**
    * 
    * @return this
-   * Abstract Feld oben
+   * Feld oben
    */
 
 	public AbstractFeld top() {
@@ -114,7 +114,7 @@ public abstract class AbstractFeld {
 	/**
 	 * 
 	 * @return this
-	 * Abstract Feld links
+	 * Feld links
 	 */
 
 	public AbstractFeld left() {
@@ -130,7 +130,7 @@ public abstract class AbstractFeld {
 	/**
 	 * 
 	 * @return this
-	 * Abstract Feld rechts
+	 * Feld rechts
 	 * 
 	 */
 
@@ -145,7 +145,7 @@ public abstract class AbstractFeld {
 	/**
 	 * 
 	 * @return this
-	 * Abstract Feld Mitte
+	 * Feld Mitte
 	 */
 
 	public AbstractFeld bottom() {
