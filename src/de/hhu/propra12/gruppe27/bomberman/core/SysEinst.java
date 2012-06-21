@@ -11,6 +11,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 public class SysEinst {
 
+	static SysEinst system;
 	int amplayer = 1;
 	int feldx = 15;
 	int feldy = 15;
@@ -20,6 +21,18 @@ public class SysEinst {
 	String namePlayer2 = "Spieler 2";
 	String namePlayer3 = "Spieler 3";
 	String namePlayer4 = "Spieler 4";
+
+	public static SysEinst getSystem() {
+		if (system == null) {
+			system = new SysEinst();
+		}
+
+		return system;
+	}
+
+	private SysEinst() {
+
+	}
 
 	// get-Methoden
 
