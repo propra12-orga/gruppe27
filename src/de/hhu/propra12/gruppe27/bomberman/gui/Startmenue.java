@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
@@ -24,13 +23,25 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 public class Startmenue {
 
-	SysEinst system = new SysEinst();
+	SysEinst system = SysEinst.getSystem();
+
+	// final Image image = Toolkit.getDefaultToolkit().getImage(
+	// "warofstickmen.gif");
 
 	/*
 	 * Methode menueaufruf
 	 * 
 	 * Das Menue-Fenster wird geöffnet
 	 */
+
+	// public SysEinst menueaufruf(SysEinst system) {
+	//
+	// this.system = system;
+	// menueaufruf();
+	//
+	// return (system);
+	// }
+
 	public SysEinst menueaufruf() {
 
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -38,7 +49,7 @@ public class Startmenue {
 		framemenue.setSize(640, 640);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel bild = new JLabel("Platzhalter Bild");
+		// JLabel bild = new JLabel("Platzhalter Bild");
 		JPanel panel = new JPanel(new GridBagLayout());
 		framemenue.add(panel);
 
@@ -47,7 +58,8 @@ public class Startmenue {
 
 		c.gridx = 0;
 		c.gridy = 0;
-		panel.add(bild);
+		// panel.add(image);
+		// panel.paintComponent(g);
 
 		/*
 		 * Button 1 - buttonS1
@@ -113,6 +125,7 @@ public class Startmenue {
 		 * 
 		 * Spielfeld wird generiert und gestartet
 		 */
+
 		buttonS1.addActionListener(new ActionListener() {
 
 			@Override
@@ -121,14 +134,30 @@ public class Startmenue {
 				// Ausgabe der Einstellung-Parameter
 
 				system.printSysEinst();
-				GameWindow s = new GameWindow(0, system.getfeldx(), system
-						.getfeldy(), system.getamplayer());
-				framemenue.setVisible(false);
+				GameWindow s = new GameWindow(0);
+				// framemenue.setVisible(false);
 
-				// framemenue.dispose();
+				framemenue.dispose();
 				// Variablen können aus "system" gezogen werden
 			}
 		});
+
+		// buttonS1.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		//
+		// // Ausgabe der Einstellung-Parameter
+		//
+		// system.printSysEinst();
+		// GameWindow s = new GameWindow(0, system.getfeldx(), system
+		// .getfeldy(), system.getamplayer());
+		// framemenue.setVisible(false);
+		//
+		// // framemenue.dispose();
+		// // Variablen können aus "system" gezogen werden
+		// }
+		// });
 
 		buttonS2.addActionListener(new ActionListener() {
 
@@ -139,11 +168,10 @@ public class Startmenue {
 				// Ausgabe der Einstellung-Parameter
 				system.printSysEinst();
 
-				GameWindow s = new GameWindow(0, system.getfeldx(), system
-						.getfeldy(), system.getamplayer());
-				framemenue.setVisible(false);
+				GameWindow s = new GameWindow(0);
+				// framemenue.setVisible(false);
 
-				// framemenue.dispose();
+				framemenue.dispose();
 				// Variablen können aus "system" gezogen werden
 			}
 		});
@@ -180,7 +208,7 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				Optionmenue option = new Optionmenue();
-				system = option.optionaufruf(system);
+				option.optionaufruf();
 			}
 		});
 

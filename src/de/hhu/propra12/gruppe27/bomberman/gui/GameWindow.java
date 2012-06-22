@@ -2,17 +2,22 @@ package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import javax.swing.JFrame;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+
 public class GameWindow extends JFrame {
 
+	SysEinst system;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public GameWindow(int levelnr, int laenge, int breite, int spielerzahl) {
+	public GameWindow(int levelnr) {
 
-		add(new Spielfeld(levelnr, laenge, breite, spielerzahl));
-		setSize(laenge * 32, breite * 32 + 24);
+		this.system = SysEinst.getSystem();
+
+		add(new Spielfeld(levelnr, this));
+		setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 24);
 		setVisible(true);
 		repaint();
 	}

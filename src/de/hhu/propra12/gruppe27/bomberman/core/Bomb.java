@@ -1,6 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -17,6 +19,11 @@ public class Bomb {
 	int time;
 	public AbstractFeld Feld;
 	private boolean planted;
+
+	final Image image = Toolkit.getDefaultToolkit().getImage(
+			"src/de/hhu/propra12/gruppe27/bomberman/graphics/Bombe2.gif");
+
+	// final Image image = Toolkit.getDefaultToolkit().getImage("test.jpg");
 
 	/**
 	 * 
@@ -68,6 +75,7 @@ public class Bomb {
 			planted = false;
 			time = 0;
 			AbstractFeld Next;
+			pg.hitThings(Feld);
 			Next = Feld.top();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
@@ -104,7 +112,9 @@ public class Bomb {
 	 * @param g
 	 */
 	public void draw(Graphics g) {
-		g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
+		// g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
+
+		g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32, 32, pg);
 	}
 
 	/**

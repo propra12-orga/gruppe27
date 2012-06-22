@@ -1,7 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.BorderLayout;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -16,14 +15,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse für das Optionsmenü
+ * @author
+ * @version 1.0 Klasse fï¿½r das Optionsmenï¿½
  */
 
 public class Optionmenue {
 
-	SysEinst sys = new SysEinst();
+	SysEinst sys = SysEinst.getSystem();
 
 	/*
 	 * Methode um das Optionsmenue aufzurufen
@@ -31,15 +29,11 @@ public class Optionmenue {
 	/**
 	 * 
 	 * @param system
-	 * @return sys
-	 * Systemeinstellungen können getätigt werden, Buttons werden definiert
+	 * @return sys Systemeinstellungen kï¿½nnen getï¿½tigt werden, Buttons werden
+	 *         definiert
 	 */
-	
-	public SysEinst optionaufruf(SysEinst system) {
 
-		// lokale Variable fÃ¼r die System-Einstellungen
-		// SysEinst sys = new SysEinst();
-		sys = system;
+	public SysEinst optionaufruf() {
 
 		final JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
@@ -96,17 +90,17 @@ public class Optionmenue {
 		 * Ã–ffnen eines Fensters um die Mauerdichte einzustellen Ãœbernahme der
 		 * Mauerdichte in die lokale Variable sys
 		 */
-		
+
 		/**
-		 * Listener werden hinzugefügt, damit Buttons eine Funktion haben
+		 * Listener werden hinzugefï¿½gt, damit Buttons eine Funktion haben
 		 */
-		
+
 		buttonO1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				OptionWall density = new OptionWall();
-				sys = density.optionwall(sys);
+				density.optionwall();
 			}
 
 		});
@@ -121,7 +115,7 @@ public class Optionmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Optionfield opfield = new Optionfield();
-				sys = opfield.opfieldEinst(sys);
+				opfield.opfieldEinst();
 			}
 
 		});
@@ -130,8 +124,7 @@ public class Optionmenue {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sys.setamplayer(2);
-				System.out.println(sys.getamplayer());
+
 				frameoption.dispose();
 			}
 
