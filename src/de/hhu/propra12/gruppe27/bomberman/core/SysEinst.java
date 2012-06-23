@@ -32,7 +32,6 @@ public class SysEinst {
 		if (system == null) {
 			system = new SysEinst();
 		}
-
 		return system;
 	}
 
