@@ -23,6 +23,9 @@ public class Optionmenue {
 
 	SysEinst sys = SysEinst.getSystem();
 
+	String spiegel = "Spiegelung: ";
+	String standard = "Standardlevel: ";
+
 	/*
 	 * Methode um das Optionsmenue aufzurufen
 	 */
@@ -41,11 +44,11 @@ public class Optionmenue {
 		frameoption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JLabel optionbild = new JLabel("Platzhalter Bild");
-		JPanel optionpanel = new JPanel(new GridBagLayout());
+		final JPanel optionpanel = new JPanel(new GridBagLayout());
 		frameoption.add(optionpanel);
 
 		frameoption.getContentPane().add(optionpanel, BorderLayout.SOUTH);
-		GridBagConstraints coption = new GridBagConstraints();
+		final GridBagConstraints coption = new GridBagConstraints();
 
 		coption.gridx = 0;
 		coption.gridy = 0;
@@ -79,10 +82,30 @@ public class Optionmenue {
 		 * 
 		 * Optionsmenue verlassen
 		 */
-		JButton buttonO3 = new JButton("zurück");
+		final JButton buttonO3 = new JButton(spiegel + sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 3;
 		optionpanel.add(buttonO3, coption);
+
+		/*
+		 * TODO * Button 4 - buttonO4
+		 * 
+		 * Optionsmenue verlassen
+		 */
+		JButton buttonO4 = new JButton(standard + sys.getstandardlvl());
+		coption.gridx = 0;
+		coption.gridy = 4;
+		optionpanel.add(buttonO4, coption);
+
+		/*
+		 * Button 5 - buttonO5
+		 * 
+		 * Optionsmenue verlassen
+		 */
+		JButton buttonO5 = new JButton("zurück");
+		coption.gridx = 0;
+		coption.gridy = 5;
+		optionpanel.add(buttonO5, coption);
 
 		/*
 		 * Button 1 - Mauerdichte
@@ -120,7 +143,40 @@ public class Optionmenue {
 
 		});
 
+		/*
+		 * Button 3 - Spiegelung
+		 * 
+		 * Ein oder Aus
+		 */
 		buttonO3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sys.setspiegelung(!sys.getspiegelung());
+				System.out.println(sys.getspiegelung());
+
+				frameoption.dispose();
+				optionaufruf();
+
+			}
+
+		});
+
+		buttonO4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sys.setstandardlvl(!sys.getstandardlvl());
+				System.out.println(sys.getstandardlvl());
+
+				frameoption.dispose();
+				optionaufruf();
+
+			}
+
+		});
+
+		buttonO5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -132,4 +188,5 @@ public class Optionmenue {
 
 		return (sys);
 	}
+
 }

@@ -20,8 +20,8 @@ public class SysEinst {
 	int feldy = 15;
 	int densWall = 1;
 	boolean randomlvl = true;
-	boolean spiegelung = true;
-	boolean standardlvl = false;
+	boolean spiegelung = false;
+	boolean standardlvl = true;
 
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";

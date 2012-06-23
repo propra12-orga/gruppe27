@@ -22,12 +22,17 @@ public class LevelGen extends Level {
 
 		do {
 
-			if (system.getstandardlvl()) {
+			if (true == system.getstandardlvl()
+					&& false == system.getspiegelung()) {
 				generatestan();
-			} else if (system.getspiegelung()) {
-				generatespiegel();
-			} else {
+			} else if (true == system.getstandardlvl()
+					&& true == system.getspiegelung()) {
+				generatestanspiegel();
+			} else if (false == system.getstandardlvl()
+					&& false == system.getspiegelung()) {
 				generatelvl();
+			} else {
+				generatespiegelung();
 			}
 
 			generatefreistart();
@@ -131,9 +136,45 @@ public class LevelGen extends Level {
 	}
 
 	/*
-	 * Methode um das Spielfeld zu spiegeln
+	 * Methode um das Standardlevel zu spiegeln
 	 */
-	private void generatespiegel() {
+	private void generatestanspiegel() {
+
+		for (int i = 0; i < feldx; i++) {
+			for (int j = 0; j < feldy; j++) {
+
+				// Aussenwaende
+				if ((i == 0) || (i == feldx - 1) || (j == 0)
+						|| (j == feldy - 1)) {
+					laxbr[i][j] = new Wall(i, j, this);
+				}
+
+				// Innenblocks
+				else if ((i % 2 == 0) && (j % 2 == 0)) {
+					laxbr[i][j] = new Wall(i, j, this);
+				}
+
+				// Begehbare Felder mit zerstoerbaren Objekten
+				else {
+					wandoderfrei = randomBoolean(1);
+					if (wandoderfrei == true) {
+						laxbr[i][j] = new Block(i, j, this);
+						laxbr[feldx - 1 - i][feldy - 1 - j] = new Block(feldx
+								- 1 - i, feldy - 1 - j, this);
+					} else {
+						laxbr[i][j] = new Path(i, j, this);
+						laxbr[feldx - 1 - i][feldy - 1 - j] = new Path(feldx
+								- 1 - i, feldy - 1 - j, this);
+					}
+				}
+			}
+		}
+	}
+
+	/*
+	 * Methode um das Random-Spielfeld zu spiegeln
+	 */
+	private void generatespiegelung() {
 
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
