@@ -132,13 +132,10 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				// Ausgabe der Einstellung-Parameter
-
 				system.printSysEinst();
-				GameWindow s = new GameWindow(0);
-				// framemenue.setVisible(false);
 
+				GameWindow s = new GameWindow(0);
 				framemenue.dispose();
-				// Variablen können aus "system" gezogen werden
 			}
 		});
 

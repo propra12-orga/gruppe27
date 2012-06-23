@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
@@ -82,7 +83,8 @@ public class Optionmenue {
 		 * 
 		 * Optionsmenue verlassen
 		 */
-		final JButton buttonO3 = new JButton(spiegel + sys.getspiegelung());
+		final JToggleButton buttonO3 = new JToggleButton(spiegel
+				+ sys.getspiegelung(), sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 3;
 		optionpanel.add(buttonO3, coption);
@@ -92,7 +94,8 @@ public class Optionmenue {
 		 * 
 		 * Optionsmenue verlassen
 		 */
-		JButton buttonO4 = new JButton(standard + sys.getstandardlvl());
+		JToggleButton buttonO4 = new JToggleButton(standard
+				+ sys.getstandardlvl(), sys.getstandardlvl());
 		coption.gridx = 0;
 		coption.gridy = 4;
 		optionpanel.add(buttonO4, coption);
@@ -125,7 +128,6 @@ public class Optionmenue {
 				OptionWall density = new OptionWall();
 				density.optionwall();
 			}
-
 		});
 
 		/*
@@ -140,7 +142,6 @@ public class Optionmenue {
 				Optionfield opfield = new Optionfield();
 				opfield.opfieldEinst();
 			}
-
 		});
 
 		/*
@@ -155,13 +156,16 @@ public class Optionmenue {
 				sys.setspiegelung(!sys.getspiegelung());
 				System.out.println(sys.getspiegelung());
 
-				frameoption.dispose();
-				optionaufruf();
-
+				JToggleButton buttonO3 = (JToggleButton) e.getSource();
+				buttonO3.setText(spiegel + sys.getspiegelung());
 			}
-
 		});
 
+		/*
+		 * Button 3 - Standardlevel
+		 * 
+		 * Ein oder Aus
+		 */
 		buttonO4.addActionListener(new ActionListener() {
 
 			@Override
@@ -169,13 +173,14 @@ public class Optionmenue {
 				sys.setstandardlvl(!sys.getstandardlvl());
 				System.out.println(sys.getstandardlvl());
 
-				frameoption.dispose();
-				optionaufruf();
-
+				JToggleButton buttonO4 = (JToggleButton) e.getSource();
+				buttonO4.setText(spiegel + sys.getspiegelung());
 			}
-
 		});
 
+		/*
+		 * Fenster schließen und zurück gehen
+		 */
 		buttonO5.addActionListener(new ActionListener() {
 
 			@Override
@@ -183,10 +188,8 @@ public class Optionmenue {
 
 				frameoption.dispose();
 			}
-
 		});
 
 		return (sys);
 	}
-
 }
