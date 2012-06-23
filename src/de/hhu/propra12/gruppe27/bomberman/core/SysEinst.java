@@ -5,6 +5,9 @@ package de.hhu.propra12.gruppe27.bomberman.core;
  * Anzahl der Spieler 	-> players
  * Feldgröße			-> feldx, feldy
  * densWall				-> Mauerdichte
+ * randomlvl			-> generiertes Level
+ * spiegelung			-> Level soll gespiegelt werden
+ * standardlvl			-> Level soll festgelegte unzerst. Wände haben
  * namePlayer1			-> Name von Spieler1
  * namePlayer2			-> Name von Spieler2
  */
@@ -16,6 +19,9 @@ public class SysEinst {
 	int feldx = 15;
 	int feldy = 15;
 	int densWall = 1;
+	boolean randomlvl = true;
+	boolean spiegelung = true;
+	boolean standardlvl = false;
 
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";
@@ -52,6 +58,18 @@ public class SysEinst {
 		return densWall;
 	}
 
+	public boolean getrandomlvl() {
+		return randomlvl;
+	}
+
+	public boolean getspiegelung() {
+		return spiegelung;
+	}
+
+	public boolean getstandardlvl() {
+		return standardlvl;
+	}
+
 	public String getnamePlayer1() {
 		return namePlayer1;
 	}
@@ -84,6 +102,18 @@ public class SysEinst {
 
 	public void setdensWall(int densWall) {
 		this.densWall = densWall;
+	}
+
+	public void setrandomlvl(boolean lvl) {
+		this.randomlvl = lvl;
+	}
+
+	public void setspiegelung(boolean spiegelung) {
+		this.spiegelung = spiegelung;
+	}
+
+	public void setstandardlvl(boolean lvl) {
+		this.standardlvl = lvl;
 	}
 
 	public void setnamePlayer1(String namePlayer1) {

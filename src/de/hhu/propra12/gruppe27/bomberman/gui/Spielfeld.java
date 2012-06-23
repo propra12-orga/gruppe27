@@ -18,7 +18,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
 import de.hhu.propra12.gruppe27.bomberman.core.KeyPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
-import de.hhu.propra12.gruppe27.bomberman.core.Level0;
+import de.hhu.propra12.gruppe27.bomberman.core.LevelGen;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
@@ -50,7 +50,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	private Level loadlevel(int levelnr) {
 
-		return new Level0(system.getfeldx(), system.getfeldy(),
+		// return new Level0(system.getfeldx(), system.getfeldy(),
+		// system.getamplayer());
+		return new LevelGen(system.getfeldx(), system.getfeldy(),
 				system.getamplayer());
 	}
 
@@ -194,6 +196,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
 		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
+
 		// Bei bedarf eingangüberzeichnen.
 		if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
