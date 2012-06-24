@@ -57,16 +57,14 @@ public class Bomb {
 
 	}
 
-	/**
-	 * 
-	 */
+	
 	public Bomb() {
 		planted = false;
 
 	}
 
 	/**
-	 * Bombenzeit wird bestimmt
+	 * Radius der Bombe
 	 */
 
 	public void explode(int radius) {
@@ -101,7 +99,7 @@ public class Bomb {
 
 	/**
 	 * 
-	 * @return
+	 * @return planted
 	 */
 
 	public boolean isPlanted() {
@@ -117,9 +115,7 @@ public class Bomb {
 		g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32, 32, pg);
 	}
 
-	/**
-	 * 
-	 */
+	
 	public void hit() {
 		explode(bombstr);
 

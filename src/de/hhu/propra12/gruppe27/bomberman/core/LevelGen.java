@@ -1,5 +1,12 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse Levelgenerator, Bestimmung der Eigenschaften des Spielfeldes 
+ */
+
 public class LevelGen extends Level {
 
 	SysEinst system = SysEinst.getSystem();
@@ -11,6 +18,14 @@ public class LevelGen extends Level {
 	boolean wandoderfrei;
 	boolean zerstoderfest;
 	boolean konsist = true;
+	
+	/**
+	 * 
+	 * @param laengex
+	 * @param breitey
+	 * @param Spieleranzahl
+	 * Das Spielfeld wird erstellt
+	 */
 
 	public LevelGen(int laengex, int breitey, int Spieleranzahl) {
 
@@ -43,6 +58,12 @@ public class LevelGen extends Level {
 		} while (false == konsist);
 
 	}
+	
+	/**
+	 * Zufällige Erstellung des Spielfeldes
+	 * @param a
+	 * @return
+	 */
 
 	/*
 	 * Boolean zur Zufalls Generierung des Spielfeldes
@@ -70,6 +91,10 @@ public class LevelGen extends Level {
 		}
 
 	}
+	
+	/**
+	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit unzerstörbaren Mauern umrandet
+	 */
 
 	/*
 	 * Methode um alle Felder zu initialisieren
@@ -102,6 +127,10 @@ public class LevelGen extends Level {
 			}
 		}
 	}
+	
+	/**
+	 * Felder eines Standartlevels werden generiert (Ausenwände, Innenblocks, Begehbare Felder=
+	 */
 
 	/*
 	 * Methode um die Felder eines Standardlevels zu generieren
@@ -134,6 +163,10 @@ public class LevelGen extends Level {
 			}
 		}
 	}
+	
+	/**
+	 * Spiegelung des Standartlevels für zwei-Spieler Modus
+	 */
 
 	/*
 	 * Methode um das Standardlevel zu spiegeln
@@ -210,6 +243,10 @@ public class LevelGen extends Level {
 			}
 		}
 	}
+	
+	/**
+	 * Sartfelder werden begehbar gemacht, damit Spieler starten kann
+	 */
 
 	/*
 	 * Methode um die Startfelder frei zu machen
@@ -227,6 +264,11 @@ public class LevelGen extends Level {
 			laxbr[feldx - 3][feldy - 2] = new Path(feldx - 3, feldy - 2, this);
 		}
 	}
+	
+	/**
+	 * @return a
+	 * Startposition und Spielnummer werden festgelegt
+	 */
 
 	public int[] getStartposition(int spielernummer) {
 		int[] a = { 1, 1 };
