@@ -233,5 +233,4 @@ public class LevelGen extends Level {
 		return a;
 
 	}
-
 }
