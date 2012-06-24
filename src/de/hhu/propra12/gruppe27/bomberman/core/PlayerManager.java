@@ -1,16 +1,14 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Graphics;
-
 import java.util.ArrayList;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse des Playermanagers
+ * @author
+ * @version 1.0 Klasse des Playermanagers
  */
 
 public class PlayerManager {
@@ -25,13 +23,13 @@ public class PlayerManager {
 	/**
 	 * Bewegung der Spieler
 	 */
-	
+
 	public void movePlayers() {
 		for (int i = 0; i < PlayerList.size(); i++) {
 			PlayerList.get(i).move();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param keycode
@@ -47,19 +45,17 @@ public class PlayerManager {
 
 	// liefert true zurück wenn das spiel zu ende ist(also wenn ein spieler das
 	// Ende erreicht)
-	
+
 	/**
 	 * 
-	 * @return true/false
-	 * Einstellungen f�r das Ende des Spiels
+	 * @return true/false Einstellungen f�r das Ende des Spiels
 	 */
-	
-	public boolean checkGameEnde() {// bedingungen für spielende
+
+	public int checkGameEnde() {// bedingungen für spielende
 		if (countPlayersAlive() < 1) // wenn keiner mehr lebt
-			return true;
+			return 1;
 		for (int i = 0; i < PlayerList.size(); i++) {
-		
-			
+
 			if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
 															// warum der
 															// vergleich der
@@ -68,18 +64,39 @@ public class PlayerManager {
 															// (:-/)
 					&& (PlayerList.get(i).getY() == owner.e.getY())) {
 				System.out.println("X übereinstimmung!");
-				return true;
+				return 2;
 
 			}
 		}
 
-		return false;
+		return 0;
 	}
-	
+
+	// public boolean checkGameEnde() {// bedingungen für spielende
+	// if (countPlayersAlive() < 1) // wenn keiner mehr lebt
+	// return true;
+	// for (int i = 0; i < PlayerList.size(); i++) {
+	//
+	//
+	// if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
+	// // warum der
+	// // vergleich der
+	// // felder nicht
+	// // hingehauen hat
+	// // (:-/)
+	// && (PlayerList.get(i).getY() == owner.e.getY())) {
+	// System.out.println("X übereinstimmung!");
+	// return true;
+	//
+	// }
+	// }
+	//
+	// return false;
+	// }
+
 	/**
 	 * 
-	 * @return res
-	 * Programm z�hlt lebende Spieler
+	 * @return res Programm z�hlt lebende Spieler
 	 */
 
 	// zählt lebende spieler
@@ -90,7 +107,7 @@ public class PlayerManager {
 				res++;
 		return res;
 	}
-	
+
 	/**
 	 * 
 	 * @param Feld
@@ -104,21 +121,21 @@ public class PlayerManager {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @param p
-	 * Spieler kann hinzugef�gt
+	 *            Spieler kann hinzugef�gt
 	 */
 
 	public void addPlayer(AbstractPlayer p) {
 		PlayerList.add(p);
 	}
-	
+
 	/**
 	 * 
 	 * @param g
-	 * Spielfigur wird ausgegeben
+	 *            Spielfigur wird ausgegeben
 	 */
 
 	public void paintPlayers(Graphics g) {

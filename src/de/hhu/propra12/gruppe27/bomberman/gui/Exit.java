@@ -17,11 +17,22 @@ public class Exit {
 		owner.t.stop();
 		System.out.println("Sie haben das ende erreicht");
 
-		Startmenue start = new Startmenue();
-		start.menueaufruf();
+		WintheGame wingame = new WintheGame();
+		wingame.winthegame();
+		// Startmenue start = new Startmenue();
+		// start.menueaufruf();
 
 		owner.dispose();
-		// framemenue.setVisible(false);
+	}
+
+	public void doOnKill(Spielfeld owner) {
+		owner.setVisible(false);
+		owner.t.stop();
+
+		LosetheGame losegame = new LosetheGame();
+		losegame.losethegame();
+
+		owner.dispose();
 	}
 
 	public int getX() {
