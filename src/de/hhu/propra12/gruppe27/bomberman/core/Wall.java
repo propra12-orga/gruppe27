@@ -1,11 +1,4 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
-
-/**
- * Ein Programm zur Erstellung der W�nde
- * Dies ist ein Javadoc Kommentar
- * @version 1.0
- */
-
 import java.awt.Color;
 
 // Feld - Aussenwände
@@ -13,7 +6,8 @@ import java.awt.Color;
 /**
  * 
  * @author
- * @verison 1.0 Klasse zur Erstellung der nicht zerst�rbaren W�nde
+ * @verison 1.0 
+ * Klasse zur Erstellung der nicht zerstoerbaren Waende
  */
 public class Wall extends AbstractFeld {
 
@@ -24,7 +18,7 @@ public class Wall extends AbstractFeld {
 	 * @param x
 	 * @param y
 	 * @param owner
-	 *            Eigenschaften der W�nde (unzerst�rbar)
+	 * Eigenschaften der Waende (unzerstoerbar)
 	 */
 
 	public Wall(int x, int y, Level owner) {
