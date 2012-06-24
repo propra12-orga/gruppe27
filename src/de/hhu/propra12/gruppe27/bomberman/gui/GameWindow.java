@@ -21,4 +21,22 @@ public class GameWindow extends JFrame {
 		setVisible(true);
 		repaint();
 	}
+
+	// Konstruktor für Client im Netzwerk
+	public GameWindow(int levelnr, boolean isclient, SysEinst system,
+			Spielfeld spielfeld) {
+
+		if (isclient) {
+			this.system = system;
+
+			spielfeld.setowner(this);
+			add(spielfeld);
+			setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 24);
+			setVisible(true);
+			repaint();
+		} else {
+			new GameWindow(levelnr);
+
+		}
+	}
 }

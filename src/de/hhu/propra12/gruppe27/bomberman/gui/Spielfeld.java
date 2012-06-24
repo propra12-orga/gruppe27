@@ -238,4 +238,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		owner.dispose();
 	}
+
+	// nicht löschen, braucht man für Netzwerk
+	public void setowner(GameWindow owner) {
+		this.owner = owner;
+	}
 }

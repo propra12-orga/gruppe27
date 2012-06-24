@@ -9,24 +9,26 @@ public class LevelImport extends Level {
 
 	public LevelImport(int laenge, int breite) {
 		super(laenge, breite);
+
 		// TODO Auto-generated constructor stub
 	}
 
 	public LevelImport(String Levelpath) {
+
 		super(laenge, breite);
 
 		String input = readFile(Levelpath); // Damit er die Datei nicht immer
-											// neu öffnen muss.
+		// neu ï¿½ffnen muss.
 		int i = 0;
 		int j = 0;
 		for (int k = 0; k < (input.length() - 1); k++) { // Gesamten String
-															// einlesen und bis
-															// Länge-1
-															// durchgehen
+			// einlesen und bis
+			// Lï¿½nge-1
+			// durchgehen
 			if (input.charAt(k) == ';') {
 				j++;
 				i = 0;
-			} // Bei Semikolon die erste Dimension um 1 erhöhen
+			} // Bei Semikolon die erste Dimension um 1 erhï¿½hen
 			else if (input.charAt(k) == '1') {
 				laxbr[i][j] = new Wall(i, j, this);
 				i++;
@@ -43,24 +45,24 @@ public class LevelImport extends Level {
 	}
 
 	public String readFile(String Levelpath) throws IOException { // Lese
-																	// Leveldatei
-																	// aus Pfad
-																	// ein
+		// Leveldatei
+		// aus Pfad
+		// ein
 
 		Properties levelstructure = new Properties(); // Properties verwenden,
-														// um Datei zu lesen und
-														// Levelstruktur zu
-														// importieren
+		// um Datei zu lesen und
+		// Levelstruktur zu
+		// importieren
 		BufferedInputStream stream = new BufferedInputStream(
 				new FileInputStream(Levelpath)); // .bml (BomberManLevel) mit
-													// BIS einlesen
-		levelstructure.load(stream); // load gehört zur properties-Lib
-		stream.close(); // Schließen des BIS
+		// BIS einlesen
+		levelstructure.load(stream); // load gehï¿½rt zur properties-Lib
+		stream.close(); // Schlieï¿½en des BIS
 		String lvlstr = levelstructure.getProperty("LEVEL"); // Lese die
-																// Levelstruktur
-																// aus der
-																// Property-Datei
-																// aus
+		// Levelstruktur
+		// aus der
+		// Property-Datei
+		// aus
 		return lvlstr;
 	}
 

@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /*
  * grafisches Startmenü
@@ -163,22 +165,24 @@ public class Startmenue {
 			}
 		});
 
+		// Join Multiplayer
 		buttonS3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				// Vorbereitung
+				Client client = new Client();
 
 			}
 		});
 
+		// Host Multiplayer
 		buttonS4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				// Vorbereitung
+				Host host = new Host();
 
 			}
 		});
