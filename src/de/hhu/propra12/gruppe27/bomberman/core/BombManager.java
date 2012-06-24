@@ -10,9 +10,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
  * 
  * @author 
  * @version 1.0
- * Klasse BombManager
+ * Klasse BombManager 
  * 
- *
  */
 
 public class BombManager {
@@ -23,7 +22,7 @@ public class BombManager {
 	}
 	
 	/**
-	 * 
+	 * Anzahl der Bomben wird überprüft
 	 */
 
 	public void CheckBombs() {
@@ -35,6 +34,11 @@ public class BombManager {
 				i++;
 		}
 	}
+	
+	/**
+	 * @param Feld
+	 * 
+	 */
 
 	public void hitBombs(AbstractFeld Feld) {
 		for (int i = 0; i < Bomblist.size(); i++) {
@@ -44,15 +48,32 @@ public class BombManager {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @return Bomblist is.Empty
+	 * Überprüfung der Bomblist
+	 */
 
 	public boolean isEmpty() {
 		return Bomblist.isEmpty();
 	}
 
+	/**
+	 * 
+	 * @param b
+	 * Bombe wird hinzugefügt
+	 */
+	
 	public void AddBomb(Bomb b) {
 		Bomblist.add(b);
 	}
 
+	/**
+	 * Bombe wird dargestellt
+	 * @param g
+	 */
+	
 	public void paintBombs(Graphics g) {
 		for (int i = 0; i < Bomblist.size(); i++) {
 			Bomblist.get(i).draw(g);

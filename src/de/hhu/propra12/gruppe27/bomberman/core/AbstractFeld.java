@@ -94,14 +94,14 @@ public abstract class AbstractFeld {
 	public final boolean isFrei() {
 		return frei;
 	}
-<<<<<<< HEAD
+
 	
   /**
    * 
    * @return this
    * Feld oben
    */
-=======
+
 
 	public final boolean isZerstoer() {
 		return zerstoer;
@@ -111,7 +111,8 @@ public abstract class AbstractFeld {
 	 * 
 	 * @return this Abstract Feld oben
 	 */
->>>>>>> 29de2189a76ea4cd31165199689b3a6da419ca26
+
+
 
 	public AbstractFeld top() {
 		if (posy > 0)
@@ -123,12 +124,10 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-<<<<<<< HEAD
 	 * @return this
 	 * Feld links
-=======
 	 * @return this Abstract Feld links
->>>>>>> 29de2189a76ea4cd31165199689b3a6da419ca26
+	 * 
 	 */
 
 	public AbstractFeld left() {
@@ -142,12 +141,10 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-<<<<<<< HEAD
 	 * @return this
 	 * Feld rechts
-=======
 	 * @return this Abstract Feld rechts
->>>>>>> 29de2189a76ea4cd31165199689b3a6da419ca26
+
 	 * 
 	 */
 
@@ -161,12 +158,11 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-<<<<<<< HEAD
 	 * @return this
 	 * Feld Mitte
-=======
+
 	 * @return this Abstract Feld Mitte
->>>>>>> 29de2189a76ea4cd31165199689b3a6da419ca26
+
 	 */
 
 	public AbstractFeld bottom() {
