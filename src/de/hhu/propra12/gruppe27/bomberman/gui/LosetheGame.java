@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -12,13 +13,23 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse für verlorenes Spiel
+ *
+ */
+
 public class LosetheGame {
 
-	/**
-	 * 
-	 */
+	
 	Icon loseicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/VerlorenTranz.gif");
+	
+	/**
+	 * Einblendung von "Verloren"
+	 */
 
 	public void losethegame() {
 

@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -10,7 +11,19 @@ import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse zum Einstellen der Level
+ *
+ */
+
 public class LevelEditor {
+	
+	/**
+	 * Feldbestimmung
+	 */
 
 	SysEinst system = SysEinst.getSystem();
 	int feldx = system.getfeldx();
@@ -18,6 +31,10 @@ public class LevelEditor {
 
 	JButton button[][] = new JButton[feldx][feldy];
 
+	/**
+	 * Größe
+	 */
+	
 	public void leveleditor() {
 
 		final JFrame frameeditor = new JFrame("Leveleditor");
@@ -33,6 +50,7 @@ public class LevelEditor {
 
 		c.gridx = 0;
 		c.gridy = 0;
+		
 
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
@@ -48,6 +66,11 @@ public class LevelEditor {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param args
+	 */
 
 	public static void main(String[] args) {
 		LevelEditor editor = new LevelEditor();
