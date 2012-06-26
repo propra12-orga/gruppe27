@@ -5,24 +5,29 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
+
 /**
  * 
  * @author
- * @version 1.0
- * Klasse für das grafische Startmenü (Spiel starten, Multiplayer joinen und hosten, Einstellungen setzen)
- *
+ * @version 1.0 Klasse fï¿½r das grafische Startmenï¿½ (Spiel starten, Multiplayer
+ *          joinen und hosten, Einstellungen setzen)
+ * 
  */
-
 
 public class Startmenue {
 
@@ -32,13 +37,14 @@ public class Startmenue {
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
-	
-	// public SysEinst menueaufruf() {
+	String bmlimport = "Level importieren: ";
+
 	/**
-	 * Methode um das Menü-Fenster zu öffnen
+	 * Methode um das Menï¿½-Fenster zu ï¿½ffnen
+	 * 
 	 * @return
 	 */
-	
+
 	public static Startmenue getMenue() {
 		if (startmen == null) {
 			startmen = new Startmenue();
@@ -46,12 +52,10 @@ public class Startmenue {
 		return startmen;
 	}
 
-	
-	
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setSize(640, 590);
+		framemenue.setSize(640, 615);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -67,7 +71,7 @@ public class Startmenue {
 		c.gridy = 0;
 
 		// Button mit Bild als erstes
-		
+
 		JButton buttonS0 = new JButton(icon);
 		c.gridx = 0;
 		c.gridy = 1;
@@ -75,17 +79,16 @@ public class Startmenue {
 		c.weightx = 1.0;
 		panel.add(buttonS0, c);
 
-	
 		/**
 		 * Spiel starten (Button 1/buttonS1) - solo
 		 */
-		
+
 		JButton buttonS1 = new JButton("Spiel starten (Solo)");
 		c.gridx = 0;
 		c.gridy = 2;
 
 		panel.add(buttonS1, c);
-		
+
 		/**
 		 * Spiel starten (Button 2/buttonS2) - 2Spieler - Modus
 		 */
@@ -96,50 +99,56 @@ public class Startmenue {
 
 		panel.add(buttonS2, c);
 
-
 		/**
 		 * Multiplayer verbinden (Button 3/buttonS3)
 		 */
-		
+
 		JButton buttonS3 = new JButton("Multiplayer (Join Game)");
 		c.gridx = 0;
 		c.gridy = 4;
 		panel.add(buttonS3, c);
 
-
 		/**
 		 * Multiplayer hosten (Button 4/buttonS4)
 		 */
-		
+
 		JButton buttonS4 = new JButton("Multiplayer (Host Game)");
 		c.gridx = 0;
 		c.gridy = 5;
 		panel.add(buttonS4, c);
 
-	
 		/**
-		 * Optionsmenü öffnen (Button 5/buttonS5)
+		 * Datei laden (Button buttonbmlimport)
+		 * 
+		 * Level importieren
 		 */
-		
-		JButton buttonS5 = new JButton("Optionen");
+		JToggleButton buttonbmlimport = new JToggleButton(bmlimport
+				+ system.getbmllevel(), system.getbmllevel());
 		c.gridx = 0;
 		c.gridy = 6;
+		panel.add(buttonbmlimport, c);
+
+		/**
+		 * Optionsmenue oeffnen (Button 5/buttonS5)
+		 * 
+		 */
+
+		JButton buttonS5 = new JButton("Optionen");
+		c.gridx = 0;
+		c.gridy = 7;
 		panel.add(buttonS5, c);
 
 		/**
-		 * Spiel beenden bzw. schließen (Button 6/buttonS6)
+		 * Spiel beenden bzw. schlieï¿½en (Button 6/buttonS6)
 		 */
-		
+
 		JButton buttonS6 = new JButton("Spiel verlassen");
 		c.gridx = 0;
-		c.gridy = 7;
+		c.gridy = 8;
 		panel.add(buttonS6, c);
 
-
-		
 		/**
-		 * Aktionen für Button 1
-		 * Spielfeld wird generiert und gestartet
+		 * Aktionen fï¿½r Button 1 Spielfeld wird generiert und gestartet
 		 */
 
 		buttonS1.addActionListener(new ActionListener() {
@@ -195,12 +204,40 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen für Button 5
+		 * Aktionen fÃ¼r Button buttonbmlimport
 		 * 
-		 * Optionsmenü wird in neuem Fenster aufgerufen Änderungen der Optionen
-		 * werden übernommen und in der system-Instanz gespeichert
+		 * soll einen Boolean setzen, damit das Level beim Spielstart geladen
+		 * wird
 		 */
-		
+
+		buttonbmlimport.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				system.setbmllevel(!system.getbmllevel());
+
+				JToggleButton buttonbmlimport = (JToggleButton) e.getSource();
+				buttonbmlimport.setText(bmlimport + system.getbmllevel());
+
+				try {
+					setfeld(system.getlevelpath());
+				} catch (IOException eIO) {
+
+				} catch (NumberFormatException eNFE) {
+
+				}
+
+			}
+		});
+
+		/**
+		 * Aktionen fï¿½r Button 5
+		 * 
+		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der Optionen
+		 * werden ï¿½bernommen und in der system-Instanz gespeichert
+		 */
+
 		buttonS5.addActionListener(new ActionListener() {
 
 			@Override
@@ -212,7 +249,7 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen für Button 6
+		 * Aktionen fï¿½r Button 6
 		 * 
 		 * Alle Fenster und das Spiel werden geschlossen
 		 */
@@ -225,6 +262,37 @@ public class Startmenue {
 			}
 		});
 
-		// return (system);
 	}
+
+	public void setfeld(String Levelpath) throws NumberFormatException,
+			IOException {
+
+		system.setfeldxbml(Integer.parseInt(readFile(Levelpath, "LAENGE")));
+		system.setfeldybml(Integer.parseInt(readFile(Levelpath, "BREITE")));
+
+	}
+
+	public static String readFile(String Levelpath, String ToBeLoaded)
+			throws IOException { // Lese
+									// Leveldatei
+									// aus Pfad
+									// ein
+
+		Properties levelfile = new Properties(); // Properties verwenden,
+													// um Datei zu lesen und
+													// Levelstruktur zu
+													// importieren
+		BufferedInputStream stream = new BufferedInputStream(
+				new FileInputStream(Levelpath)); // .bml (BomberManLevel) mit
+													// BIS einlesen
+		levelfile.load(stream); // load gehï¿½rt zur properties-Lib
+		stream.close(); // Schlieï¿½en des BIS
+		String data = levelfile.getProperty(ToBeLoaded); // Lese die
+															// Levelstruktur
+															// aus der
+															// Property-Datei
+															// aus
+		return data;
+	}
+
 }
