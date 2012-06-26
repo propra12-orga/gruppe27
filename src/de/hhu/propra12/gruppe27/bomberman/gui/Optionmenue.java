@@ -18,7 +18,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 Klasse f�r das Optionsmen�
+ * @version 1.0 Klasse fuer das Optionsmenue
  */
 
 public class Optionmenue {
@@ -27,9 +27,6 @@ public class Optionmenue {
 
 	String spiegel = "Spiegelung: ";
 	String standard = "Standardlevel: ";
-
-	// Icon icon = new ImageIcon(
-	// "src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickman.gif");
 
 	Icon optionicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
@@ -42,7 +39,7 @@ public class Optionmenue {
 	 *         definiert
 	 */
 
-	public SysEinst optionaufruf() {
+	public void optionaufruf() {
 
 		final JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
@@ -58,18 +55,10 @@ public class Optionmenue {
 		coption.gridx = 0;
 		coption.gridy = 0;
 
-		// JLabel optionbild = new JLabel(optionicon);
-		// coption.fill = GridBagConstraints.HORIZONTAL;
-		// coption.weightx = 1.0;
-		//
-		// optionpanel.add(optionbild, coption);
-
-		// optionpanel.add(optionbild);
-
 		/**
 		 * Button 0 - buttonO0
 		 * 
-		 * Bild f�r Optionsmen�
+		 * Bild fuer Optionsmenue
 		 */
 
 		JButton buttonO0 = new JButton(optionicon);
@@ -84,8 +73,8 @@ public class Optionmenue {
 		 */
 
 		/**
-		 * Mauerdichte kann eingestellt werden (Fenster wird ge�ffnet) -->
-		 * zerst�rbare W�nde
+		 * Mauerdichte kann eingestellt werden (Fenster wird geoeffnet) -->
+		 * zerstoerbare Waende
 		 */
 
 		JButton buttonO1 = new JButton("Mauerdichte");
@@ -99,7 +88,7 @@ public class Optionmenue {
 		 * Button 2 - buttonO2
 		 */
 		/**
-		 * Spielfeldgr��e kann ausgew�hlt werden (Fenster �ffnet sich)
+		 * Spielfeldgroesse kann ausgewaehlt werden (Fenster oeffnet sich)
 		 */
 
 		JButton buttonO2 = new JButton("Spielfeldgroesse");
@@ -108,7 +97,7 @@ public class Optionmenue {
 		optionpanel.add(buttonO2, coption);
 
 		/**
-		 * Optionsmen� wird verlassen (Button 3/buttonO3)
+		 * Spiegelung an/aus (Button 3/buttonO3)
 		 */
 		JToggleButton buttonO3 = new JToggleButton(spiegel
 				+ sys.getspiegelung(), sys.getspiegelung());
@@ -118,7 +107,7 @@ public class Optionmenue {
 
 		/**
 		 * 
-		 * Optionsmen� wird verlassen (Button 4/buttonO4)
+		 * Standardlevel an/aus (Button 4/buttonO4)
 		 */
 
 		JToggleButton buttonO4 = new JToggleButton(standard
@@ -128,7 +117,7 @@ public class Optionmenue {
 		optionpanel.add(buttonO4, coption);
 
 		/**
-		 * Optionsmen� wird verlassen (Button 5/buttonO5)
+		 * Optionsmenue wird verlassen (Button 5/buttonO5)
 		 */
 
 		JButton buttonO5 = new JButton("zurück");
@@ -137,9 +126,9 @@ public class Optionmenue {
 		optionpanel.add(buttonO5, coption);
 
 		/**
-		 * Listener werden hinzugef�gt, damit Buttons eine Funktion haben �ffnen
-		 * eines Fensters, um die Mauerdichte einzustellen Mauerdichte wird in
-		 * die lokale Variable sys �bernommen (Button 1 - Mauerdichte)
+		 * Listener werden hinzugefuegt, damit Buttons eine Funktion haben
+		 * oeffnen eines Fensters, um die Mauerdichte einzustellen Mauerdichte
+		 * wird in die lokale Variable sys uebernommen (Button 1 - Mauerdichte)
 		 */
 
 		buttonO1.addActionListener(new ActionListener() {
@@ -152,7 +141,7 @@ public class Optionmenue {
 		});
 
 		/**
-		 * Spielfeld w�hlen (Button 2/Spielfeldgr��e)
+		 * Spielfeld waehlen (Button 2/Spielfeldgroessee)
 		 */
 
 		buttonO2.addActionListener(new ActionListener() {
@@ -198,7 +187,7 @@ public class Optionmenue {
 		});
 
 		/**
-		 * Fenster schließen und zur�ch gehen
+		 * Fenster schließen und zurueck gehen
 		 */
 
 		buttonO5.addActionListener(new ActionListener() {
@@ -210,6 +199,5 @@ public class Optionmenue {
 			}
 		});
 
-		return (sys);
 	}
 }

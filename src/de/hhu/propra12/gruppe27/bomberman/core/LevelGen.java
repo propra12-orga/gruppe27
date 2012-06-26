@@ -115,8 +115,10 @@ public class LevelGen extends Level {
 	}
 
 	/**
+	 * Generierung der Felder für ein zufälliges Level
+	 * 
 	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit
-	 * unzerst�rbaren Mauern umrandet
+	 * unzerstoerbaren Mauern umrandet
 	 */
 
 	/*
@@ -152,8 +154,8 @@ public class LevelGen extends Level {
 	}
 
 	/**
-	 * Felder eines Standartlevels werden generiert (Ausenw�nde, Innenblocks,
-	 * Begehbare Felder=
+	 * Felder eines Standardlevels werden generiert (Ausenwaende, Innenblocks,
+	 * Begehbare Felder
 	 */
 
 	/*
@@ -189,7 +191,7 @@ public class LevelGen extends Level {
 	}
 
 	/**
-	 * Spiegelung des Standartlevels f�r zwei-Spieler Modus
+	 * Spiegelung des Standardlevels
 	 */
 
 	/*
@@ -228,8 +230,12 @@ public class LevelGen extends Level {
 		}
 	}
 
+	/**
+	 * Spiegelung des Zufall-Spielfeldes
+	 */
+
 	/*
-	 * Methode um das Random-Spielfeld zu spiegeln
+	 * Methode um das Zufalls-Spielfeld zu spiegeln
 	 */
 	private void generatespiegelung() {
 
@@ -302,35 +308,31 @@ public class LevelGen extends Level {
 	public void generatebml(String Levelpath) throws NumberFormatException,
 			IOException {
 
-		// laenge = Integer.parseInt(readFile(Levelpath, "LAENGE"));
-		// breite = Integer.parseInt(readFile(Levelpath, "BREITE"));
-		// laxbr = new AbstractFeld[laenge][breite];
-
-		String input = readFile(Levelpath, "LEVEL"); // Damit er die Datei nicht
-														// immer
-		// neu �ffnen muss.
+		// Damit er die Datei nicht immer neu oeffnen muss.
+		String input = readFile(Levelpath, "LEVEL");
 		int i = 0;
 		int j = 0;
-		// for (int k = 0; k < (input.length() - 1); k++) { // Gesamten String
-		for (int k = 0; k < (input.length() - 1); k++) { // Gesamten String
 
-			// einlesen und bis
-			// L�nge-1
-			// durchgehen
+		// Gesamten String einlesen und bis Laenge-1 durchgehen
+
+		for (int k = 0; k < (input.length() - 1); k++) {
+
+			// Bei Semikolon die erste Dimension um 1 erhoehen
 			if (input.charAt(k) == ';') {
 				j++;
 				i = 0;
-			} // Bei Semikolon die erste Dimension um 1 erh�hen
-			else if (input.charAt(k) == '1') { // Bei "1" neue feste Wand
+			}
+			// Bei "1" neue feste Wand
+			else if (input.charAt(k) == '1') {
 				laxbr[i][j] = new Wall(i, j, this);
 				i++;
-			} else if (input.charAt(k) == '2') { // Bei "2" neue zerst. Wand
+				// Bei "2" neue zerst. Wand
+			} else if (input.charAt(k) == '2') {
 				laxbr[i][j] = new Block(i, j, this);
 				i++;
+				// Bei "0" oder allem anderem begehbaren Weg einsetzen.
 			} else {
-				laxbr[i][j] = new Path(i, j, this); // Bei "0" oder allem
-													// anderem begehbaren Weg
-													// einsetzen.
+				laxbr[i][j] = new Path(i, j, this);
 				i++;
 			}
 

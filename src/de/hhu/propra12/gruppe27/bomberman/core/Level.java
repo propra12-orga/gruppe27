@@ -3,13 +3,16 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 /**
  * 
  * @author
- * @version 1.0 Oberklasse f�r alle Level, Leveleigenschaften werden festgelegt
+ * @version 1.0 Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
  */
 
-// oberklasse f�r alle levels, enth�lt methode textout um level testweise in der
-// konsole ausgeben zu lassen, sp�ter weitere methoden wie draw(),...
-// generierungsregeln f�r level sind von Level abgeleitet,
-// (?)level in seperates package(?)
+/*
+ * Abstrakte Klasse für alle Level, enthaelt methode textout um level testweise
+ * in der konsole ausgeben zu lassen, spaeter weitere methoden wie draw(),...
+ * generierungsregeln fuer die level findet man in der LevelGen Klasse, (?)level
+ * in seperates package(?)
+ */
+
 public abstract class Level {
 	int laenge;
 	int breite;

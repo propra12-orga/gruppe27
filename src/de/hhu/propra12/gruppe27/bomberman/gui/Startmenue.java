@@ -223,9 +223,9 @@ public class Startmenue {
 				try {
 					setfeld(system.getlevelpath());
 				} catch (IOException eIO) {
-
+					// TODO Fehlerbehandlung
 				} catch (NumberFormatException eNFE) {
-
+					// TODO Fehlerbehandlung
 				}
 
 			}
@@ -264,6 +264,10 @@ public class Startmenue {
 
 	}
 
+	/*
+	 * Methode um die Größe des einzulesenden Spielfeldes in die
+	 * Systemeinstellungen zu schreiben
+	 */
 	public void setfeld(String Levelpath) throws NumberFormatException,
 			IOException {
 
@@ -272,26 +276,22 @@ public class Startmenue {
 
 	}
 
+	// Lese Leveldatei aus Pfad ein
 	public static String readFile(String Levelpath, String ToBeLoaded)
-			throws IOException { // Lese
-									// Leveldatei
-									// aus Pfad
-									// ein
+			throws IOException {
 
-		Properties levelfile = new Properties(); // Properties verwenden,
-													// um Datei zu lesen und
-													// Levelstruktur zu
-													// importieren
+		// Properties verwenden um Datei zu lesen und Levelstruktur zu
+		// importieren
+		Properties levelfile = new Properties();
+		// .bml (BomberManLevel) mit BIS einlesen
 		BufferedInputStream stream = new BufferedInputStream(
-				new FileInputStream(Levelpath)); // .bml (BomberManLevel) mit
-													// BIS einlesen
-		levelfile.load(stream); // load geh�rt zur properties-Lib
-		stream.close(); // Schlie�en des BIS
-		String data = levelfile.getProperty(ToBeLoaded); // Lese die
-															// Levelstruktur
-															// aus der
-															// Property-Datei
-															// aus
+				new FileInputStream(Levelpath));
+		// load geh�rt zur properties-Lib
+		levelfile.load(stream);
+		// Schliessen des BIS
+		stream.close();
+		// Lese die Levelstruktur aus der Property-Datei aus
+		String data = levelfile.getProperty(ToBeLoaded);
 		return data;
 	}
 
