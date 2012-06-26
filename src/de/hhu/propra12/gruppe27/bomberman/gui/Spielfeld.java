@@ -1,4 +1,3 @@
-// <<<<<<< HEAD
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.Graphics;
@@ -50,10 +49,14 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	private Level loadlevel(int levelnr) {
 
-		// return new Level0(system.getfeldx(), system.getfeldy(),
-		// system.getamplayer());
-		return new LevelGen(system.getfeldx(), system.getfeldy(),
-				system.getamplayer());
+		if (false == system.getbmllevel()) {
+			return new LevelGen(system.getfeldx(), system.getfeldy(),
+					system.getamplayer());
+		} else {
+			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
+					system.getamplayer(), system.getbmllevel());
+
+		}
 	}
 
 	/**

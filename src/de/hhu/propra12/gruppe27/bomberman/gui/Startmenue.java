@@ -5,12 +5,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
@@ -33,6 +38,8 @@ public class Startmenue {
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
+	String bmlimport = "Level importieren: ";
+
 	/*
 	 * Methode menueaufruf
 	 * 
@@ -49,7 +56,7 @@ public class Startmenue {
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setSize(640, 590);
+		framemenue.setSize(640, 615);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -110,13 +117,24 @@ public class Startmenue {
 		panel.add(buttonS4, c);
 
 		/*
+		 * Button buttonbmlimport
+		 * 
+		 * Level importieren
+		 */
+		JToggleButton buttonbmlimport = new JToggleButton(bmlimport
+				+ system.getbmllevel(), system.getbmllevel());
+		c.gridx = 0;
+		c.gridy = 6;
+		panel.add(buttonbmlimport, c);
+
+		/*
 		 * Button 5 - buttonS5
 		 * 
 		 * Optionsmenue öffnen
 		 */
 		JButton buttonS5 = new JButton("Optionen");
 		c.gridx = 0;
-		c.gridy = 6;
+		c.gridy = 7;
 		panel.add(buttonS5, c);
 
 		/*
@@ -126,7 +144,7 @@ public class Startmenue {
 		 */
 		JButton buttonS6 = new JButton("Spiel verlassen");
 		c.gridx = 0;
-		c.gridy = 7;
+		c.gridy = 8;
 		panel.add(buttonS6, c);
 
 		/*
@@ -188,6 +206,34 @@ public class Startmenue {
 		});
 
 		/*
+		 * Aktionen für Button buttonbmlimport
+		 * 
+		 * soll einen Boolean setzen, damit das Level beim Spielstart geladen
+		 * wird
+		 */
+
+		buttonbmlimport.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				system.setbmllevel(!system.getbmllevel());
+
+				JToggleButton buttonbmlimport = (JToggleButton) e.getSource();
+				buttonbmlimport.setText(bmlimport + system.getbmllevel());
+
+				try {
+					setfeld(system.getlevelpath());
+				} catch (IOException eIO) {
+
+				} catch (NumberFormatException eNFE) {
+
+				}
+
+			}
+		});
+
+		/*
 		 * Aktionen für Button 5
 		 * 
 		 * Optionsmenue wird in neuem Fenster aufgerufen Änderungen der Optionen
@@ -217,6 +263,37 @@ public class Startmenue {
 			}
 		});
 
-		// return (system);
 	}
+
+	public void setfeld(String Levelpath) throws NumberFormatException,
+			IOException {
+
+		system.setfeldxbml(Integer.parseInt(readFile(Levelpath, "LAENGE")));
+		system.setfeldybml(Integer.parseInt(readFile(Levelpath, "BREITE")));
+
+	}
+
+	public static String readFile(String Levelpath, String ToBeLoaded)
+			throws IOException { // Lese
+									// Leveldatei
+									// aus Pfad
+									// ein
+
+		Properties levelstructure = new Properties(); // Properties verwenden,
+														// um Datei zu lesen und
+														// Levelstruktur zu
+														// importieren
+		BufferedInputStream stream = new BufferedInputStream(
+				new FileInputStream(Levelpath)); // .bml (BomberManLevel) mit
+													// BIS einlesen
+		levelstructure.load(stream); // load geh�rt zur properties-Lib
+		stream.close(); // Schlie�en des BIS
+		String data = levelstructure.getProperty(ToBeLoaded); // Lese die
+																// Levelstruktur
+																// aus der
+																// Property-Datei
+																// aus
+		return data;
+	}
+
 }

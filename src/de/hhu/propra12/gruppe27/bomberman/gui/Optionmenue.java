@@ -108,7 +108,7 @@ public class Optionmenue {
 		 * 
 		 * Optionsmenue verlassen
 		 */
-		final JToggleButton buttonO3 = new JToggleButton(spiegel
+		JToggleButton buttonO3 = new JToggleButton(spiegel
 				+ sys.getspiegelung(), sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 4;

@@ -1,10 +1,15 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse Levelgenerator, Bestimmung der Eigenschaften des Spielfeldes 
+ * @author
+ * @version 1.0 Klasse Levelgenerator, Bestimmung der Eigenschaften des
+ *          Spielfeldes
  */
 
 public class LevelGen extends Level {
@@ -18,18 +23,19 @@ public class LevelGen extends Level {
 	boolean wandoderfrei;
 	boolean zerstoderfest;
 	boolean konsist = true;
-	
+
 	/**
 	 * 
 	 * @param laengex
 	 * @param breitey
 	 * @param Spieleranzahl
-	 * Das Spielfeld wird erstellt
+	 *            Das Spielfeld wird erstellt
 	 */
 
 	public LevelGen(int laengex, int breitey, int Spieleranzahl) {
 
 		// laxbr = new AbstractFeld[feldx][feldy];
+
 		super(laengex, breitey);
 		name = "Zufallslevel";
 
@@ -58,9 +64,25 @@ public class LevelGen extends Level {
 		} while (false == konsist);
 
 	}
-	
+
+	public LevelGen(int laengex, int breitey, int Spieleranzahl,
+			boolean bmllevel) {
+
+		super(laengex, breitey);
+
+		try {
+			generatebml(system.getlevelpath());
+		} catch (NumberFormatException e) {
+			// TODO Fehlerbehandlung
+		} catch (IOException e) {
+			// TODO Fehlerbehandlung
+		}
+
+	}
+
 	/**
-	 * Zufällige Erstellung des Spielfeldes
+	 * Zufï¿½llige Erstellung des Spielfeldes
+	 * 
 	 * @param a
 	 * @return
 	 */
@@ -91,9 +113,10 @@ public class LevelGen extends Level {
 		}
 
 	}
-	
+
 	/**
-	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit unzerstörbaren Mauern umrandet
+	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit
+	 * unzerstï¿½rbaren Mauern umrandet
 	 */
 
 	/*
@@ -127,9 +150,10 @@ public class LevelGen extends Level {
 			}
 		}
 	}
-	
+
 	/**
-	 * Felder eines Standartlevels werden generiert (Ausenwände, Innenblocks, Begehbare Felder=
+	 * Felder eines Standartlevels werden generiert (Ausenwï¿½nde, Innenblocks,
+	 * Begehbare Felder=
 	 */
 
 	/*
@@ -163,9 +187,9 @@ public class LevelGen extends Level {
 			}
 		}
 	}
-	
+
 	/**
-	 * Spiegelung des Standartlevels für zwei-Spieler Modus
+	 * Spiegelung des Standartlevels fï¿½r zwei-Spieler Modus
 	 */
 
 	/*
@@ -243,7 +267,7 @@ public class LevelGen extends Level {
 			}
 		}
 	}
-	
+
 	/**
 	 * Sartfelder werden begehbar gemacht, damit Spieler starten kann
 	 */
@@ -264,10 +288,9 @@ public class LevelGen extends Level {
 			laxbr[feldx - 3][feldy - 2] = new Path(feldx - 3, feldy - 2, this);
 		}
 	}
-	
+
 	/**
-	 * @return a
-	 * Startposition und Spielnummer werden festgelegt
+	 * @return a Startposition und Spielnummer werden festgelegt
 	 */
 
 	public int[] getStartposition(int spielernummer) {
@@ -275,4 +298,66 @@ public class LevelGen extends Level {
 		return a;
 
 	}
+
+	public void generatebml(String Levelpath) throws NumberFormatException,
+			IOException {
+
+		// laenge = Integer.parseInt(readFile(Levelpath, "LAENGE"));
+		// breite = Integer.parseInt(readFile(Levelpath, "BREITE"));
+		// laxbr = new AbstractFeld[laenge][breite];
+
+		String input = readFile(Levelpath, "LEVEL"); // Damit er die Datei nicht
+														// immer
+		// neu ï¿½ffnen muss.
+		int i = 0;
+		int j = 0;
+		// for (int k = 0; k < (input.length() - 1); k++) { // Gesamten String
+		for (int k = 0; k < (input.length() - 1); k++) { // Gesamten String
+
+			// einlesen und bis
+			// Lï¿½nge-1
+			// durchgehen
+			if (input.charAt(k) == ';') {
+				j++;
+				i = 0;
+			} // Bei Semikolon die erste Dimension um 1 erhï¿½hen
+			else if (input.charAt(k) == '1') { // Bei "1" neue feste Wand
+				laxbr[i][j] = new Wall(i, j, this);
+				i++;
+			} else if (input.charAt(k) == '2') { // Bei "2" neue zerst. Wand
+				laxbr[i][j] = new Block(i, j, this);
+				i++;
+			} else {
+				laxbr[i][j] = new Path(i, j, this); // Bei "0" oder allem
+													// anderem begehbaren Weg
+													// einsetzen.
+				i++;
+			}
+
+		}
+	}
+
+	public static String readFile(String Levelpath, String ToBeLoaded)
+			throws IOException { // Lese
+									// Leveldatei
+									// aus Pfad
+									// ein
+
+		Properties levelstructure = new Properties(); // Properties verwenden,
+														// um Datei zu lesen und
+														// Levelstruktur zu
+														// importieren
+		BufferedInputStream stream = new BufferedInputStream(
+				new FileInputStream(Levelpath)); // .bml (BomberManLevel) mit
+													// BIS einlesen
+		levelstructure.load(stream); // load gehï¿½rt zur properties-Lib
+		stream.close(); // Schlieï¿½en des BIS
+		String data = levelstructure.getProperty(ToBeLoaded); // Lese die
+																// Levelstruktur
+																// aus der
+																// Property-Datei
+																// aus
+		return data;
+	}
+
 }
