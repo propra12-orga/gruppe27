@@ -1,5 +1,10 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * 
  * @author
@@ -36,6 +41,53 @@ public abstract class Level {
 		laxbr = new AbstractFeld[laenge][breite];
 
 	}
+	
+	public Level(String Levelpath) throws NumberFormatException, IOException {
+		
+		laenge = Integer.parseInt(readFile(Levelpath, "LAENGE"));
+		breite = Integer.parseInt(readFile(Levelpath, "BREITE"));
+		laxbr = new AbstractFeld[laenge][breite];
+		
+		String input = readFile(Levelpath, "LEVEL");		// Damit er die Datei nicht immer
+																		// neu öffnen muss.
+		int i = 0;
+		int j = 0;
+		for (int k = 0; k < (input.length() - 1); k++) { 		// Gesamten String
+																// einlesen und bis
+																// Länge-1
+																// durchgehen
+		if (input.charAt(k) == ';') {j++; i = 0;}				// Bei Semikolon die erste Dimension um 1 erhöhen
+		else if (input.charAt(k) == '1') {						// Bei "1" neue feste Wand
+		laxbr[i][j] = new Wall(i, j, this); 
+		i++;
+		}													
+		else if (input.charAt(k) == '2') {						// Bei "2" neue zerst. Wand
+		laxbr[i][j] = new Block(i, j, this);
+		i++;
+		}													
+		else {
+		laxbr[i][j] = new Path(i, j, this);					// Bei "0" oder allem anderem begehbaren Weg einsetzen.
+		i++;}
+		
+		}	
+	} 														
+
+	public static String readFile(String Levelpath, String ToBeLoaded) throws IOException { 		// Lese Leveldatei aus Pfad ein / ToBeLoaded = Properties-Part
+		Properties levelfile = new Properties(); 												// Properties verwenden,
+																								// um Datei zu lesen und
+																								// Levelstruktur zu
+																								// importieren
+		BufferedInputStream stream = new BufferedInputStream(
+		new FileInputStream(Levelpath)); 														// .bml (BomberManLevel) mit
+																								// BIS einlesen
+		levelfile.load(stream); 																// load gehört zur properties-Lib
+		stream.close(); 																		// Schließen des BIS
+		String data = levelfile.getProperty(ToBeLoaded); 										// Lese die	Levelstruktur aus der Property-Datei aus	
+		
+		return data;
+	}
+
+		
 	
 	/**
 	 * Level werden ausgegeben
@@ -91,7 +143,7 @@ public abstract class Level {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return labrx
+	 * @return laxbr
 	 * 
 	 */
 
