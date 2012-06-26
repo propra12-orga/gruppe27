@@ -72,25 +72,18 @@ public abstract class Level {
 		}	
 	} 														
 
-	public static String readFile(String Levelpath, String ToBeLoaded) throws IOException { 	// Lese
-																								// Leveldatei
-																								// aus Pfad
-																								// ein
-
-		Properties levelstructure = new Properties(); 											// Properties verwenden,
+	public static String readFile(String Levelpath, String ToBeLoaded) throws IOException { 		// Lese Leveldatei aus Pfad ein / ToBeLoaded = Properties-Part
+		Properties levelfile = new Properties(); 												// Properties verwenden,
 																								// um Datei zu lesen und
 																								// Levelstruktur zu
 																								// importieren
 		BufferedInputStream stream = new BufferedInputStream(
 		new FileInputStream(Levelpath)); 														// .bml (BomberManLevel) mit
 																								// BIS einlesen
-		levelstructure.load(stream); 															// load gehört zur properties-Lib
+		levelfile.load(stream); 																// load gehört zur properties-Lib
 		stream.close(); 																		// Schließen des BIS
-		String data = levelstructure.getProperty(ToBeLoaded); 									// Lese die
-																								// Levelstruktur
-																								// aus der
-																								// Property-Datei
-																								// aus
+		String data = levelfile.getProperty(ToBeLoaded); 										// Lese die	Levelstruktur aus der Property-Datei aus	
+		
 		return data;
 	}
 
