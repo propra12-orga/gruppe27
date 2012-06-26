@@ -12,13 +12,23 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author
+ * @version 1.0
+ * Klasse für das Gewinnen des Spiels
+ *
+ */
+
 public class WintheGame {
 
-	/**
-	 * 
-	 */
+
 	Icon winicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranz.gif");
+	
+	/**
+	 * "Gewonnen" wird ausgegeben, wenn man das Spiel erfolgreich beendet hat
+	 */
 
 	public void winthegame() {
 
@@ -32,7 +42,7 @@ public class WintheGame {
 
 		framewin.getContentPane().add(panelwin, BorderLayout.SOUTH);
 		GridBagConstraints c = new GridBagConstraints();
-
+		
 		c.gridx = 0;
 		c.gridy = 0;
 
@@ -44,12 +54,20 @@ public class WintheGame {
 		c.weightx = 2.0;
 		panelwin.add(buttonW0, c);
 
+		/**
+		 * Button, für einen neuen Spielstart
+		 */
+		
 		JButton buttonW1 = new JButton("Noch einmal!");
 		c.gridx = 0;
 		c.gridy = 2;
 		// c.gridwidth = 2;
 		panelwin.add(buttonW1, c);
 
+		/**
+		 * Button, wenn man zurück zum Startmenü möchte
+		 */
+		
 		JButton buttonW2 = new JButton("ZurÃ¼ck zum Startmenue");
 		c.gridx = 0;
 		c.gridy = 3;
@@ -65,6 +83,8 @@ public class WintheGame {
 			}
 		});
 
+
+		
 		buttonW2.addActionListener(new ActionListener() {
 
 			@Override

@@ -25,7 +25,8 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 Klasse Spielfeld implementiert ActionListener
+ * @version 1.0 
+ * Klasse Spielfeld implementiert ActionListener
  */
 
 public class Spielfeld extends JPanel implements ActionListener {
@@ -216,6 +217,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Players.movePlayers();

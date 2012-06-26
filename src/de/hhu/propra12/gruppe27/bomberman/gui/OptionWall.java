@@ -12,19 +12,27 @@ import javax.swing.JPanel;
 
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
+/**
+ * 
+ * @author
+ * @version 1.0
+ * Klasse zur Einstellung der Wände
+ *
+ */
+
 public final class OptionWall {
 
 	SysEinst sysopwall = SysEinst.getSystem();
 
-	/*
+	/**
 	 * Methode um die Mauerdichte einzustellen
 	 * 
-	 * setzt einen int Wert zwischen 0 und 10, 0 entspricht keinen Mauern, 10
-	 * entspricht Ã¼berall Mauern
-	 * 
+	 * int-Wer wird zwischen 0 und 10 festgelegt (0 = keine Mauer, 10 = nur Mauern)
+	 *
 	 * Buttons durchnummeriert von 0 bis 10 Wert wird gesetzt, Fenster
-	 * geschlossen und zurÃ¼ck an das Optionsmenue gegeben
+	 * geschlossen und zurück an das Optionsmenü gegeben
 	 */
+	
 	public SysEinst optionwall() {
 
 		final JFrame framemauer = new JFrame("Mauerdichte");

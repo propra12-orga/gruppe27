@@ -18,7 +18,8 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 Klasse fÔøΩr das OptionsmenÔøΩ
+ * @version 1.0
+ *  Klasse f¸r das Optionsmen¸
  */
 
 public class Optionmenue {
@@ -34,13 +35,10 @@ public class Optionmenue {
 	Icon optionicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
-	/*
-	 * Methode um das Optionsmenue aufzurufen
-	 */
 	/**
-	 * 
+	 * Methode um das Optionsmen¸ aufzurufen
 	 * @param system
-	 * @return sys Systemeinstellungen kÔøΩnnen getÔøΩtigt werden, Buttons werden
+	 * @return sys Systemeinstellungen kˆnnen get‰tigt werden, Buttons werden
 	 *         definiert
 	 */
 
@@ -68,11 +66,12 @@ public class Optionmenue {
 
 		// optionpanel.add(optionbild);
 
-		/*
+		/**
 		 * Button 0 - buttonO0
 		 * 
-		 * Bild f√ºr Optionsmenue
+		 * Bild f¸r Optionsmen¸
 		 */
+		
 		JButton buttonO0 = new JButton(optionicon);
 		coption.gridx = 0;
 		coption.gridy = 1;
@@ -82,10 +81,12 @@ public class Optionmenue {
 
 		/*
 		 * Button 1 - buttonO1
-		 * 
-		 * Fenster √∂ffnen um die Mauerdichte einzustellen Mauerdichte der
-		 * zerst√∂rbaren W√§nde
 		 */
+		
+		/**
+		 * Mauerdichte kann eingestellt werden (Fenster wird geˆffnet) --> zerstˆrbare W‰nde
+		 */
+		
 		JButton buttonO1 = new JButton("Mauerdichte");
 		coption.gridx = 0;
 		coption.gridy = 2;
@@ -95,55 +96,53 @@ public class Optionmenue {
 
 		/*
 		 * Button 2 - buttonO2
-		 * 
-		 * Fenster √∂ffnen um die Spielfeldgr√∂√üe auszuw√§hlen
 		 */
+		/**
+		 * Spielfeldgrˆﬂe kann ausgew‰hlt werden (Fenster ˆffnet sich)
+		 */
+		
 		JButton buttonO2 = new JButton("Spielfeldgroesse");
 		coption.gridx = 0;
 		coption.gridy = 3;
 		optionpanel.add(buttonO2, coption);
-
-		/*
-		 * Button 3 - buttonO3
-		 * 
-		 * Optionsmenue verlassen
+		
+		/**
+		 * Optionsmen¸ wird verlassen (Button 3/buttonO3)
 		 */
+		
 		final JToggleButton buttonO3 = new JToggleButton(spiegel
 				+ sys.getspiegelung(), sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 4;
 		optionpanel.add(buttonO3, coption);
 
-		/*
-		 * Button 4 - buttonO4
+		/**
 		 * 
-		 * Optionsmenue verlassen
+		 * Optionsmen¸ wird verlassen (Button 4/buttonO4)
 		 */
+		
+		
 		JToggleButton buttonO4 = new JToggleButton(standard
 				+ sys.getstandardlvl(), sys.getstandardlvl());
 		coption.gridx = 0;
 		coption.gridy = 5;
 		optionpanel.add(buttonO4, coption);
 
-		/*
-		 * Button 5 - buttonO5
-		 * 
-		 * Optionsmenue verlassen
+	
+		/**
+		 * Optionsmen¸ wird verlassen (Button 5/buttonO5)
 		 */
+		
 		JButton buttonO5 = new JButton("zur√ºck");
 		coption.gridx = 0;
 		coption.gridy = 6;
 		optionpanel.add(buttonO5, coption);
 
-		/*
-		 * Button 1 - Mauerdichte
-		 * 
-		 * √ñffnen eines Fensters um die Mauerdichte einzustellen √úbernahme der
-		 * Mauerdichte in die lokale Variable sys
-		 */
 
 		/**
 		 * Listener werden hinzugefÔøΩgt, damit Buttons eine Funktion haben
+		 * ÷ffnen eines Fensters, um die Mauerdichte einzustellen
+		 * Mauerdichte wird in die lokale Variable sys ¸bernommen (Button 1 - Mauerdichte)
 		 */
 
 		buttonO1.addActionListener(new ActionListener() {
@@ -155,11 +154,11 @@ public class Optionmenue {
 			}
 		});
 
-		/*
-		 * Button 2 - Spielfeldgr√∂√üe
-		 * 
-		 * Spielfeld w√§hlen
+		
+		/**
+		 * Spielfeld w‰hlen (Button 2/Spielfeldgrˆﬂe)
 		 */
+		
 		buttonO2.addActionListener(new ActionListener() {
 
 			@Override
@@ -169,11 +168,12 @@ public class Optionmenue {
 			}
 		});
 
-		/*
-		 * Button 3 - Spiegelung
-		 * 
-		 * Ein oder Aus
+
+		
+		/**
+		 * Die Spiegelung wird eingestellt --> Aus oder ein (Button 3/Spiegelung)
 		 */
+		
 		buttonO3.addActionListener(new ActionListener() {
 
 			@Override
@@ -186,11 +186,12 @@ public class Optionmenue {
 			}
 		});
 
-		/*
-		 * Button 3 - Standardlevel
-		 * 
-		 * Ein oder Aus
+
+		
+		/**
+		 * Ein und ausschalten des Standardlevels (Button 3/Standardlevel)
 		 */
+		
 		buttonO4.addActionListener(new ActionListener() {
 
 			@Override
@@ -203,9 +204,10 @@ public class Optionmenue {
 			}
 		});
 
-		/*
-		 * Fenster schlie√üen und zur√ºck gehen
+		/**
+		 * Fenster schlie√üen und zur¸ch gehen
 		 */
+		
 		buttonO5.addActionListener(new ActionListener() {
 
 			@Override

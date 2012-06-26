@@ -15,21 +15,18 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 Klasse fï¿½r die Einstellungen des Optionsfeldes
+ * @version 1.0 
+ * Klasse für die Einstellungen des Optionsfeldes
  */
 
 public class Optionfield {
 
 	SysEinst sysopfield = SysEinst.getSystem();
 
-	/*
-	 * Methode um die SpielfeldgrÃ¶ÃŸe einzurichten
-	 * 
-	 * Wahl zwischen 3 SpielfeldgrÃ¶ÃŸen Feld1 15x15 Feld2 19x19 Feld3 11x11
-	 */
-
+	
 	/**
-	 * Einstellungen fï¿½r das Optionsmenï¿½
+	 * Einstellungen für das Optionsmenü
+	 * --> Spielfeldgröße (3 Auswahlmöglichkeiten: 15x15, 19x19, 11x11)
 	 * 
 	 * @param system
 	 * @return sysopfield
@@ -37,7 +34,7 @@ public class Optionfield {
 
 	public SysEinst opfieldEinst() {
 
-		final JFrame frameopfield = new JFrame("SpielfeldgrÃ¶ÃŸe");
+		final JFrame frameopfield = new JFrame("Spielfeldgröße");
 		frameopfield.setVisible(true);
 		frameopfield.setSize(640, 640);
 		frameopfield.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,11 +48,13 @@ public class Optionfield {
 		copfield.gridx = 0;
 		copfield.gridy = 0;
 
-		/*
-		 * Definition der KnÃ¶pfe
-		 * 
-		 * Button 1 SpielfeldgrÃ¶ÃŸe 11x11
+		
+		
+		/**
+		 * Knöpfe werden definiert
+		 * Button 1 für 11x11
 		 */
+		
 		JButton buttonopfield1 = new JButton("Spielfeld: 11 x 11");
 		copfield.gridx = 0;
 		copfield.gridy = 1;
@@ -63,34 +62,34 @@ public class Optionfield {
 		copfield.weightx = 1.0;
 		panelopfield.add(buttonopfield1, copfield);
 
-		/*
-		 * Definition der KnÃ¶pfe
-		 * 
-		 * Button 2 SpielfeldgrÃ¶ÃŸe 15x15
+		
+		/**
+		 * Button 2 für 15x15
 		 */
+		
 		JButton buttonopfield2 = new JButton("Spielfeld 15 x 15 (default)");
 		copfield.gridx = 0;
 		copfield.gridy = 2;
 		panelopfield.add(buttonopfield2, copfield);
 
-		/*
-		 * Definition der KnÃ¶pfe
-		 * 
-		 * Button 3 SpielfeldgrÃ¶ÃŸe 19x25
+		/**
+		 * Button 3 für 19x19
 		 */
+		
 		JButton buttonopfield3 = new JButton("Spieldfeld 19 x 19");
 		copfield.gridx = 0;
 		copfield.gridy = 3;
 		panelopfield.add(buttonopfield3, copfield);
 
 		/*
-		 * Aktion der KnÃ¶pfe
 		 * 
 		 * jeweils feldx und feldy setzen je nach ausgewÃ¤hlter GrÃ¶ÃŸe
 		 */
 
 		/**
-		 * Listener wird ausgefï¿½hrt, damit Knopfdruck bearbeitet werden kann
+		 * Aktion der Knöpfe
+		 * Listener wird ausgeführt, damit Knopfdruck bearbeitet werden kann
+		 * 
 		 */
 
 		buttonopfield1.addActionListener(new ActionListener() {

@@ -32,7 +32,8 @@ public class ItemManager {
 	// Funktion um Items durch bombe zerstÃ¶ren zu lassen
 	//
 /**
- * Keine Items
+ * Test, ob Item vom Player aufgenommen worden ist (Funktion)
+ * Item kann durch Bombe zerstört werden (Funktion)
  * @return
  */
 	
