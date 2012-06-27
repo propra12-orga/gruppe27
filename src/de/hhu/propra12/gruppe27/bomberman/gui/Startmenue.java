@@ -220,24 +220,58 @@ public class Startmenue {
 				buttonbmlimport.setText("Level importieren");
 
 				try {
-					
-					OpenFileDialog filedialog = new OpenFileDialog();																//Neuer Dialog
-					system.setlevelpath(filedialog.loadFile(new Frame(), "Lade BomberMan-Level...", ".\\data/levels", "*.bml"));	//Parameter an neuen Dialog übergeben und Pfad auf levelpath setzen
-					setfeld(system.getlevelpath());																					//levelpath an feld übergeben
-					System.out.println(system.getlevelpath() + " geladen!");														//Konsolenausgabe zum debuggen
-					buttonbmlimport.setText(system.getlevelpath() + " geladen!");													//Umbenennen des Buttons. Nutzer informieren
 
-					
+					OpenFileDialog filedialog = new OpenFileDialog(); // Neuer
+																		// Dialog
+					system.setlevelpath(filedialog.loadFile(new Frame(),
+							"Lade BomberMan-Level...", ".\\data/levels",
+							"*.bml")); // Parameter
+					// an
+					// neuen
+					// Dialog
+					// übergeben
+					// und
+					// Pfad
+					// auf
+					// levelpath
+					// setzen
+					setfeld(system.getlevelpath()); // levelpath an feld
+													// übergeben
+					System.out.println(system.getlevelpath() + " geladen!"); // Konsolenausgabe
+																				// zum
+																				// debuggen
+					buttonbmlimport.setText(system.getlevelpath() + " geladen!"); // Umbenennen
+																					// des
+																					// Buttons.
+																					// Nutzer
+																					// informieren
+
 				} catch (IOException eIO) {
-					
-					System.out.println("Fehler: " + system.getlevelpath() + " konnte nicht geladen werden!\n" + eIO.getMessage());//Konsolenausgabe zum debuggen
-					buttonbmlimport.setText("Fehler beim Laden des Levels!");														//Umbenennen des Buttons. Nutzer informieren.
-				
+
+					System.out.println("Fehler: " + system.getlevelpath()
+							+ " konnte nicht geladen werden!\n"
+							+ eIO.getMessage());// Konsolenausgabe zum debuggen
+					buttonbmlimport.setText("Fehler beim Laden des Levels!"); // Umbenennen
+																				// des
+																				// Buttons.
+																				// Nutzer
+																				// informieren.
+
 				} catch (NumberFormatException eNFE) {
-					
-					System.out.println("Fehler beim einlesen der Levellänge/-breite in" + system.getlevelpath() + " !\n" + eNFE.getMessage());//Konsolenausgabe zum debuggen
-					buttonbmlimport.setText("Fehler beim einlesen der Levellänge/-breite!");										//Umbenennen des Buttons. Nutzer informieren.							
-				
+
+					System.out
+							.println("Fehler beim einlesen der Levellänge/-breite in"
+									+ system.getlevelpath()
+									+ " !\n"
+									+ eNFE.getMessage());// Konsolenausgabe zum
+															// debuggen
+					buttonbmlimport
+							.setText("Fehler beim einlesen der Levellänge/-breite!"); // Umbenennen
+																						// des
+																						// Buttons.
+																						// Nutzer
+																						// informieren.
+
 				}
 
 			}
