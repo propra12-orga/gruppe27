@@ -23,6 +23,8 @@ public class SysEinst {
 	boolean spiegelung = false;
 	boolean standardlvl = true;
 	boolean bmllevel = false;
+	boolean boolKI = false;
+	boolean boolLAN = false;
 
 	String levelpath = "data/levels/level_1.bml";
 	String namePlayer1 = "Spieler 1";
@@ -136,6 +138,24 @@ public class SysEinst {
 
 	public boolean getbmllevel() {
 		return bmllevel;
+	}
+
+	/**
+	 * 
+	 * @return boolKI
+	 */
+
+	public boolean getboolKI() {
+		return boolKI;
+	}
+
+	/**
+	 * 
+	 * @return boolLAN
+	 */
+
+	public boolean getboolLAN() {
+		return boolLAN;
 	}
 
 	/**
@@ -273,6 +293,24 @@ public class SysEinst {
 
 	public void setbmllevel(boolean bmllvl) {
 		this.bmllevel = bmllvl;
+	}
+
+	/**
+	 * 
+	 * @param boolKI
+	 */
+
+	public void setboolKI(boolean boolKI) {
+		this.boolKI = boolKI;
+	}
+
+	/**
+	 * 
+	 * @param boolLAN
+	 */
+
+	public void setboolLAN(boolean boolLAN) {
+		this.boolLAN = boolLAN;
 	}
 
 	/**

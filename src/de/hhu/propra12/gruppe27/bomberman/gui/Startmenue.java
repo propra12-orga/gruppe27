@@ -25,8 +25,8 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 /**
  * 
  * @author
- * @version 1.0 Klasse fï¿½r das grafische Startmenï¿½ (Spiel starten,
- *          Multiplayer joinen und hosten, Einstellungen setzen)
+ * @version 1.0 Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
+ *          joinen und hosten, Einstellungen setzen)
  * 
  */
 
@@ -39,7 +39,7 @@ public class Startmenue {
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
 	/**
-	 * Methode um das Menï¿½-Fenster zu ï¿½ffnen
+	 * Methode um das Menue-Fenster zu oeffnen
 	 * 
 	 * @return
 	 */
@@ -59,9 +59,6 @@ public class Startmenue {
 
 		JPanel panel = new JPanel(new GridBagLayout());
 		framemenue.add(panel);
-
-		// JPanel panel2 = new JPanel(new GridBagLayout());
-		// framemenue.add(panel2);
 
 		framemenue.getContentPane().add(panel, BorderLayout.NORTH);
 		GridBagConstraints c = new GridBagConstraints();
@@ -138,7 +135,7 @@ public class Startmenue {
 		panel.add(buttonS5, c);
 
 		/**
-		 * Spiel beenden bzw. schließen (Button 6/buttonS6)
+		 * Spiel beenden bzw. schlieï¿½en (Button 6/buttonS6)
 		 */
 
 		JButton buttonS6 = new JButton("Spiel verlassen");
@@ -155,6 +152,8 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				system.setamplayer(1);
+				system.setboolLAN(false);
 				// Ausgabe der Einstellung-Parameter
 				system.printSysEinst();
 
@@ -169,6 +168,7 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setamplayer(2);
+				system.setboolLAN(false);
 				// Ausgabe der Einstellung-Parameter
 				system.printSysEinst();
 
@@ -186,6 +186,7 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				system.setboolLAN(true);
 				Client client = new Client();
 
 			}
@@ -197,6 +198,7 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				system.setboolLAN(true);
 				Host host = new Host();
 
 			}
@@ -229,14 +231,14 @@ public class Startmenue {
 					// an
 					// neuen
 					// Dialog
-					// übergeben
+					// ï¿½bergeben
 					// und
 					// Pfad
 					// auf
 					// levelpath
 					// setzen
 					setfeld(system.getlevelpath()); // levelpath an feld
-													// übergeben
+													// ï¿½bergeben
 					System.out.println(system.getlevelpath() + " geladen!"); // Konsolenausgabe
 																				// zum
 																				// debuggen
@@ -260,13 +262,13 @@ public class Startmenue {
 				} catch (NumberFormatException eNFE) {
 
 					System.out
-							.println("Fehler beim einlesen der Levellänge/-breite in"
+							.println("Fehler beim einlesen der Levellï¿½nge/-breite in"
 									+ system.getlevelpath()
 									+ " !\n"
 									+ eNFE.getMessage());// Konsolenausgabe zum
 															// debuggen
 					buttonbmlimport
-							.setText("Fehler beim einlesen der Levellänge/-breite!"); // Umbenennen
+							.setText("Fehler beim einlesen der Levellï¿½nge/-breite!"); // Umbenennen
 																						// des
 																						// Buttons.
 																						// Nutzer
@@ -280,8 +282,8 @@ public class Startmenue {
 		/**
 		 * Aktionen fï¿½r Button 5
 		 * 
-		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der
-		 * Optionen werden ï¿½bernommen und in der system-Instanz gespeichert
+		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der Optionen
+		 * werden ï¿½bernommen und in der system-Instanz gespeichert
 		 */
 
 		buttonS5.addActionListener(new ActionListener() {

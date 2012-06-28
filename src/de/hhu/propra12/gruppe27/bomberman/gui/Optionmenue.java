@@ -27,6 +27,7 @@ public class Optionmenue {
 
 	String spiegel = "Spiegelung: ";
 	String standard = "Standardlevel: ";
+	String stringKI = "KI: ";
 
 	Icon optionicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
@@ -117,12 +118,23 @@ public class Optionmenue {
 		optionpanel.add(buttonO4, coption);
 
 		/**
-		 * Optionsmenue wird verlassen (Button 5/buttonO5)
+		 * 
+		 * KI an/aus (Button 5/buttonKI)
+		 */
+
+		JToggleButton buttonKI = new JToggleButton(stringKI + sys.getboolKI(),
+				sys.getboolKI());
+		coption.gridx = 0;
+		coption.gridy = 6;
+		optionpanel.add(buttonKI, coption);
+
+		/**
+		 * Optionsmenue wird verlassen (Button 6/buttonO5)
 		 */
 
 		JButton buttonO5 = new JButton("zurück");
 		coption.gridx = 0;
-		coption.gridy = 6;
+		coption.gridy = 7;
 		optionpanel.add(buttonO5, coption);
 
 		/**
@@ -183,6 +195,22 @@ public class Optionmenue {
 
 				JToggleButton buttonO4 = (JToggleButton) e.getSource();
 				buttonO4.setText(standard + sys.getstandardlvl());
+			}
+		});
+
+		/**
+		 * Ein und ausschalten der KI (buttonKI)
+		 */
+
+		buttonKI.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sys.setboolKI(!sys.getboolKI());
+				System.out.println(sys.getboolKI());
+
+				JToggleButton buttonKI = (JToggleButton) e.getSource();
+				buttonKI.setText(stringKI + sys.getboolKI());
 			}
 		});
 
