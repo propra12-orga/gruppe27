@@ -24,7 +24,7 @@ public class SysEinst {
 	boolean standardlvl = true;
 	boolean bmllevel = false;
 
-	String levelpath = "data/level_1.bml";
+	String levelpath = "data/levels/level_1.bml";
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";
 	String namePlayer3 = "Spieler 3";

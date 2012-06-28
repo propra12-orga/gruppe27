@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -24,8 +25,8 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 /**
  * 
  * @author
- * @version 1.0 Klasse fï¿½r das grafische Startmenï¿½ (Spiel starten, Multiplayer
- *          joinen und hosten, Einstellungen setzen)
+ * @version 1.0 Klasse fï¿½r das grafische Startmenï¿½ (Spiel starten,
+ *          Multiplayer joinen und hosten, Einstellungen setzen)
  * 
  */
 
@@ -36,8 +37,6 @@ public class Startmenue {
 
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
-
-	String bmlimport = "Level importieren: ";
 
 	/**
 	 * Methode um das Menï¿½-Fenster zu ï¿½ffnen
@@ -93,7 +92,7 @@ public class Startmenue {
 		 * Spiel starten (Button 2/buttonS2) - 2Spieler - Modus
 		 */
 
-		JButton buttonS2 = new JButton("Spiel starten (2 SPieler-Modus)");
+		JButton buttonS2 = new JButton("Spiel starten (2 Spieler-Modus)");
 		c.gridx = 0;
 		c.gridy = 3;
 
@@ -122,8 +121,8 @@ public class Startmenue {
 		 * 
 		 * Level importieren
 		 */
-		JToggleButton buttonbmlimport = new JToggleButton(bmlimport
-				+ system.getbmllevel(), system.getbmllevel());
+		JToggleButton buttonbmlimport = new JToggleButton("Level importieren",
+				system.getbmllevel());
 		c.gridx = 0;
 		c.gridy = 6;
 		panel.add(buttonbmlimport, c);
@@ -139,7 +138,7 @@ public class Startmenue {
 		panel.add(buttonS5, c);
 
 		/**
-		 * Spiel beenden bzw. schlieï¿½en (Button 6/buttonS6)
+		 * Spiel beenden bzw. schließen (Button 6/buttonS6)
 		 */
 
 		JButton buttonS6 = new JButton("Spiel verlassen");
@@ -218,14 +217,61 @@ public class Startmenue {
 				system.setbmllevel(!system.getbmllevel());
 
 				JToggleButton buttonbmlimport = (JToggleButton) e.getSource();
-				buttonbmlimport.setText(bmlimport + system.getbmllevel());
+				buttonbmlimport.setText("Level importieren");
 
 				try {
-					setfeld(system.getlevelpath());
+
+					OpenFileDialog filedialog = new OpenFileDialog(); // Neuer
+																		// Dialog
+					system.setlevelpath(filedialog.loadFile(new Frame(),
+							"Lade BomberMan-Level...", ".\\data/levels",
+							"*.bml")); // Parameter
+					// an
+					// neuen
+					// Dialog
+					// übergeben
+					// und
+					// Pfad
+					// auf
+					// levelpath
+					// setzen
+					setfeld(system.getlevelpath()); // levelpath an feld
+													// übergeben
+					System.out.println(system.getlevelpath() + " geladen!"); // Konsolenausgabe
+																				// zum
+																				// debuggen
+					buttonbmlimport.setText(system.getlevelpath() + " geladen!"); // Umbenennen
+																					// des
+																					// Buttons.
+																					// Nutzer
+																					// informieren
+
 				} catch (IOException eIO) {
-					// TODO Fehlerbehandlung
+
+					System.out.println("Fehler: " + system.getlevelpath()
+							+ " konnte nicht geladen werden!\n"
+							+ eIO.getMessage());// Konsolenausgabe zum debuggen
+					buttonbmlimport.setText("Fehler beim Laden des Levels!"); // Umbenennen
+																				// des
+																				// Buttons.
+																				// Nutzer
+																				// informieren.
+
 				} catch (NumberFormatException eNFE) {
-					// TODO Fehlerbehandlung
+
+					System.out
+							.println("Fehler beim einlesen der Levellänge/-breite in"
+									+ system.getlevelpath()
+									+ " !\n"
+									+ eNFE.getMessage());// Konsolenausgabe zum
+															// debuggen
+					buttonbmlimport
+							.setText("Fehler beim einlesen der Levellänge/-breite!"); // Umbenennen
+																						// des
+																						// Buttons.
+																						// Nutzer
+																						// informieren.
+
 				}
 
 			}
@@ -234,8 +280,8 @@ public class Startmenue {
 		/**
 		 * Aktionen fï¿½r Button 5
 		 * 
-		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der Optionen
-		 * werden ï¿½bernommen und in der system-Instanz gespeichert
+		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der
+		 * Optionen werden ï¿½bernommen und in der system-Instanz gespeichert
 		 */
 
 		buttonS5.addActionListener(new ActionListener() {
