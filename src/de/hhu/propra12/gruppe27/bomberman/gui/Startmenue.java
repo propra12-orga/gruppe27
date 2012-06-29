@@ -227,26 +227,23 @@ public class Startmenue {
 																		// Dialog
 					system.setlevelpath(filedialog.loadFile(new Frame(),
 							"Lade BomberMan-Level...", ".\\data/levels",
-							"*.bml")); // Parameter
-					// an
-					// neuen
-					// Dialog
-					// ï¿½bergeben
-					// und
-					// Pfad
-					// auf
-					// levelpath
-					// setzen
-					setfeld(system.getlevelpath()); // levelpath an feld
-													// ï¿½bergeben
-					System.out.println(system.getlevelpath() + " geladen!"); // Konsolenausgabe
-																				// zum
-																				// debuggen
-					buttonbmlimport.setText(system.getlevelpath() + " geladen!"); // Umbenennen
-																					// des
-																					// Buttons.
-																					// Nutzer
-																					// informieren
+							"*.bml")); // Parameter an neuen Dialog übergeben
+										// und Pfad auf levelpath setzen
+					if (system.getlevelpath() == null) {
+						system.setbmllevel(false);
+						System.out.println("Kein Level importiert!");
+					} else {
+						system.setbmllevel(true);
+						setfeld(system.getlevelpath()); // levelpath an feld
+														// übergeben
+						System.out.println(system.getlevelpath() + " geladen!"); // Konsolenausgabe
+																					// zum
+																					// debuggen
+
+						buttonbmlimport.setText(system.getlevelpath()
+								+ " geladen!"); // Umbenennen des Buttons.
+												// Nutzer informieren.
+					}
 
 				} catch (IOException eIO) {
 
@@ -273,7 +270,6 @@ public class Startmenue {
 																						// Buttons.
 																						// Nutzer
 																						// informieren.
-
 				}
 
 			}
@@ -282,8 +278,8 @@ public class Startmenue {
 		/**
 		 * Aktionen fï¿½r Button 5
 		 * 
-		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der Optionen
-		 * werden ï¿½bernommen und in der system-Instanz gespeichert
+		 * Optionsmenï¿½ wird in neuem Fenster aufgerufen ï¿½nderungen der
+		 * Optionen werden ï¿½bernommen und in der system-Instanz gespeichert
 		 */
 
 		buttonS5.addActionListener(new ActionListener() {

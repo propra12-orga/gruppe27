@@ -4,10 +4,10 @@ package de.hhu.propra12.gruppe27.bomberman.core;
  * 
  * @author
  * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte, randomlvl =
- *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unerst�rbare W�nde im Level, namePlayer =
- *         Name des Spielers
+ *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte,
+ *         randomlvl = Generiertes Level, spiegelung = Level soll gespiegelt
+ *         werden, standardlvl = Festgelegte unerst�rbare W�nde im Level,
+ *         namePlayer = Name des Spielers
  */
 
 public class SysEinst {
@@ -27,6 +27,7 @@ public class SysEinst {
 	boolean boolLAN = false;
 
 	String levelpath = "data/levels/level_1.bml";
+	String levelname = "";
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";
 	String namePlayer3 = "Spieler 3";
@@ -165,6 +166,10 @@ public class SysEinst {
 
 	public String getlevelpath() {
 		return levelpath;
+	}
+
+	public String getlevelname() {
+		return levelname;
 	}
 
 	/**
@@ -320,6 +325,10 @@ public class SysEinst {
 
 	public void setlevelpath(String levelpath) {
 		this.levelpath = levelpath;
+	}
+
+	public void setlevelname(String levelname) {
+		this.levelname = levelname;
 	}
 
 	/**

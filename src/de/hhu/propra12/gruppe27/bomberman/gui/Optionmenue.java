@@ -36,8 +36,8 @@ public class Optionmenue {
 	 * Methode um das Optionsmen� aufzurufen
 	 * 
 	 * @param system
-	 * @return sys Systemeinstellungen k�nnen get�tigt werden, Buttons werden
-	 *         definiert
+	 * @return sys Systemeinstellungen k�nnen get�tigt werden, Buttons
+	 *         werden definiert
 	 */
 
 	public void optionaufruf() {
@@ -132,7 +132,7 @@ public class Optionmenue {
 		 * Optionsmenue wird verlassen (Button 6/buttonO5)
 		 */
 
-		JButton buttonO5 = new JButton("zurück");
+		JButton buttonO5 = new JButton("Zur" + "\u00FC" + "ck");
 		coption.gridx = 0;
 		coption.gridy = 7;
 		optionpanel.add(buttonO5, coption);

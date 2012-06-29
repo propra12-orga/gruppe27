@@ -18,7 +18,11 @@ public class OpenFileDialog {
 		fd.setLocation(100, 100); // Fensterposition. Will momentan nicht
 									// funktionieren.
 		fd.show(); // Frame zeichnen
-		return fd.getFile(); // Pfad zurückgeben
+		if (fd.getFile() != null) {
+			return fd.getDirectory() + fd.getFile();
+		} else {
+			return null;
+		}
 	}
 
 	public String saveFile(Frame fenster, String title, String defDir,
@@ -29,7 +33,11 @@ public class OpenFileDialog {
 		fd.setDirectory(defDir);
 		fd.setLocation(100, 100);
 		fd.show();
-		return fd.getFile();
+		if (fd.getFile() != null) {
+			return fd.getDirectory() + fd.getFile();
+		} else {
+			return null;
+		}
 	}
 
 	// filedialog.loadFile(new Frame(), "Lade BomberMan-Level...", ".\\",
