@@ -5,6 +5,7 @@ import java.awt.Frame;
 
 public class OpenFileDialog {
 
+	@SuppressWarnings("deprecation")
 	public String loadFile(Frame fenster, String title, String defDir,
 			String fileType) { // Lade-Methode (Frame, Fenstertitel,
 								// Startordner, Dateityp der angezeigt/geladen
@@ -25,6 +26,7 @@ public class OpenFileDialog {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public String saveFile(Frame fenster, String title, String defDir,
 			String fileType) { // Wie bei loadFile. Nur eben zum Speichern
 								// gedacht.
