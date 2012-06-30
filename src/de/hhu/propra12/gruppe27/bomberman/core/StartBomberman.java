@@ -1,6 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
-import de.hhu.propra12.gruppe27.bomberman.gui.Startmenue;
+import de.hhu.propra12.gruppe27.bomberman.gui.menue.Startmenue;
 
 public class StartBomberman {
 

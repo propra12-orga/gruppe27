@@ -1,6 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
+import de.hhu.propra12.gruppe27.bomberman.gui.menue.LosetheGame;
+import de.hhu.propra12.gruppe27.bomberman.gui.menue.WintheGame;
 
 /**
  * 
@@ -15,7 +17,7 @@ public class Exit {
 	private AbstractFeld Feld;
 	
 	/**
-	 * Größe des Feldes
+	 * Grï¿½ï¿½e des Feldes
 	 * @param Feld
 	 */
 

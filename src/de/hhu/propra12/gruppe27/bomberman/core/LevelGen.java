@@ -34,8 +34,6 @@ public class LevelGen extends Level {
 
 	public LevelGen(int laengex, int breitey, int Spieleranzahl) {
 
-		// laxbr = new AbstractFeld[feldx][feldy];
-
 		super(laengex, breitey);
 		name = "Zufallslevel";
 
