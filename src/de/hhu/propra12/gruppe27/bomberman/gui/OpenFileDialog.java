@@ -5,6 +5,7 @@ import java.awt.Frame;
 
 public class OpenFileDialog {
 
+	@SuppressWarnings("deprecation")
 	public String loadFile(Frame fenster, String title, String defDir,
 			String fileType) { // Lade-Methode (Frame, Fenstertitel,
 								// Startordner, Dateityp der angezeigt/geladen
@@ -18,9 +19,14 @@ public class OpenFileDialog {
 		fd.setLocation(100, 100); // Fensterposition. Will momentan nicht
 									// funktionieren.
 		fd.show(); // Frame zeichnen
-		return fd.getFile(); // Pfad zurückgeben
+		if (fd.getFile() != null) {
+			return fd.getDirectory() + fd.getFile();
+		} else {
+			return null;
+		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public String saveFile(Frame fenster, String title, String defDir,
 			String fileType) { // Wie bei loadFile. Nur eben zum Speichern
 								// gedacht.
@@ -29,7 +35,11 @@ public class OpenFileDialog {
 		fd.setDirectory(defDir);
 		fd.setLocation(100, 100);
 		fd.show();
-		return fd.getFile();
+		if (fd.getFile() != null) {
+			return fd.getDirectory() + fd.getFile();
+		} else {
+			return null;
+		}
 	}
 
 	// filedialog.loadFile(new Frame(), "Lade BomberMan-Level...", ".\\",

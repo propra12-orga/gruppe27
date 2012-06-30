@@ -77,33 +77,31 @@ public class LevelEditor {
 	public static void main(String[] args) {
 		LevelEditor editor = new LevelEditor();
 		editor.leveleditor();
+
+		// Export-Button Routine ANFANG
 		Properties levelstructure = new Properties();
 		levelstructure.setProperty("LEVEL", editor.convertButtons()); // Alle
 																		// Werte
 																		// in
 																		// ein
 																		// neues
-																		// Property
+																		// Prperty
 																		// Objekt
 																		// setzen
-		levelstructure.setProperty("LAENGE", Integer.toString(editor.feldx)); // Muss
-																				// alles
-																				// später
-																				// in
-																				// die
-																				// Button-Funktion
+		levelstructure.setProperty("LAENGE", Integer.toString(editor.feldx));
 		levelstructure.setProperty("BREITE", Integer.toString(editor.feldy));
-		OpenFileDialog fd = new OpenFileDialog();
-		if (editor.export(fd.saveFile(new Frame(), "Level exportieren...",
-				".\\data\\levels", "*.bml"), levelstructure)) { // File-Dialog
-																// ...
-																// Pfad an den
-																// Filewriter/Exporter
-																// schicken
+
+		OpenFileDialog filedialog = new OpenFileDialog();
+		if (editor.export(filedialog.saveFile(new Frame(),
+				"Level exportieren...", ".\\data\\levels", "*.bml"),
+				levelstructure)) { // File-Dialog. Pfad an den
+									// Filewriter/Exporter schicken
+
 			System.out.println("Level erfolgreich gespeichert!");
 		} else {
 			System.out.println("Fehler beim speichern der Leveldatei!");
 		}
+		// Export-Button Routine ENDE
 
 	}
 
@@ -133,22 +131,29 @@ public class LevelEditor {
 	}
 
 	public boolean export(String filepath, Properties ToBeSaved) {
-		try {
-			BufferedOutputStream bos = new BufferedOutputStream( // BOS
-																	// initialisieren
+		if (filepath != null) {
+			try {
+				BufferedOutputStream bos = new BufferedOutputStream( // BOS
+																		// initialisieren
 
-					new FileOutputStream(filepath)); // FOS initialisieren
-			ToBeSaved.store(bos, "Saved BomberMan-Level"); // .store ist eine
-			// Properties
-			// Methode. Übergibt
-			// die Werte an den
-			// OutPutStream.
-			bos.close(); // Datei/Stream schließen
-			return true; // Wenn erfolgreich true zurückgeben
-		} catch (IOException eIO) {
-			System.out.println("Fehler beim Schreiben in die Leveldatei!");
-			return false; // Bei IOException Konsolenausgabe + false zurück.
+						new FileOutputStream(filepath)); // FOS initialisieren
+				ToBeSaved.store(bos, "Saved BomberMan-Level"); // .store ist
+																// eine
+																// Properties
+																// Methode.
+																// Übergibt
+																// die Werte an
+																// den
+																// OutPutStream.
+				bos.close(); // Datei/Stream schließen
+				return true; // Wenn erfolgreich true zurückgeben
+			} catch (IOException eIO) {
+				System.out.println("Fehler beim Schreiben in die Leveldatei!");
+				return false; // Bei IOException Konsolenausgabe + false zurück.
+			}
+		} else {
+			System.out.println("Keine Zieldatei ausgewählt!");
+			return false;
 		}
-
 	}
 }
