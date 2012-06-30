@@ -144,7 +144,7 @@ public class Startmenue {
 		panel.add(buttonS6, c);
 
 		/**
-		 * Aktionen f�r Button 1 Spielfeld wird generiert und gestartet
+		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
 		 */
 
 		buttonS1.addActionListener(new ActionListener() {

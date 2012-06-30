@@ -24,8 +24,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 
- * Klasse Spielfeld implementiert ActionListener
+ * @version 1.0 Klasse Spielfeld implementiert ActionListener
  */
 
 public class Spielfeld extends JPanel implements ActionListener {
@@ -87,10 +86,14 @@ public class Spielfeld extends JPanel implements ActionListener {
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
-		// TODO menüanbindung Mehrspieler
+
 		if (system.getamplayer() > 1)
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(
 					2)));
+		// TODO Abfrage für Netzwerkspieler
+
+		// TODO Netzwerk übergabe von spielfeld
+
 		this.repaint();
 		this.startgame();
 	}
@@ -220,7 +223,6 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Players.movePlayers();

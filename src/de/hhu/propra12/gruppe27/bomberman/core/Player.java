@@ -6,9 +6,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Eigenschaften des Spielers
+ * @author
+ * @version 1.0 Eigenschaften des Spielers
  */
 
 public class Player extends AbstractPlayer {
@@ -32,7 +31,7 @@ public class Player extends AbstractPlayer {
 
 		this.playerWER = playerWER;
 	}
-	
+
 	/**
 	 * 
 	 * @param posx
@@ -52,11 +51,11 @@ public class Player extends AbstractPlayer {
 	 */
 
 	//
-	
+
 	/**
-	 * Bewegung des Spielers 
+	 * Bewegung des Spieler 1
 	 */
-	
+
 	public void update(int keycode, boolean pressed) {
 
 		if (1 == playerWER) {
@@ -81,7 +80,7 @@ public class Player extends AbstractPlayer {
 				break;
 			}
 		}
-		
+
 		/**
 		 * Bewegung Spieler 2
 		 */
@@ -108,6 +107,8 @@ public class Player extends AbstractPlayer {
 				break;
 			}
 		}
+
+		// TODO Bewegung für Netzwerkspieler
 
 	}
 

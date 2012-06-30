@@ -4,13 +4,12 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse Keyplayers und Bestimmung der Fähigkeiten
+ * @author
+ * @version 1.0 Klasse Keyplayers und Bestimmung der Fï¿½higkeiten
  */
 
 public class KeyPlayer extends AbstractPlayer {
-	
+
 	private Keyset Keys;
 
 	public KeyPlayer(int posx, int posy, String pname, Spielfeld owner,
@@ -35,7 +34,7 @@ public class KeyPlayer extends AbstractPlayer {
 	/**
 	 * Bewegungseinstellungen
 	 */
-	
+
 	public void update(int keycode, boolean pressed) {
 		if (alive) {
 			if (keycode == Keys.KeyUp) {
@@ -55,9 +54,9 @@ public class KeyPlayer extends AbstractPlayer {
 			}
 		}
 	}
-	
+
 	/**
-	 * Bewegung des Spielers auf Spielfeldern ohne feste Blöcke
+	 * Bewegung des Spielers auf Spielfeldern ohne feste Blï¿½cke
 	 */
 
 	public void move() {
