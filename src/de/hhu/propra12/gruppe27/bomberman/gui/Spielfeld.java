@@ -36,7 +36,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	private BombManager Bombs;
 	public Exit e;
 	private GameWindow owner;
-	SysEinst system = SysEinst.getSystem();
+	private SysEinst system = SysEinst.getSystem();
 	final Image imagezerwand = Toolkit
 			.getDefaultToolkit()
 			.getImage(
@@ -249,5 +249,9 @@ public class Spielfeld extends JPanel implements ActionListener {
 	// nicht löschen, braucht man für Netzwerk
 	public void setowner(GameWindow owner) {
 		this.owner = owner;
+	}
+
+	public SysEinst getsystem() {
+		return system;
 	}
 }

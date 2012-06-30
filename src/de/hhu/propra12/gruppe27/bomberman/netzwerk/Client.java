@@ -5,19 +5,25 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
+import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
 public class Client {
 
-	IRemote service;
+	IRemoteHost service;
 
 	public Client() {
 		try {
-			IRemote service = (IRemote) Naming.lookup("rmi://"
-					+ IRemote.hostname + ":" + IRemote.registryPort + "/"
-					+ IRemote.servicename);
+			System.out.println("rmi://" + IRemoteHost.hostname + ":"
+					+ IRemoteHost.registryPort + "/" + IRemoteHost.servicename);
+			RemoteHostImpl rhi = new RemoteHostImpl(new Host());
+			IRemoteHost service = (IRemoteHost) Naming.lookup("rmi://"
+					+ IRemoteHost.hostname + ":" + IRemoteHost.registryPort
+					+ "/" + IRemoteHost.servicename);
 
 			this.service = service;
-			service.echo("service");
-			service.joingame();
+			// service.echo("service");
+			// service.joingame();
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -31,4 +37,10 @@ public class Client {
 		}
 
 	}
+
+	public void sendgame(Spielfeld spielfeld) {
+
+		GameWindow s = new GameWindow(0, true, spielfeld.getsystem(), spielfeld);
+	}
+
 }
