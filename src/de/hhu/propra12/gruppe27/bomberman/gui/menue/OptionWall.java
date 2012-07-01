@@ -15,9 +15,8 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0
- * Klasse zur Einstellung der W�nde
- *
+ * @version 1.0 Klasse zur Einstellung der W�nde
+ * 
  */
 
 public final class OptionWall {
@@ -27,17 +26,20 @@ public final class OptionWall {
 	/**
 	 * Methode um die Mauerdichte einzustellen
 	 * 
-	 * int-Wer wird zwischen 0 und 10 festgelegt (0 = keine Mauer, 10 = nur Mauern)
-	 *
+	 * int-Wer wird zwischen 0 und 10 festgelegt (0 = keine Mauer, 10 = nur
+	 * Mauern)
+	 * 
 	 * Buttons durchnummeriert von 0 bis 10 Wert wird gesetzt, Fenster
 	 * geschlossen und zur�ck an das Optionsmen� gegeben
 	 */
-	
+
 	public SysEinst optionwall() {
 
 		final JFrame framemauer = new JFrame("Mauerdichte");
 		framemauer.setVisible(true);
-		framemauer.setSize(640, 640);
+		// framemauer.setSize(640, 640);
+		framemauer.setResizable(false);
+		framemauer.setLocationRelativeTo(null);
 		framemauer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panelmauer = new JPanel(new GridBagLayout());
@@ -105,6 +107,8 @@ public final class OptionWall {
 		cmauer.gridx = 0;
 		cmauer.gridy = 11;
 		panelmauer.add(buttonMau11, cmauer);
+
+		framemauer.setSize(framemauer.getPreferredSize());
 
 		buttonMau01.addActionListener(new ActionListener() {
 

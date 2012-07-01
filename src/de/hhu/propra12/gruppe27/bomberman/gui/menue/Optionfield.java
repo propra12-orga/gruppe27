@@ -34,7 +34,9 @@ public class Optionfield {
 
 		final JFrame frameopfield = new JFrame("Spielfeldgroesse");
 		frameopfield.setVisible(true);
-		frameopfield.setSize(640, 640);
+		// frameopfield.setSize(640, 640);
+		frameopfield.setResizable(false);
+		frameopfield.setLocationRelativeTo(null);
 		frameopfield.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panelopfield = new JPanel(new GridBagLayout());
@@ -74,6 +76,8 @@ public class Optionfield {
 		copfield.gridx = 0;
 		copfield.gridy = 3;
 		panelopfield.add(buttonopfield3, copfield);
+
+		frameopfield.setSize(frameopfield.getPreferredSize());
 
 		/*
 		 * 

@@ -35,7 +35,9 @@ public class Leveleditmenue {
 
 		final JFrame frameedit = new JFrame("Spielfeldgroesse");
 		frameedit.setVisible(true);
-		frameedit.setSize(640, 640);
+		// frameedit.setSize(640, 640);
+		frameedit.setResizable(false);
+		frameedit.setLocationRelativeTo(null);
 		frameedit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel paneledit = new JPanel(new GridBagLayout());
@@ -76,6 +78,8 @@ public class Leveleditmenue {
 		cedit.gridy = 3;
 		paneledit.add(buttonedit3, cedit);
 
+		frameedit.setSize(frameedit.getPreferredSize()); // Frame an Buttons
+															// anpassen
 		/*
 		 * 
 		 * jeweils feldx und feldy setzen je nach ausgewählter Größe

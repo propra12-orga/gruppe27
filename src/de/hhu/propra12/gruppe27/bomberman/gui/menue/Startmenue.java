@@ -57,7 +57,9 @@ public class Startmenue {
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setSize(640, 640);
+		// framemenue.setSize(640, 640);
+		framemenue.setResizable(false);
+		framemenue.setLocationRelativeTo(null);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -159,6 +161,8 @@ public class Startmenue {
 		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
 		 */
 
+		framemenue.setSize(framemenue.getPreferredSize());
+
 		buttonS1.addActionListener(new ActionListener() {
 
 			@Override
@@ -227,10 +231,12 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen fÃ¼r Button buttonbmlimport
+		 * Aktionen für Button buttonbmlimport
 		 * 
-		 * soll einen Boolean setzen, damit das Level beim Spielstart geladen
-		 * wird
+		 * Öffnet ein OpenFileDialog zum Übergeben des Pfads der zu ladenden
+		 * Datei. Sollte abgebrochen werden, wird der Toggle Button
+		 * zurückgesetzt und es wird kein Level geladen.
+		 * 
 		 */
 
 		buttonbmlimport.addActionListener(new ActionListener() {
@@ -253,6 +259,7 @@ public class Startmenue {
 										// und Pfad auf levelpath setzen
 					if (system.getlevelpath() == null) {
 						system.setbmllevel(false);
+						buttonbmlimport.setSelected(false);
 						System.out.println("Kein Level importiert!");
 					} else {
 						system.setbmllevel(true);
