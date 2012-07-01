@@ -27,7 +27,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	public void publishClient() throws RemoteException {
 
 		try {
-			// LocateRegistry.createRegistry(registryPort);
+
 			System.out.println("publish:    rmi://" + clientname + ":"
 					+ registryPort + "/" + servicename);
 			Naming.rebind("rmi://" + clientname + ":" + registryPort + "/"

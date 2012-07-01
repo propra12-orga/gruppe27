@@ -15,26 +15,24 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author
- * @version 1.0 
- * Klasse f�r die Einstellungen des Optionsfeldes
+ * @version 1.0 Klasse fuer die Einstellungen des Optionsfeldes
  */
 
 public class Optionfield {
 
 	SysEinst sysopfield = SysEinst.getSystem();
 
-	
 	/**
-	 * Einstellungen f�r das Optionsmen�
-	 * --> Spielfeldgr��e (3 Auswahlm�glichkeiten: 15x15, 19x19, 11x11)
+	 * Einstellungen fuer das Optionsmenue --> Spielfeldgroesse (3
+	 * Auswahlmoeglichkeiten: 15x15, 19x19, 11x11)
 	 * 
 	 * @param system
-	 * @return sysopfield
+	 * 
 	 */
 
-	public SysEinst opfieldEinst() {
+	public void opfieldEinst() {
 
-		final JFrame frameopfield = new JFrame("Spielfeldgr��e");
+		final JFrame frameopfield = new JFrame("Spielfeldgroesse");
 		frameopfield.setVisible(true);
 		frameopfield.setSize(640, 640);
 		frameopfield.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -48,13 +46,10 @@ public class Optionfield {
 		copfield.gridx = 0;
 		copfield.gridy = 0;
 
-		
-		
 		/**
-		 * Kn�pfe werden definiert
-		 * Button 1 f�r 11x11
+		 * Knoepfe werden definiert Button 1 fuer 11x11
 		 */
-		
+
 		JButton buttonopfield1 = new JButton("Spielfeld: 11 x 11");
 		copfield.gridx = 0;
 		copfield.gridy = 1;
@@ -62,20 +57,19 @@ public class Optionfield {
 		copfield.weightx = 1.0;
 		panelopfield.add(buttonopfield1, copfield);
 
-		
 		/**
-		 * Button 2 f�r 15x15
+		 * Button 2 fuer 15x15
 		 */
-		
+
 		JButton buttonopfield2 = new JButton("Spielfeld 15 x 15 (default)");
 		copfield.gridx = 0;
 		copfield.gridy = 2;
 		panelopfield.add(buttonopfield2, copfield);
 
 		/**
-		 * Button 3 f�r 19x19
+		 * Button 3 fuer 19x19
 		 */
-		
+
 		JButton buttonopfield3 = new JButton("Spieldfeld 19 x 19");
 		copfield.gridx = 0;
 		copfield.gridy = 3;
@@ -87,8 +81,8 @@ public class Optionfield {
 		 */
 
 		/**
-		 * Aktion der Kn�pfe
-		 * Listener wird ausgef�hrt, damit Knopfdruck bearbeitet werden kann
+		 * Aktion der Knoepfe Listener wird ausgefuehrt, damit Knopfdruck
+		 * bearbeitet werden kann
 		 * 
 		 */
 
@@ -122,6 +116,5 @@ public class Optionfield {
 			}
 		});
 
-		return (sysopfield);
 	}
 }

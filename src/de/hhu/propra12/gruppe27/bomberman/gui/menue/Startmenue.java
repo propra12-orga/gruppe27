@@ -308,7 +308,8 @@ public class Startmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				// TODO Leveleditor einhängen
+				Leveleditmenue leveledit = new Leveleditmenue();
+				leveledit.leveleditmenue();
 			}
 		});
 
