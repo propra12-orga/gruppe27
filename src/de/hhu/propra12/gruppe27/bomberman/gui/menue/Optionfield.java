@@ -34,7 +34,6 @@ public class Optionfield {
 
 		final JFrame frameopfield = new JFrame("Spielfeldgroesse");
 		frameopfield.setVisible(true);
-		// frameopfield.setSize(640, 640);
 		frameopfield.setResizable(false);
 		frameopfield.setLocationRelativeTo(null);
 		frameopfield.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

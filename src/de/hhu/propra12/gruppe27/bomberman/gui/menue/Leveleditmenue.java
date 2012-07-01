@@ -35,7 +35,6 @@ public class Leveleditmenue {
 
 		final JFrame frameedit = new JFrame("Spielfeldgroesse");
 		frameedit.setVisible(true);
-		// frameedit.setSize(640, 640);
 		frameedit.setResizable(false);
 		frameedit.setLocationRelativeTo(null);
 		frameedit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

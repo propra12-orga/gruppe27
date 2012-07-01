@@ -37,7 +37,6 @@ public final class OptionWall {
 
 		final JFrame framemauer = new JFrame("Mauerdichte");
 		framemauer.setVisible(true);
-		// framemauer.setSize(640, 640);
 		framemauer.setResizable(false);
 		framemauer.setLocationRelativeTo(null);
 		framemauer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

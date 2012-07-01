@@ -17,17 +17,15 @@ import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 /**
  * 
  * @author
- * @version 1.0
- * Klasse f�r das Gewinnen des Spiels
- *
+ * @version 1.0 Klasse f�r das Gewinnen des Spiels
+ * 
  */
 
 public class WintheGame {
 
-
 	Icon winicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranz.gif");
-	
+
 	/**
 	 * "Gewonnen" wird ausgegeben, wenn man das Spiel erfolgreich beendet hat
 	 */
@@ -36,7 +34,8 @@ public class WintheGame {
 
 		final JFrame framewin = new JFrame("Gewonnen");
 		framewin.setVisible(true);
-		framewin.setSize(640, 640);
+		framewin.setResizable(false);
+		framewin.setLocationRelativeTo(null);
 		framewin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panelwin = new JPanel(new GridBagLayout());
@@ -44,7 +43,7 @@ public class WintheGame {
 
 		framewin.getContentPane().add(panelwin, BorderLayout.SOUTH);
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		c.gridx = 0;
 		c.gridy = 0;
 
@@ -59,7 +58,7 @@ public class WintheGame {
 		/**
 		 * Button, f�r einen neuen Spielstart
 		 */
-		
+
 		JButton buttonW1 = new JButton("Noch einmal!");
 		c.gridx = 0;
 		c.gridy = 2;
@@ -69,12 +68,14 @@ public class WintheGame {
 		/**
 		 * Button, wenn man zur�ck zum Startmen� m�chte
 		 */
-		
+
 		JButton buttonW2 = new JButton("Zurück zum Startmenue");
 		c.gridx = 0;
 		c.gridy = 3;
 		// c.gridwidth = 2;
 		panelwin.add(buttonW2, c);
+
+		framewin.setSize(framewin.getPreferredSize());
 
 		buttonW1.addActionListener(new ActionListener() {
 
@@ -85,8 +86,6 @@ public class WintheGame {
 			}
 		});
 
-
-		
 		buttonW2.addActionListener(new ActionListener() {
 
 			@Override

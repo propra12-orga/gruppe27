@@ -57,7 +57,6 @@ public class Startmenue {
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
-		// framemenue.setSize(640, 640);
 		framemenue.setResizable(false);
 		framemenue.setLocationRelativeTo(null);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

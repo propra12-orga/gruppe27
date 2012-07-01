@@ -44,7 +44,6 @@ public class Optionmenue {
 
 		final JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
-		// frameoption.setSize(640, 640);
 		frameoption.setResizable(false);
 		frameoption.setLocationRelativeTo(null);
 		frameoption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
