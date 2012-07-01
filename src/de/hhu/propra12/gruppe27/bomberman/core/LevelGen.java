@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.Properties;
 
 /**
+ * Klasse Levelgenerator, Bestimmung der Eigenschaften des Spielfeldes.
  * 
  * @author
- * @version 1.0 Klasse Levelgenerator, Bestimmung der Eigenschaften des
- *          Spielfeldes
+ * @version 1.0
+ * 
  */
 
 public class LevelGen extends Level implements Serializable {
@@ -28,11 +29,15 @@ public class LevelGen extends Level implements Serializable {
 	boolean konsist = true;
 
 	/**
+	 * Level-Generator Konstruktor.
 	 * 
 	 * @param laengex
+	 *            Länge des Zufalls-Levels.
 	 * @param breitey
+	 *            Breite des Zufalls-Levels.
 	 * @param Spieleranzahl
-	 *            Das Spielfeld wird erstellt
+	 *            Anzahl, der Spieler, die hinzugefügt werden.
+	 * 
 	 */
 
 	public LevelGen(int laengex, int breitey, int Spieleranzahl) {
@@ -66,6 +71,13 @@ public class LevelGen extends Level implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @param laengex
+	 * @param breitey
+	 * @param Spieleranzahl
+	 * @param bmllevel
+	 */
 	public LevelGen(int laengex, int breitey, int Spieleranzahl,
 			boolean bmllevel) {
 
@@ -82,20 +94,15 @@ public class LevelGen extends Level implements Serializable {
 	}
 
 	/**
-	 * Zufï¿½llige Erstellung des Spielfeldes
-	 * 
-	 * @param a
-	 * @return
-	 */
-
-	/*
 	 * Boolean zur Zufalls Generierung des Spielfeldes
 	 * 
 	 * int r = (int) Math.random() * 10;
 	 * 
 	 * wenn a == 1 ist, dann wird die die Variable aus der Mauerdichte mit
 	 * eingezogen (Wand oder freies Feld). Ansonsten sind 75% der Waende
-	 * zerstÃ¶rbar
+	 * zerstörbar
+	 * 
+	 * @return Gibt True oder False zurück.
 	 */
 	private boolean randomBoolean(int a) {
 
