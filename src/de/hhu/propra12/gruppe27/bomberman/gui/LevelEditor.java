@@ -41,8 +41,8 @@ public class LevelEditor extends Level implements Serializable {
 	 */
 
 	SysEinst system = SysEinst.getSystem();
-	int feldx = system.getfeldx();
-	int feldy = system.getfeldy();
+	int feldx = system.getfeldxbml();
+	int feldy = system.getfeldybml();
 
 	int intfeld = 0;
 
@@ -61,7 +61,7 @@ public class LevelEditor extends Level implements Serializable {
 	public void leveleditor() {
 
 		/*
-		 * Frame initialisieren und Sichtbar machen. Feste Größe. Mittig
+		 * Frame initialisieren und Sichtbar machen. Feste Grï¿½ï¿½e. Mittig
 		 * ausrichten.
 		 */
 		final JFrame frameeditor = new JFrame("Leveleditor");
@@ -142,10 +142,10 @@ public class LevelEditor extends Level implements Serializable {
 		frameeditor.setSize(frameeditor.getPreferredSize());
 
 		/*
-		 * ActionListener hinzufügen. Wenn ein Button gedrückt wird wird
-		 * überprüft, was das aktuelle Label ist und wird umbenannt. Dabei wird
-		 * das Fenster an die neue Buttongröße angepasst, um zu verhindern, dass
-		 * Buttons außerhalb des Fensterrands geraten
+		 * ActionListener hinzufï¿½gen. Wenn ein Button gedrï¿½ckt wird wird
+		 * ï¿½berprï¿½ft, was das aktuelle Label ist und wird umbenannt. Dabei wird
+		 * das Fenster an die neue Buttongrï¿½ï¿½e angepasst, um zu verhindern, dass
+		 * Buttons auï¿½erhalb des Fensterrands geraten
 		 */
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
@@ -302,9 +302,9 @@ public class LevelEditor extends Level implements Serializable {
 
 	/**
 	 * Eine Methode, die die Labels der Level-Editor Buttons in einen String
-	 * umsetzt und für das Ende der ersten Dimension immer ein Semikolon setzt.
+	 * umsetzt und fï¿½r das Ende der ersten Dimension immer ein Semikolon setzt.
 	 * 
-	 * @return Gibt einen String zurück, der die Button-Labels enthält.
+	 * @return Gibt einen String zurï¿½ck, der die Button-Labels enthï¿½lt.
 	 * */
 	public String convertButtons() {
 		String output = "";
@@ -314,7 +314,7 @@ public class LevelEditor extends Level implements Serializable {
 
 				String compare = button[j][i].getText(); // Damit .getText()
 															// nicht bei jedem
-															// if ausgeführt
+															// if ausgefï¿½hrt
 															// werden muss.
 
 				if (compare == "F") {
@@ -346,10 +346,10 @@ public class LevelEditor extends Level implements Serializable {
 	 * @param ToBeSaved
 	 *            Property-Objekt, dass geschrieben/gespeichert werden soll.
 	 * @return Gibt true bei erfolgreichem Export oder false bei nicht
-	 *         erfolgreichem Export zurück.
+	 *         erfolgreichem Export zurï¿½ck.
 	 */
 	public boolean exportlvl(String filepath, Properties ToBeSaved) {
-		String manual = "\nInformationen:\n0 ist ein begehbarer Weg\n1 ist ein unzerstörbarer Block\n2 ist ein zerstörbarer Block\n3 ist ein Ausgang\n4 ist ein Versteck";
+		String manual = "\nInformationen:\n0 ist ein begehbarer Weg\n1 ist ein unzerstï¿½rbarer Block\n2 ist ein zerstï¿½rbarer Block\n3 ist ein Ausgang\n4 ist ein Versteck";
 		if (filepath != null) {
 			try {
 				BufferedOutputStream bos = new BufferedOutputStream( // BOS
@@ -361,7 +361,7 @@ public class LevelEditor extends Level implements Serializable {
 				// eine
 				// Properties
 				// Methode.
-				// übergibt
+				// ï¿½bergibt
 				// die Werte
 				// an
 				// den
@@ -371,7 +371,7 @@ public class LevelEditor extends Level implements Serializable {
 			} catch (IOException eIO) {
 				System.out.println("Fehler:" + eIO.getMessage());
 				return false; // Bei IOException Konsolenausgabe + false
-								// zurück.
+								// zurï¿½ck.
 			}
 		} else {
 			System.out.println("Keine Zieldatei ausgew\u00e4hlt!");

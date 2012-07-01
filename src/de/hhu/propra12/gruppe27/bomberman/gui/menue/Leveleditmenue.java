@@ -94,10 +94,10 @@ public class Leveleditmenue {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				system.setfeldx(11);
-				system.setfeldy(11);
-				LevelEditor editor = new LevelEditor(system.getfeldx(), system
-						.getfeldy());
+				system.setfeldxbml(11);
+				system.setfeldybml(11);
+				LevelEditor editor = new LevelEditor(system.getfeldxbml(),
+						system.getfeldybml());
 				editor.leveleditor();
 				frameedit.dispose();
 			}
@@ -107,10 +107,10 @@ public class Leveleditmenue {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				system.setfeldx(15);
-				system.setfeldy(15);
-				LevelEditor editor = new LevelEditor(system.getfeldx(), system
-						.getfeldy());
+				system.setfeldxbml(15);
+				system.setfeldybml(15);
+				LevelEditor editor = new LevelEditor(system.getfeldxbml(),
+						system.getfeldybml());
 				editor.leveleditor();
 				frameedit.dispose();
 			}
@@ -120,10 +120,10 @@ public class Leveleditmenue {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				system.setfeldx(19);
-				system.setfeldy(19);
-				LevelEditor editor = new LevelEditor(system.getfeldx(), system
-						.getfeldy());
+				system.setfeldxbml(19);
+				system.setfeldybml(19);
+				LevelEditor editor = new LevelEditor(system.getfeldxbml(),
+						system.getfeldybml());
 				editor.leveleditor();
 				frameedit.dispose();
 			}

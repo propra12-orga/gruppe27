@@ -32,11 +32,11 @@ public class LevelGen extends Level implements Serializable {
 	 * Level-Generator Konstruktor.
 	 * 
 	 * @param laengex
-	 *            Länge des Zufalls-Levels.
+	 *            Lï¿½nge des Zufalls-Levels.
 	 * @param breitey
 	 *            Breite des Zufalls-Levels.
 	 * @param Spieleranzahl
-	 *            Anzahl, der Spieler, die hinzugefügt werden.
+	 *            Anzahl, der Spieler, die hinzugefï¿½gt werden.
 	 * 
 	 */
 
@@ -100,9 +100,9 @@ public class LevelGen extends Level implements Serializable {
 	 * 
 	 * wenn a == 1 ist, dann wird die die Variable aus der Mauerdichte mit
 	 * eingezogen (Wand oder freies Feld). Ansonsten sind 75% der Waende
-	 * zerstörbar
+	 * zerstï¿½rbar
 	 * 
-	 * @return Gibt True oder False zurück.
+	 * @return Gibt True oder False zurï¿½ck.
 	 */
 	private boolean randomBoolean(int a) {
 
@@ -296,6 +296,11 @@ public class LevelGen extends Level implements Serializable {
 		laxbr[2][1] = new Path(2, 1, this);
 
 		// Startposition Spieler 2 freimachen
+
+		// wenn der Exit random gesetzt wird und der zweite Spieler an
+		// gegenÃ¼berliegener Position gesetzt ist
+		// if (system.getamplayer() > 1 | system.getboolKI() == true |
+		// system.getboolLAN() == true) {
 		if (1 <= system.getamplayer()) {
 			laxbr[feldx - 2][feldy - 2] = new Path(feldx - 2, feldy - 2, this);
 			laxbr[feldx - 2][feldy - 3] = new Path(feldx - 2, feldy - 3, this);
