@@ -1,23 +1,25 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * 
- * @author 
- * @version 1.0
- * Klasse Path wird erstellt
- *
+ * @author
+ * @version 1.0 Klasse Path wird erstellt
+ * 
  */
 
-public class Path extends AbstractFeld {
-	
+public class Path extends AbstractFeld implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 
 	 * @param x
 	 * @param y
 	 * @param owner
-	 * Eigenschaften von Path werden bestimmt
+	 *            Eigenschaften von Path werden bestimmt
 	 * 
 	 */
 
@@ -27,7 +29,7 @@ public class Path extends AbstractFeld {
 		zerstoer = true;
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @return ' '
 	 */
@@ -37,7 +39,7 @@ public class Path extends AbstractFeld {
 		// TODO Auto-generated method stub
 		return ' ';
 	}
-	
+
 	/**
 	 * @return Color.white
 	 */

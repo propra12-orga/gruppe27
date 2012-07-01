@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * 
@@ -8,7 +9,9 @@ import java.awt.Color;
  * @version 1.0 Klasse zur Erstellung eines Feldes
  */
 
-public abstract class AbstractFeld {
+public abstract class AbstractFeld implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	public static final int DIR_NULL = 0;
 	public static final int DIR_TOP = 1;
 	public static final int DIR_LEFT = 2;
@@ -95,13 +98,10 @@ public abstract class AbstractFeld {
 		return frei;
 	}
 
-	
-  /**
-   * 
-   * @return this
-   * Feld oben
-   */
-
+	/**
+	 * 
+	 * @return this Feld oben
+	 */
 
 	public final boolean isZerstoer() {
 		return zerstoer;
@@ -111,8 +111,6 @@ public abstract class AbstractFeld {
 	 * 
 	 * @return this Abstract Feld oben
 	 */
-
-
 
 	public AbstractFeld top() {
 		if (posy > 0)
@@ -124,8 +122,7 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-	 * @return this
-	 * Feld links
+	 * @return this Feld links
 	 * @return this Abstract Feld links
 	 * 
 	 */
@@ -141,10 +138,9 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-	 * @return this
-	 * Feld rechts
+	 * @return this Feld rechts
 	 * @return this Abstract Feld rechts
-
+	 * 
 	 * 
 	 */
 
@@ -158,11 +154,9 @@ public abstract class AbstractFeld {
 
 	/**
 	 * 
-	 * @return this
-	 * Feld Mitte
-
+	 * @return this Feld Mitte
+	 * 
 	 * @return this Abstract Feld Mitte
-
 	 */
 
 	public AbstractFeld bottom() {

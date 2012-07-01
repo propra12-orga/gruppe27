@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,25 +28,17 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
  * @version 1.0 Klasse Spielfeld implementiert ActionListener
  */
 
-public class Spielfeld extends JPanel implements ActionListener {
+public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public Level level;
 	Timer t;
-	private PlayerManager Players;
+	public PlayerManager Players;
 	private BombManager Bombs;
 	public Exit e;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
-	final Image imagezerwand = Toolkit
-			.getDefaultToolkit()
-			.getImage(
-					"src/de/hhu/propra12/gruppe27/bomberman/graphics/ZerstoerbareWand.gif");
-	final Image imagewand = Toolkit.getDefaultToolkit().getImage(
-			"src/de/hhu/propra12/gruppe27/bomberman/graphics/Wand.gif");
-
-	final Image imageexit = Toolkit.getDefaultToolkit().getImage(
-			"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
+	private transient Image imagezerwand, imageexit, imagewand;
 
 	private Level loadlevel(int levelnr) {
 
@@ -85,15 +78,22 @@ public class Spielfeld extends JPanel implements ActionListener {
 		// breite - 2);
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
+
+		// if (system.getboolLAN()){
+		// // 2 Netzwerkspieler
+		// }
+
 		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
 
-		if (system.getamplayer() > 1)
+		if (system.getamplayer() > 1) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(
 					2)));
+		}
 		// TODO Abfrage für Netzwerkspieler
 
 		// TODO Netzwerk übergabe von spielfeld
 
+		initImages();
 		this.repaint();
 		this.startgame();
 	}
@@ -102,7 +102,7 @@ public class Spielfeld extends JPanel implements ActionListener {
 	 * Spielstart
 	 */
 
-	private void startgame() {
+	public void startgame() {
 		t = new Timer(500, this);
 		t.start();
 
@@ -118,16 +118,19 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
-		if (Players.checkGameEnde() > 0) {
 
-			// if (Players.countPlayersAlive() < 1) {
-			// e.doOnKill(this);
-			// }
-			if (1 == Players.checkGameEnde())
-				e.doOnKill(this);
-			if (2 == Players.checkGameEnde())
-				e.doOnExit(this);
-		}
+		// }
+		// PlayerList.size()
+		// if (Players.checkGameEnde() > 0) {
+		//
+		// // if (Players.countPlayersAlive() < 1) {
+		// // e.doOnKill(this);
+		// // }
+		// if (1 == Players.checkGameEnde())
+		// e.doOnKill(this);
+		// if (2 == Players.checkGameEnde())
+		// e.doOnExit(this);
+		// }
 	}
 
 	/**
@@ -229,7 +232,10 @@ public class Spielfeld extends JPanel implements ActionListener {
 		repaint();
 	}
 
-	private class TAdapter extends KeyAdapter {
+	private class TAdapter extends KeyAdapter implements Serializable {
+
+		private static final long serialVersionUID = 1L;
+
 		public void keyPressed(KeyEvent e) {
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
@@ -253,5 +259,19 @@ public class Spielfeld extends JPanel implements ActionListener {
 
 	public SysEinst getsystem() {
 		return system;
+	}
+
+	public void initImages() {
+
+		imagezerwand = Toolkit
+				.getDefaultToolkit()
+				.getImage(
+						"src/de/hhu/propra12/gruppe27/bomberman/graphics/ZerstoerbareWand.gif");
+		imagewand = Toolkit.getDefaultToolkit().getImage(
+				"src/de/hhu/propra12/gruppe27/bomberman/graphics/Wand.gif");
+
+		imageexit = Toolkit.getDefaultToolkit().getImage(
+				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
+
 	}
 }

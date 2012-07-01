@@ -9,8 +9,6 @@ public interface IRemoteHost extends Remote {
 	public static final String hostname = "localhost";
 	public static final String servicename = "IRemoteHostService";
 
-	public String echo(String s) throws RemoteException;
-
 	public void joingame() throws RemoteException;
 
 }

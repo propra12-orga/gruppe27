@@ -1,5 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.io.Serializable;
+
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
@@ -8,8 +10,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
  * @version 1.0 Klasse Keyplayers und Bestimmung der F�higkeiten
  */
 
-public class KeyPlayer extends AbstractPlayer {
+public class KeyPlayer extends AbstractPlayer implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Keyset Keys;
 
 	public KeyPlayer(int posx, int posy, String pname, Spielfeld owner,

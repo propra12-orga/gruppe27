@@ -1,17 +1,20 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author
  * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte,
- *         randomlvl = Generiertes Level, spiegelung = Level soll gespiegelt
- *         werden, standardlvl = Festgelegte unerst�rbare W�nde im Level,
- *         namePlayer = Name des Spielers
+ *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte, randomlvl =
+ *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
+ *         standardlvl = Festgelegte unerst�rbare W�nde im Level, namePlayer =
+ *         Name des Spielers
  */
 
-public class SysEinst {
+public class SysEinst implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	static SysEinst system;
 	int amplayer = 1;
 	int feldx = 15;

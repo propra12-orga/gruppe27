@@ -13,7 +13,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 public class GameWindow extends JFrame {
 
-	SysEinst system;
+	SysEinst system = SysEinst.getSystem();
 	Spielfeld spielfeld;
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class GameWindow extends JFrame {
 		 * Festlegung der Groesse
 		 */
 
-		this.system = SysEinst.getSystem();
+		// this.system = SysEinst.getSystem();
 
 		this.spielfeld = new Spielfeld(levelnr, this);
 		add(spielfeld);
@@ -53,8 +53,16 @@ public class GameWindow extends JFrame {
 			Spielfeld spielfeldc) {
 
 		if (isclient) {
+			// System.out.println("Gamewindow");
+			// System.out.println(spielfeldc.getsystem());
+			// System.out.println(spielfeldc.getsystem().getfeldx());
+			// System.out.println(spielfeldc.getsystem().getfeldy());
+
+			// this.system = SysEinst.getSystem();
 			system.setfeldx(sys.getfeldx());
 			system.setfeldy(sys.getfeldy());
+
+			// this.system = sys;
 
 			this.spielfeld = spielfeldc;
 			spielfeld.setowner(this);
@@ -62,6 +70,7 @@ public class GameWindow extends JFrame {
 			setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 24);
 			setVisible(true);
 			repaint();
+
 		} else {
 			new GameWindow(levelnr);
 

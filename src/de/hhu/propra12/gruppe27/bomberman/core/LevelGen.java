@@ -3,6 +3,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Properties;
 
 /**
@@ -12,7 +13,9 @@ import java.util.Properties;
  *          Spielfeldes
  */
 
-public class LevelGen extends Level {
+public class LevelGen extends Level implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	SysEinst system = SysEinst.getSystem();
 

@@ -3,6 +3,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.Serializable;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -12,7 +13,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
  * @version 1.0
  */
 
-public class Bomb {
+public class Bomb implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	int bombstr;
 	AbstractPlayer owner;
 	Spielfeld pg;
@@ -57,7 +60,6 @@ public class Bomb {
 
 	}
 
-	
 	public Bomb() {
 		planted = false;
 
@@ -115,7 +117,6 @@ public class Bomb {
 		g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32, 32, pg);
 	}
 
-	
 	public void hit() {
 		explode(bombstr);
 

@@ -1,16 +1,18 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 /**
  * 
- * @author 	
- * @version 1.0
- * Belegung der Tasten für Spieler 
- *
+ * @author
+ * @version 1.0 Belegung der Tasten fï¿½r Spieler
+ * 
  */
 
-public class Keyset {
+public class Keyset implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	public int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
 
 	public Keyset(int KeyUp, int KeyDown, int KeyLeft, int KeyRight, int KeyBomb) {
@@ -21,11 +23,11 @@ public class Keyset {
 		this.setKeyBomb(KeyBomb);
 
 	}
-	
+
 	/**
 	 * 
 	 * @param presetnumber
-	 * Tastenbelegung für 3 Spieler
+	 *            Tastenbelegung fï¿½r 3 Spieler
 	 */
 
 	public Keyset(int presetnumber) {
@@ -52,7 +54,7 @@ public class Keyset {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @return Keyup
@@ -61,7 +63,7 @@ public class Keyset {
 	public int getKeyUp() {
 		return KeyUp;
 	}
-	
+
 	/**
 	 * 
 	 * @param keyUp
@@ -75,11 +77,11 @@ public class Keyset {
 	 * 
 	 * @return KeyDown
 	 */
-	
+
 	public int getKeyDown() {
 		return KeyDown;
 	}
-	
+
 	/**
 	 * 
 	 * @param keyDown
@@ -88,7 +90,7 @@ public class Keyset {
 	public void setKeyDown(int keyDown) {
 		KeyDown = keyDown;
 	}
-	
+
 	/**
 	 * 
 	 * @return KeyLeft
@@ -97,7 +99,7 @@ public class Keyset {
 	public int getKeyLeft() {
 		return KeyLeft;
 	}
-	
+
 	/**
 	 * 
 	 * @param keyLeft
@@ -106,7 +108,7 @@ public class Keyset {
 	public void setKeyLeft(int keyLeft) {
 		KeyLeft = keyLeft;
 	}
-	
+
 	/**
 	 * 
 	 * @return KeyRight
@@ -115,7 +117,7 @@ public class Keyset {
 	public int getKeyRight() {
 		return KeyRight;
 	}
-	
+
 	/**
 	 * 
 	 * @param keyRight
@@ -124,7 +126,7 @@ public class Keyset {
 	public void setKeyRight(int keyRight) {
 		KeyRight = keyRight;
 	}
-	
+
 	/**
 	 * 
 	 * @return KeyBomb
@@ -133,7 +135,7 @@ public class Keyset {
 	public int getKeyBomb() {
 		return KeyBomb;
 	}
-	
+
 	/**
 	 * 
 	 * @param keyBomb

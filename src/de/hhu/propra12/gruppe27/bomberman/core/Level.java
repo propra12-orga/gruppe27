@@ -1,5 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author
@@ -13,7 +15,9 @@ package de.hhu.propra12.gruppe27.bomberman.core;
  * in seperates package(?)
  */
 
-public abstract class Level {
+public abstract class Level implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	int laenge;
 	int breite;
 	String name;

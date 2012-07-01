@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
@@ -11,9 +12,11 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
  * @version 1.0 Klasse des Playermanagers
  */
 
-public class PlayerManager {
+public class PlayerManager implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Spielfeld owner;
-	private ArrayList<AbstractPlayer> PlayerList;
+	public ArrayList<AbstractPlayer> PlayerList;
 
 	public PlayerManager(Spielfeld owner) {
 		PlayerList = new ArrayList<AbstractPlayer>();

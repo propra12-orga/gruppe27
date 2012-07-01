@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Properties;
 
 import javax.swing.Icon;
@@ -198,7 +199,12 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				Client client = new Client();
+				try {
+					Client client = new Client();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
@@ -210,7 +216,12 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				Host host = new Host();
+				try {
+					Host host = new Host();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
