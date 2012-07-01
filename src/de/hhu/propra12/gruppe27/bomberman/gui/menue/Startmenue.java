@@ -202,6 +202,8 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
+				system.setboolClient(true);
+				system.setamplayer(2);
 				try {
 					Client client = new Client();
 				} catch (RemoteException e1) {
@@ -219,6 +221,8 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
+				system.setboolClient(false);
+				system.setamplayer(2);
 				try {
 					Host host = new Host();
 				} catch (RemoteException e1) {
@@ -230,11 +234,11 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen für Button buttonbmlimport
+		 * Aktionen fï¿½r Button buttonbmlimport
 		 * 
-		 * Öffnet ein OpenFileDialog zum Übergeben des Pfads der zu ladenden
+		 * ï¿½ffnet ein OpenFileDialog zum ï¿½bergeben des Pfads der zu ladenden
 		 * Datei. Sollte abgebrochen werden, wird der Toggle Button
-		 * zurückgesetzt und es wird kein Level geladen.
+		 * zurï¿½ckgesetzt und es wird kein Level geladen.
 		 * 
 		 */
 

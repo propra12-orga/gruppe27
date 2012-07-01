@@ -40,7 +40,9 @@ public class PlayerManager implements Serializable {
 	 */
 
 	public void updatePlayers(int keycode, boolean pressed) {
+		System.out.println("ArrayListsize " + PlayerList.size());
 		for (int i = 0; i < PlayerList.size(); i++) {
+
 			PlayerList.get(i).update(keycode, pressed);
 		}
 
@@ -145,5 +147,9 @@ public class PlayerManager implements Serializable {
 		for (int i = 0; i < PlayerList.size(); i++) {
 			PlayerList.get(i).draw(g);
 		}
+	}
+
+	public ArrayList<AbstractPlayer> getPlayerList() {
+		return PlayerList;
 	}
 }

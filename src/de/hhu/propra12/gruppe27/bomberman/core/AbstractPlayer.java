@@ -31,7 +31,7 @@ public abstract class AbstractPlayer implements Serializable {
 	int bombcount;// Bombenanzahl aktuell
 	int playerWER; // Welcher Spieler? 1 - 4
 
-	private Color playercolor = new Color(0, 255, 0);
+	public Color playercolor = new Color(0, 255, 0);
 	Spielfeld owner;
 	// int speed;
 

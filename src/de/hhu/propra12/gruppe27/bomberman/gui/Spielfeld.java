@@ -1,5 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -17,6 +18,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
 import de.hhu.propra12.gruppe27.bomberman.core.KeyPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
+import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.LevelGen;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
@@ -48,7 +50,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		} else {
 			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
 					system.getamplayer(), system.getbmllevel());
-
 		}
 	}
 
@@ -79,23 +80,26 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		// if (system.getboolLAN()){
-		// // 2 Netzwerkspieler
-		// }
+		// bei lokalem Spiel werden die Spieler normal geaddet
+		if (false == system.getboolLAN()) {
+			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
+					1)));
 
-		Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(1)));
+			if (system.getamplayer() > 1) {
 
-		if (system.getamplayer() > 1) {
-			Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this, new Keyset(
-					2)));
+				KeyPlayer lp2 = (new KeyPlayer(1, 1, "Spieler2", this,
+						new Keyset(2)));
+				lp2.playercolor = new Color(255, 0, 0);
+				Players.addPlayer(lp2);
+
+				// Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this,
+				// new Keyset(2)));
+			}
+
+			initImages();
+			this.repaint();
+			this.startgame();
 		}
-		// TODO Abfrage für Netzwerkspieler
-
-		// TODO Netzwerk übergabe von spielfeld
-
-		initImages();
-		this.repaint();
-		this.startgame();
 	}
 
 	/**
@@ -103,6 +107,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	public void startgame() {
+		if (system.getboolClient())
+			System.out.println("client.t.start");
+		else
+			System.out.println("host.t.start");
+
 		t = new Timer(500, this);
 		t.start();
 
@@ -228,6 +237,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// if (system.getboolClient())
+		// System.out.println("tickt");
 		Players.movePlayers();
 		repaint();
 	}
@@ -237,6 +248,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public void keyPressed(KeyEvent e) {
+			if (system.getboolClient())
+				System.out.println("Client pressed " + e.getKeyCode());
+			else
+				System.out.println("Host pressed " + e.getKeyCode());
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
 		}
@@ -274,4 +289,58 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
 	}
+
+	// Methode um beim Client die Keysets zu tauschen
+	public void switchKeyset() {
+
+		if (system.getboolLAN() == true && system.getboolClient() == true) {
+
+			LanPlayer host = (LanPlayer) Players.getPlayerList().get(0);
+			LanPlayer client = (LanPlayer) Players.getPlayerList().get(1);
+			//
+			// Keyset k = host.getKeyset();
+			// host.setKeyset(client.getKeyset());
+			// client.setKeyset(k);
+
+			host.setKeyset(new Keyset(2));
+			client.setKeyset(new Keyset(1));
+
+		}
+	}
+
+	public void initPlayer() {
+		// Abfrage Netzwerkspieler
+		if (system.getboolClient() == false) {
+			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
+					1)));
+
+			LanPlayer lp2 = (new LanPlayer(1, 1, "Spieler2", this, new Keyset(
+					-1)));
+			lp2.playercolor = new Color(255, 0, 0);
+			Players.addPlayer(lp2);
+
+		}
+
+		//
+		else {
+			// (system.getboolLAN() == true && system.getboolClient() == true) {
+			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
+					-1)));
+
+			LanPlayer lp2 = (new LanPlayer(1, 1, "Spieler2", this,
+					new Keyset(2)));
+			lp2.playercolor = new Color(255, 0, 0);
+			Players.addPlayer(lp2);
+
+		}
+
+		initImages();
+		this.repaint();
+		// this.startgame();
+	}
+
+	public void setsystem(SysEinst sys) {
+		system = sys;
+	}
+
 }

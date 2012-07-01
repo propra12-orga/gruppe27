@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -14,6 +15,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	private static final long serialVersionUID = 1L;
 	IRemoteHost service;
+	SysEinst system = SysEinst.getSystem();
 
 	public Client() throws RemoteException {
 
@@ -46,7 +48,12 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 			System.out.println("ap.isAlive()=" + ap.isAlive());
 
 		spielfeld.initImages();
+		// spielfeld.switchKeyset();
+
 		GameWindow s = new GameWindow(0, true, spielfeld.getsystem(), spielfeld);
+
+		spielfeld.initPlayer();
+		spielfeld.setsystem(system);
 		spielfeld.startgame();
 		System.out.println("send game received");
 
@@ -74,6 +81,18 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		}
 
 		return service;
+
+	}
+
+	@Override
+	public void moveLanPlayer(int playerindex, int direction) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void layBombLanPlayer(int playerindex) {
+		// TODO Auto-generated method stub
 
 	}
 }

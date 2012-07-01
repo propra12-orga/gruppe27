@@ -9,6 +9,15 @@ public interface IRemoteHost extends Remote {
 	public static final String hostname = "localhost";
 	public static final String servicename = "IRemoteHostService";
 
+	public static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3;
+
+	// Definition der Remote-Methoden
+
 	public void joingame() throws RemoteException;
+
+	public void moveLanPlayer(int playerindex, int direction)
+			throws RemoteException;
+
+	public void layBombLanPlayer(int playerindex) throws RemoteException;
 
 }

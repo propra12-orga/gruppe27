@@ -14,6 +14,7 @@ public class Keyset implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
+	SysEinst system = SysEinst.getSystem();
 
 	public Keyset(int KeyUp, int KeyDown, int KeyLeft, int KeyRight, int KeyBomb) {
 		this.setKeyUp(KeyUp);
@@ -27,24 +28,38 @@ public class Keyset implements Serializable {
 	/**
 	 * 
 	 * @param presetnumber
-	 *            Tastenbelegung f�r 3 Spieler
+	 *            Tastenbelegung fuer 3 Spieler
 	 */
 
 	public Keyset(int presetnumber) {
+
 		if (presetnumber == 1) {
-			setKeyUp(KeyEvent.VK_W); // Standartbelegung 1 (WASD/SPACE)
-			setKeyLeft(KeyEvent.VK_A);
-			setKeyDown(KeyEvent.VK_S);
-			setKeyRight(KeyEvent.VK_D);
-			setKeyBomb(KeyEvent.VK_SPACE);
+
+			if (false == system.getboolClient() || false == system.getboolLAN()) {
+				setKeyUp(KeyEvent.VK_W); // Standartbelegung 1 (WASD/SPACE)
+				setKeyLeft(KeyEvent.VK_A);
+				setKeyDown(KeyEvent.VK_S);
+				setKeyRight(KeyEvent.VK_D);
+				setKeyBomb(KeyEvent.VK_SPACE);
+			}
+
 		} else if (presetnumber == 2) {
-			setKeyUp(KeyEvent.VK_UP); // Standartbelegung 2
-										// ("Pfeiltasten"/ENTER)
-			setKeyLeft(KeyEvent.VK_LEFT);
-			setKeyDown(KeyEvent.VK_DOWN);
-			setKeyRight(KeyEvent.VK_RIGHT);
-			setKeyBomb(KeyEvent.VK_ENTER);
-		} else // if (presetnumber == 3)
+
+			if (true == system.getboolClient() || false == system.getboolLAN()) {
+				setKeyUp(KeyEvent.VK_UP); // Standartbelegung 2
+											// ("Pfeiltasten"/ENTER)
+				setKeyLeft(KeyEvent.VK_LEFT);
+				setKeyDown(KeyEvent.VK_DOWN);
+				setKeyRight(KeyEvent.VK_RIGHT);
+				setKeyBomb(KeyEvent.VK_ENTER);
+			}
+		}
+		// LanPlayer mit diesem Keyset kann nicht über Tasten gesteuert werden
+		else if (presetnumber == -1) {
+
+		}
+
+		else // if (presetnumber == 3)
 		{// ---------------And so on...
 			setKeyUp(KeyEvent.VK_I); // Standartbelegung 3 (IJKL/KOMMA",")
 			setKeyLeft(KeyEvent.VK_J);

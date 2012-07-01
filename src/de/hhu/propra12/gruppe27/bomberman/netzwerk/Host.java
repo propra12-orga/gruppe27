@@ -7,7 +7,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
-import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -59,15 +58,17 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		// Übergabe des Spielfeldes an den Client
 		try {
 			Spielfeld spielfeld = s.getspielfeld();
-			System.out.println("Server:");
-			System.out.println("Players.PlayerList.size() ="
-					+ spielfeld.Players.PlayerList.size());
-			for (AbstractPlayer ap : spielfeld.Players.PlayerList)
-				System.out.println("ap.isAlive()=" + ap.isAlive());
-			System.out.println(""
-					+ spielfeld.Players.PlayerList.get(0).getClass());
+			// System.out.println("Server:");
+			// System.out.println("Players.PlayerList.size() ="
+			// + spielfeld.Players.PlayerList.size());
+			// for (AbstractPlayer ap : spielfeld.Players.PlayerList)
+			// System.out.println("ap.isAlive()=" + ap.isAlive());
+			// System.out.println(""
+			// + spielfeld.Players.PlayerList.get(0).getClass());
 
 			service.sendSpielfeld(s.getspielfeld());
+			spielfeld.initPlayer();
+			spielfeld.startgame();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +86,18 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void moveLanPlayer(int playerindex, int direction) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void layBombLanPlayer(int playerindex) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

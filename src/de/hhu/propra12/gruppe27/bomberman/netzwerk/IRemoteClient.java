@@ -11,6 +11,15 @@ public interface IRemoteClient extends Remote {
 	public static final String clientname = "localhost";
 	public static final String servicename = "IRemoteClientService";
 
+	public static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3;
+
+	// Definition der Remote Methoden
+
 	public void sendSpielfeld(Spielfeld spielfeld) throws RemoteException;
+
+	public void moveLanPlayer(int playerindex, int direction)
+			throws RemoteException;
+
+	public void layBombLanPlayer(int playerindex) throws RemoteException;
 
 }

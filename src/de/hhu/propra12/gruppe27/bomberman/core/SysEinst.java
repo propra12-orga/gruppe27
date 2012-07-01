@@ -28,6 +28,7 @@ public class SysEinst implements Serializable {
 	boolean bmllevel = false;
 	boolean boolKI = false;
 	boolean boolLAN = false;
+	boolean boolClient;
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
@@ -160,6 +161,15 @@ public class SysEinst implements Serializable {
 
 	public boolean getboolLAN() {
 		return boolLAN;
+	}
+
+	/**
+	 * 
+	 * @return boolClient
+	 */
+
+	public boolean getboolClient() {
+		return boolClient;
 	}
 
 	/**
@@ -319,6 +329,15 @@ public class SysEinst implements Serializable {
 
 	public void setboolLAN(boolean boolLAN) {
 		this.boolLAN = boolLAN;
+	}
+
+	/**
+	 * 
+	 * @param boolClient
+	 */
+
+	public void setboolClient(boolean boolClient) {
+		this.boolClient = boolClient;
 	}
 
 	/**
