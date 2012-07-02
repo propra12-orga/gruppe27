@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.Serializable;
 
+import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
@@ -97,6 +98,8 @@ public class Bomb implements Serializable {
 				Next = Next.bottom();
 			}
 		}
+
+		StdAudio.play("data/audio/bomb.wav");
 	}
 
 	/**

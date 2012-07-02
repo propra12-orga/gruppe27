@@ -69,7 +69,7 @@ public class WintheGame {
 		 * Button, wenn man zur�ck zum Startmen� m�chte
 		 */
 
-		JButton buttonW2 = new JButton("Zurück zum Startmenue");
+		JButton buttonW2 = new JButton("Zur\u00fcck zum Startmenue");
 		c.gridx = 0;
 		c.gridy = 3;
 		// c.gridwidth = 2;

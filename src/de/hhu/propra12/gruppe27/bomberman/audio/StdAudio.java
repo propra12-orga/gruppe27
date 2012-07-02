@@ -272,28 +272,20 @@ public final class StdAudio {
 	/**
 	 * Test client - play an A major scale to standard audio.
 	 */
-	public static void main(String[] args) {
-
-		// 440 Hz for 1 sec
-		double freq = 440.0;
-		for (int i = 0; i <= StdAudio.SAMPLE_RATE; i++) {
-			StdAudio.play(0.5 * Math.sin(2 * Math.PI * freq * i
-					/ StdAudio.SAMPLE_RATE));
-		}
-
-		// scale increments
-		int[] steps = { 0, 2, 4, 5, 7, 9, 11, 12 };
-		for (int i = 0; i < steps.length; i++) {
-			double hz = 440.0 * Math.pow(2, steps[i] / 12.0);
-			StdAudio.play(note(hz, 1.0, 0.5));
-		}
-
-		// need to call this in non-interactive stuff so the program doesn't
-		// terminate
-		// until all the sound leaves the speaker.
-		StdAudio.close();
-
-		// need to terminate a Java program with sound
-		System.exit(0);
-	}
+	/*
+	 * public static void main(String[] args) {
+	 * 
+	 * // 440 Hz for 1 sec double freq = 440.0; for (int i = 0; i <=
+	 * StdAudio.SAMPLE_RATE; i++) { StdAudio.play(0.5 * Math.sin(2 * Math.PI *
+	 * freq * i / StdAudio.SAMPLE_RATE)); }
+	 * 
+	 * // scale increments int[] steps = { 0, 2, 4, 5, 7, 9, 11, 12 }; for (int
+	 * i = 0; i < steps.length; i++) { double hz = 440.0 * Math.pow(2, steps[i]
+	 * / 12.0); StdAudio.play(note(hz, 1.0, 0.5)); }
+	 * 
+	 * // need to call this in non-interactive stuff so the program doesn't //
+	 * terminate // until all the sound leaves the speaker. StdAudio.close();
+	 * 
+	 * // need to terminate a Java program with sound System.exit(0); }
+	 */
 }

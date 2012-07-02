@@ -30,7 +30,7 @@ public class SysEinst implements Serializable {
 	boolean boolLAN = false;
 	boolean boolClient;
 	boolean sound = true;
-	boolean MouseOverBool = true; // Sound-MouseOvers aktivieren/deaktivieren
+	boolean MouseOverBool = true; // Sound-MouseOvers initialisiern oder nicht
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";

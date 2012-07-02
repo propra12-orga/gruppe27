@@ -35,8 +35,14 @@ public class GameWindow extends JFrame {
 
 		setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 24);
 		setVisible(true);
+		setDefaultCloseOperation(warte());
 
 		repaint();
+	}
+
+	public int warte() {
+		System.out.println("Fenster wird geschlossen");
+		return 2;
 	}
 
 	/**
