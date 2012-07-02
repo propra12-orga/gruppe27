@@ -30,7 +30,6 @@ public class GameWindow extends JFrame {
 		 */
 
 		// this.system = SysEinst.getSystem();
-
 		this.spielfeld = new Spielfeld(levelnr, this);
 		add(spielfeld);
 

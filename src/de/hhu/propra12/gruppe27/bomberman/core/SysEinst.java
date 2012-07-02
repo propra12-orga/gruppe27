@@ -6,10 +6,10 @@ import java.io.Serializable;
  * 
  * @author
  * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte, randomlvl =
- *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unerst�rbare W�nde im Level, namePlayer =
- *         Name des Spielers
+ *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte,
+ *         randomlvl = Generiertes Level, spiegelung = Level soll gespiegelt
+ *         werden, standardlvl = Festgelegte unerst�rbare W�nde im Level,
+ *         namePlayer = Name des Spielers
  */
 
 public class SysEinst implements Serializable {
@@ -29,6 +29,8 @@ public class SysEinst implements Serializable {
 	boolean boolKI = false;
 	boolean boolLAN = false;
 	boolean boolClient;
+	boolean sound = true;
+	boolean MouseOverBool = true; // Sound-MouseOvers aktivieren/deaktivieren
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
@@ -170,6 +172,15 @@ public class SysEinst implements Serializable {
 
 	public boolean getboolClient() {
 		return boolClient;
+	}
+
+	public boolean getSound() {
+		return sound;
+	}
+
+	public boolean getMouseOverBool() {
+		// TODO Auto-generated method stub
+		return MouseOverBool;
 	}
 
 	/**
@@ -338,6 +349,14 @@ public class SysEinst implements Serializable {
 
 	public void setboolClient(boolean boolClient) {
 		this.boolClient = boolClient;
+	}
+
+	public void setSound(boolean sound) {
+		this.sound = sound;
+	}
+
+	public void setMouseOverBool(boolean MouseOverBool) {
+		this.MouseOverBool = MouseOverBool;
 	}
 
 	/**

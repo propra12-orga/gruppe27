@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
@@ -25,9 +26,9 @@ public class Optionmenue {
 
 	SysEinst sys = SysEinst.getSystem();
 
-	String spiegel = "Spiegelung: ";
-	String standard = "Standardlevel: ";
-	String stringKI = "KI: ";
+	String spiegel = "Spiegelung ";
+	String standard = "Standardlevel ";
+	String stringKI = "KI ";
 
 	Icon optionicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
@@ -102,7 +103,7 @@ public class Optionmenue {
 		 * Spiegelung an/aus (Button 3/buttonO3)
 		 */
 		JToggleButton buttonO3 = new JToggleButton(spiegel
-				+ sys.getspiegelung(), sys.getspiegelung());
+				+ getBoolState(sys.getspiegelung()), sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 4;
 		optionpanel.add(buttonO3, coption);
@@ -113,7 +114,7 @@ public class Optionmenue {
 		 */
 
 		JToggleButton buttonO4 = new JToggleButton(standard
-				+ sys.getstandardlvl(), sys.getstandardlvl());
+				+ getBoolState(sys.getstandardlvl()), sys.getstandardlvl());
 		coption.gridx = 0;
 		coption.gridy = 5;
 		optionpanel.add(buttonO4, coption);
@@ -123,11 +124,17 @@ public class Optionmenue {
 		 * KI an/aus (Button 5/buttonKI)
 		 */
 
-		JToggleButton buttonKI = new JToggleButton(stringKI + sys.getboolKI(),
-				sys.getboolKI());
+		JToggleButton buttonKI = new JToggleButton(stringKI
+				+ getBoolState(sys.getboolKI()), sys.getboolKI());
 		coption.gridx = 0;
 		coption.gridy = 6;
 		optionpanel.add(buttonKI, coption);
+
+		JToggleButton buttonSound = new JToggleButton("Sound "
+				+ getBoolState(sys.getSound()), sys.getSound());
+		coption.gridx = 0;
+		coption.gridy = 7;
+		optionpanel.add(buttonSound, coption);
 
 		/**
 		 * Optionsmenue wird verlassen (Button 6/buttonO5)
@@ -135,7 +142,7 @@ public class Optionmenue {
 
 		JButton buttonO5 = new JButton("Zur" + "\u00FC" + "ck");
 		coption.gridx = 0;
-		coption.gridy = 7;
+		coption.gridy = 8;
 		optionpanel.add(buttonO5, coption);
 
 		frameoption.setSize(frameoption.getPreferredSize());
@@ -178,10 +185,10 @@ public class Optionmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sys.setspiegelung(!sys.getspiegelung());
-				System.out.println(sys.getspiegelung());
+				System.out.println("Spiegelung: " + sys.getspiegelung());
 
 				JToggleButton buttonO3 = (JToggleButton) e.getSource();
-				buttonO3.setText(spiegel + sys.getspiegelung());
+				buttonO3.setText(spiegel + getBoolState(sys.getspiegelung()));
 			}
 		});
 
@@ -194,10 +201,10 @@ public class Optionmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sys.setstandardlvl(!sys.getstandardlvl());
-				System.out.println(sys.getstandardlvl());
+				System.out.println("StandardLevel: " + sys.getstandardlvl());
 
 				JToggleButton buttonO4 = (JToggleButton) e.getSource();
-				buttonO4.setText(standard + sys.getstandardlvl());
+				buttonO4.setText(standard + getBoolState(sys.getstandardlvl()));
 			}
 		});
 
@@ -210,10 +217,22 @@ public class Optionmenue {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sys.setboolKI(!sys.getboolKI());
-				System.out.println(sys.getboolKI());
+				System.out.println("KI: " + sys.getboolKI());
 
 				JToggleButton buttonKI = (JToggleButton) e.getSource();
-				buttonKI.setText(stringKI + sys.getboolKI());
+				buttonKI.setText(stringKI + getBoolState(sys.getboolKI()));
+			}
+		});
+
+		buttonSound.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sys.setSound(!sys.getSound());
+				System.out.println("Sound: " + sys.getSound());
+
+				JToggleButton buttonSound = (JToggleButton) e.getSource();
+				buttonSound.setText("Sound " + getBoolState(sys.getSound()));
 			}
 		});
 
@@ -230,5 +249,83 @@ public class Optionmenue {
 			}
 		});
 
+		if (sys.getMouseOverBool()) {
+
+			buttonO1.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonO2.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonO3.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonO4.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonO5.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonKI.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonSound.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (sys.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+		}
+	}
+
+	/*
+	 * Kleine Funktion die nur in Optionsmenu benötigt wird. Daher private.
+	 */
+
+	/**
+	 * Funktion, um True/False gegen aktiviert/deaktiviert zu tauschen.
+	 * 
+	 * @param state
+	 * @return Gibt den String aktiviert bei True oder deaktiviert bei False
+	 *         zurück.
+	 */
+
+	private String getBoolState(boolean state) {
+		if (state) {
+			return "aktiviert";
+		} else {
+			return "deaktiviert";
+		}
 	}
 }

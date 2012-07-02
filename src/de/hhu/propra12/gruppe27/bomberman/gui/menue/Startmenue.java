@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.OpenFileDialog;
@@ -354,6 +355,76 @@ public class Startmenue {
 			}
 		});
 
+		/*
+		 * Mouse Overs (Audio)
+		 */
+		if (system.getMouseOverBool()) {
+
+			buttonS1.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonS2.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonS3.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonS4.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonS5.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonS6.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonbmlimport.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+			buttonle.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					if (system.getSound()) {
+						StdAudio.play("data/audio/mouseover.wav");
+					}
+				}
+			});
+
+		}
 	}
 
 	/*
