@@ -13,6 +13,7 @@ import java.io.Serializable;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
@@ -114,6 +115,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		t = new Timer(500, this);
 		t.start();
+
+		if (system.getSound()) {
+			StdAudio.loop("data/audio/main.wav");
+		}
 
 	}
 
