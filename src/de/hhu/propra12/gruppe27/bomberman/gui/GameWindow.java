@@ -24,14 +24,20 @@ public class GameWindow extends JFrame {
 	 * @param levelnr
 	 */
 	public GameWindow(int levelnr) {
-		
-		spielfeld = new Spielfeld(levelnr, this);
+
+		/**
+		 * Festlegung der Groesse
+		 */
+
+		// this.system = SysEinst.getSystem();
+		this.spielfeld = new Spielfeld(levelnr, this);
+
 		add(spielfeld);
 		int width = system.getfeldx() * 32;
 		int height = system.getfeldy() * 32 + 24;
 		setSize(width, height);
-		setVisible(true);	
-		centerWindow(width, height);	//Fenster mittig setzen
+		setVisible(true);
+		centerWindow(width, height); // Fenster mittig setzen
 		repaint();
 	}
 
@@ -56,21 +62,23 @@ public class GameWindow extends JFrame {
 			int width = system.getfeldx() * 32;
 			int height = system.getfeldy() * 32 + 24;
 			setSize(width, height);
-			setVisible(true);	
-			centerWindow(width, height);	//Fenster mittig setzen
+			setVisible(true);
+			centerWindow(width, height); // Fenster mittig setzen
 			repaint();
-		} 
-//		else {
-//			new GameWindow(levelnr);
-//		}
+		}
+		// else {
+		// new GameWindow(levelnr);
+		// }
 	}
 
 	public Spielfeld getspielfeld() {
 		return spielfeld;
 	}
-	
-	public void centerWindow(int width, int height){
-		Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize (); 
-		this.setLocation((screensize.width-width)/2, (screensize.height-height)/2);	
+
+	public void centerWindow(int width, int height) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		this.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 }

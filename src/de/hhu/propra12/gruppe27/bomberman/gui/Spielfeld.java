@@ -10,10 +10,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
@@ -35,7 +35,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public Level level = null;
-	public Timer t; //timer gets stopped in Exit-class
+	public Timer t; // timer gets stopped in Exit-class
 	public PlayerManager Players;
 	private BombManager Bombs;
 	public Exit e; // Zugriff in PlayerManager
@@ -49,19 +49,19 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 *
+	 * 
 	 */
-	
+
 	public Spielfeld(int levelnr, GameWindow owner) {
 		system.printSysEinst();
 		level = loadlevel(levelnr);
 		this.owner = owner;
-		
+
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
-		//Ausgang rechts unten
+		// Ausgang rechts unten
 		e = new Exit(
 				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // ausgang
 		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
@@ -80,14 +80,14 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				Players.addPlayer(lp2);
 			}
 
-//			Keyset k1 = new Keyset(1);
-//			Keyset k2 = new Keyset(2);
-//			((KeyPlayer)(Players.getPlayerList().get(0))).Keys = k2;
-//			((KeyPlayer)(Players.getPlayerList().get(1))).Keys = k1;			
-			
+			// Keyset k1 = new Keyset(1);
+			// Keyset k2 = new Keyset(2);
+			// ((KeyPlayer)(Players.getPlayerList().get(0))).Keys = k2;
+			// ((KeyPlayer)(Players.getPlayerList().get(1))).Keys = k1;
+
 			initImages();
 			this.repaint();
-			this.startgame(); //Timer starten
+			this.startgame(); // Timer starten
 		}
 	}
 
@@ -103,6 +103,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		t = new Timer(500, this);
 		t.start();
+
+		if (system.getSound()) {
+			StdAudio.loop("data/audio/main.wav");
+		}
+
 	}
 
 	/**
@@ -226,7 +231,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// if (system.getboolClient())
-		 System.out.println("tickt");
+		System.out.println("tickt");
 		Players.movePlayers();
 		repaint();
 	}
@@ -320,8 +325,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.repaint();
 		this.startgame();
 	}
-	
-	public void setowner(GameWindow gw){
+
+	public void setowner(GameWindow gw) {
 		owner = gw;
 	}
 
@@ -329,7 +334,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		system = sys;
 	}
 
-	
 	private Level loadlevel(int levelnr) {
 		if (false == system.getbmllevel()) {
 			return new LevelGen(system.getfeldx(), system.getfeldy(),

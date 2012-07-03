@@ -28,7 +28,9 @@ public class SysEinst implements Serializable {
 	boolean bmllevel = false;
 	boolean boolKI = false;
 	boolean boolLAN = false;
-	boolean boolClient=true;
+	boolean boolClient;
+	boolean sound = false;
+	boolean MouseOverBool = false; // Sound-MouseOvers initialisiern oder nicht
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
@@ -170,6 +172,15 @@ public class SysEinst implements Serializable {
 
 	public boolean getboolClient() {
 		return boolClient;
+	}
+
+	public boolean getSound() {
+		return sound;
+	}
+
+	public boolean getMouseOverBool() {
+		// TODO Auto-generated method stub
+		return MouseOverBool;
 	}
 
 	/**
@@ -340,6 +351,14 @@ public class SysEinst implements Serializable {
 		this.boolClient = boolClient;
 	}
 
+	public void setSound(boolean sound) {
+		this.sound = sound;
+	}
+
+	public void setMouseOverBool(boolean MouseOverBool) {
+		this.MouseOverBool = MouseOverBool;
+	}
+
 	/**
 	 * 
 	 * @param namePlayer1
@@ -402,14 +421,10 @@ public class SysEinst implements Serializable {
 		System.out.println("Name Spieler2 = " + getnamePlayer2());
 		System.out.println("Name Spieler3 = " + getnamePlayer3());
 		System.out.println("Name Spieler4 = " + getnamePlayer4());
-		System.out.println("---\n" + 
-				"randomlvl= "+ randomlvl +
-				"spiegelung= "+ spiegelung+
-				"standardlvl= "+ standardlvl +
-				"bmllvl= "+ bmllevel +
-				"boolKI= "+ boolKI +
-				"boolLAN= "+ boolLAN +
-				"boolClient= "+ boolClient);
+		System.out.println("---\n" + "randomlvl= " + randomlvl + "spiegelung= "
+				+ spiegelung + "standardlvl= " + standardlvl + "bmllvl= "
+				+ bmllevel + "boolKI= " + boolKI + "boolLAN= " + boolLAN
+				+ "boolClient= " + boolClient);
 	}
 
 }
