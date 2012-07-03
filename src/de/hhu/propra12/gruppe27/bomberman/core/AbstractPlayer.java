@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.io.Serializable;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
 
 /**
  * 
@@ -78,18 +79,37 @@ public abstract class AbstractPlayer implements Serializable {
 
 	public void move() {
 		if (pup) {
+			move(IRemoteClient.UP);
+		} else if (pleft) {
+			move(IRemoteClient.LEFT);
+		} else if (pdown) {
+			move(IRemoteClient.DOWN);
+		} else if (pright) {
+			move(IRemoteClient.RIGHT);
+		} else if (plant) {
+			move(IRemoteClient.BOMB);
+		}
+	}
+
+	/**
+	 * 
+	 * @param direction
+	 *            Konstanten siehe IRemoteClient
+	 */
+	public void move(int direction) {
+		if (direction == IRemoteClient.UP) {
 			if (owner.getFeld(posx, posy - 1).isFrei())
 				posy--;
-		} else if (pleft) {
+		} else if (direction == IRemoteClient.LEFT) {
 			if (owner.getFeld(posx - 1, posy).isFrei())
 				posx--;
-		} else if (pdown) {
+		} else if (direction == IRemoteClient.DOWN) {
 			if (owner.getFeld(posx, posy + 1).isFrei())
 				posy++;
-		} else if (pright) {
+		} else if (direction == IRemoteClient.RIGHT) {
 			if (owner.getFeld(posx + 1, posy).isFrei())
 				posx++;
-		} else if (plant) {
+		} else if (direction == IRemoteClient.BOMB) {
 			if (bombcount > 0) {
 				owner.plantBomb(new Bomb(this, bombstr, bombdelay));
 				bombcount--;
