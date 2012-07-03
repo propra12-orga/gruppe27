@@ -123,16 +123,16 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		// }
 		// PlayerList.size()
-		// if (Players.checkGameEnde() > 0) {
-		//
-		// // if (Players.countPlayersAlive() < 1) {
-		// // e.doOnKill(this);
-		// // }
-		// if (1 == Players.checkGameEnde())
-		// e.doOnKill(this);
-		// if (2 == Players.checkGameEnde())
-		// e.doOnExit(this);
-		// }
+		if (Players.checkGameEnde() > 0) {
+
+			// if (Players.countPlayersAlive() < 1) {
+			// e.doOnKill(this);
+			// }
+			if (1 == Players.checkGameEnde())
+				e.doOnKill(this);
+			else if (2 == Players.checkGameEnde())
+				e.doOnExit(this);
+		}
 	}
 
 	/**
