@@ -3,6 +3,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.io.Serializable;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
  * 
@@ -15,6 +16,8 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Keyset Keys;
+	public int index = -1;	//playerindex in playerList...wichtig für client/host
+	public Host h=null;
 
 	public LanPlayer(int posx, int posy, String pname, Spielfeld owner,
 			Keyset Movement) {
@@ -33,6 +36,7 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 		plant = false;
 		bombcount = 3;
 		this.owner = owner;
+
 	}
 
 	/**
@@ -40,22 +44,27 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 	 */
 
 	public void update(int keycode, boolean pressed) {
-		System.out.println("lanplayerupdate");
+//		System.out.println("lanplayerupdate");
 		if (alive) {
 			if (keycode == Keys.KeyUp) {
 				pup = pressed;
+				h.hostKeyUpdate(index, keycode, pressed);	
 			}
 			if (keycode == Keys.KeyLeft) {
 				pleft = pressed;
+				h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyDown) {
 				pdown = pressed;
+				h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyRight) {
 				pright = pressed;
+				h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyBomb) {
 				plant = pressed;
+				h.hostKeyUpdate(index, keycode, pressed);
 			}
 		}
 	}

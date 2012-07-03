@@ -7,6 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
+import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -14,63 +16,36 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	private static final long serialVersionUID = 1L;
 
-	IRemoteClient service;
+	IRemoteClient service=null;
 
 	public Host() throws RemoteException {
 		publishHost();
+		
+//		GameWindow s = new GameWindow(0);
 	}
 
-	// suche nach remote-services des Clients
-	public void retrieveClientService() {
-		System.out.println("fetch:    rmi://" + IRemoteClient.clientname + ":"
-				+ IRemoteClient.registryPort + "/" + IRemoteClient.servicename);
-		try {
-			service = (IRemoteClient) Naming.lookup("rmi://"
-					+ IRemoteClient.clientname + ":"
-					+ IRemoteClient.registryPort + "/"
-					+ IRemoteClient.servicename);
-			this.service = service;
-		}
 
-		catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException re) {
-			re.printStackTrace();
-		}
-	}
 
 	@Override
 	public void joingame() {
-
 		/*
 		 * Client hat sich beim Host angemeldet (Client joined Game)
-		 * 
 		 * suche nach remote-services des Clients
 		 */
 		retrieveClientService();
-
-		GameWindow s = new GameWindow(0);
-
-		// Übergabe des Spielfeldes an den Client
+		GameWindow gw = new GameWindow(0);
+		// Uebergabe des Spielfeldes an den Client
 		try {
-			Spielfeld spielfeld = s.getspielfeld();
-			// System.out.println("Server:");
-			// System.out.println("Players.PlayerList.size() ="
-			// + spielfeld.Players.PlayerList.size());
-			// for (AbstractPlayer ap : spielfeld.Players.PlayerList)
-			// System.out.println("ap.isAlive()=" + ap.isAlive());
-			// System.out.println(""
-			// + spielfeld.Players.PlayerList.get(0).getClass());
-
-			service.sendSpielfeld(s.getspielfeld());
-			spielfeld.initPlayer();
-			spielfeld.startgame();
+					Spielfeld spielfeld = gw.getspielfeld();
+					service.sendSpielfeld(spielfeld);
+					spielfeld.initPlayer();
+					
+					for (AbstractPlayer ap : spielfeld.Players.getPlayerList()){
+						((LanPlayer)ap).h = this;
+					}					
+			System.out.println("Host aufruf: startgame");
+//					spielfeld.startgame();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -79,25 +54,66 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	public void publishHost() throws RemoteException {
 
 		try {
-			System.out.println("RHI: " + "rmi://" + hostname + "/"
-					+ servicename);
 			LocateRegistry.createRegistry(registryPort);
 			Naming.rebind("rmi://" + hostname + "/" + servicename, this);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void moveLanPlayer(int playerindex, int direction) {
-		// TODO Auto-generated method stub
-
+	
+	// suche nach remote-services des Clients
+	public void retrieveClientService() {
+//		System.out.println("fetch:    rmi://" + IRemoteClient.clientname + ":"
+//				+ IRemoteClient.registryPort + "/" + IRemoteClient.servicename);
+		try {
+			service = (IRemoteClient) Naming.lookup("rmi://"
+					+ IRemoteClient.clientname + ":"
+					+ IRemoteClient.registryPort + "/"
+					+ IRemoteClient.servicename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			System.out.println("Client did not yet publish.");
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	public void layBombLanPlayer(int playerindex) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void clientKeyPressed(int keycode) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void clientKeyReleased(int keycode) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+		
+	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed){
+		try {
+			service.hostKeyUpdate(playerindex, keycode, pressed);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void tick(){
+		try {
+			service.tick();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

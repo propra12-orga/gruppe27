@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -57,7 +58,7 @@ public class Startmenue {
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
-		framemenue.setResizable(false);
+		// framemenue.setResizable(false);
 		framemenue.setLocationRelativeTo(null);
 		framemenue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -161,6 +162,9 @@ public class Startmenue {
 		 */
 
 		framemenue.setSize(framemenue.getPreferredSize());
+		int height = framemenue.getPreferredSize().height;
+		int width = framemenue.getPreferredSize().width;
+		centerWindow(width, height, framemenue);
 
 		buttonS1.addActionListener(new ActionListener() {
 
@@ -385,6 +389,13 @@ public class Startmenue {
 		// Lese die Levelstruktur aus der Property-Datei aus
 		String data = levelfile.getProperty(ToBeLoaded);
 		return data;
+	}
+
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 
 }

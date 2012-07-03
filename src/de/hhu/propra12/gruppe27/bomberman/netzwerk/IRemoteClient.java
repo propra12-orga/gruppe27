@@ -16,10 +16,9 @@ public interface IRemoteClient extends Remote {
 	// Definition der Remote Methoden
 
 	public void sendSpielfeld(Spielfeld spielfeld) throws RemoteException;
-
-	public void moveLanPlayer(int playerindex, int direction)
-			throws RemoteException;
-
-	public void layBombLanPlayer(int playerindex) throws RemoteException;
+	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed) throws RemoteException;
+	//public void hostKeyReleased(int playerindex, int keycode) throws RemoteException;
+	public void tick() throws RemoteException;
+	
 
 }

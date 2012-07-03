@@ -1,5 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
+import java.awt.event.KeyEvent;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,10 +15,6 @@ public interface IRemoteHost extends Remote {
 	// Definition der Remote-Methoden
 
 	public void joingame() throws RemoteException;
-
-	public void moveLanPlayer(int playerindex, int direction)
-			throws RemoteException;
-
-	public void layBombLanPlayer(int playerindex) throws RemoteException;
-
+	public void clientKeyPressed(int keycode) throws RemoteException;
+	public void clientKeyReleased(int keycode) throws RemoteException;
 }

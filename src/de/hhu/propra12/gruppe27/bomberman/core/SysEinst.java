@@ -28,7 +28,7 @@ public class SysEinst implements Serializable {
 	boolean bmllevel = false;
 	boolean boolKI = false;
 	boolean boolLAN = false;
-	boolean boolClient;
+	boolean boolClient=true;
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
@@ -402,6 +402,14 @@ public class SysEinst implements Serializable {
 		System.out.println("Name Spieler2 = " + getnamePlayer2());
 		System.out.println("Name Spieler3 = " + getnamePlayer3());
 		System.out.println("Name Spieler4 = " + getnamePlayer4());
+		System.out.println("---\n" + 
+				"randomlvl= "+ randomlvl +
+				"spiegelung= "+ spiegelung+
+				"standardlvl= "+ standardlvl +
+				"bmllvl= "+ bmllevel +
+				"boolKI= "+ boolKI +
+				"boolLAN= "+ boolLAN +
+				"boolClient= "+ boolClient);
 	}
 
 }

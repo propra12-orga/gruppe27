@@ -13,7 +13,7 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Keyset Keys;
+	public Keyset Keys;
 
 	public KeyPlayer(int posx, int posy, String pname, Spielfeld owner,
 			Keyset Movement) {

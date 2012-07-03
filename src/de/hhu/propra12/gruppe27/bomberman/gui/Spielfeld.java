@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -33,25 +34,14 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public Level level;
-	Timer t;
+	public Level level = null;
+	public Timer t; //timer gets stopped in Exit-class
 	public PlayerManager Players;
 	private BombManager Bombs;
-	public Exit e;
+	public Exit e; // Zugriff in PlayerManager
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
-
-	private Level loadlevel(int levelnr) {
-
-		if (false == system.getbmllevel()) {
-			return new LevelGen(system.getfeldx(), system.getfeldy(),
-					system.getamplayer());
-		} else {
-			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
-					system.getamplayer(), system.getbmllevel());
-		}
-	}
 
 	/**
 	 * 
@@ -59,22 +49,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 *            Konstruktur wird erstellt
+	 *
 	 */
-
-	// Konstruktor
+	
 	public Spielfeld(int levelnr, GameWindow owner) {
-
+		system.printSysEinst();
+		level = loadlevel(levelnr);
 		this.owner = owner;
-
-		level = loadlevel(0);
-
+		
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
+		//Ausgang rechts unten
 		e = new Exit(
-				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // asugang
+				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // ausgang
 		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
 		// breite - 2);
 		Bombs = new BombManager(this);
@@ -84,21 +73,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		if (false == system.getboolLAN()) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
-
 			if (system.getamplayer() > 1) {
-
 				KeyPlayer lp2 = (new KeyPlayer(1, 1, "Spieler2", this,
 						new Keyset(2)));
 				lp2.playercolor = new Color(255, 0, 0);
 				Players.addPlayer(lp2);
-
-				// Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this,
-				// new Keyset(2)));
 			}
 
+//			Keyset k1 = new Keyset(1);
+//			Keyset k2 = new Keyset(2);
+//			((KeyPlayer)(Players.getPlayerList().get(0))).Keys = k2;
+//			((KeyPlayer)(Players.getPlayerList().get(1))).Keys = k1;			
+			
 			initImages();
 			this.repaint();
-			this.startgame();
+			this.startgame(); //Timer starten
 		}
 	}
 
@@ -114,7 +103,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		t = new Timer(500, this);
 		t.start();
-
 	}
 
 	/**
@@ -215,7 +203,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		Players.paintPlayers(g);
 		if (!Bombs.isEmpty())
-			Bombs.paintBombs(g);// ausgabe der bomben(später auch
+			Bombs.paintBombs(g);// ausgabe der bomben(spaeter auch
 								// explosionsgrafiken)
 		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
 		// implementierung eines ItemManagers
@@ -223,7 +211,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
 		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-		// Bei bedarf eingangüberzeichnen.
+		// Bei bedarf eingang ueberzeichnen.
 		if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
 			g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
@@ -238,7 +226,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// if (system.getboolClient())
-		// System.out.println("tickt");
+		 System.out.println("tickt");
 		Players.movePlayers();
 		repaint();
 	}
@@ -252,6 +240,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				System.out.println("Client pressed " + e.getKeyCode());
 			else
 				System.out.println("Host pressed " + e.getKeyCode());
+			System.out.println("size=" + Players.PlayerList.size());
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
 		}
@@ -263,13 +252,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	public void dispose() {
-
 		owner.dispose();
-	}
-
-	// nicht löschen, braucht man für Netzwerk
-	public void setowner(GameWindow owner) {
-		this.owner = owner;
 	}
 
 	public SysEinst getsystem() {
@@ -277,14 +260,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	public void initImages() {
-
 		imagezerwand = Toolkit
 				.getDefaultToolkit()
 				.getImage(
 						"src/de/hhu/propra12/gruppe27/bomberman/graphics/ZerstoerbareWand.gif");
 		imagewand = Toolkit.getDefaultToolkit().getImage(
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/Wand.gif");
-
 		imageexit = Toolkit.getDefaultToolkit().getImage(
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
@@ -311,6 +292,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	public void initPlayer() {
 		// Abfrage Netzwerkspieler
 		if (system.getboolClient() == false) {
+			this.setFocusable(true);
 			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
 
@@ -328,7 +310,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 					-1)));
 
 			LanPlayer lp2 = (new LanPlayer(1, 1, "Spieler2", this,
-					new Keyset(2)));
+					new Keyset(1)));
 			lp2.playercolor = new Color(255, 0, 0);
 			Players.addPlayer(lp2);
 
@@ -336,11 +318,25 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		initImages();
 		this.repaint();
-		// this.startgame();
+		this.startgame();
+	}
+	
+	public void setowner(GameWindow gw){
+		owner = gw;
 	}
 
 	public void setsystem(SysEinst sys) {
 		system = sys;
 	}
 
+	
+	private Level loadlevel(int levelnr) {
+		if (false == system.getbmllevel()) {
+			return new LevelGen(system.getfeldx(), system.getfeldy(),
+					system.getamplayer());
+		} else {
+			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
+					system.getamplayer(), system.getbmllevel());
+		}
+	}
 }

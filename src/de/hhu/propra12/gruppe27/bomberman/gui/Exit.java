@@ -16,7 +16,7 @@ import de.hhu.propra12.gruppe27.bomberman.gui.menue.WintheGame;
 public class Exit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int posx, posy;
+//	private int posx, posy;
 	private AbstractFeld Feld;
 
 	/**
@@ -27,8 +27,8 @@ public class Exit implements Serializable {
 
 	public Exit(AbstractFeld Feld) {
 		this.Feld = Feld;
-		posx = Feld.getX();
-		posy = Feld.getY();
+//		posx = Feld.getX();
+//		posy = Feld.getY();
 	}
 
 	/**
@@ -71,7 +71,8 @@ public class Exit implements Serializable {
 	 */
 
 	public int getX() {
-		return posx;
+//		return posx;
+		return Feld.getX();
 	}
 
 	/**
@@ -79,9 +80,9 @@ public class Exit implements Serializable {
 	 * @param posx
 	 */
 
-	public void setPosx(int posx) {
-		this.posx = posx;
-	}
+//	public void setPosx(int posx) {
+//		this.posx = posx;
+//	}
 
 	/**
 	 * 
@@ -89,7 +90,8 @@ public class Exit implements Serializable {
 	 */
 
 	public int getY() {
-		return posy;
+//		return posy;
+		return Feld.getY();
 	}
 
 	/**
@@ -97,9 +99,9 @@ public class Exit implements Serializable {
 	 * @param posy
 	 */
 
-	public void setPosy(int posy) {
-		this.posy = posy;
-	}
+//	public void setPosy(int posy) {
+//		this.posy = posy;
+//	}
 
 	/**
 	 * 

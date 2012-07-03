@@ -40,7 +40,7 @@ public class PlayerManager implements Serializable {
 	 */
 
 	public void updatePlayers(int keycode, boolean pressed) {
-		System.out.println("ArrayListsize " + PlayerList.size());
+//		System.out.println("ArrayListsize " + PlayerList.size());
 		for (int i = 0; i < PlayerList.size(); i++) {
 
 			PlayerList.get(i).update(keycode, pressed);
@@ -135,6 +135,8 @@ public class PlayerManager implements Serializable {
 
 	public void addPlayer(AbstractPlayer p) {
 		PlayerList.add(p);
+		if (p instanceof LanPlayer)
+			((LanPlayer) p).index = PlayerList.indexOf(p);
 	}
 
 	/**
