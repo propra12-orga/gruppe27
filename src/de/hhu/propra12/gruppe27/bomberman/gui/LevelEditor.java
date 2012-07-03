@@ -57,13 +57,15 @@ public class LevelEditor extends Level implements Serializable {
 	public LevelEditor(int feldx, int feldy) {
 		super(feldx, feldy);
 	}
+	
+	/**
+	 *  Frame initialisieren und Sichtbar machen. Feste Groeße. Mittig
+	 *	ausrichten
+	 */
 
 	public void leveleditor() {
 
-		/*
-		 * Frame initialisieren und Sichtbar machen. Feste Grï¿½ï¿½e. Mittig
-		 * ausrichten.
-		 */
+	
 		final JFrame frameeditor = new JFrame("Leveleditor");
 		frameeditor.setVisible(true);
 		frameeditor.setResizable(false);
@@ -93,11 +95,13 @@ public class LevelEditor extends Level implements Serializable {
 
 			}
 		}
-
-		/*
+		
+		/**
 		 * Buttons um die Felder zu setzen F = freies Feld, W = feste Wand, Z =
 		 * zerstoerbarer Block, E = Ausgang, V = versteckter Ausgang
+		 * 
 		 */
+
 		ButtonGroup group = new ButtonGroup();
 		JToggleButton buttonF = new JToggleButton("Frei");
 		c.gridx = 0;
@@ -140,13 +144,16 @@ public class LevelEditor extends Level implements Serializable {
 		panel.add(buttonEx, c);
 
 		frameeditor.setSize(frameeditor.getPreferredSize());
-
-		/*
-		 * ActionListener hinzufï¿½gen. Wenn ein Button gedrï¿½ckt wird wird
-		 * ï¿½berprï¿½ft, was das aktuelle Label ist und wird umbenannt. Dabei wird
-		 * das Fenster an die neue Buttongrï¿½ï¿½e angepasst, um zu verhindern, dass
-		 * Buttons auï¿½erhalb des Fensterrands geraten
+		
+		/**
+		 * ActionListener wird hinzufuegt. Wenn ein Button gedrueckt wird, wird
+		 * ueberprueft, was das aktuelle Label ist und wird umbenannt. Dabei wird
+		 * das Fenster an die neue Buttongroesse angepasst, um zu verhindern, dass
+		 * Buttons ausserhalb des Fensterrands geraten
 		 */
+	
+
+	
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
@@ -188,6 +195,10 @@ public class LevelEditor extends Level implements Serializable {
 				});
 			}
 		}
+		
+		/**
+		 * Action Listener
+		 */
 
 		buttonF.addActionListener(new ActionListener() {
 
@@ -198,6 +209,7 @@ public class LevelEditor extends Level implements Serializable {
 
 			}
 		});
+		
 
 		buttonW.addActionListener(new ActionListener() {
 
@@ -249,6 +261,8 @@ public class LevelEditor extends Level implements Serializable {
 				}
 			}
 		});
+		
+		
 
 		buttonEx.addActionListener(new ActionListener() {
 
@@ -274,8 +288,10 @@ public class LevelEditor extends Level implements Serializable {
 
 	}
 
-	/*
+	/**
 	 * Methoden um die einzelnen Felder zu bestimmen
+	 * @param i
+	 * @param j
 	 */
 
 	public void laxbrpath(int i, int j) {
@@ -304,7 +320,7 @@ public class LevelEditor extends Level implements Serializable {
 	 * Eine Methode, die die Labels der Level-Editor Buttons in einen String
 	 * umsetzt und fï¿½r das Ende der ersten Dimension immer ein Semikolon setzt.
 	 * 
-	 * @return Gibt einen String zurï¿½ck, der die Button-Labels enthï¿½lt.
+	 * @return Gibt einen String zurueck, der die Button-Labels enthaelt.
 	 * */
 	public String convertButtons() {
 		String output = "";
@@ -378,6 +394,12 @@ public class LevelEditor extends Level implements Serializable {
 			return false;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param Levelpath
+	 * @return false/true
+	 */
 
 	public boolean importlvl(String Levelpath) {
 		try {
@@ -418,6 +440,10 @@ public class LevelEditor extends Level implements Serializable {
 		}
 		return true;
 	}
+	
+	/**
+	 * Startmenue wird festgelegt
+	 */
 
 	@Override
 	public int[] getStartposition(int spielernummer) {

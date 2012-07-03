@@ -6,7 +6,15 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
+/**
+ * 
+ * @author 
+ * @version
+ * Klasse RemoteClientIml
+ */
 
 public class RemoteClientImpl extends UnicastRemoteObject implements
 		IRemoteClient {

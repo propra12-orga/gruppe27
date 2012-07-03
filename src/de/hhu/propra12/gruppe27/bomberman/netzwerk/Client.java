@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
 import java.awt.Robot;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,6 +13,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse Client
+ */
 
 public class Client extends UnicastRemoteObject implements IRemoteClient {
 
@@ -28,6 +36,11 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		service.joingame();
 
 	}
+	
+	/**
+	 * Clientname, registryPort, servicename werden erfragt
+	 * @throws RemoteException
+	 */
 
 	public void publishClient() throws RemoteException {
 
@@ -42,6 +55,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		}
 	}
 
+	/**
+	 * Spielfeld wird uebergeben
+	 */
+	
 	@Override
 	public void sendSpielfeld(Spielfeld spielfeld) {
 //		System.out.println("Client:");
@@ -62,6 +79,11 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		System.out.println("send game received");
 
 	}
+	
+	/**
+	 * 
+	 * @return service
+	 */
 
 	public IRemoteHost retrieveHostService() {
 		try {

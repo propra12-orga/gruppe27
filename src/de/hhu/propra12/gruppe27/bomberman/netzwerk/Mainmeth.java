@@ -5,6 +5,13 @@ import java.rmi.RemoteException;
 import de.hhu.propra12.gruppe27.bomberman.core.StartBomberman;
 import de.hhu.propra12.gruppe27.bomberman.gui.menue.Startmenue;
 
+/**
+ * 
+ * @author 
+ * @version
+ * Klasse Meinmeth
+ */
+
 public class Mainmeth {
 
 	public static void main(String[] args) {

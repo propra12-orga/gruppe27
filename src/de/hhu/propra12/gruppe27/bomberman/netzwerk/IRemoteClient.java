@@ -1,9 +1,17 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
 import java.rmi.Remote;
+
 import java.rmi.RemoteException;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
+/**
+ * 
+ * @author 
+ * @version
+ * Interface IRemoteClient, Definition der Remote Mehtode
+ */
 
 public interface IRemoteClient extends Remote {
 
@@ -13,7 +21,7 @@ public interface IRemoteClient extends Remote {
 
 	public static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3;
 
-	// Definition der Remote Methoden
+	
 
 	public void sendSpielfeld(Spielfeld spielfeld) throws RemoteException;
 	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed) throws RemoteException;

@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
 import java.net.MalformedURLException;
+
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -11,6 +12,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
+
+/**
+ * 
+ * @author 
+ * @version 1.0
+ * Klasse Host
+ */
 
 public class Host extends UnicastRemoteObject implements IRemoteHost {
 
@@ -24,17 +32,16 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 //		GameWindow s = new GameWindow(0);
 	}
 
-
+/**
+ * Client hat sich beim Host angemeldet, übergabe des Spielfeldes
+ */
 
 	@Override
 	public void joingame() {
-		/*
-		 * Client hat sich beim Host angemeldet (Client joined Game)
-		 * suche nach remote-services des Clients
-		 */
+		
 		retrieveClientService();
 		GameWindow gw = new GameWindow(0);
-		// Uebergabe des Spielfeldes an den Client
+	
 		try {
 					Spielfeld spielfeld = gw.getspielfeld();
 					service.sendSpielfeld(spielfeld);
@@ -50,6 +57,11 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @throws RemoteException
+	 */
 
 	public void publishHost() throws RemoteException {
 
@@ -61,7 +73,10 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		}
 	}
 	
-	// suche nach remote-services des Clients
+	/**
+	 * Suche nach remote-services des Clients
+	 */
+	
 	public void retrieveClientService() {
 //		System.out.println("fetch:    rmi://" + IRemoteClient.clientname + ":"
 //				+ IRemoteClient.registryPort + "/" + IRemoteClient.servicename);
@@ -81,6 +96,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	}
 
 
+
 	@Override
 	public void clientKeyPressed(int keycode) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -95,6 +111,13 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		
 	}
 	
+	/**
+	 * 
+	 * @param playerindex
+	 * @param keycode
+	 * @param pressed
+	 */
+	
 		
 	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed){
 		try {
@@ -105,6 +128,8 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		}
 		
 	}
+	
+
 	
 	public void tick(){
 		try {

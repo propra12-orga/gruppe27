@@ -4,16 +4,10 @@ import java.io.Serializable;
 
 /**
  * 
- * @author
  * @version 1.0 Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
  */
 
-/*
- * Abstrakte Klasse für alle Level, enthaelt methode textout um level testweise
- * in der konsole ausgeben zu lassen, spaeter weitere methoden wie draw(),...
- * generierungsregeln fuer die level findet man in der LevelGen Klasse, (?)level
- * in seperates package(?)
- */
+
 
 public abstract class Level implements Serializable {
 
