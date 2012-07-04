@@ -22,6 +22,7 @@ import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.OpenFileDialog;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
@@ -37,8 +38,9 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 public class Startmenue {
 
-	static Startmenue startmen;
+	// static Startmenue startmen;
 	SysEinst system = SysEinst.getSystem();
+	SysEinstClient systemclient = SysEinstClient.getSystemClient();
 
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
@@ -49,12 +51,12 @@ public class Startmenue {
 	 * @return
 	 */
 
-	public static Startmenue getMenue() {
-		if (startmen == null) {
-			startmen = new Startmenue();
-		}
-		return startmen;
-	}
+	// public static Startmenue getMenue() {
+	// if (startmen == null) {
+	// startmen = new Startmenue();
+	// }
+	// return startmen;
+	// }
 
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -207,7 +209,8 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				system.setboolClient(true);
+				systemclient.setboolClient(true);
+				System.out.println("sysref clientstart:" + system);
 				system.setamplayer(2);
 				try {
 					Client client = new Client();

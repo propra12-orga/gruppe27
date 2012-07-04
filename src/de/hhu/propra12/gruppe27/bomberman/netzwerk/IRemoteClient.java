@@ -24,8 +24,8 @@ public interface IRemoteClient extends Remote {
 	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed)
 			throws RemoteException;
 
-	// public void hostKeyReleased(int playerindex, int keycode) throws
-	// RemoteException;
 	public void tick() throws RemoteException;
+
+	public void movep2h(int direction) throws RemoteException;
 
 }

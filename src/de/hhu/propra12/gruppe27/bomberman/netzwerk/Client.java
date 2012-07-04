@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -20,7 +20,11 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	private static final long serialVersionUID = 1L;
 	IRemoteHost service;
-	SysEinst system = SysEinst.getSystem();
+	/*
+	 * für 2 systeme wieder reinnehmen SysEinst system = SysEinst.getSystem();
+	 */
+	SysEinstClient system = SysEinstClient.getSystemClient();
+
 	Spielfeld spielfeld = null;
 
 	public Client() throws RemoteException {
@@ -28,6 +32,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		publishClient();
 
 		service = retrieveHostService();
+		system.setRemoteHost(service);
 		service.joingame();
 
 	}
@@ -68,8 +73,9 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 		GameWindow s = new GameWindow(0, true, spielfeld);
 
-		spielfeld.initPlayer();
-		spielfeld.setsystem(system);
+		// spielfeld.initPlayer();
+		// spielfeld.setsystem(system);
+
 		// TODO startgame entfernen, wenn remoteaufruf tick funktioniert.
 		spielfeld.startgame();
 		System.out.println("send game received");
@@ -106,31 +112,22 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	}
 
 	@Override
-	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed)
-			throws RemoteException {
-		// Robot r = new Robot();
-		// int [][] keycodeMapping = new int [2][5]; //2 Spieler, je 5 keycodes.
-		// for (int i=0;i<5;++i){
-		// // Keyset k1 = ((LanPlayer)(;
-		//
-		// // ((LanPlayer)(spielfeld.Players.getPlayerList().get(0));
-		// }
-		//
-		// if (playerindex==1){
-		// AbstractPlayer ap =
-		// spielfeld.Players.getPlayerList().get(playerindex);
-		//
-		// r.keyPress(direction);
-		//
-		// }else if(playerindex==0){
-		//
-		// }
-	}
-
-	@Override
 	public void tick() throws RemoteException {
 		spielfeld.Players.movePlayers();
 		spielfeld.repaint();
+
+	}
+
+	@Override
+	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void movep2h(int direction) throws RemoteException {
+		// TODO Auto-generated method stub
 
 	}
 

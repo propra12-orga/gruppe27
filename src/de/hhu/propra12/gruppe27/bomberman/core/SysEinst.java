@@ -2,6 +2,9 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.io.Serializable;
 
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
+import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
+
 /**
  * 
  * @author
@@ -28,9 +31,11 @@ public class SysEinst implements Serializable {
 	boolean bmllevel = false;
 	boolean boolKI = false;
 	boolean boolLAN = false;
-	boolean boolClient;
+	boolean boolClient = false;
 	boolean sound = false;
 	boolean MouseOverBool = false; // Sound-MouseOvers initialisiern oder nicht
+	IRemoteHost remotehost = null;
+	IRemoteClient remoteclient = null;
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
@@ -52,7 +57,7 @@ public class SysEinst implements Serializable {
 		return system;
 	}
 
-	private SysEinst() {
+	public SysEinst() {
 
 	}
 
@@ -234,10 +239,28 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @param players
+	 * @return remotehost
 	 */
 
+	public IRemoteHost getRemoteHost() {
+		return remotehost;
+	}
+
+	/**
+	 * 
+	 * @return remotehost
+	 */
+
+	public IRemoteClient getRemoteClient() {
+		return remoteclient;
+	}
+
 	// set-Methoden
+
+	/**
+	 * 
+	 * @param players
+	 */
 
 	public void setamplayer(int players) {
 		this.amplayer = players;
@@ -406,6 +429,24 @@ public class SysEinst implements Serializable {
 
 	public void setnamePlayer4(String namePlayer4) {
 		this.namePlayer4 = namePlayer4;
+	}
+
+	/**
+	 * 
+	 * @return remotehost
+	 */
+
+	public void setRemoteHost(IRemoteHost remotehost) {
+		this.remotehost = remotehost;
+	}
+
+	/**
+	 * 
+	 * @return remotehost
+	 */
+
+	public void setRemoteClient(IRemoteClient remoteclient) {
+		this.remoteclient = remoteclient;
 	}
 
 	/**

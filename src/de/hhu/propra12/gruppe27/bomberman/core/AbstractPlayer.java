@@ -3,6 +3,7 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
@@ -34,6 +35,9 @@ public abstract class AbstractPlayer implements Serializable {
 
 	public Color playercolor = new Color(0, 255, 0);
 	Spielfeld owner;
+	SysEinst system = SysEinst.getSystem();
+	SysEinstClient systemclient = SysEinstClient.getSystemClient();
+
 	// int speed;
 
 	String name;
@@ -97,23 +101,60 @@ public abstract class AbstractPlayer implements Serializable {
 	 *            Konstanten siehe IRemoteClient
 	 */
 	public void move(int direction) {
-		if (direction == IRemoteClient.UP) {
-			if (owner.getFeld(posx, posy - 1).isFrei())
-				posy--;
-		} else if (direction == IRemoteClient.LEFT) {
-			if (owner.getFeld(posx - 1, posy).isFrei())
-				posx--;
-		} else if (direction == IRemoteClient.DOWN) {
-			if (owner.getFeld(posx, posy + 1).isFrei())
-				posy++;
-		} else if (direction == IRemoteClient.RIGHT) {
-			if (owner.getFeld(posx + 1, posy).isFrei())
-				posx++;
-		} else if (direction == IRemoteClient.BOMB) {
-			if (bombcount > 0) {
-				owner.plantBomb(new Bomb(this, bombstr, bombdelay));
-				bombcount--;
+		try {
+			if (direction == IRemoteClient.UP) {
+				if (owner.getFeld(posx, posy - 1).isFrei()) {
+					posy--;
+
+					// Wenn es ein Lanspiel ist, dann sollen Remotemethoden
+					// aufgerufen werden
+					if (system.getboolLAN()) {
+
+						if (systemclient.getboolClient()) {
+							// Methode vom Host aufrufen
+							systemclient.getRemoteHost().movep2c(direction);
+						} else {
+							// Methode vom Client aufrufen
+							system.getRemoteClient().movep2h(direction);
+						}
+					}
+				}
+
+				// TODO move player2 im 2ten system
+			} else if (direction == IRemoteClient.LEFT) {
+				if (owner.getFeld(posx - 1, posy).isFrei())
+					posx--;
+			} else if (direction == IRemoteClient.DOWN) {
+				if (owner.getFeld(posx, posy + 1).isFrei())
+					posy++;
+
+				// Wenn es ein Lanspiel ist, dann sollen Remotemethoden
+				// aufgerufen werden
+				if (system.getboolLAN()) {
+					system.printSysEinst();
+					systemclient.printSysEinst();
+					if (systemclient.getboolClient()) {
+						// Methode vom Host aufrufen
+						System.out.println("movep2");
+						systemclient.getRemoteHost().movep2c(direction);
+					} else {
+						// Methode vom Client aufrufen
+						System.out.println("sysref h:" + system);
+						system.getRemoteClient().movep2h(direction);
+					}
+				}
+
+			} else if (direction == IRemoteClient.RIGHT) {
+				if (owner.getFeld(posx + 1, posy).isFrei())
+					posx++;
+			} else if (direction == IRemoteClient.BOMB) {
+				if (bombcount > 0) {
+					owner.plantBomb(new Bomb(this, bombstr, bombdelay));
+					bombcount--;
+				}
 			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 
 	}

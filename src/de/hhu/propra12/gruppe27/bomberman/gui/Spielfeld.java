@@ -1,6 +1,5 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 import de.hhu.propra12.gruppe27.bomberman.core.Bomb;
 import de.hhu.propra12.gruppe27.bomberman.core.BombManager;
@@ -34,14 +32,26 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public Level level = null;
-	public Timer t; // timer gets stopped in Exit-class
+	public Level level;
+	Timer t;
 	public PlayerManager Players;
 	private BombManager Bombs;
-	public Exit e; // Zugriff in PlayerManager
+	public Exit e;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
+
+	private Level loadlevel(int levelnr) {
+
+		if (false == system.getbmllevel()) {
+			return new LevelGen(system.getfeldx(), system.getfeldy(),
+					system.getamplayer());
+		} else {
+			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
+					system.getamplayer(), system.getbmllevel());
+
+		}
+	}
 
 	/**
 	 * 
@@ -49,46 +59,55 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 * 
+	 *            Konstruktur wird erstellt
 	 */
 
+	// Konstruktor
 	public Spielfeld(int levelnr, GameWindow owner) {
-		system.printSysEinst();
-		level = loadlevel(levelnr);
+
 		this.owner = owner;
+
+		level = loadlevel(0);
 
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
-		// Ausgang rechts unten
 		e = new Exit(
-				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // ausgang
+				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // asugang
 		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
 		// breite - 2);
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		// bei lokalem Spiel werden die Spieler normal geaddet
-		if (false == system.getboolLAN()) {
+		// if (system.getboolLAN()){
+		// // 2 Netzwerkspieler
+		// }
+
+		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
+
 			if (system.getamplayer() > 1) {
-				KeyPlayer lp2 = (new KeyPlayer(1, 1, "Spieler2", this,
+				Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this,
 						new Keyset(2)));
-				lp2.playercolor = new Color(255, 0, 0);
-				Players.addPlayer(lp2);
 			}
-
-			// Keyset k1 = new Keyset(1);
-			// Keyset k2 = new Keyset(2);
-			// ((KeyPlayer)(Players.getPlayerList().get(0))).Keys = k2;
-			// ((KeyPlayer)(Players.getPlayerList().get(1))).Keys = k1;
-
-			initImages();
-			this.repaint();
-			this.startgame(); // Timer starten
 		}
+
+		else {
+			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
+					1)));
+			Players.addPlayer(new LanPlayer(1, 1, "Spieler2", this, new Keyset(
+					-1)));
+
+		}
+		// TODO Abfrage für Netzwerkspieler
+
+		// TODO Netzwerk übergabe von spielfeld
+
+		initImages();
+		this.repaint();
+		this.startgame();
 	}
 
 	/**
@@ -96,17 +115,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	public void startgame() {
-		if (system.getboolClient())
-			System.out.println("client.t.start");
-		else
-			System.out.println("host.t.start");
-
 		t = new Timer(500, this);
 		t.start();
-
-		if (system.getSound()) {
-			StdAudio.loop("data/audio/main.wav");
-		}
 
 	}
 
@@ -123,16 +133,16 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		// }
 		// PlayerList.size()
-		if (Players.checkGameEnde() > 0) {
-
-			// if (Players.countPlayersAlive() < 1) {
-			// e.doOnKill(this);
-			// }
-			if (1 == Players.checkGameEnde())
-				e.doOnKill(this);
-			else if (2 == Players.checkGameEnde())
-				e.doOnExit(this);
-		}
+		// if (Players.checkGameEnde() > 0) {
+		//
+		// // if (Players.countPlayersAlive() < 1) {
+		// // e.doOnKill(this);
+		// // }
+		// if (1 == Players.checkGameEnde())
+		// e.doOnKill(this);
+		// if (2 == Players.checkGameEnde())
+		// e.doOnExit(this);
+		// }
 	}
 
 	/**
@@ -208,7 +218,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		Players.paintPlayers(g);
 		if (!Bombs.isEmpty())
-			Bombs.paintBombs(g);// ausgabe der bomben(spaeter auch
+			Bombs.paintBombs(g);// ausgabe der bomben(später auch
 								// explosionsgrafiken)
 		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
 		// implementierung eines ItemManagers
@@ -216,7 +226,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
 		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-		// Bei bedarf eingang ueberzeichnen.
+		// Bei bedarf eingangüberzeichnen.
 		if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
 			g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
@@ -230,8 +240,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// if (system.getboolClient())
-		System.out.println("tickt");
 		Players.movePlayers();
 		repaint();
 	}
@@ -241,11 +249,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public void keyPressed(KeyEvent e) {
-			if (system.getboolClient())
-				System.out.println("Client pressed " + e.getKeyCode());
-			else
-				System.out.println("Host pressed " + e.getKeyCode());
-			System.out.println("size=" + Players.PlayerList.size());
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
 		}
@@ -257,7 +260,13 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	public void dispose() {
+
 		owner.dispose();
+	}
+
+	// nicht löschen, braucht man für Netzwerk
+	public void setowner(GameWindow owner) {
+		this.owner = owner;
 	}
 
 	public SysEinst getsystem() {
@@ -265,82 +274,16 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	public void initImages() {
+
 		imagezerwand = Toolkit
 				.getDefaultToolkit()
 				.getImage(
 						"src/de/hhu/propra12/gruppe27/bomberman/graphics/ZerstoerbareWand.gif");
 		imagewand = Toolkit.getDefaultToolkit().getImage(
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/Wand.gif");
+
 		imageexit = Toolkit.getDefaultToolkit().getImage(
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
-	}
-
-	// Methode um beim Client die Keysets zu tauschen
-	public void switchKeyset() {
-
-		if (system.getboolLAN() == true && system.getboolClient() == true) {
-
-			LanPlayer host = (LanPlayer) Players.getPlayerList().get(0);
-			LanPlayer client = (LanPlayer) Players.getPlayerList().get(1);
-			//
-			// Keyset k = host.getKeyset();
-			// host.setKeyset(client.getKeyset());
-			// client.setKeyset(k);
-
-			host.setKeyset(new Keyset(2));
-			client.setKeyset(new Keyset(1));
-
-		}
-	}
-
-	public void initPlayer() {
-		// Abfrage Netzwerkspieler
-		if (system.getboolClient() == false) {
-			this.setFocusable(true);
-			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
-					1)));
-
-			LanPlayer lp2 = (new LanPlayer(1, 1, "Spieler2", this, new Keyset(
-					-1)));
-			lp2.playercolor = new Color(255, 0, 0);
-			Players.addPlayer(lp2);
-
-		}
-
-		//
-		else {
-			// (system.getboolLAN() == true && system.getboolClient() == true) {
-			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
-					-1)));
-
-			LanPlayer lp2 = (new LanPlayer(1, 1, "Spieler2", this,
-					new Keyset(1)));
-			lp2.playercolor = new Color(255, 0, 0);
-			Players.addPlayer(lp2);
-
-		}
-
-		initImages();
-		this.repaint();
-		this.startgame();
-	}
-
-	public void setowner(GameWindow gw) {
-		owner = gw;
-	}
-
-	public void setsystem(SysEinst sys) {
-		system = sys;
-	}
-
-	private Level loadlevel(int levelnr) {
-		if (false == system.getbmllevel()) {
-			return new LevelGen(system.getfeldx(), system.getfeldy(),
-					system.getamplayer());
-		} else {
-			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
-					system.getamplayer(), system.getbmllevel());
-		}
 	}
 }
