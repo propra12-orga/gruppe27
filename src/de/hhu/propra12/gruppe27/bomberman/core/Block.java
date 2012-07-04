@@ -5,8 +5,10 @@ import java.io.Serializable;
 
 /**
  * 
- * @author
- * @version 1.0 Die Klasse dient der Erstellung von Bl�cken
+ * @author Gruppe 27
+ * @version 1.0
+ *  Die Klasse dient der Erstellung von Bloecken
+ *  Ist eine Unterklasse von AbstractFeld und implementiert Serializable
  */
 
 public class Block extends AbstractFeld implements Serializable {
@@ -18,18 +20,19 @@ public class Block extends AbstractFeld implements Serializable {
 	 * @param x
 	 * @param y
 	 * @param owner
-	 *            Erstellung eines zerst�rbaren Blocks
+	 * Erstellung eines zerstoerbaren Blocks, die auf dem Feld liegen 
 	 */
 
 	public Block(int x, int y, Level owner) {
 		super(x, y, owner);
 		frei = false;
 		zerstoer = true;
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
 	 * @return Color
+	 * Farbe des Blocks = rot
 	 */
 
 	@Override
@@ -39,7 +42,7 @@ public class Block extends AbstractFeld implements Serializable {
 
 	@Override
 	public char toChar() {
-		// TODO Auto-generated method stub
+	
 		return 'B';
 	}
 

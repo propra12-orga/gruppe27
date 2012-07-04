@@ -6,14 +6,31 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse Keyplayers und Bestimmung der F�higkeiten
+ * @author Gruppe 27
+ * @version 1.0 
+ * Klasse Keyplayers und Bestimmung der Faehigkeiten
+ * Unterklasse vom AbstractPlayer, implementiert Serializable
  */
 
 public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public Keyset Keys;
+	
+	/**
+	 * 
+	 * @param posx
+	 * @param posy
+	 * @param pname
+	 * @param owner
+	 * @param Movement
+	 * Der Spieler bewegt sich auf einem zweidimensionalen Feld mit den Koordinaten y und x
+	 * 2 sind die Bombenstuecke pro Feld 
+	 * Die Bombenanzahl, die der Spieler besitzt, ist 1. Diese Bombe explodiert innerhalb von 7 Sekunden.
+	 * Die Bewegung des Spielers wird mit der Tastatur gelenkt
+	 * 
+	 * 
+	 */
 
 	public KeyPlayer(int posx, int posy, String pname, Spielfeld owner,
 			Keyset Movement) {
@@ -36,6 +53,7 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	/**
 	 * Bewegungseinstellungen
+	 * Wenn Taste gedrueckt wird, wird an das Programm 'pressed' uebergeben
 	 */
 
 	public void update(int keycode, boolean pressed) {
@@ -59,7 +77,9 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * Bewegung des Spielers auf Spielfeldern ohne feste Bl�cke
+	 * Die Bewegung des Spieler auf dem Feld ohne festen Bloecken wird definiert
+	 * 
+	 * 
 	 */
 
 	public void move() {

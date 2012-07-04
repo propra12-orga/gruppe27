@@ -8,33 +8,41 @@ import de.hhu.propra12.gruppe27.bomberman.gui.menue.WintheGame;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse zum erstellen vom Ausgang
+ * @author Gruppe 27
+ * @version 1.0
+ *  Klasse zum erstellen vom Ausgang
+ *  Implementiert Serializable
  * 
  */
 
 public class Exit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-//	private int posx, posy;
+/**
+ * 	private int posx, posy;
+ */
 	private AbstractFeld Feld;
 
 	/**
-	 * Gr��e des Feldes
+	 * Groesse des Feldes
 	 * 
 	 * @param Feld
+	 * mit den Koordinaten x und y
+	 * --> posx = Feld.getX();
+	 *     posy = Feld.getY();
 	 */
 
 	public Exit(AbstractFeld Feld) {
 		this.Feld = Feld;
-//		posx = Feld.getX();
-//		posy = Feld.getY();
+
 	}
 
 	/**
-	 * Beim erreichen des Ausgangs --> "Sie haben das ende erreicht"
+	 * Beim Erreichen des Ausgangs --> "Sie haben das ende erreicht"
 	 * 
 	 * @param owner
+	 * --> Startmenue start = new Startmenue();
+	 *     start.menueaufruf();
 	 */
 
 	public void doOnExit(Spielfeld owner) {
@@ -44,8 +52,6 @@ public class Exit implements Serializable {
 
 		WintheGame wingame = new WintheGame();
 		wingame.winthegame();
-		// Startmenue start = new Startmenue();
-		// start.menueaufruf();
 
 		owner.dispose();
 	}
@@ -53,6 +59,7 @@ public class Exit implements Serializable {
 	/**
 	 * 
 	 * @param owner
+	 * 
 	 */
 
 	public void doOnKill(Spielfeld owner) {
