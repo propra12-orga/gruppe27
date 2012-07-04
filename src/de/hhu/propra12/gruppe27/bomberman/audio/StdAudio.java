@@ -29,6 +29,11 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 
 /**
+ * @author gruppe 27
+ * @version 1.0
+ */
+
+/**
  * <i>Standard audio</i>. This class provides a basic capability for creating,
  * reading, and saving audio.
  * <p>
@@ -62,16 +67,24 @@ public final class StdAudio {
 	private StdAudio() {
 	}
 
-	// static initializer
+	/**
+	 * static initializer
+	 */
+	
 	static {
 		init();
 	}
 
-	// open up an audio stream
+/**
+ * Audio is opend
+ */
+	
 	private static void init() {
 		try {
-			// 44,100 samples per second, 16-bit audio, mono, signed PCM, little
-			// Endian
+/**
+ *  44,100 samples per second, 16-bit audio, mono, signed PCM, little
+ */
+			
 			AudioFormat format = new AudioFormat((float) SAMPLE_RATE,
 					BITS_PER_SAMPLE, 1, true, false);
 			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
@@ -150,7 +163,8 @@ public final class StdAudio {
 		}
 		return d;
 	}
-
+	
+	
 	/**
 	 * Play a sound file (in .wav or .au format) in a background thread.
 	 */
@@ -163,6 +177,8 @@ public final class StdAudio {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+		
+	
 		// URL url = StdAudio.class.getResource(filename);
 		if (url == null)
 			throw new RuntimeException("audio " + filename + " not found");
@@ -188,32 +204,49 @@ public final class StdAudio {
 		AudioClip clip = Applet.newAudioClip(url);
 		clip.loop();
 	}
+	
+	/**
+	 * 
+	 * @param filename
+	 * @return data as a byte array
+	 * try to read form file
+	 */
 
-	// return data as a byte array
+	
 	private static byte[] readByte(String filename) {
 		byte[] data = null;
 		AudioInputStream ais = null;
 		try {
 
-			// try to read from file
+			
 			File file = new File(filename);
 			if (file.exists()) {
 				ais = AudioSystem.getAudioInputStream(file);
 				data = new byte[ais.available()];
 				ais.read(data);
 			}
-
-			// try to read from URL
+			
+			
+      /**
+       * try to read from URL 
+       */
+			
 			else {
 				URL url = StdAudio.class.getResource(filename);
 				ais = AudioSystem.getAudioInputStream(url);
 				data = new byte[ais.available()];
 				ais.read(data);
 			}
+			
+			/**
+			 *catch Exeption 
+			 */
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException("Could not read " + filename);
 		}
+		
 
 		return data;
 	}
@@ -233,7 +266,10 @@ public final class StdAudio {
 			data[2 * i + 1] = (byte) (temp >> 8);
 		}
 
-		// now save the file
+		/**
+		 * save the file
+		 */
+	
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(data);
 			AudioInputStream ais = new AudioInputStream(bais, format,
