@@ -18,8 +18,10 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse fuer das Optionsmenue
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse fuer das Optionsmenue
+ * Einstellungen wie Spiegelung, Standardlvl und KI
  */
 
 public class Optionmenue {
@@ -34,10 +36,10 @@ public class Optionmenue {
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
 	/**
-	 * Methode um das Optionsmen� aufzurufen
+	 * Methode um das Optionsmenue aufzurufen
 	 * 
 	 * @param system
-	 * @return sys Systemeinstellungen k�nnen get�tigt werden, Buttons
+	 * @return sys Systemeinstellungen koennen getaetigt werden, Buttons
 	 *         werden definiert
 	 */
 
@@ -58,11 +60,6 @@ public class Optionmenue {
 		coption.gridx = 0;
 		coption.gridy = 0;
 
-		/**
-		 * Button 0 - buttonO0
-		 * 
-		 * Bild fuer Optionsmenue
-		 */
 
 		JButton buttonO0 = new JButton(optionicon);
 		coption.gridx = 0;
@@ -237,7 +234,8 @@ public class Optionmenue {
 		});
 
 		/**
-		 * Fenster schließen und zurueck gehen
+		 * Fenster schliessen und zurueck gehen
+		 * Audio wird erzeugt
 		 */
 
 		buttonO5.addActionListener(new ActionListener() {

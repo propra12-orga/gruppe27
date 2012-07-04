@@ -15,8 +15,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.LevelEditor;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse fuer die Einstellungen des Feldes für den Leveleditor
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse fuer die Einstellungen des Feldes fuer den Leveleditor
  */
 
 public class Leveleditmenue {

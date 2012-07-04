@@ -16,9 +16,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse f�r verlorenes Spiel
- * 
+ * @author gruppe 27
+ * @version 1.0 Klasse fuer verlorenes Spiel
+ * Grafik wird uebergeben
  */
 
 public class LosetheGame {
@@ -27,7 +27,7 @@ public class LosetheGame {
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/VerlorenTranz.gif");
 
 	/**
-	 * Einblendung von "Verloren"
+	 * Einblendung von "Verloren", "Noch einmal" und "Zurueck zum Startmenue"
 	 */
 
 	public void losethegame() {

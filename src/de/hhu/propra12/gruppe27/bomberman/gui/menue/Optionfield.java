@@ -14,8 +14,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse fuer die Einstellungen des Optionsfeldes
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse fuer die Einstellungen des Optionsfeldes
  */
 
 public class Optionfield {

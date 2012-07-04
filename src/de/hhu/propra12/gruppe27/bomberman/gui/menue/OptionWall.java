@@ -14,8 +14,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse zur Einstellung der W�nde
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse zur Einstellung der Waende, (Mauerdichte)
  * 
  */
 
@@ -30,7 +31,7 @@ public final class OptionWall {
 	 * Mauern)
 	 * 
 	 * Buttons durchnummeriert von 0 bis 10 Wert wird gesetzt, Fenster
-	 * geschlossen und zur�ck an das Optionsmen� gegeben
+	 * geschlossen und zurueck an das Optionsmenue gegeben
 	 */
 
 	public SysEinst optionwall() {
@@ -111,6 +112,7 @@ public final class OptionWall {
 
 		buttonMau01.addActionListener(new ActionListener() {
 
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sysopwall.setdensWall(0);

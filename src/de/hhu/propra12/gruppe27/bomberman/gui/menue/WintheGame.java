@@ -16,8 +16,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse f�r das Gewinnen des Spiels
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird aufgerufen
  * 
  */
 
@@ -56,7 +57,7 @@ public class WintheGame {
 		panelwin.add(buttonW0, c);
 
 		/**
-		 * Button, f�r einen neuen Spielstart
+		 * Button, fuer einen neuen Spielstart
 		 */
 
 		JButton buttonW1 = new JButton("Noch einmal!");
@@ -66,7 +67,7 @@ public class WintheGame {
 		panelwin.add(buttonW1, c);
 
 		/**
-		 * Button, wenn man zur�ck zum Startmen� m�chte
+		 * Button, wenn man zurueck zum Startmenue moechte
 		 */
 
 		JButton buttonW2 = new JButton("Zur\u00fcck zum Startmenue");
@@ -86,6 +87,10 @@ public class WintheGame {
 			}
 		});
 
+		/**
+		 * Action Listener wird hinzugefuegt
+		 */
+		
 		buttonW2.addActionListener(new ActionListener() {
 
 			@Override
