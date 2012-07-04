@@ -5,8 +5,10 @@ import java.io.Serializable;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse zur Erstellung eines Feldes
+ * @author Gruppe 27
+ * @version 1.0
+ * Klasse zur Erstellung eines Feldes
+ * Koordinaten des Spielfeldes werden bestimmt, Feld kennt die eigenen Koordinaten
  */
 
 public abstract class AbstractFeld implements Serializable {
@@ -18,26 +20,21 @@ public abstract class AbstractFeld implements Serializable {
 	public static final int DIR_RIGHT = 3;
 	public static final int DIR_BOTTOM = 4;
 
-	// (?)sollte ein feld seine eigenen koordinaten kennen? vllt sinnvoll um
-	// später
-	// einfacher nachbarfelder abzufragen(?) in dem fall zusätzliche methoden
-	// nord/sued/ost/west o.ä.
-	// Feld begehbar
+
 
 	/**
-	 * Feld begehbar
+	 * Wenn boolean frei, dann Feld begehbar
 	 */
 
 	protected boolean frei;
 
 	/**
-	 * Feld zerst�rbar
+	 * Wenn boolean zerstoer, dann Feld zerstoerbar
 	 */
 
-	// Feld zerstörbar
+	
 	protected boolean zerstoer;
 
-	// TODO private boolean bombplanted;
 
 	private int posx, posy;
 
@@ -50,6 +47,7 @@ public abstract class AbstractFeld implements Serializable {
 	 * @param x
 	 * @param y
 	 * @param owner
+	 * Positionen auf dem Feld: x bzw. y
 	 */
 
 	public AbstractFeld(int x, int y, Level owner) {
@@ -59,11 +57,13 @@ public abstract class AbstractFeld implements Serializable {
 
 	}
 
-	public abstract char toChar();// bis noch kein gui da ist...
+	public abstract char toChar();
 
 	/**
 	 * 
 	 * @return posyx
+	 * Position x auf dem Feld
+	 * 
 	 */
 
 	// public Image im;
@@ -74,6 +74,8 @@ public abstract class AbstractFeld implements Serializable {
 	/**
 	 * 
 	 * @return posy
+	 * Position y auf dem Feld
+	 * 
 	 */
 
 	public int getY() {
@@ -83,15 +85,17 @@ public abstract class AbstractFeld implements Serializable {
 	/**
 	 * 
 	 * @return c
+	 * Farbe des Feldes
 	 */
 
-	public Color getColor() {// später ersetzen durch bildausgabe
+	public Color getColor() {
 		return c;
 	}
 
 	/**
 	 * 
 	 * @return frei
+	 * Position auf dem Feld ist frei
 	 */
 
 	public final boolean isFrei() {
@@ -101,6 +105,7 @@ public abstract class AbstractFeld implements Serializable {
 	/**
 	 * 
 	 * @return this Feld oben
+	 * Feld ist zerstoerbar
 	 */
 
 	public final boolean isZerstoer() {
@@ -110,6 +115,8 @@ public abstract class AbstractFeld implements Serializable {
 	/**
 	 * 
 	 * @return this Abstract Feld oben
+	 * Die Figur bewegt sich nach oben, wenn Position y > 0 
+	 * 
 	 */
 
 	public AbstractFeld top() {
@@ -124,7 +131,7 @@ public abstract class AbstractFeld implements Serializable {
 	 * 
 	 * @return this Feld links
 	 * @return this Abstract Feld links
-	 * 
+	 * Die Figur bewegt sich nach links, wenn Position x > 0
 	 */
 
 	public AbstractFeld left() {
@@ -140,7 +147,7 @@ public abstract class AbstractFeld implements Serializable {
 	 * 
 	 * @return this Feld rechts
 	 * @return this Abstract Feld rechts
-	 * 
+	 * Die Figur bewegt sich nach rechts, wenn Position x + 1
 	 * 
 	 */
 
@@ -157,6 +164,7 @@ public abstract class AbstractFeld implements Serializable {
 	 * @return this Feld Mitte
 	 * 
 	 * @return this Abstract Feld Mitte
+	 * Die Figur bewegt sich nach unten, wenn Position y + 1
 	 */
 
 	public AbstractFeld bottom() {

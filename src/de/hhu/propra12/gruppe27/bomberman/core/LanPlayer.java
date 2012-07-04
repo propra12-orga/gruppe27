@@ -7,18 +7,40 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse LanPlayer und Bestimmung der Faehigkeiten
+ * @author Gruppe 27
+ * @version 1.0 Klasse
+ * LanPlayer und Bestimmung der Faehigkeiten
+ * Ist eine Unterklasse von AbstractPLayer und implementiert Serializable
  */
 
 public class LanPlayer extends AbstractPlayer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Playerindex in PlayerList, ist wichtig fuer client/host
+	 * Index betraegt -1 
+	 * 
+	 */
+	
 	private Keyset Keys;
-	public int index = -1; // playerindex in playerList...wichtig fï¿½r
-							// client/host
+	public int index = -1; 
 	public Host h = null;
+	
+	/**
+	 * 
+	 * @param posx
+	 * @param posy
+	 * @param pname
+	 * @param owner
+	 * @param Movement
+	 * Der Spieler bewegt sich auf einem zweidimensionalen Feld mit den Koordinaten y und x
+	 * 2 sind die Bombenstuecke pro Feld 
+	 * Die Bombenanzahl, die der Spieler besitzt, ist 1. Diese Bombe explodiert innerhalb von 7 Sekunden.
+	 * Die Bewegung des Spielers wird mit der Tastatur gelenkt
+	 * 
+	 */
+	
 
 	public LanPlayer(int posx, int posy, String pname, Spielfeld owner,
 			Keyset Movement) {
@@ -42,6 +64,9 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 
 	/**
 	 * Bewegungseinstellungen
+	 * Wenn der Spieler noch am Leben ist und die Tasten zur Steuerung oder Ablegung der Bombe drückt, wird 
+	 * 'pressed' an das Programm uebergeben.
+	 * --> h.hostKeyUpdate(index, keycode, pressed)
 	 */
 
 	public void update(int keycode, boolean pressed) {
@@ -49,26 +74,27 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 		if (alive) {
 			if (keycode == Keys.KeyUp) {
 				pup = pressed;
-				// h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyLeft) {
 				pleft = pressed;
-				// h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyDown) {
 				pdown = pressed;
-				// h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyRight) {
 				pright = pressed;
-				// h.hostKeyUpdate(index, keycode, pressed);
 			}
 			if (keycode == Keys.KeyBomb) {
 				plant = pressed;
-				// h.hostKeyUpdate(index, keycode, pressed);
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * Werte fuer Keys werden uebergeben
+	 */
 
 	public Keyset getKeyset() {
 		return Keys;
