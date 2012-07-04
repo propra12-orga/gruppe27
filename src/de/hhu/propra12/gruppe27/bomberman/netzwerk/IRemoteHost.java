@@ -3,6 +3,8 @@ package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import de.hhu.propra12.gruppe27.bomberman.core.Level;
+
 /**
  * 
  * @author
@@ -18,6 +20,8 @@ public interface IRemoteHost extends Remote {
 	public static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3;
 
 	public void joingame() throws RemoteException;
+
+	public Level getLevel() throws RemoteException;
 
 	public void movep2c(int direction) throws RemoteException;
 }

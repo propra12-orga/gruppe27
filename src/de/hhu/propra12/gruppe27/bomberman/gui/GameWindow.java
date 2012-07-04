@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
@@ -49,26 +50,21 @@ public class GameWindow extends JFrame {
 	 * @param spielfeld
 	 */
 	// Konstruktor fuer Client im Netzwerk
-	public GameWindow(int levelnr, boolean isclient, Spielfeld spielfeldc) {
+	public GameWindow(Level level) {
+		System.out.println("Konstruktor client called");
+		Spielfeld spielfeld = new Spielfeld(level, this);
+		system.setfeldx(spielfeld.getsystem().getfeldx());
+		system.setfeldy(spielfeld.getsystem().getfeldy());
 
-		if (isclient) {
-			System.out.println("Konstruktor client called");
-			system.setfeldx(spielfeldc.getsystem().getfeldx());
-			system.setfeldy(spielfeldc.getsystem().getfeldy());
-
-			this.spielfeld = spielfeldc;
-			spielfeld.setowner(this);
-			add(spielfeld);
-			int width = system.getfeldx() * 32;
-			int height = system.getfeldy() * 32 + 24;
-			setSize(width, height);
-			setVisible(true);
-			centerWindow(width, height); // Fenster mittig setzen
-			repaint();
-		}
-		// else {
-		// new GameWindow(levelnr);
-		// }
+		this.spielfeld = spielfeld;
+		spielfeld.setowner(this);
+		add(spielfeld);
+		int width = system.getfeldx() * 32;
+		int height = system.getfeldy() * 32 + 24;
+		setSize(width, height);
+		setVisible(true);
+		centerWindow(width, height); // Fenster mittig setzen
+		repaint();
 	}
 
 	public Spielfeld getspielfeld() {

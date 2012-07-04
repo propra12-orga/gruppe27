@@ -9,6 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
+import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
@@ -22,6 +23,7 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	private static final long serialVersionUID = 1L;
+	GameWindow gw;
 
 	IRemoteClient service = null;
 	Spielfeld spielfeld;
@@ -40,25 +42,26 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	public void joingame() {
 
 		retrieveClientService();
-		GameWindow gw = new GameWindow(0);
+		gw = new GameWindow(0);
 
-		try {
-			this.spielfeld = gw.getspielfeld();
-			service.sendSpielfeld(spielfeld);
-			// spielfeld.initPlayer();
-			System.out.println(service);
-			System.out.println("sysref h:" + SysEinst.getSystem());
-			SysEinst.getSystem().setRemoteClient(service);
+		this.spielfeld = gw.getspielfeld();
+		// Löschen service.sendSpielfeld(spielfeld);
+		// spielfeld.initPlayer();
+		System.out.println(service);
+		System.out.println("sysref h:" + SysEinst.getSystem());
+		SysEinst.getSystem().setRemoteClient(service);
 
-			for (AbstractPlayer ap : spielfeld.Players.getPlayerList()) {
-				((LanPlayer) ap).h = this;
-			}
-			System.out.println("Host aufruf: startgame");
-			// spielfeld.startgame();
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		for (AbstractPlayer ap : spielfeld.getPlayers().getPlayerList()) {
+			((LanPlayer) ap).h = this;
 		}
+		System.out.println("Host aufruf: startgame");
+		// spielfeld.startgame();
 
+	}
+
+	@Override
+	public Level getLevel() {
+		return gw.getspielfeld().getLevel();
 	}
 
 	/**
@@ -112,7 +115,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	@Override
 	public void movep2c(int direction) throws RemoteException {
 		// TODO Auto-generated method stub
-		LanPlayer p2c = (LanPlayer) spielfeld.Players.PlayerList.get(1);
+		LanPlayer p2c = (LanPlayer) spielfeld.getPlayers().PlayerList.get(1);
 		p2c.move(direction);
 	}
 

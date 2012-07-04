@@ -1,5 +1,6 @@
 package de.hhu.propra12.gruppe27.bomberman.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -32,17 +33,18 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public Level level;
+	private Level level;
 	Timer t;
-	public PlayerManager Players;
+	private PlayerManager Players;
+
 	private BombManager Bombs;
-	public Exit e;
+	private Exit e;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
 
-	private Level loadlevel(int levelnr) {
-
+	private static Level loadlevel(int levelnr) {
+		SysEinst system = SysEinst.getSystem();
 		if (false == system.getbmllevel()) {
 			return new LevelGen(system.getfeldx(), system.getfeldy(),
 					system.getamplayer());
@@ -64,10 +66,22 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	// Konstruktor
 	public Spielfeld(int levelnr, GameWindow owner) {
+		this(loadlevel(0), owner);
+	}
 
+	/**
+	 * 
+	 * @param level
+	 * @param laenge
+	 * @param breite
+	 * @param spielerzal
+	 *            Konstruktur wird erstellt
+	 */
+
+	// Konstruktor
+	public Spielfeld(Level level, GameWindow owner) {
+		this.level = level;
 		this.owner = owner;
-
-		level = loadlevel(0);
 
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
@@ -89,16 +103,19 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 					1)));
 
 			if (system.getamplayer() > 1) {
-				Players.addPlayer(new KeyPlayer(1, 1, "Spieler2", this,
-						new Keyset(2)));
+				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(1, 1, "Spieler2",
+						this, new Keyset(2)).withColor(new Color(255, 0, 0));
+				Players.addPlayer(player2);
 			}
 		}
 
 		else {
 			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
-			Players.addPlayer(new LanPlayer(1, 1, "Spieler2", this, new Keyset(
-					-1)));
+
+			LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
+					this, new Keyset(2)).withColor(new Color(255, 0, 0));
+			Players.addPlayer(player2);
 
 		}
 		// TODO Abfrage für Netzwerkspieler
@@ -286,4 +303,17 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
 	}
+
+	public Level getLevel() {
+		return level;
+	}
+
+	public PlayerManager getPlayers() {
+		return Players;
+	}
+
+	public Exit getExit() {
+		return e;
+	}
+
 }

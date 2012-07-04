@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
@@ -35,6 +36,23 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		system.setRemoteHost(service);
 		service.joingame();
 
+		// System.out.println("Client:");
+		// System.out.println("Players.PlayerList.size() ="
+		// + spielfeld.Players.PlayerList.size());
+		// for (AbstractPlayer ap : spielfeld.Players.PlayerList)
+		// System.out.println("ap.isAlive()=" + ap.isAlive());
+		Level level = service.getLevel();
+
+		// spielfeld.switchKeyset();
+
+		GameWindow s = new GameWindow(level);
+
+		// spielfeld.initPlayer();
+		// spielfeld.setsystem(system);
+
+		// TODO startgame entfernen, wenn remoteaufruf tick funktioniert.
+		spielfeld.startgame();
+		System.out.println("send game received");
 	}
 
 	/**
@@ -54,32 +72,6 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Spielfeld wird uebergeben
-	 */
-
-	@Override
-	public void sendSpielfeld(Spielfeld spielfeld) {
-		// System.out.println("Client:");
-		// System.out.println("Players.PlayerList.size() ="
-		// + spielfeld.Players.PlayerList.size());
-		// for (AbstractPlayer ap : spielfeld.Players.PlayerList)
-		// System.out.println("ap.isAlive()=" + ap.isAlive());
-		this.spielfeld = spielfeld;
-		spielfeld.initImages();
-		// spielfeld.switchKeyset();
-
-		GameWindow s = new GameWindow(0, true, spielfeld);
-
-		// spielfeld.initPlayer();
-		// spielfeld.setsystem(system);
-
-		// TODO startgame entfernen, wenn remoteaufruf tick funktioniert.
-		spielfeld.startgame();
-		System.out.println("send game received");
-
 	}
 
 	/**
@@ -113,7 +105,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	@Override
 	public void tick() throws RemoteException {
-		spielfeld.Players.movePlayers();
+		spielfeld.getPlayers().movePlayers();
 		spielfeld.repaint();
 
 	}

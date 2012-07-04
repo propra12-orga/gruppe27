@@ -40,7 +40,7 @@ public class PlayerManager implements Serializable {
 	 */
 
 	public void updatePlayers(int keycode, boolean pressed) {
-//		System.out.println("ArrayListsize " + PlayerList.size());
+		// System.out.println("ArrayListsize " + PlayerList.size());
 		for (int i = 0; i < PlayerList.size(); i++) {
 
 			PlayerList.get(i).update(keycode, pressed);
@@ -61,13 +61,14 @@ public class PlayerManager implements Serializable {
 			return 1;
 		for (int i = 0; i < PlayerList.size(); i++) {
 
-			if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
-															// warum der
-															// vergleich der
-															// felder nicht
-															// hingehauen hat
-															// (:-/)
-					&& (PlayerList.get(i).getY() == owner.e.getY())) {
+			if ((PlayerList.get(i).getX() == owner.getExit().getX())// TODO
+																	// rausfinden
+					// warum der
+					// vergleich der
+					// felder nicht
+					// hingehauen hat
+					// (:-/)
+					&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
 				System.out.println("X übereinstimmung!");
 				return 2;
 
