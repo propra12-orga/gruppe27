@@ -8,12 +8,10 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
 /**
  * 
  * @author
- * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte, randomlvl =
- *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unerst�rbare W�nde im Level, namePlayer =
- *         Name des Spielers
+ * @verion 1.0 
+ * @see System Einstellungen
  */
+ 
 
 public class SysEinstClient implements Serializable {
 

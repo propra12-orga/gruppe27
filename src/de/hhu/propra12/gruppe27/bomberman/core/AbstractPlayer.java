@@ -9,9 +9,15 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse AbstractPlayer Eigenschaften f�r die Bombe,Spieler und
- *          Feld
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse AbstractPlayer 
+ * Eigenschaften fuer die Bombe,Spieler und Feld werden initialisiert
+ * int posx entspricht i am Array, int posy entspricht y im Array
+ * in bobdelay ist zustaendig fuer die explosionsverzoegerung
+ * int bombstr ist gleich die Anzahl der Bombenstuecke pro Feld
+ * int bombanz ist gleich die Bombenanzahl, int bombcount ist die aktuelle Bombenanzahl
+ * int playerWER bestimmt den Spieler 
  * 
  */
 
@@ -23,29 +29,50 @@ public abstract class AbstractPlayer implements Serializable {
 
 	boolean pleft, pright, pup, pdown, plant;
 
-	int posx; // entspricht i im Array
-	int posy; // enstpricht j im Array
+	int posx; 
+	int posy; 
 
-	int bombdelay = 7;// explosionsverzögerung
-	int bombstr; // Bombenst�rke 1 pro Feld
-	int bombanz; // Bombenanzahl
-	int bombcount;// Bombenanzahl aktuell
-	int playerWER; // Welcher Spieler? 1 - 4
+	int bombdelay = 7;
+	int bombstr; 
+	int bombanz; 
+	int bombcount;
+	int playerWER;
 
 	private Color playercolor = new Color(0, 255, 0);
+	
+	/**
+	 * 
+	 * @return playercolot, die Farbe des Spielers wird bestimmt
+	 */
 
 	public Color getPlayercolor() {
 		return playercolor;
 	}
+	
+	/**
+	 * 
+	 * @param playercolor 
+	 * playercolor wird uebergeben
+	 */
 
 	public void setPlayercolor(Color playercolor) {
 		this.playercolor = playercolor;
 	}
+	
+	/**
+	 * 
+	 * @param playercolor
+	 * @return this
+	 */
 
 	public AbstractPlayer withColor(Color playercolor) {
 		this.playercolor = playercolor;
 		return this;
 	}
+	
+	/**
+	 * System und SystemClient werden initialisiert
+	 */
 
 	Spielfeld owner;
 	SysEinst system = SysEinst.getSystem();
@@ -57,7 +84,7 @@ public abstract class AbstractPlayer implements Serializable {
 
 	/**
 	 * 
-	 * @return alive �berpr�fung ob Spieler lebt
+	 * @return alive Ueberpruefung ob Spieler lebt
 	 */
 
 	public boolean isAlive() {
@@ -86,12 +113,15 @@ public abstract class AbstractPlayer implements Serializable {
 	 * 
 	 * @param keycode
 	 * @param pressed
+	 * Boolean und Keycode werden aktualisiert
 	 */
 
 	abstract public void update(int keycode, boolean pressed);
 
 	/**
-	 * Bewegung des Spielers und Platzierung der Bombe
+	 * Bewegung des Spielers (Client) und Platzierung der Bombe
+	 * Recht, links, runter , hoch und Bombe
+	 * 
 	 */
 
 	public void move() {
@@ -111,8 +141,9 @@ public abstract class AbstractPlayer implements Serializable {
 	/**
 	 * 
 	 * @param direction
-	 *            Konstanten siehe IRemoteClient
+	 * Konstanten siehe IRemoteClient
 	 */
+	
 	public void move(int direction) {
 		// try {
 		if (direction == IRemoteClient.UP) {
@@ -132,6 +163,10 @@ public abstract class AbstractPlayer implements Serializable {
 				// }
 			}
 		}
+		
+		/**
+		 * Bewegung des Client
+		 */
 
 		// TODO move player2 im 2ten system
 		else if (direction == IRemoteClient.LEFT) {
@@ -173,8 +208,8 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return owner.getFeld
+	 *  @return owner.getFeld
+	 *  Positionen x und y werden aus an die aufrufende Methode zrueckgegeben
 	 */
 
 	public AbstractFeld getFeld() {
@@ -196,7 +231,7 @@ public abstract class AbstractPlayer implements Serializable {
 	/**
 	 * 
 	 * @param g
-	 *            Spieler wird gezeichnet
+	 * Spieler wird gezeichnet wenn lebend
 	 */
 
 	public void draw(Graphics g) {

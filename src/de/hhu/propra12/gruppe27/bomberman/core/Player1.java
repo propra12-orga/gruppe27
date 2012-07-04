@@ -8,7 +8,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
  * 
  * @author 
  * @version
- * Klasse für Einstellungen von Spieler 1 und seine Eigenschaften
+ * Klasse für Einstellungen von Spieler und seine Eigenschaften, positionen x und y werden aufgerufen
+ * Bombenanzahl = 1 und Bombenstueck pro Feld = 1, Aktuelle Bombenanzahl = 1
  */
 
 public class Player1 extends AbstractPlayer {

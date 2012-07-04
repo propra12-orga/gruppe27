@@ -5,8 +5,9 @@ import java.io.Serializable;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse Path wird erstellt
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse Path wird erstellt extends Klasse AbstractFeld
  * 
  */
 
@@ -19,7 +20,7 @@ public class Path extends AbstractFeld implements Serializable {
 	 * @param x
 	 * @param y
 	 * @param owner
-	 *            Eigenschaften von Path werden bestimmt
+	 * Eigenschaften von Path werden bestimmt
 	 * 
 	 */
 
@@ -42,6 +43,7 @@ public class Path extends AbstractFeld implements Serializable {
 
 	/**
 	 * @return Color.white
+	 * Farbe Weiss wird uebergeben
 	 */
 
 	public Color getColor() {

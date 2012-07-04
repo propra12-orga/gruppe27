@@ -8,8 +8,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse BombManager
+ * @author gruppe 27
+ * @version 1.0
+ * Klasse BombManager, Bomblist wird als Array erstellt
  * 
  */
 
@@ -23,7 +24,7 @@ public class BombManager implements Serializable {
 	}
 
 	/**
-	 * Anzahl der Bomben wird �berpr�ft
+	 * Anzahl der Bomben wird ueberprueft
 	 */
 
 	public void CheckBombs() {
@@ -38,7 +39,7 @@ public class BombManager implements Serializable {
 
 	/**
 	 * @param Feld
-	 * 
+	 * i muss kleiner sein als die groesse von Bomblist.size
 	 */
 
 	public void hitBombs(AbstractFeld Feld) {
@@ -52,7 +53,7 @@ public class BombManager implements Serializable {
 
 	/**
 	 * 
-	 * @return Bomblist is.Empty �berpr�fung der Bomblist
+	 * @return Bomblist is.Empty ueberpruefung der Bomblist
 	 */
 
 	public boolean isEmpty() {
@@ -62,7 +63,7 @@ public class BombManager implements Serializable {
 	/**
 	 * 
 	 * @param b
-	 *            Bombe wird hinzugef�gt
+	 * Bombe wird hinzugefuegt
 	 */
 
 	public void AddBomb(Bomb b) {
