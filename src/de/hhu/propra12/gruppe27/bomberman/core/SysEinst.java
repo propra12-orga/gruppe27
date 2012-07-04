@@ -9,10 +9,10 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
  * 
  * @author
  * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldgï¿½ï¿½e = feldx, feldy, denswall = Mauerdichte, randomlvl =
- *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unerstï¿½rbare Wï¿½nde im Level, namePlayer =
- *         Name des Spielers
+ *         Spieler, Feldgï¿½ï¿½e = feldx, feldy, denswall = Mauerdichte,
+ *         randomlvl = Generiertes Level, spiegelung = Level soll gespiegelt
+ *         werden, standardlvl = Festgelegte unerstï¿½rbare Wï¿½nde im Level,
+ *         namePlayer = Name des Spielers
  */
 
 public class SysEinst implements Serializable {
@@ -74,7 +74,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return feldx
+	 * @return Gibt die Spielfeldgröße "X" zurück.
 	 */
 
 	public int getfeldx() {
@@ -83,7 +83,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return feldxbml
+	 * @return Gibt die aus einer BML-Datei eingelesene Spielfeldgröße "X"
+	 *         zurück.
 	 */
 	public int getfeldxbml() {
 		return feldxbml;
@@ -91,7 +92,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return feldy
+	 * @return Gibt die Spielfeldgröße "Y" zurück.
 	 */
 
 	public int getfeldy() {
@@ -100,7 +101,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return feldybml
+	 * @return Gibt die aus einer BML-Datei eingelesene Spielfeldgröße "Y"
+	 *         zurück.
 	 */
 
 	public int getfeldybml() {
@@ -109,7 +111,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return denswall
+	 * @return Gibt die eingestellte Wandstärke zurück.
 	 */
 
 	public int getdensWall() {
@@ -118,7 +120,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return randomlvl
+	 * @return Gibt True bei aktivierter "Zufallslevel"-Einstellung und False
+	 *         bei deaktivierter "Zufallslevel"-Einstellung zurück.
 	 */
 
 	public boolean getrandomlvl() {
@@ -127,7 +130,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return spiegelung
+	 * @return Gibt True bei aktivierter "Levelspiegelung" und False bei
+	 *         deaktivierter "Levelspiegelung" zurück.
 	 */
 
 	public boolean getspiegelung() {
@@ -136,7 +140,8 @@ public class SysEinst implements Serializable {
 
 	/***
 	 * 
-	 * @return standardlvl
+	 * @return Gibt True bei aktiviertem "Standardlevel" und False bei
+	 *         deaktiviertem "Standardlevel" zurück.
 	 */
 
 	public boolean getstandardlvl() {
@@ -145,7 +150,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return bmllevel
+	 * @return Gibt True bei aktivierter "BML-Importierung" und False bei
+	 *         deaktivierter "BML-Importierung" zurück.
 	 */
 
 	public boolean getbmllevel() {
@@ -154,7 +160,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return boolKI
+	 * @return Gibt True bei aktivierter "KI" und False bei deaktivierter "KI"
+	 *         zurück.
 	 */
 
 	public boolean getboolKI() {
@@ -163,7 +170,8 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return boolLAN
+	 * @return Gibt True bei "LAN-Spiel"-Aktivierung und False bei
+	 *         "LAN-Spiel"-Deaktivierung zurück.
 	 */
 
 	public boolean getboolLAN() {
@@ -179,9 +187,21 @@ public class SysEinst implements Serializable {
 		return boolClient;
 	}
 
+	/**
+	 * 
+	 * @return Gibt True bei aktiviertem "Sound" und False bei deaktiviertem
+	 *         "Sound" zurück.
+	 */
+
 	public boolean getSound() {
 		return sound;
 	}
+
+	/**
+	 * 
+	 * @return True - Button-MouseOvers(Sound) werden bei Start initialisiert.
+	 *         False - Button-MouseOvers(Sound) werden bei Start initialisiert.
+	 */
 
 	public boolean getMouseOverBool() {
 		// TODO Auto-generated method stub
@@ -190,12 +210,17 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return levelpath
+	 * @return Gibt den gespeicherten Levelpfad zurück.
 	 */
 
 	public String getlevelpath() {
 		return levelpath;
 	}
+
+	/**
+	 * 
+	 * @return Gibt den Namen, des aktuellen Level zurück. (Sofern definiert.)
+	 */
 
 	public String getlevelname() {
 		return levelname;
@@ -203,7 +228,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return namePlayer1
+	 * @return Gibt den Namen, des ersten Spielers zurück.
 	 */
 
 	public String getnamePlayer1() {
@@ -212,7 +237,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return namePlayer2
+	 * @return Gibt den Namen, des zweiten Spielers zurück.
 	 */
 
 	public String getnamePlayer2() {
@@ -221,7 +246,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return namePlayer3
+	 * @return Gibt den Namen, des dritten Spielers zurück.
 	 */
 
 	public String getnamePlayer3() {
@@ -230,7 +255,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return namePlayer4
+	 * @return Gibt den Namen, des vierten Spielers zurück.
 	 */
 
 	public String getnamePlayer4() {
@@ -239,7 +264,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return remotehost
+	 * @return Gibt die Adresse, des Host zurück.
 	 */
 
 	public IRemoteHost getRemoteHost() {
@@ -248,7 +273,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return remotehost
+	 * @return Gibt die Adresse, des Client zurück.
 	 */
 
 	public IRemoteClient getRemoteClient() {
