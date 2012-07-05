@@ -15,7 +15,7 @@ public interface IRemoteClient extends Remote {
 	public static final String clientname = "localhost";
 	public static final String servicename = "IRemoteClientService";
 
-	public static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3, BOMB = 4;
+	public static final int UP = 1, LEFT = 2, DOWN = 3, RIGHT = 4, BOMB = 5;
 
 	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed)
 			throws RemoteException;

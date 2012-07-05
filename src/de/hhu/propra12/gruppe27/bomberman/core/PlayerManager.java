@@ -9,9 +9,7 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse des Playermanagers
- * Owner wird augerufen
+ * @version 1.0 Klasse des Playermanagers Owner wird augerufen
  */
 
 public class PlayerManager implements Serializable {
@@ -26,8 +24,7 @@ public class PlayerManager implements Serializable {
 	}
 
 	/**
-	 * Bewegung der Spieler
-	 * Playerlist wird um eins erhoeht wenn 0
+	 * Bewegung der Spieler Playerlist wird um eins erhoeht wenn 0
 	 */
 
 	public void movePlayers() {
@@ -40,7 +37,7 @@ public class PlayerManager implements Serializable {
 	 * 
 	 * @param keycode
 	 * @param pressed
-	 * Werte fuer Player wird aktualisiert
+	 *            Werte fuer Player wird aktualisiert
 	 */
 
 	public void updatePlayers(int keycode, boolean pressed) {
@@ -52,14 +49,14 @@ public class PlayerManager implements Serializable {
 
 	}
 
-
 	/**
 	 * 
-	 * @return true liefert true zurueck wenn das spiel zu ende ist(also wenn ein spieler das Ende erreicht)
+	 * @return true liefert true zurueck wenn das spiel zu ende ist(also wenn
+	 *         ein spieler das Ende erreicht)
 	 */
 
 	public int checkGameEnde() {
-		if (countPlayersAlive() < 1) 
+		if (countPlayersAlive() < 1)
 			return 1;
 		for (int i = 0; i < PlayerList.size(); i++) {
 
@@ -118,6 +115,7 @@ public class PlayerManager implements Serializable {
 
 	/**
 	 * PlayerList wird uebergeben
+	 * 
 	 * @param Feld
 	 */
 
@@ -133,7 +131,7 @@ public class PlayerManager implements Serializable {
 	/**
 	 * 
 	 * @param p
-	 * Spieler kann hinzugefuegt werden
+	 *            Spieler kann hinzugefuegt werden
 	 */
 
 	public void addPlayer(AbstractPlayer p) {
@@ -145,7 +143,7 @@ public class PlayerManager implements Serializable {
 	/**
 	 * 
 	 * @param g
-	 *Spielfigur wird ausgegeben
+	 *            Spielfigur wird ausgegeben
 	 */
 
 	public void paintPlayers(Graphics g) {
@@ -153,14 +151,19 @@ public class PlayerManager implements Serializable {
 			PlayerList.get(i).draw(g);
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @return PlayerList
-	 * PlayerList wird uebergeben
+	 * @return PlayerList PlayerList wird uebergeben
 	 */
 
 	public ArrayList<AbstractPlayer> getPlayerList() {
 		return PlayerList;
+	}
+
+	public void moveremotePlayers(int direction) {
+		for (int i = 0; i < PlayerList.size(); i++) {
+			PlayerList.get(i).moveremote(direction);
+		}
 	}
 }

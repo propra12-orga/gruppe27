@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
@@ -46,12 +47,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		// spielfeld.switchKeyset();
 
 		GameWindow s = new GameWindow(level);
-
-		// spielfeld.initPlayer();
-		// spielfeld.setsystem(system);
+		spielfeld = s.getspielfeld();
 
 		// TODO startgame entfernen, wenn remoteaufruf tick funktioniert.
-		spielfeld.startgame();
+		// spielfeld.startgame();
 		System.out.println("send game received");
 	}
 
@@ -119,8 +118,42 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	@Override
 	public void movep2h(int direction) throws RemoteException {
-		// TODO Auto-generated method stub
+		direction = translate(direction);
+
+		spielfeld.getPlayers().moveremotePlayers(direction);
 
 	}
 
+	// public int translate(int direction) {
+	// if (direction == KeyEvent.VK_UP) {
+	// return Keyset.REMUP;
+	// } else if (direction == KeyEvent.VK_LEFT) {
+	// return Keyset.REMLEFT;
+	// } else if (direction == KeyEvent.VK_DOWN) {
+	// return Keyset.REMDOWN;
+	// } else if (direction == KeyEvent.VK_RIGHT) {
+	// return Keyset.REMRIGHT;
+	// } else if (direction == KeyEvent.VK_ENTER) {
+	// return Keyset.REMBOMB;
+	// }
+	// return 0; // sollte nie vorkommen!
+	// }
+
+	public int translate(int direction) {
+		System.out.println("client: translate: " + direction);
+		if (direction == IRemoteClient.UP) {
+			return Keyset.REMUP;
+		} else if (direction == IRemoteClient.LEFT) {
+			return Keyset.REMLEFT;
+		} else if (direction == IRemoteClient.DOWN) {
+			return Keyset.REMDOWN;
+
+		} else if (direction == IRemoteClient.RIGHT) {
+			return Keyset.REMRIGHT;
+		} else if (direction == IRemoteClient.BOMB) {
+			return Keyset.REMBOMB;
+		}
+		System.out.println("keine korrekte Uebersetzung moeglich");
+		return 0; // sollte nie vorkommen!
+	}
 }

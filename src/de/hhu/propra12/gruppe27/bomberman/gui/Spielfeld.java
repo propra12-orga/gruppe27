@@ -43,6 +43,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
 
+	/*
+	 * Generierung des Spielfeldes
+	 */
+
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
 		if (false == system.getbmllevel()) {
@@ -111,16 +115,13 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		else {
 			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
-					1)));
+					2)));
 
 			LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
-					this, new Keyset(2)).withColor(new Color(255, 0, 0));
+					this, new Keyset(-1)).withColor(new Color(255, 0, 0));
 			Players.addPlayer(player2);
 
 		}
-		// TODO Abfrage für Netzwerkspieler
-
-		// TODO Netzwerk übergabe von spielfeld
 
 		initImages();
 		this.repaint();
@@ -268,6 +269,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		public void keyPressed(KeyEvent e) {
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
+			// System.out.println("keypressed " + e.getKeyCode());
 		}
 
 		public void keyReleased(KeyEvent e) {

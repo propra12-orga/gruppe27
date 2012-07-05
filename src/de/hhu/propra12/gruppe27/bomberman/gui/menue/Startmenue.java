@@ -31,9 +31,8 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
- * joinen und hosten, Einstellungen setzen)
+ * @version 1.0 Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
+ *          joinen und hosten, Einstellungen setzen)
  * 
  */
 
@@ -46,8 +45,6 @@ public class Startmenue {
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
-	
-
 	// public static Startmenue getMenue() {
 	// if (startmen == null) {
 	// startmen = new Startmenue();
@@ -58,7 +55,7 @@ public class Startmenue {
 	/**
 	 * Methode um das Menue-Fenster zu oeffnen
 	 */
-	
+
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
 		framemenue.setVisible(true);
@@ -167,8 +164,6 @@ public class Startmenue {
 		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
 		 */
 
-		
-		
 		framemenue.setSize(framemenue.getPreferredSize());
 		int height = framemenue.getPreferredSize().height;
 		int width = framemenue.getPreferredSize().width;
@@ -188,7 +183,7 @@ public class Startmenue {
 				framemenue.dispose();
 			}
 		});
-		
+
 		/**
 		 * Variablen koennen aus System gezogen werden
 		 */
@@ -207,14 +202,14 @@ public class Startmenue {
 				// framemenue.setVisible(false);
 
 				framemenue.dispose();
-			
+
 			}
 		});
 
 		/**
 		 * Action Listener fuer Join Multiplayer
 		 */
-		
+
 		buttonS3.addActionListener(new ActionListener() {
 
 			@Override
@@ -235,9 +230,9 @@ public class Startmenue {
 		});
 
 		/**
-		 * ActionListener für Host Multiplayer
+		 * ActionListener fï¿½r Host Multiplayer
 		 */
-		
+
 		buttonS4.addActionListener(new ActionListener() {
 
 			@Override
@@ -299,7 +294,7 @@ public class Startmenue {
 								+ " geladen!"); // Umbenennen des Buttons.
 												// Nutzer informieren.
 					}
-					
+
 					/**
 					 * Umbennen des Buttons. Nutzer wird informiert
 					 */
@@ -309,9 +304,7 @@ public class Startmenue {
 					System.out.println("Fehler: " + system.getlevelpath()
 							+ " konnte nicht geladen werden!\n"
 							+ eIO.getMessage());// Konsolenausgabe zum debuggen
-					buttonbmlimport.setText("Fehler beim Laden des Levels!"); 
-					
-					
+					buttonbmlimport.setText("Fehler beim Laden des Levels!");
 
 				} catch (NumberFormatException eNFE) {
 
@@ -322,7 +315,7 @@ public class Startmenue {
 									+ eNFE.getMessage());// Konsolenausgabe zum
 															// debuggen
 					buttonbmlimport
-							.setText("Fehler beim einlesen der Levellaenge/-breite!"); 
+							.setText("Fehler beim einlesen der Levellaenge/-breite!");
 				}
 
 			}
@@ -376,10 +369,10 @@ public class Startmenue {
 		});
 
 		/**
-		 * MouseOver fuer AudioDatein
-		 * Beim fahren ueber die Knoepfe erscheint ein Sound
+		 * MouseOver fuer AudioDatein Beim fahren ueber die Knoepfe erscheint
+		 * ein Sound
 		 */
-		
+
 		if (system.getMouseOverBool()) {
 
 			buttonS1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -454,10 +447,10 @@ public class Startmenue {
 	 * @param Levelpath
 	 * @throws NumberFormatException
 	 * @throws IOException
-	 * Methode um die Groesse des einzulesenden Spielfeldes in die
-	 * Systemeinstellungen zu schreiben
+	 *             Methode um die Groesse des einzulesenden Spielfeldes in die
+	 *             Systemeinstellungen zu schreiben
 	 */
-	
+
 	public void setfeld(String Levelpath) throws NumberFormatException,
 			IOException {
 
@@ -490,9 +483,9 @@ public class Startmenue {
 	 * @param width
 	 * @param height
 	 * @param frame
-	 * Position des Fensters
+	 *            Position des Fensters
 	 */
-	
+
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
 				.getScreenSize();
