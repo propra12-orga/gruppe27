@@ -12,7 +12,7 @@ import java.rmi.server.UnicastRemoteObject;
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
-import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -29,7 +29,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	/*
 	 * für 2 systeme wieder reinnehmen SysEinst system = SysEinst.getSystem();
 	 */
-	SysEinstClient system = SysEinstClient.getSystemClient();
+	SysEinst system = SysEinst.getSystem();
 
 	Spielfeld spielfeld = null;
 

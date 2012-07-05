@@ -22,7 +22,6 @@ import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
-import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.OpenFileDialog;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
@@ -40,7 +39,7 @@ public class Startmenue {
 
 	// static Startmenue startmen;
 	SysEinst system = SysEinst.getSystem();
-	SysEinstClient systemclient = SysEinstClient.getSystemClient();
+	// SysEinstClient systemclient = SysEinstClient.getSystemClient();
 
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
@@ -215,7 +214,7 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				systemclient.setboolClient(true);
+				// systemclient.setboolClient(true);
 				system.setboolClient(true);
 				System.out.println("sysref clientstart:" + system);
 				system.setamplayer(2);

@@ -42,7 +42,7 @@ public abstract class AbstractPlayer implements Serializable {
 
 	Spielfeld owner;
 	SysEinst system = SysEinst.getSystem();
-	SysEinstClient systemclient = SysEinstClient.getSystemClient();
+	// SysEinstClient systemclient = SysEinstClient.getSystemClient();
 
 	// int speed;
 
@@ -178,14 +178,14 @@ public abstract class AbstractPlayer implements Serializable {
 	public void moveifremote(int direction) {
 
 		System.out.println("moveifremote: " + direction);
-		System.out.println("systemclient: " + systemclient.getboolClient());
+		System.out.println("system: " + system.getboolClient());
 		System.out.println("system boolLAN: " + system.getboolLAN());
 		try {
 			if (system.getboolLAN()) {
 
-				if (systemclient.getboolClient()) {
+				if (system.getboolClient()) {
 					// Methode vom Host aufrufen
-					systemclient.getRemoteHost().movep2c(direction);
+					system.getRemoteHost().movep2c(direction);
 
 				} else {
 					// Methode vom Client aufrufen
