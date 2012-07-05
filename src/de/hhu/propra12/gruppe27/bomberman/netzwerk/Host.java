@@ -117,7 +117,11 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	public void movep2c(int direction) throws RemoteException {
 		direction = translate(direction);
 
-		spielfeld.getPlayers().moveremotePlayers(direction);
+		// spielfeld.getPlayers().moveremotePlayers(direction);
+
+		((LanPlayer) (spielfeld.getPlayers().getPlayerList().get(1)))
+				.moveremote(direction);
+
 	}
 
 	// public int translate(int direction) {

@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
+import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
@@ -120,7 +121,9 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	public void movep2h(int direction) throws RemoteException {
 		direction = translate(direction);
 
-		spielfeld.getPlayers().moveremotePlayers(direction);
+		// spielfeld.getPlayers().moveremotePlayers(direction);
+		((LanPlayer) (spielfeld.getPlayers().getPlayerList().get(1)))
+				.moveremote(direction);
 
 	}
 

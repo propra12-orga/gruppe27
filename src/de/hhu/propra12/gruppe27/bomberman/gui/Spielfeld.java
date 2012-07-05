@@ -114,6 +114,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		}
 
 		else {
+
 			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
 					2)));
 
