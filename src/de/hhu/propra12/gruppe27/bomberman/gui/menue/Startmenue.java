@@ -209,7 +209,6 @@ public class Startmenue {
 		/**
 		 * Action Listener fuer Join Multiplayer
 		 */
-
 		buttonS3.addActionListener(new ActionListener() {
 
 			@Override
@@ -217,12 +216,18 @@ public class Startmenue {
 
 				system.setboolLAN(true);
 				systemclient.setboolClient(true);
+				system.setboolClient(true);
 				System.out.println("sysref clientstart:" + system);
 				system.setamplayer(2);
 				try {
-					Client client = new Client();
+					// TODO
+					// hier ist eigentlich Benutzereingabe erforderlich!
+					String hostservice = "rmi://localhost:1099/host";
+					// Test URL
+					// String hostservice = "rmi://192.168.0.196:1099/host";
+
+					Client client = new Client(1090, "client", hostservice);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -230,7 +235,7 @@ public class Startmenue {
 		});
 
 		/**
-		 * ActionListener f�r Host Multiplayer
+		 * ActionListener fuer Host Multiplayer
 		 */
 
 		buttonS4.addActionListener(new ActionListener() {
@@ -242,7 +247,8 @@ public class Startmenue {
 				system.setboolClient(false);
 				system.setamplayer(2);
 				try {
-					Host host = new Host();
+					// default registry port 1099
+					Host host = new Host(1099, "host");
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

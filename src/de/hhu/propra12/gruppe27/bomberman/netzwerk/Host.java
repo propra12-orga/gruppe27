@@ -1,6 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -25,12 +27,12 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	private static final long serialVersionUID = 1L;
 	GameWindow gw;
-
+	String hostservice = "host service not yet published";
 	IRemoteClient service = null;
 	Spielfeld spielfeld;
 
-	public Host() throws RemoteException {
-		publishHost();
+	public Host(int registryPort, String servicename) throws RemoteException {
+		publishHost(registryPort, servicename);
 
 		// GameWindow s = new GameWindow(0);
 	}
@@ -40,14 +42,13 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	 */
 
 	@Override
-	public void joingame() {
+	public void joingame(String strService) {
 
-		retrieveClientService();
+		retrieveClientService(strService);
 		gw = new GameWindow(0);
 
 		this.spielfeld = gw.getspielfeld();
-		// Löschen service.sendSpielfeld(spielfeld);
-		// spielfeld.initPlayer();
+
 		System.out.println(service);
 		System.out.println("sysref h:" + SysEinst.getSystem());
 		SysEinst.getSystem().setRemoteClient(service);
@@ -70,29 +71,43 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	 * @throws RemoteException
 	 */
 
-	public void publishHost() throws RemoteException {
+	public void publishHost(int registryPort, String servicename)
+			throws RemoteException {
 
 		try {
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			// LocateRegistry.getRegistry(registryPort);
 			LocateRegistry.createRegistry(registryPort);
-			Naming.rebind("rmi://" + hostname + "/" + servicename, this);
+			String str = "rmi://" + ip + ":" + registryPort + "/" + servicename;
+			Naming.rebind(str, this);
+			// System.out.println("ip host:" + ip);
+			hostservice = str;
+			System.out.println(str);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
 		}
+	}
+
+	public String getServiceURL() {
+		return hostservice;
 	}
 
 	/**
 	 * Suche nach remote-services des Clients
 	 */
 
-	public void retrieveClientService() {
+	public void retrieveClientService(String strService) {
 		// System.out.println("fetch:    rmi://" + IRemoteClient.clientname +
 		// ":"
 		// + IRemoteClient.registryPort + "/" + IRemoteClient.servicename);
 		try {
-			service = (IRemoteClient) Naming.lookup("rmi://"
-					+ IRemoteClient.clientname + ":"
-					+ IRemoteClient.registryPort + "/"
-					+ IRemoteClient.servicename);
+
+			// besser ist folgendes:
+			// service = (IRemoteClient) LocateRegistry
+			// .getRegistry("hostip", 1099).lookup(strService);
+			service = (IRemoteClient) Naming.lookup(strService);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {

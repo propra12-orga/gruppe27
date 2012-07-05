@@ -114,13 +114,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		}
 
 		else {
+			if (system.getboolClient()) {
+				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
+						.getfeldy() - 2, "Spieler1", this, new Keyset(2)));
 
-			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
-					2)));
+				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
+						this, new Keyset(-1)).withColor(new Color(255, 0, 0));
+				Players.addPlayer(player2);
+			} else {
+				Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this,
+						new Keyset(2)));
 
-			LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
-					this, new Keyset(-1)).withColor(new Color(255, 0, 0));
-			Players.addPlayer(player2);
+				LanPlayer player2 = (LanPlayer) new LanPlayer(
+						system.getfeldx() - 2, system.getfeldy() - 2,
+						"Spieler2", this, new Keyset(-1)).withColor(new Color(
+						255, 0, 0));
+				Players.addPlayer(player2);
+
+			}
 
 		}
 

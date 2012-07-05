@@ -11,9 +11,9 @@ import java.rmi.RemoteException;
 
 public interface IRemoteClient extends Remote {
 
-	public static final int registryPort = 1099;
-	public static final String clientname = "localhost";
-	public static final String servicename = "IRemoteClientService";
+	// public static final int registryPort = 1099;
+	// public static final String clientname = "localhost";
+	// public static final String servicename = "IRemoteClientService";
 
 	public static final int UP = 1, LEFT = 2, DOWN = 3, RIGHT = 4, BOMB = 5;
 
