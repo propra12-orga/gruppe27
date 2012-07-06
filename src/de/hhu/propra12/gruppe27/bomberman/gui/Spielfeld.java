@@ -170,13 +170,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		// }
 		// PlayerList.size()
-		// if (Players.checkGameEnde() > 0) {
-		//
-		// if (1 == Players.checkGameEnde())
-		// e.doOnKill(this);
-		// if (2 == Players.checkGameEnde())
-		// e.doOnExit(this);
-		// }
+
+		// Prüfung, ob das Spiel zu Ende ist
+		if (Players.checkGameEnde() > PlayerManager.ENDE) {
+
+			// Fall, wenn es ein Singleplayerspiel ist
+			if (system.getamplayer() == 1) {
+
+				if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+					e.doOnKill(this);
+
+				else if (PlayerManager.EXIT == Players.checkGameEnde())
+					e.doOnExit(this);
+			}
+
+			else if (system.getamplayer() == 2) {
+				// TODO Behandlung der Multiplayerfälle
+			}
+		}
 	}
 
 	/**

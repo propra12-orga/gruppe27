@@ -55,26 +55,30 @@ public class PlayerManager implements Serializable {
 	 *         ein spieler das Ende erreicht)
 	 */
 
+	public final static int ENDE = 0, ALLDEAD = 1, EXIT = 2;
+	SysEinst sys = SysEinst.getSystem();
+
 	public int checkGameEnde() {
-		if (countPlayersAlive() < 1)
-			return 1;
-		for (int i = 0; i < PlayerList.size(); i++) {
 
-			if ((PlayerList.get(i).getX() == owner.getExit().getX())// TODO
-																	// rausfinden
-					// warum der
-					// vergleich der
-					// felder nicht
-					// hingehauen hat
-					// (:-/)
-					&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
-				System.out.println("X übereinstimmung!");
-				return 2;
+		if (countPlayersAlive() < 1) {
+			return ALLDEAD;
+		}
+		if (sys.getamplayer() == 1) {
+			for (int i = 0; i < PlayerList.size(); i++) {
 
+				if ((PlayerList.get(i).getX() == owner.getExit().getX())
+				// TODO rausfinden warum der vergleich der felder nicht
+				// hingehauen
+				// hat (:-/)
+						&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
+					System.out.println("X übereinstimmung!");
+					return EXIT;
+
+				}
 			}
 		}
 
-		return 0;
+		return ENDE;
 	}
 
 	/**
