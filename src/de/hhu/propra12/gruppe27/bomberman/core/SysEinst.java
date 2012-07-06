@@ -25,7 +25,9 @@ public class SysEinst implements Serializable {
 	int feldy = 15;
 	int feldybml;
 	int densWall = 1;
-	int highscore;
+	int highscoreP1 = 0;
+	int highscoreP2 = 0;
+
 	boolean randomlvl = true;
 	boolean spiegelung = false;
 	boolean standardlvl = true;
@@ -120,10 +122,6 @@ public class SysEinst implements Serializable {
 
 	public int getdensWall() {
 		return densWall;
-	}
-
-	public int getHighscore() {
-		return highscore;
 	}
 
 	/**
@@ -359,10 +357,6 @@ public class SysEinst implements Serializable {
 		this.densWall = densWall;
 	}
 
-	public void setHighscore(int highscore) {
-		this.highscore = highscore;
-	}
-
 	/**
 	 * lvl wird aufgerufen
 	 * 
@@ -533,8 +527,24 @@ public class SysEinst implements Serializable {
 		this.remoteclient = remoteclient;
 	}
 
+	public int getHighscoreP1() {
+		return highscoreP1;
+	}
+
+	public void setHighscoreP1(int highscoreP1) {
+		this.highscoreP1 = highscoreP1;
+	}
+
+	public int getHighscoreP2() {
+		return highscoreP2;
+	}
+
+	public void setHighscoreP2(int highscoreP2) {
+		this.highscoreP2 = highscoreP2;
+	}
+
 	/**
-	 * Ausgabe aller Werte der Symstemeinstellungen
+	 * Ausgabe einiger Werte der Symstemeinstellungen
 	 */
 
 	public void printSysEinst() {

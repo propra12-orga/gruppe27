@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -71,18 +72,6 @@ public class WintheGame {
 		}
 
 		/**
-		 * Button, auf dem der Highscore steht
-		 */
-		// if (system.getamplayer() == 1) {
-		JButton buttonScore = new JButton("Du hast das Ziel innerhalb von "
-				+ system.getHighscore() + "Schritten erreicht");
-		c.gridx = 0;
-		c.gridy = 4;
-		// c.gridwidth = 2;
-		panelwin.add(buttonScore, c);
-		// }
-
-		/**
 		 * Button, wenn man zurueck zum Startmenue moechte
 		 */
 
@@ -92,7 +81,23 @@ public class WintheGame {
 		// c.gridwidth = 2;
 		panelwin.add(buttonW2, c);
 
+		/**
+		 * Button, auf dem der Highscore steht
+		 */
+		if (system.getamplayer() == 1) {
+			JButton buttonScore = new JButton(
+					"Du hast den Ausgang innerhalb von "
+							+ system.getHighscoreP2() + " Schritten erreicht");
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panelwin.add(buttonScore, c);
+		}
+
 		framewin.setSize(framewin.getPreferredSize());
+		int height = framewin.getPreferredSize().height;
+		int width = framewin.getPreferredSize().width;
+		centerWindow(width, height, framewin);
 
 		buttonW1.addActionListener(new ActionListener() {
 
@@ -118,5 +123,20 @@ public class WintheGame {
 			}
 		});
 
+	}
+
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 *            Position des Fensters
+	 */
+
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 }

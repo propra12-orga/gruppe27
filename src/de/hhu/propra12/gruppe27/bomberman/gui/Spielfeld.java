@@ -104,7 +104,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Players = new PlayerManager(this);
 
 		// Highscore löschen
-		system.setHighscore(0);
+		system.setHighscoreP1(0);
+		system.setHighscoreP2(0);
 
 		/*
 		 * Spieler werden zugefuegt
@@ -172,24 +173,26 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
 
-		// }
-		// PlayerList.size()
-
 		// Prüfung, ob das Spiel zu Ende ist
 		int intendgame = Players.checkGameEnde();
+
+		// was passiert, wenn das Spiel zu Ende ist,
 		if (intendgame > PlayerManager.ENDE) {
+
+			// highscores werden gespeichert in den Systemeinstellungen
+			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
+			system.setHighscoreP2(Players.PlayerList.get(0).getCountthesteps());
 
 			// Fall, wenn es ein Singleplayerspiel ist
 			if (system.getamplayer() == 1) {
 
 				if (PlayerManager.ALLDEAD == intendgame)
 					e.doOnKill(this);
-				else if (PlayerManager.EXIT == intendgame)
+				else if (PlayerManager.EXIT == intendgame) {
 					System.out.println("Anzahl der Schritte: "
 							+ Players.PlayerList.get(0).getCountthesteps());
-				system.setHighscore(Players.PlayerList.get(0)
-						.getCountthesteps());
-				e.doOnExit(this);
+					e.doOnExit(this);
+				}
 			}
 
 			// Fall, wenn es der 2Spieler-Modus ist
@@ -394,8 +397,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			this.exitx = getrandomcoordx();
 			this.exity = getrandomcoordy();
 
-		} while ((exitx == 0 || exitx == system.getfeldx() || exity == 0 || exity == system
-				.getfeldy())
+		} while ((exitx == 0 || exitx == system.getfeldx() - 1 || exity == 0 || exity == system
+				.getfeldy() - 1)
 				|| ((exitx == 1 && exity == 1) || (exitx == 1 && exity == 2) || (exitx == 2 && exity == 1))
 				|| ((exitx == system.getfeldx() - 2 && exity == system
 						.getfeldy() - 2)

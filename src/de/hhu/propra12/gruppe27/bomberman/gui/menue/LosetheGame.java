@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,7 @@ public class LosetheGame {
 
 		final JFrame framelose = new JFrame("Verloren");
 		framelose.setVisible(true);
-		framelose.setResizable(false);
+		// framelose.setResizable(false);
 		framelose.setLocationRelativeTo(null);
 		framelose.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -70,7 +71,20 @@ public class LosetheGame {
 		// c.gridwidth = 2;
 		panellose.add(buttonL2, c);
 
+		if (system.getamplayer() == 1) {
+			JButton buttonScore = new JButton(
+					"Bis zu deiner Vernichtung konntest du dich "
+							+ system.getHighscoreP1() + " Schritte bewegen");
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panellose.add(buttonScore, c);
+		}
+
 		framelose.setSize(framelose.getPreferredSize());
+		int height = framelose.getPreferredSize().height;
+		int width = framelose.getPreferredSize().width;
+		centerWindow(width, height, framelose);
 
 		buttonL1.addActionListener(new ActionListener() {
 
@@ -92,6 +106,13 @@ public class LosetheGame {
 			}
 		});
 
+	}
+
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 
 }
