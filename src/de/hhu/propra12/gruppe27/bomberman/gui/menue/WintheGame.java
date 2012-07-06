@@ -28,7 +28,7 @@ public class WintheGame {
 
 	SysEinst system = SysEinst.getSystem();
 	Icon winicon = new ImageIcon(
-			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranz.gif");
+			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranzkleiner.gif");
 
 	/**
 	 * "Gewonnen" wird ausgegeben, wenn man das Spiel erfolgreich beendet hat

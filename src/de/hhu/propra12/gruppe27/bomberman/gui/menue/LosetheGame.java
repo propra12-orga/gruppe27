@@ -26,7 +26,7 @@ public class LosetheGame {
 
 	SysEinst system = SysEinst.getSystem();
 	Icon loseicon = new ImageIcon(
-			"src/de/hhu/propra12/gruppe27/bomberman/graphics/VerlorenTranz.gif");
+			"src/de/hhu/propra12/gruppe27/bomberman/graphics/VerlorenTranzkleiner.gif");
 
 	/**
 	 * Einblendung von "Verloren", "Noch einmal" und "Zurueck zum Startmenue"
