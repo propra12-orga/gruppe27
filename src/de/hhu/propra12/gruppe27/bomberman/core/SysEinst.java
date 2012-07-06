@@ -42,6 +42,7 @@ public class SysEinst implements Serializable {
 
 	String levelpath = "data/levels/level_1.bml";
 	String levelname = "";
+	String message2P;
 	String namePlayer1 = "Spieler 1";
 	String namePlayer2 = "Spieler 2";
 	String namePlayer3 = "Spieler 3";
@@ -563,6 +564,14 @@ public class SysEinst implements Serializable {
 
 	public void setHighscoreP2(int highscoreP2) {
 		this.highscoreP2 = highscoreP2;
+	}
+
+	public String getMessage2P() {
+		return message2P;
+	}
+
+	public void setMessage2P(String message2p) {
+		this.message2P = message2p;
 	}
 
 	/**

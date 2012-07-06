@@ -143,26 +143,33 @@ public abstract class AbstractPlayer implements Serializable {
 		if (direction == IRemoteClient.UP) {
 			if (owner.getFeld(posx, posy - 1).isFrei()) {
 				posy--;
-
+				countthesteps++;
 				// Wenn es ein Lanspiel ist, dann sollen Remotemethoden
 				// aufgerufen werden
 				moveifremote(direction);
+
 			}
 		}
 
 		else if (direction == IRemoteClient.LEFT) {
-			if (owner.getFeld(posx - 1, posy).isFrei())
+			if (owner.getFeld(posx - 1, posy).isFrei()) {
 				posx--;
-			moveifremote(direction);
+				countthesteps++;
+				moveifremote(direction);
+			}
 		} else if (direction == IRemoteClient.DOWN) {
-			if (owner.getFeld(posx, posy + 1).isFrei())
+			if (owner.getFeld(posx, posy + 1).isFrei()) {
 				posy++;
-			moveifremote(direction);
+				countthesteps++;
+				moveifremote(direction);
+			}
 
 		} else if (direction == IRemoteClient.RIGHT) {
-			if (owner.getFeld(posx + 1, posy).isFrei())
+			if (owner.getFeld(posx + 1, posy).isFrei()) {
 				posx++;
-			moveifremote(direction);
+				countthesteps++;
+				moveifremote(direction);
+			}
 		} else if (direction == IRemoteClient.BOMB) {
 			if (bombcount > 0) {
 				owner.plantBomb(new Bomb(this, bombstr, bombdelay));
@@ -205,17 +212,25 @@ public abstract class AbstractPlayer implements Serializable {
 	public void moveremote(int direction) {
 		System.out.println("moveremote: " + direction);
 		if (direction == Keyset.REMUP) {
-			if (owner.getFeld(posx, posy - 1).isFrei())
+			if (owner.getFeld(posx, posy - 1).isFrei()) {
 				posy--;
+				countthesteps++;
+			}
 		} else if (direction == Keyset.REMLEFT) {
-			if (owner.getFeld(posx - 1, posy).isFrei())
+			if (owner.getFeld(posx - 1, posy).isFrei()) {
 				posx--;
+				countthesteps++;
+			}
 		} else if (direction == Keyset.REMDOWN) {
-			if (owner.getFeld(posx, posy + 1).isFrei())
+			if (owner.getFeld(posx, posy + 1).isFrei()) {
 				posy++;
+				countthesteps++;
+			}
 		} else if (direction == Keyset.REMRIGHT) {
-			if (owner.getFeld(posx + 1, posy).isFrei())
+			if (owner.getFeld(posx + 1, posy).isFrei()) {
 				posx++;
+				countthesteps++;
+			}
 		} else if (direction == Keyset.REMBOMB) {
 			if (bombcount > 0) {
 				owner.plantBomb(new Bomb(this, bombstr, bombdelay));
@@ -278,6 +293,14 @@ public abstract class AbstractPlayer implements Serializable {
 
 	public void setCountthesteps(int countthesteps) {
 		this.countthesteps = countthesteps;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

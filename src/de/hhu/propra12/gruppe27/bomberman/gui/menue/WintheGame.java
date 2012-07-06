@@ -87,7 +87,25 @@ public class WintheGame {
 		if (system.getamplayer() == 1) {
 			JButton buttonScore = new JButton(
 					"Du hast den Ausgang innerhalb von "
-							+ system.getHighscoreP2() + " Schritten erreicht");
+							+ system.getHighscoreP1() + " Schritten erreicht");
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panelwin.add(buttonScore, c);
+		}
+
+		else if (system.getamplayer() == 2 && system.getboolLAN() == false) {
+			JButton buttonScore = new JButton(system.getMessage2P());
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panelwin.add(buttonScore, c);
+		}
+
+		else if (system.getboolLAN()) {
+			JButton buttonScore = new JButton(
+					"Du hast deinen Gegner innerhalb von "
+							+ system.getHighscoreP1() + " Schritten zerstört");
 			c.gridx = 0;
 			c.gridy = 4;
 			// c.gridwidth = 2;

@@ -86,26 +86,26 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 		if (pup) {
 			if (owner.getFeld(posx, posy - 1).isFrei()) {
 				posy--;
-				if (system.getamplayer() == 1)
-					countthesteps++;
+				// if (system.getamplayer() == 1)
+				countthesteps++;
 			}
 		} else if (pleft) {
 			if (owner.getFeld(posx - 1, posy).isFrei()) {
 				posx--;
-				if (system.getamplayer() == 1)
-					countthesteps++;
+				// if (system.getamplayer() == 1)
+				countthesteps++;
 			}
 		} else if (pdown) {
 			if (owner.getFeld(posx, posy + 1).isFrei()) {
 				posy++;
-				if (system.getamplayer() == 1)
-					countthesteps++;
+				// if (system.getamplayer() == 1)
+				countthesteps++;
 			}
 		} else if (pright) {
 			if (owner.getFeld(posx + 1, posy).isFrei()) {
 				posx++;
-				if (system.getamplayer() == 1)
-					countthesteps++;
+				// if (system.getamplayer() == 1)
+				countthesteps++;
 			}
 		} else if (plant) {
 			if (bombcount > 0) {
