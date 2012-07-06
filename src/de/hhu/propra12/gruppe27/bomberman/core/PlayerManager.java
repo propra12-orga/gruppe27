@@ -88,7 +88,7 @@ public class PlayerManager implements Serializable {
 		 * im Mehrspielermodus muss abgebrochen werden, wenn nur noch 1 Spieler
 		 * lebt
 		 */
-		if (sys.getboolLAN()) {
+		else if (sys.getboolLAN()) {
 			if (countPlayersAlive() == 1) {
 
 				if (PlayerList.get(0).isAlive())
