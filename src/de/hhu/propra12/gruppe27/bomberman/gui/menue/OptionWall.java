@@ -212,6 +212,14 @@ public final class OptionWall {
 			}
 		});
 	}
+	
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 * Parameter fuer Fenster wird uebergeben
+	 */
 
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
