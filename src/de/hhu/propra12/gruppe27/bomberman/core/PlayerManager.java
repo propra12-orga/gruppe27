@@ -150,7 +150,7 @@ public class PlayerManager implements Serializable {
 
 	public void paintPlayers(Graphics g) {
 		for (int i = 0; i < PlayerList.size(); i++) {
-			PlayerList.get(i).draw(g);
+			PlayerList.get(i).draw(g, i);
 		}
 	}
 

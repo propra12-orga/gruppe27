@@ -2,6 +2,8 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -67,6 +69,7 @@ public abstract class AbstractPlayer implements Serializable {
 
 	/**
 	 * Werte werden an die Methode zurueckgeliefert
+	 * 
 	 * @param playercolor
 	 * @return this
 	 */
@@ -267,48 +270,67 @@ public abstract class AbstractPlayer implements Serializable {
 	 *            Spieler wird gezeichnet wenn lebend
 	 */
 
-	public void draw(Graphics g) {
+	private Image imgSpieler1 = Toolkit
+			.getDefaultToolkit()
+			.getImage(
+					"src/de/hhu/propra12/gruppe27/bomberman/graphics/Spielfigurblau.gif");
+	private Image imgSpieler2 = Toolkit
+			.getDefaultToolkit()
+			.getImage(
+					"src/de/hhu/propra12/gruppe27/bomberman/graphics/Spielfigurrot.gif");
+
+	public void draw(Graphics g, int playerNumber) {
 		if (alive) {
-			g.setColor(playercolor);// zeichne spieler
-			// g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 * 32);
-			g.drawLine(posx * 32, posy * 32, posx * 32 + 32, posy * 32 + 32);
-			g.drawLine(posx * 32 + 32, posy * 32, posx * 32, posy * 32 + 32);
+
+			if (playerNumber == 0) {
+				g.drawImage(imgSpieler1, posx * 32, posy * 32, 32, 32, owner);
+			}
+			if (playerNumber == 1) {
+				g.drawImage(imgSpieler2, posx * 32, posy * 32, 32, 32, owner);
+			}
+			// g.setColor(playercolor);// zeichne spieler
+			// // g.fillRect(1 * 32, 1 * 32, 1 * 32, 1 * 32);
+			// g.drawLine(posx * 32, posy * 32, posx * 32 + 32, posy * 32 + 32);
+			// g.drawLine(posx * 32 + 32, posy * 32, posx * 32, posy * 32 + 32);
+
+			// g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
+			// owner);
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @return countthesteps
-	 * Schritte des Spielers werden fuer den Highscore gezaehlt
+	 * @return countthesteps Schritte des Spielers werden fuer den Highscore
+	 *         gezaehlt
 	 */
 
 	public int getCountthesteps() {
 		return countthesteps;
 	}
-	
+
 	/**
 	 * Countthestpes werden werden aus Konstruktur aufgerufen
+	 * 
 	 * @param countthesteps
 	 */
 
 	public void setCountthesteps(int countthesteps) {
 		this.countthesteps = countthesteps;
 	}
-	
+
 	/**
 	 * 
-	 * @return name
-	 * name wird aufgerufen
+	 * @return name name wird aufgerufen
 	 */
 
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * 
 	 * @param name
-	 * Parameter name wird uebergeben
+	 *            Parameter name wird uebergeben
 	 */
 
 	public void setName(String name) {
