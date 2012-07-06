@@ -93,11 +93,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		// Ausgang wird nur bei Solospiel und im 2 Spielermodus gesetzt
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
-			e = new Exit(level.getFeld(system.getfeldx() - 2,
-					system.getfeldy() - 2));
+			setrandomexit();
 		}
-		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
-		// breite - 2);
+		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		else {
+			e = new Exit(level.getFeld(0, 0));
+		}
 
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
@@ -172,24 +173,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// PlayerList.size()
 
 		// Prüfung, ob das Spiel zu Ende ist
-		if (Players.checkGameEnde() > PlayerManager.ENDE) {
+		int intendgame = Players.checkGameEnde();
+		if (intendgame > PlayerManager.ENDE) {
 
 			// Fall, wenn es ein Singleplayerspiel ist
 			if (system.getamplayer() == 1) {
 
-				if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+				if (PlayerManager.ALLDEAD == intendgame)
 					e.doOnKill(this);
-				else if (PlayerManager.EXIT == Players.checkGameEnde())
+				else if (PlayerManager.EXIT == intendgame)
 					e.doOnExit(this);
 			}
 
 			// Fall, wenn es der 2Spieler-Modus ist
-			else if (system.getamplayer() == 2 && system.getboolLAN()) {
+			else if (PlayerManager.ALLDEAD == intendgame) {
 
-				if (PlayerManager.ALLDEAD == Players.checkGameEnde())
-					e.doOnKill(this);
-				else if (PlayerManager.EXIT == Players.checkGameEnde())
-					e.doOnExit(this);
+				// if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+				e.doOnKill(this);
+
 			}
 
 			// Fall, wenn es der Netzwerkmodus ist
@@ -362,4 +363,35 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		return e;
 	}
 
+	int exitx;
+	int exity;
+
+	private void setrandomexit() {
+
+		do {
+			this.exitx = randomsetcoordx();
+			this.exity = randomsetcoordy();
+
+		} while ((exitx == 0 || exitx == system.getfeldx() || exity == 0 || exity == system
+				.getfeldy())
+				|| ((exitx == 1 && exity == 1) || (exitx == 1 && exity == 2) || (exitx == 2 && exity == 1))
+				|| ((exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 2)
+						|| (exitx == system.getfeldx() - 3 && exity == system
+								.getfeldy() - 2) || (exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 3)));
+		e = new Exit(level.getFeld(exitx, exity));
+	}
+
+	private int randomsetcoordx() {
+		int x = system.getfeldx();
+		x = (int) (x * Math.random());
+		return x;
+	}
+
+	private int randomsetcoordy() {
+		int y = system.getfeldy();
+		y = (int) ((int) y * Math.random());
+		return y;
+	}
 }
