@@ -375,9 +375,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	private void setrandomexit() {
 
+		if (system.getrandomlvl() == true) {
+			setcoords();
+		}
+
+		else {
+			do {
+				setcoords();
+			} while ((exitx % 2) == 0 && (exity % 2) == 0);
+		}
+
+		e = new Exit(level.getFeld(exitx, exity));
+	}
+
+	private void setcoords() {
+
 		do {
-			this.exitx = randomsetcoordx();
-			this.exity = randomsetcoordy();
+			this.exitx = getrandomcoordx();
+			this.exity = getrandomcoordy();
 
 		} while ((exitx == 0 || exitx == system.getfeldx() || exity == 0 || exity == system
 				.getfeldy())
@@ -387,16 +402,16 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 						|| (exitx == system.getfeldx() - 3 && exity == system
 								.getfeldy() - 2) || (exitx == system.getfeldx() - 2 && exity == system
 						.getfeldy() - 3)));
-		e = new Exit(level.getFeld(exitx, exity));
+
 	}
 
-	private int randomsetcoordx() {
+	private int getrandomcoordx() {
 		int x = system.getfeldx();
 		x = (int) (x * Math.random());
 		return x;
 	}
 
-	private int randomsetcoordy() {
+	private int getrandomcoordy() {
 		int y = system.getfeldy();
 		y = (int) ((int) y * Math.random());
 		return y;
