@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -19,9 +20,8 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse fuer das Optionsmenue
- * Einstellungen wie Spiegelung, Standardlvl und KI
+ * @version 1.0 Klasse fuer das Optionsmenue Einstellungen wie Spiegelung,
+ *          Standardlvl und KI
  */
 
 public class Optionmenue {
@@ -39,15 +39,15 @@ public class Optionmenue {
 	 * Methode um das Optionsmenue aufzurufen
 	 * 
 	 * @param system
-	 * @return sys Systemeinstellungen koennen getaetigt werden, Buttons
-	 *         werden definiert
+	 * @return sys Systemeinstellungen koennen getaetigt werden, Buttons werden
+	 *         definiert
 	 */
 
 	public void optionaufruf() {
 
 		final JFrame frameoption = new JFrame("Optionsmenue");
 		frameoption.setVisible(true);
-		frameoption.setResizable(false);
+		// frameoption.setResizable(false);
 		frameoption.setLocationRelativeTo(null);
 		frameoption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -59,7 +59,6 @@ public class Optionmenue {
 
 		coption.gridx = 0;
 		coption.gridy = 0;
-
 
 		JButton buttonO0 = new JButton(optionicon);
 		coption.gridx = 0;
@@ -143,6 +142,9 @@ public class Optionmenue {
 		optionpanel.add(buttonO5, coption);
 
 		frameoption.setSize(frameoption.getPreferredSize());
+		int height = frameoption.getPreferredSize().height;
+		int width = frameoption.getPreferredSize().width;
+		centerWindow(width, height, frameoption);
 
 		/**
 		 * Listener werden hinzugefuegt, damit Buttons eine Funktion haben
@@ -234,8 +236,7 @@ public class Optionmenue {
 		});
 
 		/**
-		 * Fenster schliessen und zurueck gehen
-		 * Audio wird erzeugt
+		 * Fenster schliessen und zurueck gehen Audio wird erzeugt
 		 */
 
 		buttonO5.addActionListener(new ActionListener() {
@@ -308,7 +309,7 @@ public class Optionmenue {
 	}
 
 	/*
-	 * Kleine Funktion die nur in Optionsmenu benötigt wird. Daher private.
+	 * Kleine Funktion die nur in Optionsmenu benï¿½tigt wird. Daher private.
 	 */
 
 	/**
@@ -316,7 +317,7 @@ public class Optionmenue {
 	 * 
 	 * @param state
 	 * @return Gibt den String aktiviert bei True oder deaktiviert bei False
-	 *         zurück.
+	 *         zurueck.
 	 */
 
 	private String getBoolState(boolean state) {
@@ -325,5 +326,20 @@ public class Optionmenue {
 		} else {
 			return "deaktiviert";
 		}
+	}
+
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 *            Position des Fensters
+	 */
+
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 }

@@ -36,7 +36,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private Level level;
 	Timer t;
 	private PlayerManager Players;
-
 	private BombManager Bombs;
 	private Exit e;
 	private GameWindow owner;
@@ -91,24 +90,34 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
-		e = new Exit(
-				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // asugang
+
+		// Ausgang wird nur bei Solospiel und im 2 Spielermodus gesetzt
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			e = new Exit(level.getFeld(system.getfeldx() - 2,
+					system.getfeldy() - 2));
+		}
 		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
 		// breite - 2);
+
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		// if (system.getboolLAN()){
-		// // 2 Netzwerkspieler
-		// }
+		/*
+		 * Spieler werden zugefuegt
+		 * 
+		 * je nach bool Werten fuer Solo- und 2 Spielermodus oder fuer das
+		 * LanSpiel
+		 */
 
 		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
 
 			if (system.getamplayer() > 1) {
-				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(1, 1, "Spieler2",
-						this, new Keyset(2)).withColor(new Color(255, 0, 0));
+				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(
+						system.getfeldx() - 2, system.getfeldy() - 2,
+						"Spieler2", this, new Keyset(2)).withColor(new Color(
+						255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
@@ -116,23 +125,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		else {
 			if (system.getboolClient()) {
 				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
-						.getfeldy() - 2, "Spieler1", this, new Keyset(2)));
+						.getfeldy() - 2, "Spieler1", this, new Keyset(1)));
 
 				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
 						this, new Keyset(-1)).withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			} else {
 				Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this,
-						new Keyset(2)));
+						new Keyset(1)));
 
 				LanPlayer player2 = (LanPlayer) new LanPlayer(
 						system.getfeldx() - 2, system.getfeldy() - 2,
 						"Spieler2", this, new Keyset(-1)).withColor(new Color(
 						255, 0, 0));
 				Players.addPlayer(player2);
-
 			}
-
 		}
 
 		initImages();
@@ -165,9 +172,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// PlayerList.size()
 		// if (Players.checkGameEnde() > 0) {
 		//
-		// // if (Players.countPlayersAlive() < 1) {
-		// // e.doOnKill(this);
-		// // }
 		// if (1 == Players.checkGameEnde())
 		// e.doOnKill(this);
 		// if (2 == Players.checkGameEnde())
@@ -254,16 +258,20 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// implementierung eines ItemManagers
 
 		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
-		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-		// Bei bedarf eingangüberzeichnen.
-		if (!getFeld(e.getX(), e.getY()).isFrei()) {
+		// Exit wird nur im Singleplayer-Spiel überschrieben
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-			g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
-					owner);
+			// Bei bedarf eingangüberzeichnen.
+			if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
-			// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
-			// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+				g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
+						owner);
+
+				// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
+				// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+			}
 		}
 
 	}

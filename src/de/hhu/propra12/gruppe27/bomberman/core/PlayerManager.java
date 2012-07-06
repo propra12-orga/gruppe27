@@ -77,28 +77,6 @@ public class PlayerManager implements Serializable {
 		return 0;
 	}
 
-	// public boolean checkGameEnde() {// bedingungen für spielende
-	// if (countPlayersAlive() < 1) // wenn keiner mehr lebt
-	// return true;
-	// for (int i = 0; i < PlayerList.size(); i++) {
-	//
-	//
-	// if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
-	// // warum der
-	// // vergleich der
-	// // felder nicht
-	// // hingehauen hat
-	// // (:-/)
-	// && (PlayerList.get(i).getY() == owner.e.getY())) {
-	// System.out.println("X übereinstimmung!");
-	// return true;
-	//
-	// }
-	// }
-	//
-	// return false;
-	// }
-
 	/**
 	 * 
 	 * @return res Programm zaehlt lebende Spieler

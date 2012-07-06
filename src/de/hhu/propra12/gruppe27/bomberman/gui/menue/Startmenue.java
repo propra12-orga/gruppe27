@@ -37,19 +37,9 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 public class Startmenue {
 
-	// static Startmenue startmen;
 	SysEinst system = SysEinst.getSystem();
-	// SysEinstClient systemclient = SysEinstClient.getSystemClient();
-
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
-
-	// public static Startmenue getMenue() {
-	// if (startmen == null) {
-	// startmen = new Startmenue();
-	// }
-	// return startmen;
-	// }
 
 	/**
 	 * Methode um das Menue-Fenster zu oeffnen
@@ -175,8 +165,6 @@ public class Startmenue {
 
 				system.setamplayer(1);
 				system.setboolLAN(false);
-				// Ausgabe der Einstellung-Parameter
-				system.printSysEinst();
 
 				GameWindow s = new GameWindow(0);
 				framemenue.dispose();
@@ -194,12 +182,8 @@ public class Startmenue {
 
 				system.setamplayer(2);
 				system.setboolLAN(false);
-				// Ausgabe der Einstellung-Parameter
-				system.printSysEinst();
 
 				GameWindow s = new GameWindow(0);
-				// framemenue.setVisible(false);
-
 				framemenue.dispose();
 
 			}
@@ -214,16 +198,18 @@ public class Startmenue {
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				// systemclient.setboolClient(true);
 				system.setboolClient(true);
 				System.out.println("sysref clientstart:" + system);
 				system.setamplayer(2);
+
 				try {
-					// TODO
-					// hier ist eigentlich Benutzereingabe erforderlich!
-					String hostservice = "rmi://localhost:1099/host";
-					// Test URL
-					// String hostservice = "rmi://192.168.0.196:1099/host";
+					String ip = "localhost";
+					String hostservice = ("rmi://" + ip + ":1099/host");
+					/*
+					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
+					 * String hostservice = "rmi://localhost:1099/host"; Test
+					 * URL String hostservice = "rmi://192.168.0.196:1099/host";
+					 */
 
 					Client client = new Client(1090, "client", hostservice);
 				} catch (RemoteException e1) {
