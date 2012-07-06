@@ -179,13 +179,26 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 				if (PlayerManager.ALLDEAD == Players.checkGameEnde())
 					e.doOnKill(this);
-
 				else if (PlayerManager.EXIT == Players.checkGameEnde())
 					e.doOnExit(this);
 			}
 
-			else if (system.getamplayer() == 2) {
-				// TODO Behandlung der Multiplayerfälle
+			// Fall, wenn es der 2Spieler-Modus ist
+			else if (system.getamplayer() == 2 && system.getboolLAN()) {
+
+				if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+					e.doOnKill(this);
+				else if (PlayerManager.EXIT == Players.checkGameEnde())
+					e.doOnExit(this);
+			}
+
+			// Fall, wenn es der Netzwerkmodus ist
+			else if (system.getboolLAN()) {
+				if (PlayerManager.LASTMAN == Players.checkGameEnde())
+					e.doOnLastMan(this);
+				if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
+					e.doOnLastManP2(this);
+
 			}
 		}
 	}

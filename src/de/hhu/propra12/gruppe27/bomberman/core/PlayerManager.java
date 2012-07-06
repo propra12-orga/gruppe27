@@ -55,14 +55,17 @@ public class PlayerManager implements Serializable {
 	 *         ein spieler das Ende erreicht)
 	 */
 
-	public final static int ENDE = 0, ALLDEAD = 1, EXIT = 2;
+	public final static int ENDE = 0, ALLDEAD = 1, EXIT = 2, LASTMAN = 3,
+			LASTMANP2 = 4;
 	SysEinst sys = SysEinst.getSystem();
 
 	public int checkGameEnde() {
 
+		// Ende, wenn niemand mehr lebt
 		if (countPlayersAlive() < 1) {
 			return ALLDEAD;
 		}
+		// Ende, wenn der Ausgang betreten wird
 		if (sys.getamplayer() == 1) {
 			for (int i = 0; i < PlayerList.size(); i++) {
 
@@ -73,8 +76,21 @@ public class PlayerManager implements Serializable {
 						&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
 					System.out.println("X übereinstimmung!");
 					return EXIT;
-
 				}
+			}
+		}
+
+		/*
+		 * im Mehrspielermodus muss abgebrochen werden, wenn nur noch 1 Spieler
+		 * lebt
+		 */
+		if (sys.getboolLAN()) {
+			if (countPlayersAlive() == 1) {
+
+				if (PlayerList.get(0).isAlive())
+					return LASTMAN;
+				else
+					return LASTMANP2;
 			}
 		}
 
