@@ -133,6 +133,14 @@ public class Leveleditmenue {
 			}
 		});
 	}
+	
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 * Parameter fuer das Fenster werden uebergeben
+	 */
 
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
