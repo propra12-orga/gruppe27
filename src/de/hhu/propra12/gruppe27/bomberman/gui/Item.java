@@ -6,21 +6,27 @@ import java.awt.Graphics;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 /**
  * 
- * @author
+ * @author Gruppe 27
  * @version 1.0
- * Erstellung eines Items
+ * Klasse zur Erstellung eines Items
  *
  */
 
 public abstract class Item {
 	
 	/**
-	 * kann Wände zerstören
+	 * kann Waende zerstoeren
 	 */
 
 	public AbstractFeld Feld;
 	public boolean canDestroy;
 	Spielfeld pg;
+	
+	/**
+	 * 
+	 * @param g
+	 * Grafiken bei Zerstoerung
+	 */
 
 	public abstract void draw(Graphics g);
 

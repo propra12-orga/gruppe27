@@ -27,8 +27,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.Wall;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse zum Einstellen der Level
+ * @author Gruppe 27
+ * @version 1.0 
+ * Klasse LevelEditor implementiert Serializable und dient der Einstellung der Level
  * 
  */
 
@@ -38,6 +39,7 @@ public class LevelEditor extends Level implements Serializable {
 
 	/**
 	 * Feldbestimmung
+	 * Koordinaten des Feldes: x und y
 	 */
 
 	SysEinst system = SysEinst.getSystem();
@@ -59,7 +61,7 @@ public class LevelEditor extends Level implements Serializable {
 	}
 	
 	/**
-	 *  Frame initialisieren und Sichtbar machen. Feste Groeße. Mittig
+	 *  Frame initialisieren und Sichtbar machen. Feste Groesse. Mittig
 	 *	ausrichten
 	 */
 
@@ -197,7 +199,7 @@ public class LevelEditor extends Level implements Serializable {
 		}
 		
 		/**
-		 * Action Listener
+		 * Action Listener wird hinzugefuegt fuer Feld 0
 		 */
 
 		buttonF.addActionListener(new ActionListener() {
@@ -211,6 +213,10 @@ public class LevelEditor extends Level implements Serializable {
 		});
 		
 
+		/**
+		 * Action Listener wird hinzugefuegt fuer Feld 1
+		 */
+		
 		buttonW.addActionListener(new ActionListener() {
 
 			@Override
@@ -220,6 +226,10 @@ public class LevelEditor extends Level implements Serializable {
 			}
 		});
 
+		/**
+		 * Action Listener wird hinzugefuegt fuer Feld 2
+		 */
+		
 		buttonZ.addActionListener(new ActionListener() {
 
 			@Override
@@ -229,6 +239,10 @@ public class LevelEditor extends Level implements Serializable {
 			}
 		});
 
+		/**
+		 * Action Listener wird hinzugefuegt fuer Feld 3
+		 */
+		
 		buttonE.addActionListener(new ActionListener() {
 
 			@Override
@@ -238,6 +252,10 @@ public class LevelEditor extends Level implements Serializable {
 			}
 		});
 
+		/**
+		 * Action Listener wird hinzugefuegt fuer Feld 4
+		 */
+		
 		buttonV.addActionListener(new ActionListener() {
 
 			@Override
@@ -246,6 +264,11 @@ public class LevelEditor extends Level implements Serializable {
 				intfeld = 4;
 			}
 		});
+		
+		/**
+		 * ActionListener wird hinzugefuegt, 
+		 * wenn Datei falsch eingelesen wird, erscheint eine Fehlermeldung
+		 */
 
 		buttonImp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -262,6 +285,11 @@ public class LevelEditor extends Level implements Serializable {
 			}
 		});
 		
+		
+		/**
+		 * ActionListener wird hinzugefuegt
+		 * Leveleigenschaften werden defieniert
+		 */
 		
 
 		buttonEx.addActionListener(new ActionListener() {
@@ -292,6 +320,7 @@ public class LevelEditor extends Level implements Serializable {
 	 * Methoden um die einzelnen Felder zu bestimmen
 	 * @param i
 	 * @param j
+	 * Weg, Wand, Block, Exit werden definiert
 	 */
 
 	public void laxbrpath(int i, int j) {
@@ -318,7 +347,7 @@ public class LevelEditor extends Level implements Serializable {
 
 	/**
 	 * Eine Methode, die die Labels der Level-Editor Buttons in einen String
-	 * umsetzt und fï¿½r das Ende der ersten Dimension immer ein Semikolon setzt.
+	 * umsetzt und fuer das Ende der ersten Dimension immer ein Semikolon setzt.
 	 * 
 	 * @return Gibt einen String zurueck, der die Button-Labels enthaelt.
 	 * */
@@ -345,9 +374,13 @@ public class LevelEditor extends Level implements Serializable {
 					output += 4;
 				}
 			}
-			output += ";"; // Um das Ende einer Array Dimension zu deklarieren
-							// ein Semikolon. Siehe auch Levelimporter in
-							// LevelGen.java
+			output += ";"; 
+			
+			/**
+			 * Um das Ende einer Array Dimension zu deklarieren, wird ein Semikolon eingefuegt. 
+			 * Siehe auch Levelimporter in LevelGen.java
+			 */
+			
 		}
 		return output;
 	}
@@ -362,7 +395,7 @@ public class LevelEditor extends Level implements Serializable {
 	 * @param ToBeSaved
 	 *            Property-Objekt, dass geschrieben/gespeichert werden soll.
 	 * @return Gibt true bei erfolgreichem Export oder false bei nicht
-	 *         erfolgreichem Export zurï¿½ck.
+	 *         erfolgreichem Export zurueck.
 	 */
 	public boolean exportlvl(String filepath, Properties ToBeSaved) {
 		String manual = "\nInformationen:\n0 ist ein begehbarer Weg\n1 ist ein unzerstï¿½rbarer Block\n2 ist ein zerstï¿½rbarer Block\n3 ist ein Ausgang\n4 ist ein Versteck";
@@ -372,18 +405,18 @@ public class LevelEditor extends Level implements Serializable {
 																		// initialisieren
 						new FileOutputStream(filepath)); // FOS initialisieren
 
-				ToBeSaved.store(bos, "Exported BomberMan-Level" + manual); // .store
-																			// ist
-				// eine
-				// Properties
-				// Methode.
-				// ï¿½bergibt
-				// die Werte
-				// an
-				// den
-				// OutPutStream.
-				bos.close(); // Datei/Stream schlieï¿½en
-				return true; // Wenn erfolgreich true zurï¿½ckgeben
+				ToBeSaved.store(bos, "Exported BomberMan-Level" + manual); 
+				
+				/**
+				 * .store ist eine Properties Methode und uebergibt die Wertde an den OutPutStream
+				 * Datei/Stream wird geschlossen
+				 * Wenn erfolgreich, dann wird true zurueckgegeben
+				 */
+				
+
+
+				bos.close(); 
+				return true;
 			} catch (IOException eIO) {
 				System.out.println("Fehler:" + eIO.getMessage());
 				return false; // Bei IOException Konsolenausgabe + false
@@ -399,11 +432,12 @@ public class LevelEditor extends Level implements Serializable {
 	 * 
 	 * @param Levelpath
 	 * @return false/true
+	 * Damit die Datei nicht immer neu geoeffnet werden muss
+	 * Reihenfolge der Buchstabenkombinationen V, E, Z, W wird festgelegt
 	 */
 
 	public boolean importlvl(String Levelpath) {
 		try {
-			// Damit er die Datei nicht immer neu oeffnen muss.
 			String input = LevelGen.readFile(Levelpath, "LEVEL");
 			int i = 0;
 			int j = 0;

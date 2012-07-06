@@ -26,8 +26,11 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse Spielfeld implementiert ActionListener
+ * @author Gruppe 27
+ * @version 1.0
+ * Klasse Spielfeld implementiert ActionListener 
+ * private-Elemente greifen auf dazugehoerige Klassen zu
+ * 
  */
 
 public class Spielfeld extends JPanel implements ActionListener, Serializable {
@@ -42,7 +45,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
 
-	/*
+	/**
 	 * Generierung des Spielfeldes
 	 */
 
@@ -64,10 +67,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 *            Konstruktur wird erstellt
+	 * Konstruktur wird erstellt
 	 */
 
-	// Konstruktor
 	public Spielfeld(int levelnr, GameWindow owner) {
 		this(loadlevel(0), owner);
 	}
@@ -78,10 +80,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param laenge
 	 * @param breite
 	 * @param spielerzal
-	 *            Konstruktur wird erstellt
+	 * Konstruktur wird erstellt
 	 */
 
-	// Konstruktor
+	
 	public Spielfeld(Level level, GameWindow owner) {
 		this.level = level;
 		this.owner = owner;
@@ -90,29 +92,40 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
+		
+		/**
+		 * Ausgang wird nur bei einem Solospiel und im Zweispielermodus gesetzt
+		 */
 
-		// Ausgang wird nur bei Solospiel und im 2 Spielermodus gesetzt
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
 			setrandomexit();
 		}
-		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		
+		/**
+		 * Ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		 */
+		
 		else {
 			e = new Exit(level.getFeld(0, 0));
 		}
 
+		
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
+		
+		/**
+		 * Highscore wird geloescht
+		 */
 
-		// Highscore löschen
 		system.setHighscoreP1(0);
 		system.setHighscoreP2(0);
-
-		/*
-		 * Spieler werden zugefuegt
-		 * 
-		 * je nach bool Werten fuer Solo- und 2 Spielermodus oder fuer das
-		 * LanSpiel
+		
+		/**
+		 * Spieler werden hinzugefuegt, 
+		 * je nach bool-Werten fuer Solo- und Zweispielermodus oder fuer
+		 * das Lan-Spiel
 		 */
+
 
 		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
@@ -127,6 +140,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			}
 		}
 
+		
 		else {
 			if (system.getboolClient()) {
 				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
@@ -153,7 +167,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	/**
-	 * Spielstart
+	 * Spielstart wird generiert
 	 */
 
 	public void startgame() {
@@ -163,7 +177,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	/**
-	 * Zeit von Bombe laeuft ab, wenn Ende Bombe explodiert
+	 * Bomben ticken oder explodieren lassen, 
+	 * Pruefung, ob das Spiel zu Ende ist, 
+	 * was passiert, wenn das Spiel zu Ende ist,
+	 * Highscores werden in den Systemeinstellungen gespeichert
+	 * if (system.getamplayer() == 1) { --> bei einem Singlespiel
 	 */
 
 	private void StatusUpdate() {
@@ -171,19 +189,15 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// TODO Exithandling
 
 		if (!Bombs.isEmpty())
-			Bombs.CheckBombs();// bomben ticken oder explodieren lassen
+			Bombs.CheckBombs();
 
-		// Prüfung, ob das Spiel zu Ende ist
 		int intendgame = Players.checkGameEnde();
 
-		// was passiert, wenn das Spiel zu Ende ist,
 		if (intendgame > PlayerManager.ENDE) {
 
-			// highscores werden gespeichert in den Systemeinstellungen
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
 			system.setHighscoreP2(Players.PlayerList.get(0).getCountthesteps());
 
-			// Fall, wenn es ein Singleplayerspiel ist
 			if (system.getamplayer() == 1) {
 
 				if (PlayerManager.ALLDEAD == intendgame)
@@ -195,15 +209,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				}
 			}
 
-			// Fall, wenn es der 2Spieler-Modus ist
+			/**
+			 * Bei Zweispielermodus
+			 */
+			
 			else if (PlayerManager.ALLDEAD == intendgame) {
+				
+				/**
+				 * if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+				 */
 
-				// if (PlayerManager.ALLDEAD == Players.checkGameEnde())
 				e.doOnKill(this);
 
 			}
 
-			// Fall, wenn es der Netzwerkmodus ist
+			/**
+			 * Bei Netzwerkmodus
+			 */
+			
 			else if (system.getboolLAN()) {
 				if (PlayerManager.LASTMAN == Players.checkGameEnde())
 					e.doOnLastMan(this);
@@ -219,7 +242,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param x
 	 * @param y
 	 * @return level
+	 * Level wird an die Methode zurueck geliefert
+	 * Koordinaten vom Spielfeld: x und y
 	 */
+	
 
 	public AbstractFeld getFeld(int x, int y) {
 		return level.getFeld(x, y);
@@ -230,6 +256,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param input
 	 * @param x
 	 * @param y
+	 * Koordinaten von setFeld werden festgelegt
 	 */
 
 	public void setFeld(AbstractFeld input, int x, int y) {
@@ -239,6 +266,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param b
+	 * Bombe legen + neue erhalten
 	 */
 
 	public void plantBomb(Bomb b) {
@@ -248,16 +276,18 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
+	 * Bombe zerstoeren + spaeter auch Spieler treffen
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
-		Bombs.hitBombs(Feld);// Bomben zerstören
+		Bombs.hitBombs(Feld);
 		// TODO Spieler Töten
-		Players.hitPlayers(Feld);// später auch spieler treffen
+		Players.hitPlayers(Feld);
 	}
 
 	/**
-	 * Einstellungen des Levels
+	 * Einstellungen des Levels:
+	 * Breite, Laenge, Grafiken, Farbe
 	 */
 
 	protected void paintComponent(Graphics g) {
@@ -277,28 +307,28 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 					g.drawImage(imagewand, level.getFeld(i, j).getX() * 32,
 							level.getFeld(i, j).getY() * 32, 32, 32, owner);
 				}
-				// g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
-				// 32, pg);
+				/**
+				 *  g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
+				 *  32, pg);
+				 */
 			}
 
 		/**
 		 * Aussehen des Spielers wird festgelegt
+		 * Ausgabe der Bomben, Implementierung eines ItemManagers
+		 * Exit wird nur im Singleplayer-Spiel ueberschrieben
 		 */
 
+		// g.drawOval (e.getX() * 32, e.get() * 32, 31, 31);
+		
 		Players.paintPlayers(g);
 		if (!Bombs.isEmpty())
-			Bombs.paintBombs(g);// ausgabe der bomben(später auch
-								// explosionsgrafiken)
+			Bombs.paintBombs(g);
 		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
-		// implementierung eines ItemManagers
 
-		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
-
-		// Exit wird nur im Singleplayer-Spiel überschrieben
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
 			g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-			// Bei bedarf eingangüberzeichnen.
 			if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
 				g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
@@ -311,11 +341,22 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	}
 
+
+
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Players.movePlayers();
 		repaint();
 	}
+	
+/**
+ * 
+ * @author Gruppe 27
+ * Klasse TAdapter implementiert Serializable
+ * 
+ *
+ */
 
 	private class TAdapter extends KeyAdapter implements Serializable {
 
@@ -327,11 +368,17 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			// System.out.println("keypressed " + e.getKeyCode());
 		}
 
+
+		
 		public void keyReleased(KeyEvent e) {
 			Players.updatePlayers(e.getKeyCode(), false);
 			// p2.update(e.getKeyCode(), false);
 		}
 	}
+	
+	/**
+	 * Owner wird veraendert
+	 */
 
 	public void dispose() {
 
@@ -343,10 +390,20 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.owner = owner;
 	}
 
+	/**
+	 * 
+	 * @return system
+	 * system wird an die Methode zurueck geliefert
+	 */
+	
 	public SysEinst getsystem() {
 		return system;
 	}
 
+	/**
+	 * Grafiken werden eingebunden (Zertstoerbare Wand, normale Wand, Ausgang)
+	 */
+	
 	public void initImages() {
 
 		imagezerwand = Toolkit
@@ -360,21 +417,45 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
 	}
+	
+	/**
+	 * 
+	 * @return level
+	 * level wird an die Methode zurueck geliefert
+	 */
 
 	public Level getLevel() {
 		return level;
 	}
+	
+	/**
+	 * 
+	 * @return Players
+	 * Players wird an die Methode zurueck geliefert
+	 */
 
 	public PlayerManager getPlayers() {
 		return Players;
 	}
 
+	/**
+	 * 
+	 * @return e
+	 * e wird an die Methode zurueck geliefert
+	 */
+	
 	public Exit getExit() {
 		return e;
 	}
+	
+
 
 	int exitx;
 	int exity;
+	
+	/**
+	 * Zufaelliger Exit wird bestimmt
+	 */
 
 	private void setrandomexit() {
 
@@ -391,6 +472,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		e = new Exit(level.getFeld(exitx, exity));
 	}
 
+	
+	/**
+	 * Koordinaten des willkuerlich gesetzten Extis werden bestimmt
+	 */
+	
 	private void setcoords() {
 
 		do {
@@ -408,12 +494,25 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @return x
+	 * x wird an die Methode zurueck geliefert
+	 * 
+	 */
+	
 	private int getrandomcoordx() {
 		int x = system.getfeldx();
 		x = (int) (x * Math.random());
 		return x;
 	}
 
+	/**
+	 * 
+	 * @return y
+	 * y wird an die Methode zurueck geliefert
+	 */
+	
 	private int getrandomcoordy() {
 		int y = system.getfeldy();
 		y = (int) ((int) y * Math.random());
