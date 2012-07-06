@@ -9,7 +9,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 
 /**
  * 
- * @author 
+ * @author gruppe 27
  * @version 1.0
  * Klasse für die Eigenschaften eines Item
  *
@@ -18,23 +18,16 @@ import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 public class ItemManager {
 	
 	private ArrayList<Item> ItemList;
-	
-	/**
-	 * 
-	 * @param owner
-	 */
 
 	public ItemManager(Spielfeld owner) {
 		ItemList = new ArrayList<Item>();
 	}
 
-	// Funktion um zu testen ob player Items aufgenommen haben
-	// Funktion um Items durch bombe zerstÃ¶ren zu lassen
-	//
+	
 /**
  * Test, ob Item vom Player aufgenommen worden ist (Funktion)
  * Item kann durch Bombe zerstört werden (Funktion)
- * @return
+ * @return ItemList
  */
 	
 	public boolean isEmpty() {
@@ -65,7 +58,7 @@ public class ItemManager {
 	}
 	
 	/**
-	 * 
+	 * Items werden gezeichnet
 	 * @param g
 	 */
 
