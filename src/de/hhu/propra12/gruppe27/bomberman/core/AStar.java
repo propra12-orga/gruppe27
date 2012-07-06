@@ -20,9 +20,10 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.util.*;
 
 /**
- * A* algorithm implementation using the method design pattern.
- * 
- * @author Giuseppe Scrivano
+
+ * @version 1.0
+ * @author Gruppe 27
+ * Klasse AStar wird erzeugt
  */
 public abstract class AStar<T>
 {
@@ -33,8 +34,9 @@ public abstract class AStar<T>
 				public Path parent;
 				
 				/**
-				 * Default c'tor.
+				 * path und T gleich null
 				 */
+				
 				public Path(){
 						parent = null;
 						point = null;
@@ -42,9 +44,9 @@ public abstract class AStar<T>
 				}
 
 				/**
-				 * C'tor by copy another object.
+				 * Konstruktor kopiert ein Objekt
 				 * 
-				 * @param p The path object to clone.
+				 * @param p Das Path Objekt das geklont wird
 				 */
 				public Path(Path p){
 						this();
@@ -54,15 +56,12 @@ public abstract class AStar<T>
 				}
 
 				/**
-				 * Compare to another object using the total cost f.
+				 * Vergleich zu einem Objekt
 				 *
-				 * @param o The object to compare to.
-				 * @see       Comparable#compareTo()
-				 * @return <code>less than 0</code> This object is smaller
-				 * than <code>0</code>;
-				 *        <code>0</code> Object are the same.
-				 *        <code>bigger than 0</code> This object is bigger
-				 * than o.
+				 * @param o 
+				 * Das zu vergleichende Objekt
+				 * @return f
+				 * Wert f wird zureckgegeben
 				 */
 				public int compareTo(Object o){
 						Path p = (Path)o;
@@ -70,58 +69,52 @@ public abstract class AStar<T>
 				}
 
 				/**
-				 * Get the last point on the path.
 				 *
-				 * @return The last point visited by the path.
+				 * @return point
+				 * Der letzte Punkt wird zurueckgegeben (path)
 				 */
 				public T getPoint(){
 						return point;
 				}
 
 				/**
-				 * Set the 
+				 * Parameter P wird uebergeben
+				 * @param p
 				 */
+				
 				public void setPoint(T p){
 						point = p;
 				}
 		}
 
 		/**
-		 * Check if the current node is a goal for the problem.
-		 *
-		 * @param node The node to check.
-		 * @return <code>true</code> if it is a goal, <code>false</else> otherwise.
+		 * Kontrollieren des Knotens
+		 * @param node Der zu kontollierende Knoten
+		 * @return wenn der Knoten ein Ziel ist
 		 */
 		protected abstract boolean isGoal(T node);
 
 		/**
-		 * Cost for the operation to go to <code>to</code> from
-		 * <code>from</from>.
-		 *
-		 * @param from The node we are leaving.
-		 * @param to The node we are reaching.
-		 * @return The cost of the operation.
+		 * @param from dem Knoten der verlassen wird
+		 * @param to Knoten der erreicht wird
+		 * @return Aufwand
 		 */
+		
 		protected abstract Double g(T from, T to);
 
 		/**
-		 * Estimated cost to reach a goal node.
-		 * An admissible heuristic never gives a cost bigger than the real
-		 * one.
-		 * <code>from</from>.
-		 *
-		 * @param from The node we are leaving.
-		 * @param to The node we are reaching.
-		 * @return The estimated cost to reach an object.
+		 * Berechnung wie gross der Aufwand ist
+		 * @param from dem Knoten der verlassen wird
+		 * @param to Knoten der ereicht wird
+		 * @return Aufwand
 		 */
 		protected abstract Double h(T from, T to);
 
 
 		/**
-		 * Generate the successors for a given node.
-		 *
-		 * @param node The node we want to expand.
-		 * @return A list of possible next steps.
+		 * Nachfolger fuer den letzten Knoten
+		 * @param node Knoten der erreicht werden soll
+		 * @return Liste angestrebter Knoten
 		 */
 		protected abstract List<T> generateSuccessors(T node);
 
@@ -132,17 +125,18 @@ public abstract class AStar<T>
 		private int expandedCounter;
 
 		/**
-		 * Check how many times a node was expanded.
+		 * Pruefung wie oft ein Knoten erreicht wurde
 		 *
-		 * @return A counter of how many times a node was expanded.
+		 * @return exoandCounter
+		 * zaehlt wie oft ein Knoten erreicht wurde
 		 */
 		public int getExpandedCounter(){
 				return expandedCounter;
 		}
 
-		/**
-		 * Default c'tor.
-		 */
+	/**
+	 * @see oben
+	 */
 		public AStar(){
 				paths = new PriorityQueue<Path>();
 				mindists = new HashMap<T, Double>();
@@ -152,13 +146,11 @@ public abstract class AStar<T>
 
 
 		/**
-		 * Total cost function to reach the node <code>to</code> from
-		 * <code>from</code>.
-		 *  
-		 * The total cost is defined as: f(x) = g(x) + h(x).
-		 * @param from The node we are leaving.
-		 * @param to The node we are reaching.
-		 * @return The total cost.
+		
+		 * Definition des Aufwands: f(x) = g(x) + h(x).
+		 * @param from dem Knoten der verlassen wird
+		 * @param to Der Knoten der erreicht wird
+		 * @return p.f Aufwand
 		 */
 		protected Double f(Path p, T from, T to){
 				Double g =  g(from, to) + ((p.parent != null) ? p.parent.g : 0.0);
@@ -171,18 +163,15 @@ public abstract class AStar<T>
 		}
 
 		/**
-		 * Expand a path.
+		 * Entwickeln Path
 		 *
-		 * @param path The path to expand.
+		 * @param path der zu entwickelnde path
 		 */
 		private void expand(Path path){
 				T p = path.getPoint();
 				Double min = mindists.get(path.getPoint());
 
-				/*
-				 * If a better path passing for this point already exists then
-				 * don't expand it.
-				 */
+				
 				if(min == null || min.doubleValue() > path.f.doubleValue())
 						mindists.put(path.getPoint(), path.f);
 				else
@@ -201,9 +190,9 @@ public abstract class AStar<T>
 		}
 
 		/**
-		 * Get the cost to reach the last node in the path.
+		 * Aufwand den letzten Knoten zu erreichen
 		 *
-		 * @return The cost for the found path.
+		 * @return lastCost Aufwand des gefundenen Knoten
 		 */
 		public Double getCost(){
 				return lastCost;
@@ -211,19 +200,16 @@ public abstract class AStar<T>
 
 
 		/**
-		 * Find the shortest path to a goal starting from
-		 * <code>start</code>.
-		 *
-		 * @param start The initial node.
-		 * @return A list of nodes from the initial point to a goal,
-		 * <code>null</code> if a path doesn't exist.
+		 *Kuerzesten Weg zum Ziel finden
+		 * @param start der anfangs Knoten
+		 * @return A Liste der Knoten vom Anfang zum Ziel
 		 */
 		public List<T> compute(T start){
 				try{
 						Path root = new Path();
 						root.setPoint(start);
 
-						/* Needed if the initial point has a cost.  */
+					
 						f(root, start, start);
 
 						expand(root);
