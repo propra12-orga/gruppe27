@@ -115,14 +115,14 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		 */
 
 		if (system.getboolLAN() == false) {
-			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
-					1)));
+			Players.addPlayer(new KeyPlayer(1, 1, system.getnamePlayer1(),
+					this, new Keyset(1)));
 
 			if (system.getamplayer() > 1) {
 				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(
 						system.getfeldx() - 2, system.getfeldy() - 2,
-						"Spieler2", this, new Keyset(2)).withColor(new Color(
-						255, 0, 0));
+						system.getnamePlayer2(), this, new Keyset(2))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
@@ -130,19 +130,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		else {
 			if (system.getboolClient()) {
 				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
-						.getfeldy() - 2, "Spieler1", this, new Keyset(1)));
+						.getfeldy() - 2, system.getnamePlayer1(), this,
+						new Keyset(1)));
 
-				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
-						this, new Keyset(-1)).withColor(new Color(255, 0, 0));
+				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1,
+						system.getnamePlayer2(), this, new Keyset(-1))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			} else {
-				Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this,
-						new Keyset(1)));
+				Players.addPlayer(new LanPlayer(1, 1, system.getnamePlayer1(),
+						this, new Keyset(1)));
 
 				LanPlayer player2 = (LanPlayer) new LanPlayer(
 						system.getfeldx() - 2, system.getfeldy() - 2,
-						"Spieler2", this, new Keyset(-1)).withColor(new Color(
-						255, 0, 0));
+						system.getnamePlayer2(), this, new Keyset(-1))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
@@ -181,37 +183,72 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 			// highscores werden gespeichert in den Systemeinstellungen
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
-			system.setHighscoreP2(Players.PlayerList.get(0).getCountthesteps());
+			if (system.getamplayer() > 1) {
+				system.setHighscoreP2(Players.PlayerList.get(1)
+						.getCountthesteps());
+			}
+
+			// // Fall, wenn es ein Singleplayerspiel ist
+			// if (system.getamplayer() == 1) {
+			//
+			// if (PlayerManager.ALLDEAD == intendgame)
+			// e.doOnKill(this);
+			// else if (PlayerManager.EXIT == intendgame) {
+			// System.out.println("Anzahl der Schritte: "
+			// + Players.PlayerList.get(0).getCountthesteps());
+			// e.doOnExit(this);
+			// }
+			// }
+			//
+			// // Fall, wenn es der 2Spieler-Modus ist
+			// else if (PlayerManager.ALLDEAD == intendgame) {
+			//
+			// // if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+			// e.doOnKill(this);
+			// }
+			//
+			// // Fall, wenn es der Netzwerkmodus ist
+			// else if (system.getboolLAN()) {
+			// if (PlayerManager.LASTMAN == Players.checkGameEnde())
+			// e.doOnLastMan(this);
+			// if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
+			// e.doOnLastManP2(this);
+			//
+			// }
 
 			// Fall, wenn es ein Singleplayerspiel ist
-			if (system.getamplayer() == 1) {
 
-				if (PlayerManager.ALLDEAD == intendgame)
-					e.doOnKill(this);
-				else if (PlayerManager.EXIT == intendgame) {
-					System.out.println("Anzahl der Schritte: "
-							+ Players.PlayerList.get(0).getCountthesteps());
-					e.doOnExit(this);
-				}
-			}
-
-			// Fall, wenn es der 2Spieler-Modus ist
-			else if (PlayerManager.ALLDEAD == intendgame) {
-
-				// if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+			if (PlayerManager.ALLDEAD == intendgame) {
 				e.doOnKill(this);
-
 			}
 
-			// Fall, wenn es der Netzwerkmodus ist
-			else if (system.getboolLAN()) {
-				if (PlayerManager.LASTMAN == Players.checkGameEnde())
-					e.doOnLastMan(this);
-				if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
-					e.doOnLastManP2(this);
-
+			else if (PlayerManager.EXIT == intendgame) {
+				System.out.println("Anzahl der Schritte: "
+						+ Players.PlayerList.get(0).getCountthesteps());
+				e.doOnExit(this);
 			}
+
+			else if (PlayerManager.ALLDEAD == intendgame) {
+				e.doOnKill(this);
+			}
+
+			else if (PlayerManager.LASTMAN == intendgame) {
+				if (Players.PlayerList.get(0).isAlive() == true) {
+					system.setMessage2P(system.getnamePlayer1() + " hat "
+							+ system.getnamePlayer2() + " innerhalb von "
+							+ system.getHighscoreP1() + " Schritten getötet");
+				} else {
+					system.setMessage2P(system.getnamePlayer2() + " hat "
+							+ system.getnamePlayer1() + " innerhalb von "
+							+ system.getHighscoreP2() + " Schritten getötet");
+				}
+				e.doOnLastMan(this);
+
+			} else if (PlayerManager.LASTMANP2 == intendgame)
+				e.doOnLastManP2(this);
+
 		}
+
 	}
 
 	/**

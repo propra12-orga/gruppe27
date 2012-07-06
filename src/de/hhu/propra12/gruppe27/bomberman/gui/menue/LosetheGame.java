@@ -73,8 +73,18 @@ public class LosetheGame {
 
 		if (system.getamplayer() == 1) {
 			JButton buttonScore = new JButton(
-					"Bis zu deiner Vernichtung konntest du dich "
-							+ system.getHighscoreP1() + " Schritte bewegen");
+					"Bis zu deinem Freitod hast du dich "
+							+ system.getHighscoreP1() + " Schritte bewegt");
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panellose.add(buttonScore, c);
+		}
+
+		else if (system.getboolLAN()) {
+			JButton buttonScore = new JButton(
+					"Dein Gegner hat dich innerhalb von "
+							+ system.getHighscoreP2() + " Schritte vernichtet");
 			c.gridx = 0;
 			c.gridy = 4;
 			// c.gridwidth = 2;
