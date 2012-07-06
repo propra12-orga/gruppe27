@@ -73,14 +73,20 @@ public class PlayerManager implements Serializable {
 		}
 		return false;
 	}
+	
+	/**
+	 * Ende wenn niemand mehr lebt
+	 * Ende wenn der Ausgang betreten wir
+	 * @return ALLDEAD
+	 */
 
 	public int checkGameEnde() {
 
-		// Ende, wenn niemand mehr lebt
+		
 		if (countPlayersAlive() < 1) {
 			return ALLDEAD;
 		}
-		// Ende, wenn der Ausgang betreten wird
+	
 		else if (sys.getamplayer() == 1) {
 			for (int i = 0; i < PlayerList.size(); i++) {
 
@@ -99,7 +105,7 @@ public class PlayerManager implements Serializable {
 				return LASTMAN;
 		}
 
-		/*
+		/**
 		 * im Mehrspielermodus muss abgebrochen werden, wenn nur noch 1 Spieler
 		 * lebt
 		 */
@@ -121,7 +127,6 @@ public class PlayerManager implements Serializable {
 	 * @return res Programm zaehlt lebende Spieler
 	 */
 
-	// zählt lebende spieler
 	public int countPlayersAlive() {
 		int res = 0;
 		for (int i = 0; i < PlayerList.size(); i++)

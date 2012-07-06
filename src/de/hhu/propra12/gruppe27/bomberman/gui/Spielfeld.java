@@ -211,6 +211,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 			/**
 			 * Bei Netzwerkmodus
+			 * Highscore wird ausgegeben
 			 */
 
 			else if (system.getboolLAN()) {

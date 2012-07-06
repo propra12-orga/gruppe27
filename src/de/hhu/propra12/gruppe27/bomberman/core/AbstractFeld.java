@@ -187,9 +187,19 @@ public abstract class AbstractFeld implements Serializable {
 
 	}
 
+	/**
+	 * Initialisierung der Position x
+	 * @param posx
+	 */
+	
 	public void setPosx(int posx) {
 		this.posx = posx;
 	}
+	
+	/**
+	 * Initialisierung der Position y
+	 * @param posy
+	 */
 
 	public void setPosy(int posy) {
 		this.posy = posy;
