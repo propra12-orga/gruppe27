@@ -80,6 +80,7 @@ public class Exit implements Serializable {
 
 		WintheGame wingame = new WintheGame();
 		wingame.winthegame();
+		// System.out.println();
 
 		owner.dispose();
 	}

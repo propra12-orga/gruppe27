@@ -103,6 +103,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
+		// Highscore löschen
+		system.setHighscore(0);
+
 		/*
 		 * Spieler werden zugefuegt
 		 * 
@@ -182,7 +185,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				if (PlayerManager.ALLDEAD == intendgame)
 					e.doOnKill(this);
 				else if (PlayerManager.EXIT == intendgame)
-					e.doOnExit(this);
+					System.out.println("Anzahl der Schritte: "
+							+ Players.PlayerList.get(0).getCountthesteps());
+				system.setHighscore(Players.PlayerList.get(0)
+						.getCountthesteps());
+				e.doOnExit(this);
 			}
 
 			// Fall, wenn es der 2Spieler-Modus ist

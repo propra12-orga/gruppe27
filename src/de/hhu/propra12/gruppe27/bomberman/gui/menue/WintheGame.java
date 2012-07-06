@@ -37,7 +37,7 @@ public class WintheGame {
 
 		final JFrame framewin = new JFrame("Gewonnen");
 		framewin.setVisible(true);
-		framewin.setResizable(false);
+		// framewin.setResizable(false);
 		framewin.setLocationRelativeTo(null);
 		framewin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -71,10 +71,22 @@ public class WintheGame {
 		}
 
 		/**
+		 * Button, auf dem der Highscore steht
+		 */
+		// if (system.getamplayer() == 1) {
+		JButton buttonScore = new JButton("Du hast das Ziel innerhalb von "
+				+ system.getHighscore() + "Schritten erreicht");
+		c.gridx = 0;
+		c.gridy = 4;
+		// c.gridwidth = 2;
+		panelwin.add(buttonScore, c);
+		// }
+
+		/**
 		 * Button, wenn man zurueck zum Startmenue moechte
 		 */
 
-		JButton buttonW2 = new JButton("Zur\u00fcck zum Startmenue");
+		JButton buttonW2 = new JButton("Zurueck zum Startmenue");
 		c.gridx = 0;
 		c.gridy = 3;
 		// c.gridwidth = 2;

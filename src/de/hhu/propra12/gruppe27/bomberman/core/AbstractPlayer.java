@@ -37,14 +37,12 @@ public abstract class AbstractPlayer implements Serializable {
 	int bombanz;
 	int bombcount;
 	int playerWER;
+	int countthesteps = 0;
 
 	private Color playercolor = new Color(0, 255, 0);
 
 	Spielfeld owner;
 	SysEinst system = SysEinst.getSystem();
-	// SysEinstClient systemclient = SysEinstClient.getSystemClient();
-
-	// int speed;
 
 	String name;
 
@@ -261,6 +259,14 @@ public abstract class AbstractPlayer implements Serializable {
 			g.drawLine(posx * 32, posy * 32, posx * 32 + 32, posy * 32 + 32);
 			g.drawLine(posx * 32 + 32, posy * 32, posx * 32, posy * 32 + 32);
 		}
+	}
+
+	public int getCountthesteps() {
+		return countthesteps;
+	}
+
+	public void setCountthesteps(int countthesteps) {
+		this.countthesteps = countthesteps;
 	}
 
 }
