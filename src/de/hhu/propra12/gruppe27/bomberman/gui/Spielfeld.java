@@ -45,7 +45,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
 	/**
-	 * Generierung des Spielfeldes
+	 * Generierung des Levels
 	 */
 
 	private static Level loadlevel(int levelnr) {
@@ -64,8 +64,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param levelnr
 	 * @param owner
-	 *            Initialisierung von levelnr und Gamewindow
+	 * Parameter werden uebergeben
 	 */
+	
 	public Spielfeld(int levelnr, GameWindow owner) {
 		this(loadlevel(0), owner);
 	}
@@ -75,7 +76,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param level
 	 * @param owner
 	 *            Initialisierung von levelnr und GameWindow KeyListener wird
-	 *            hinzugefuegt Feld mit den Koordinaten x und y
+	 *            hinzugefuegt 
 	 */
 
 	public Spielfeld(Level level, GameWindow owner) {
@@ -88,7 +89,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setVisible(true);
 
 		/**
-		 * Ausgang wird nur bei einem Solospiel und im Zweispielermodus gesetzt
+		 * Ausgang wird nur bei einem Solospiel gesetzt
 		 */
 
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
@@ -238,8 +239,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return level Level wird an die Methode zurueck geliefert Koordinaten vom
-	 *         Spielfeld: x und y
+	 * @return level Level wird an die Methode zurueck geliefert 
+	 * Koordinaten werden initialisiert
 	 */
 
 	public AbstractFeld getFeld(int x, int y) {
@@ -261,7 +262,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param b
-	 *            Bombe legen + neue erhalten
+	 * Bombe wird gesetzt
 	 */
 
 	public void plantBomb(Bomb b) {
@@ -271,7 +272,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 *            Bombe zerstoeren
+	 * Bombe zerstoeren
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
@@ -283,6 +284,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	/**
 	 * Einstellungen des Levels: Breite, Laenge, Grafiken, Farbe
+	 * Explosion wird zurueckgesetzt
 	 */
 
 	protected void paintComponent(Graphics g) {
@@ -308,7 +310,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 							level.getFeld(i, j).getY() * 32, 32, 32, owner);
 				}
 
-				// zuruecksetzen der Explosionen
+			
 				level.setboolxplode(i, j, false);
 
 			}
@@ -349,6 +351,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @author Gruppe 27 Klasse TAdapter implementiert Serializable
+	 * KeyEvents werden hinzugefuegt
 	 * 
 	 * 
 	 */
@@ -370,7 +373,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	/**
-	 * Owner wird veraendert
+	 * Owner wird bearbeitet
 	 */
 
 	public void dispose() {
