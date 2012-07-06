@@ -83,6 +83,7 @@ public class WintheGame {
 
 		/**
 		 * Button, auf dem der Highscore steht
+		 * Schritte die man erreicht hat bis man den Ausgang erreicht hat, Schritte die man gemacht hat bis man seinen Gegner zerstoert hat
 		 */
 		if (system.getamplayer() == 1) {
 			JButton buttonScore = new JButton(

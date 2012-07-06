@@ -565,10 +565,20 @@ public class SysEinst implements Serializable {
 	public void setHighscoreP2(int highscoreP2) {
 		this.highscoreP2 = highscoreP2;
 	}
+	
+	/**
+	 * Message 2P wird aufgerufen
+	 * @return message2P
+	 */
 
 	public String getMessage2P() {
 		return message2P;
 	}
+	
+	/**
+	 * Parameter fuer messge2P wird uebergeben
+	 * @param message2p
+	 */
 
 	public void setMessage2P(String message2p) {
 		this.message2P = message2p;

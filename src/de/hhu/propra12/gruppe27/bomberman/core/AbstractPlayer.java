@@ -294,10 +294,22 @@ public abstract class AbstractPlayer implements Serializable {
 	public void setCountthesteps(int countthesteps) {
 		this.countthesteps = countthesteps;
 	}
+	
+	/**
+	 * 
+	 * @return name
+	 * name wird aufgerufen
+	 */
 
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * Parameter name wird uebergeben
+	 */
 
 	public void setName(String name) {
 		this.name = name;

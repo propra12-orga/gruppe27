@@ -68,6 +68,7 @@ public class LosetheGame {
 		
 		/**
 		 * Ausgabe des Highscores, Schritte die man bis zum Spielende machen konnte
+		 * Anzahl der Schritte die der Gegner bis zu deinem Tod gemacht hat
 		 */
 	
 
