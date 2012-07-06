@@ -1,13 +1,18 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
+import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
-import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
@@ -24,17 +29,19 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	/*
 	 * für 2 systeme wieder reinnehmen SysEinst system = SysEinst.getSystem();
 	 */
-	SysEinstClient system = SysEinstClient.getSystemClient();
+	SysEinst system = SysEinst.getSystem();
 
 	Spielfeld spielfeld = null;
 
-	public Client() throws RemoteException {
+	public Client(int regPort, String servicename, String hostservice)
+			throws RemoteException {
 
-		publishClient();
+		String strService = publishClient(regPort, servicename);
 
-		service = retrieveHostService();
+		service = retrieveService(hostservice);
 		system.setRemoteHost(service);
-		service.joingame();
+		System.out.println("serverURL " + strService);
+		service.joingame(strService);
 
 		// System.out.println("Client:");
 		// System.out.println("Players.PlayerList.size() ="
@@ -46,12 +53,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		// spielfeld.switchKeyset();
 
 		GameWindow s = new GameWindow(level);
-
-		// spielfeld.initPlayer();
-		// spielfeld.setsystem(system);
+		spielfeld = s.getspielfeld();
 
 		// TODO startgame entfernen, wenn remoteaufruf tick funktioniert.
-		spielfeld.startgame();
+		// spielfeld.startgame();
 		System.out.println("send game received");
 	}
 
@@ -61,17 +66,22 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	 * @throws RemoteException
 	 */
 
-	public void publishClient() throws RemoteException {
-
+	public String publishClient(int registryPort, String servicename)
+			throws RemoteException {
+		String str = "client not yet published";
 		try {
-
-			System.out.println("publish:    rmi://" + clientname + ":"
-					+ registryPort + "/" + servicename);
-			Naming.rebind("rmi://" + clientname + ":" + registryPort + "/"
-					+ servicename, this);
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			LocateRegistry.createRegistry(registryPort);
+			str = "rmi://" + ip + ":" + registryPort + "/" + servicename;
+			Naming.rebind(str, this);
+			// System.out.println("ip host:" + ip);
+			System.out.println(str);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
 		}
+		return str;
 	}
 
 	/**
@@ -79,28 +89,18 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	 * @return service
 	 */
 
-	public IRemoteHost retrieveHostService() {
+	public IRemoteHost retrieveService(String hostservice) {
+		IRemoteHost service_ = null;
 		try {
-			System.out.println("rmi://" + IRemoteHost.hostname + ":"
-					+ IRemoteHost.registryPort + "/" + IRemoteHost.servicename);
-			IRemoteHost service = (IRemoteHost) Naming.lookup("rmi://"
-					+ IRemoteHost.hostname + ":" + IRemoteHost.registryPort
-					+ "/" + IRemoteHost.servicename);
-
-			this.service = service;
-
+			service_ = (IRemoteHost) Naming.lookup(hostservice);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return service;
+		return service_;
 	}
 
 	@Override
@@ -119,8 +119,44 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	@Override
 	public void movep2h(int direction) throws RemoteException {
-		// TODO Auto-generated method stub
+		direction = translate(direction);
+
+		// spielfeld.getPlayers().moveremotePlayers(direction);
+		((LanPlayer) (spielfeld.getPlayers().getPlayerList().get(1)))
+				.moveremote(direction);
 
 	}
 
+	// public int translate(int direction) {
+	// if (direction == KeyEvent.VK_UP) {
+	// return Keyset.REMUP;
+	// } else if (direction == KeyEvent.VK_LEFT) {
+	// return Keyset.REMLEFT;
+	// } else if (direction == KeyEvent.VK_DOWN) {
+	// return Keyset.REMDOWN;
+	// } else if (direction == KeyEvent.VK_RIGHT) {
+	// return Keyset.REMRIGHT;
+	// } else if (direction == KeyEvent.VK_ENTER) {
+	// return Keyset.REMBOMB;
+	// }
+	// return 0; // sollte nie vorkommen!
+	// }
+
+	public int translate(int direction) {
+		System.out.println("client: translate: " + direction);
+		if (direction == IRemoteClient.UP) {
+			return Keyset.REMUP;
+		} else if (direction == IRemoteClient.LEFT) {
+			return Keyset.REMLEFT;
+		} else if (direction == IRemoteClient.DOWN) {
+			return Keyset.REMDOWN;
+
+		} else if (direction == IRemoteClient.RIGHT) {
+			return Keyset.REMRIGHT;
+		} else if (direction == IRemoteClient.BOMB) {
+			return Keyset.REMBOMB;
+		}
+		System.out.println("keine korrekte Uebersetzung moeglich");
+		return 0; // sollte nie vorkommen!
+	}
 }

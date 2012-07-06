@@ -1,6 +1,8 @@
 package de.hhu.propra12.gruppe27.bomberman.netzwerk;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -8,6 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
+import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
@@ -24,12 +27,12 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	private static final long serialVersionUID = 1L;
 	GameWindow gw;
-
+	String hostservice = "host service not yet published";
 	IRemoteClient service = null;
 	Spielfeld spielfeld;
 
-	public Host() throws RemoteException {
-		publishHost();
+	public Host(int registryPort, String servicename) throws RemoteException {
+		publishHost(registryPort, servicename);
 
 		// GameWindow s = new GameWindow(0);
 	}
@@ -39,14 +42,13 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	 */
 
 	@Override
-	public void joingame() {
+	public void joingame(String strService) {
 
-		retrieveClientService();
+		retrieveClientService(strService);
 		gw = new GameWindow(0);
 
 		this.spielfeld = gw.getspielfeld();
-		// Löschen service.sendSpielfeld(spielfeld);
-		// spielfeld.initPlayer();
+
 		System.out.println(service);
 		System.out.println("sysref h:" + SysEinst.getSystem());
 		SysEinst.getSystem().setRemoteClient(service);
@@ -69,29 +71,43 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	 * @throws RemoteException
 	 */
 
-	public void publishHost() throws RemoteException {
+	public void publishHost(int registryPort, String servicename)
+			throws RemoteException {
 
 		try {
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			// LocateRegistry.getRegistry(registryPort);
 			LocateRegistry.createRegistry(registryPort);
-			Naming.rebind("rmi://" + hostname + "/" + servicename, this);
+			String str = "rmi://" + ip + ":" + registryPort + "/" + servicename;
+			Naming.rebind(str, this);
+			// System.out.println("ip host:" + ip);
+			hostservice = str;
+			System.out.println(str);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
 		}
+	}
+
+	public String getServiceURL() {
+		return hostservice;
 	}
 
 	/**
 	 * Suche nach remote-services des Clients
 	 */
 
-	public void retrieveClientService() {
+	public void retrieveClientService(String strService) {
 		// System.out.println("fetch:    rmi://" + IRemoteClient.clientname +
 		// ":"
 		// + IRemoteClient.registryPort + "/" + IRemoteClient.servicename);
 		try {
-			service = (IRemoteClient) Naming.lookup("rmi://"
-					+ IRemoteClient.clientname + ":"
-					+ IRemoteClient.registryPort + "/"
-					+ IRemoteClient.servicename);
+
+			// besser ist folgendes:
+			// service = (IRemoteClient) LocateRegistry
+			// .getRegistry("hostip", 1099).lookup(strService);
+			service = (IRemoteClient) Naming.lookup(strService);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
@@ -114,9 +130,46 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	@Override
 	public void movep2c(int direction) throws RemoteException {
-		// TODO Auto-generated method stub
-		LanPlayer p2c = (LanPlayer) spielfeld.getPlayers().PlayerList.get(1);
-		p2c.move(direction);
+		direction = translate(direction);
+
+		// spielfeld.getPlayers().moveremotePlayers(direction);
+
+		((LanPlayer) (spielfeld.getPlayers().getPlayerList().get(1)))
+				.moveremote(direction);
+
+	}
+
+	// public int translate(int direction) {
+	// if (direction == KeyEvent.VK_UP) {
+	// return Keyset.REMUP;
+	// } else if (direction == KeyEvent.VK_LEFT) {
+	// return Keyset.REMLEFT;
+	// } else if (direction == KeyEvent.VK_DOWN) {
+	// return Keyset.REMDOWN;
+	// } else if (direction == KeyEvent.VK_RIGHT) {
+	// return Keyset.REMRIGHT;
+	// } else if (direction == KeyEvent.VK_ENTER) {
+	// return Keyset.REMBOMB;
+	// }
+	// return 0; // sollte nie vorkommen!
+	// }
+
+	public int translate(int direction) {
+		System.out.println("host: translate: " + direction);
+
+		if (direction == IRemoteClient.UP) {
+			return Keyset.REMUP;
+		} else if (direction == IRemoteClient.LEFT) {
+			return Keyset.REMLEFT;
+		} else if (direction == IRemoteClient.DOWN) {
+			return Keyset.REMDOWN;
+		} else if (direction == IRemoteClient.RIGHT) {
+			return Keyset.REMRIGHT;
+		} else if (direction == IRemoteClient.BOMB) {
+			return Keyset.REMBOMB;
+		}
+		System.out.println("keine korrekte Uebersetzung moeglich");
+		return 0; // sollte nie vorkommen!
 	}
 
 }

@@ -9,9 +9,9 @@ import java.util.Properties;
 /**
  * 
  * @author Gruppe 27
- * @version 1.0
- * Klasse Levelgenerator, Bestimmung der Eigenschaften des Spielfeldes.
- * Ist eine Unterklasse von Level und implementiert Serializable
+ * @version 1.0 Klasse Levelgenerator, Bestimmung der Eigenschaften des
+ *          Spielfeldes. Ist eine Unterklasse von Level und implementiert
+ *          Serializable
  * 
  */
 
@@ -20,10 +20,9 @@ public class LevelGen extends Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	SysEinst system = SysEinst.getSystem();
-	
+
 	/**
-	 * Initialisierung von Feldern
-	 * Boolean fuer Waende, ob zerstoerbar oder fest
+	 * Initialisierung von Feldern Boolean fuer Waende, ob zerstoerbar oder fest
 	 */
 
 	int dens = system.getdensWall();
@@ -38,11 +37,11 @@ public class LevelGen extends Level implements Serializable {
 	 * Level-Generator Konstruktor.
 	 * 
 	 * @param laengex
-	 * Laenge des Zufalls-Levels.
+	 *            Laenge des Zufalls-Levels.
 	 * @param breitey
-	 * Breite des Zufalls-Levels.
+	 *            Breite des Zufalls-Levels.
 	 * @param Spieleranzahl
-	 * Anzahl, der Spieler, die hinzugefuegt werden.
+	 *            Anzahl, der Spieler, die hinzugefuegt werden.
 	 * 
 	 */
 
@@ -51,9 +50,9 @@ public class LevelGen extends Level implements Serializable {
 		super(laengex, breitey);
 		name = "Zufallslevel";
 
-	/**
-	 * Feldaufbau
-	 */
+		/**
+		 * Feldaufbau
+		 */
 
 		do {
 
@@ -72,8 +71,6 @@ public class LevelGen extends Level implements Serializable {
 
 			generatefreistart();
 
-
-
 		} while (false == konsist);
 
 	}
@@ -84,10 +81,9 @@ public class LevelGen extends Level implements Serializable {
 	 * @param breitey
 	 * @param Spieleranzahl
 	 * @param bmllevel
-	 * Laengenkoordinate: x
-	 * Breitekoordinate: y
-	 * Initialisierung der Spielerazahl
-	 *
+	 *            Laengenkoordinate: x Breitekoordinate: y Initialisierung der
+	 *            Spielerazahl
+	 * 
 	 */
 	public LevelGen(int laengex, int breitey, int Spieleranzahl,
 			boolean bmllevel) {
@@ -137,18 +133,17 @@ public class LevelGen extends Level implements Serializable {
 	 * Generierung der Felder fuer ein zufaelliges Level
 	 * 
 	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit
-	 * unzerstoerbaren Mauern umrandet
-	 * Methode um alle zu initialisieren
+	 * unzerstoerbaren Mauern umrandet Methode um alle zu initialisieren
 	 */
 
 	private void generatelvl() {
 
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
-				
-	/** 
-	 * Umrandung des Spielfelds sind zerstoerbare Bloecke			
-	 */
+
+				/**
+				 * Umrandung des Spielfelds sind zerstoerbare Bloecke
+				 */
 
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
@@ -178,8 +173,7 @@ public class LevelGen extends Level implements Serializable {
 
 	/**
 	 * Felder eines Standardlevels werden generiert (Aussenwaende, Innenblocks,
-	 * Begehbare Felder
-	 * Methode um die Felder eines Standardlevels zu generieren
+	 * Begehbare Felder Methode um die Felder eines Standardlevels zu generieren
 	 */
 
 	private void generatestan() {
@@ -187,9 +181,9 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-		/**
-		 * Aussenwaende
-		 */
+				/**
+				 * Aussenwaende
+				 */
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
@@ -200,9 +194,9 @@ public class LevelGen extends Level implements Serializable {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-	/**
-	 *  Begehbare Felder mit zerstoerbaren Objekten
-	 */
+				/**
+				 * Begehbare Felder mit zerstoerbaren Objekten
+				 */
 				else {
 					wandoderfrei = randomBoolean(1);
 					if (wandoderfrei == true) {
@@ -216,8 +210,7 @@ public class LevelGen extends Level implements Serializable {
 	}
 
 	/**
-	 * Spiegelung des Standardlevels
-	 * Methode um das Standardlevel zu spiegeln
+	 * Spiegelung des Standardlevels Methode um das Standardlevel zu spiegeln
 	 */
 
 	private void generatestanspiegel() {
@@ -225,25 +218,24 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
- /**
-  *  Aussenwaende 
-  */
+				/**
+				 * Aussenwaende
+				 */
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-	/**
-	 *  Innenblocks
-     */
+				/**
+				 * Innenblocks
+				 */
 				else if ((i % 2 == 0) && (j % 2 == 0)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				
-	/**
-	 *  Begehbare Felder mit zerstoerbaren Objekten
-	 */
+				/**
+				 * Begehbare Felder mit zerstoerbaren Objekten
+				 */
 				else {
 					wandoderfrei = randomBoolean(1);
 					if (wandoderfrei == true) {
@@ -261,8 +253,8 @@ public class LevelGen extends Level implements Serializable {
 	}
 
 	/**
-	 * Spiegelung des Zufall-Spielfeldes
-	 * Methode um das Zufalls-Soielfeld zu spiegeln
+	 * Spiegelung des Zufall-Spielfeldes Methode um das Zufalls-Soielfeld zu
+	 * spiegeln
 	 */
 
 	private void generatespiegelung() {
@@ -270,9 +262,9 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-	/**
-	 *  Umrandung des Spielfelds sind unzerst. Blöcke
-	 */
+				/**
+				 * Umrandung des Spielfelds sind unzerst. Blöcke
+				 */
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
@@ -280,9 +272,9 @@ public class LevelGen extends Level implements Serializable {
 							- i, feldy - 1 - j, this);
 				}
 
-	/**
-	 *  Rest des Spielfeldes füllen
-	 */
+				/**
+				 * Rest des Spielfeldes füllen
+				 */
 				else {
 					wandoderfrei = randomBoolean(1);
 					zerstoderfest = randomBoolean(2);
@@ -307,25 +299,23 @@ public class LevelGen extends Level implements Serializable {
 	}
 
 	/**
-	 * Sartfelder werden begehbar gemacht, damit Spieler starten kann
-	 * Methode um die Startfelder frei zu machen
-	 * Startposition Spieler 1 freimachen
+	 * Sartfelder werden begehbar gemacht, damit Spieler starten kann Methode um
+	 * die Startfelder frei zu machen Startposition Spieler 1 freimachen
 	 */
 	private void generatefreistart() {
 		laxbr[1][1] = new Path(1, 1, this);
 		laxbr[1][2] = new Path(1, 2, this);
 		laxbr[2][1] = new Path(2, 1, this);
 
-		/** Startposition Spieler 2 freimachen
-
-		* wenn der Exit random gesetzt wird und der zweite Spieler an
-		* gegenüberliegener Position gesetzt ist
-		* if (system.getamplayer() > 1 | system.getboolKI() == true |
-		 *  system.getboolLAN() == true) {
+		/**
+		 * Startposition Spieler 2 freimachen
+		 * 
+		 * wenn der Exit random gesetzt wird und der zweite Spieler an
+		 * gegenüberliegener Position gesetzt ist if (system.getamplayer() > 1 |
+		 * system.getboolKI() == true | system.getboolLAN() == true) {
 		 */
-		
-		
-		if (1 <= system.getamplayer()) {
+
+		if (1 < system.getamplayer()) {
 			laxbr[feldx - 2][feldy - 2] = new Path(feldx - 2, feldy - 2, this);
 			laxbr[feldx - 2][feldy - 3] = new Path(feldx - 2, feldy - 3, this);
 			laxbr[feldx - 3][feldy - 2] = new Path(feldx - 3, feldy - 2, this);
@@ -346,16 +336,16 @@ public class LevelGen extends Level implements Serializable {
 			IOException {
 
 		/**
-		 *  Damit er die Datei nicht immer neu oeffnen muss.
+		 * Damit er die Datei nicht immer neu oeffnen muss.
 		 */
-		
+
 		String input = readFile(Levelpath, "LEVEL");
 		int i = 0;
 		int j = 0;
 
 		/**
-		 * Gesamten String einlesen und bis Laenge-1 durchgehen
-		 * Bei Semikolon die erste Dimension um 1 erhoehen
+		 * Gesamten String einlesen und bis Laenge-1 durchgehen Bei Semikolon
+		 * die erste Dimension um 1 erhoehen
 		 */
 
 		for (int k = 0; k < (input.length() - 1); k++) {
@@ -365,19 +355,19 @@ public class LevelGen extends Level implements Serializable {
 				i = 0;
 			}
 			/**
-			 *  Bei "1" neue feste Wand
+			 * Bei "1" neue feste Wand
 			 */
 			else if (input.charAt(k) == '1') {
 				laxbr[i][j] = new Wall(i, j, this);
 				i++;
 				/**
-				 *  Bei "2" neue zerst. Wand
+				 * Bei "2" neue zerst. Wand
 				 */
 			} else if (input.charAt(k) == '2') {
 				laxbr[i][j] = new Block(i, j, this);
 				i++;
 				/**
-				 *  Bei "0" oder allem anderem begehbaren Weg einsetzen.
+				 * Bei "0" oder allem anderem begehbaren Weg einsetzen.
 				 */
 			} else {
 				laxbr[i][j] = new Path(i, j, this);
@@ -388,32 +378,32 @@ public class LevelGen extends Level implements Serializable {
 	}
 
 	public static String readFile(String Levelpath, String ToBeLoaded)
-			throws IOException { 
-		/** Lese Leveldatei aus Pfad ein
+			throws IOException {
+		/**
+		 * Lese Leveldatei aus Pfad ein
 		 * 
 		 */
-								
 
-		Properties levelstructure = new Properties(); 
+		Properties levelstructure = new Properties();
 		/**
-		 *  Properties verwenden, um Datei zu lesen und Levelstruktur zu importieren
+		 * Properties verwenden, um Datei zu lesen und Levelstruktur zu
+		 * importieren
 		 */
-														
+
 		BufferedInputStream stream = new BufferedInputStream(
-				new FileInputStream(Levelpath)); 
+				new FileInputStream(Levelpath));
 		/**
-		 *  .bml (BomberManLevel) mit BIS einlesen
-		 *  load gehoert zur properties-Lib
-		 *  stream-close() zum schliessen des BIS
+		 * .bml (BomberManLevel) mit BIS einlesen load gehoert zur
+		 * properties-Lib stream-close() zum schliessen des BIS
 		 */
-											
-		levelstructure.load(stream); 
-		stream.close(); 
-		String data = levelstructure.getProperty(ToBeLoaded); 
+
+		levelstructure.load(stream);
+		stream.close();
+		String data = levelstructure.getProperty(ToBeLoaded);
 		/**
 		 * Lese die Levelstrukter aus der Property-Datei aus
 		 */
-																
+
 		return data;
 	}
 

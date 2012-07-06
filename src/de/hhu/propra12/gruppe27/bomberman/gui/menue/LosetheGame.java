@@ -12,22 +12,23 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse f�r verlorenes Spiel
- * 
+ * @author gruppe 27
+ * @version 1.0 Klasse fuer verlorenes Spiel Grafik wird uebergeben
  */
 
 public class LosetheGame {
 
+	SysEinst system = SysEinst.getSystem();
 	Icon loseicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/VerlorenTranz.gif");
 
 	/**
-	 * Einblendung von "Verloren"
+	 * Einblendung von "Verloren", "Noch einmal" und "Zurueck zum Startmenue"
 	 */
 
 	public void losethegame() {
@@ -59,7 +60,9 @@ public class LosetheGame {
 		c.gridx = 0;
 		c.gridy = 2;
 		// c.gridwidth = 2;
-		panellose.add(buttonL1, c);
+		if (system.getboolLAN() == false) {
+			panellose.add(buttonL1, c);
+		}
 
 		JButton buttonL2 = new JButton("Zurück zum Startmenue");
 		c.gridx = 0;

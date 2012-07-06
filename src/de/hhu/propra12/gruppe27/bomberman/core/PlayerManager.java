@@ -8,8 +8,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse des Playermanagers
+ * @author gruppe 27
+ * @version 1.0 Klasse des Playermanagers Owner wird augerufen
  */
 
 public class PlayerManager implements Serializable {
@@ -24,7 +24,7 @@ public class PlayerManager implements Serializable {
 	}
 
 	/**
-	 * Bewegung der Spieler
+	 * Bewegung der Spieler Playerlist wird um eins erhoeht wenn 0
 	 */
 
 	public void movePlayers() {
@@ -37,6 +37,7 @@ public class PlayerManager implements Serializable {
 	 * 
 	 * @param keycode
 	 * @param pressed
+	 *            Werte fuer Player wird aktualisiert
 	 */
 
 	public void updatePlayers(int keycode, boolean pressed) {
@@ -48,61 +49,57 @@ public class PlayerManager implements Serializable {
 
 	}
 
-	// liefert true zurück wenn das spiel zu ende ist(also wenn ein spieler das
-	// Ende erreicht)
-
 	/**
 	 * 
-	 * @return true/false Einstellungen f�r das Ende des Spiels
+	 * @return true liefert true zurueck wenn das spiel zu ende ist(also wenn
+	 *         ein spieler das Ende erreicht)
 	 */
 
-	public int checkGameEnde() {// bedingungen für spielende
-		if (countPlayersAlive() < 1) // wenn keiner mehr lebt
-			return 1;
-		for (int i = 0; i < PlayerList.size(); i++) {
+	public final static int ENDE = 0, ALLDEAD = 1, EXIT = 2, LASTMAN = 3,
+			LASTMANP2 = 4;
+	SysEinst sys = SysEinst.getSystem();
 
-			if ((PlayerList.get(i).getX() == owner.getExit().getX())// TODO
-																	// rausfinden
-					// warum der
-					// vergleich der
-					// felder nicht
-					// hingehauen hat
-					// (:-/)
-					&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
-				System.out.println("X übereinstimmung!");
-				return 2;
+	public int checkGameEnde() {
 
+		// Ende, wenn niemand mehr lebt
+		if (countPlayersAlive() < 1) {
+			return ALLDEAD;
+		}
+		// Ende, wenn der Ausgang betreten wird
+		if (sys.getamplayer() == 1) {
+			for (int i = 0; i < PlayerList.size(); i++) {
+
+				if ((PlayerList.get(i).getX() == owner.getExit().getX())
+				// TODO rausfinden warum der vergleich der felder nicht
+				// hingehauen
+				// hat (:-/)
+						&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
+					System.out.println("X übereinstimmung!");
+					return EXIT;
+				}
 			}
 		}
 
-		return 0;
-	}
+		/*
+		 * im Mehrspielermodus muss abgebrochen werden, wenn nur noch 1 Spieler
+		 * lebt
+		 */
+		if (sys.getboolLAN()) {
+			if (countPlayersAlive() == 1) {
 
-	// public boolean checkGameEnde() {// bedingungen für spielende
-	// if (countPlayersAlive() < 1) // wenn keiner mehr lebt
-	// return true;
-	// for (int i = 0; i < PlayerList.size(); i++) {
-	//
-	//
-	// if ((PlayerList.get(i).getX() == owner.e.getX())// TODO rausfinden
-	// // warum der
-	// // vergleich der
-	// // felder nicht
-	// // hingehauen hat
-	// // (:-/)
-	// && (PlayerList.get(i).getY() == owner.e.getY())) {
-	// System.out.println("X übereinstimmung!");
-	// return true;
-	//
-	// }
-	// }
-	//
-	// return false;
-	// }
+				if (PlayerList.get(0).isAlive())
+					return LASTMAN;
+				else
+					return LASTMANP2;
+			}
+		}
+
+		return ENDE;
+	}
 
 	/**
 	 * 
-	 * @return res Programm z�hlt lebende Spieler
+	 * @return res Programm zaehlt lebende Spieler
 	 */
 
 	// zählt lebende spieler
@@ -115,6 +112,7 @@ public class PlayerManager implements Serializable {
 	}
 
 	/**
+	 * PlayerList wird uebergeben
 	 * 
 	 * @param Feld
 	 */
@@ -131,7 +129,7 @@ public class PlayerManager implements Serializable {
 	/**
 	 * 
 	 * @param p
-	 *            Spieler kann hinzugef�gt
+	 *            Spieler kann hinzugefuegt werden
 	 */
 
 	public void addPlayer(AbstractPlayer p) {
@@ -152,7 +150,18 @@ public class PlayerManager implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * @return PlayerList PlayerList wird uebergeben
+	 */
+
 	public ArrayList<AbstractPlayer> getPlayerList() {
 		return PlayerList;
+	}
+
+	public void moveremotePlayers(int direction) {
+		for (int i = 0; i < PlayerList.size(); i++) {
+			PlayerList.get(i).moveremote(direction);
+		}
 	}
 }

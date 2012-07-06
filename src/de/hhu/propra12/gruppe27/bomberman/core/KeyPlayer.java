@@ -7,16 +7,15 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 /**
  * 
  * @author Gruppe 27
- * @version 1.0 
- * Klasse Keyplayers und Bestimmung der Faehigkeiten
- * Unterklasse vom AbstractPlayer, implementiert Serializable
+ * @version 1.0 Klasse Keyplayers und Bestimmung der Faehigkeiten Unterklasse
+ *          vom AbstractPlayer, implementiert Serializable
  */
 
 public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public Keyset Keys;
-	
+
 	/**
 	 * 
 	 * @param posx
@@ -24,10 +23,11 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 	 * @param pname
 	 * @param owner
 	 * @param Movement
-	 * Der Spieler bewegt sich auf einem zweidimensionalen Feld mit den Koordinaten y und x
-	 * 2 sind die Bombenstuecke pro Feld 
-	 * Die Bombenanzahl, die der Spieler besitzt, ist 1. Diese Bombe explodiert innerhalb von 7 Sekunden.
-	 * Die Bewegung des Spielers wird mit der Tastatur gelenkt
+	 *            Der Spieler bewegt sich auf einem zweidimensionalen Feld mit
+	 *            den Koordinaten y und x 2 sind die Bombenstuecke pro Feld Die
+	 *            Bombenanzahl, die der Spieler besitzt, ist 1. Diese Bombe
+	 *            explodiert innerhalb von 7 Sekunden. Die Bewegung des Spielers
+	 *            wird mit der Tastatur gelenkt
 	 * 
 	 * 
 	 */
@@ -52,8 +52,8 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * Bewegungseinstellungen
-	 * Wenn Taste gedrueckt wird, wird an das Programm 'pressed' uebergeben
+	 * Bewegungseinstellungen Wenn Taste gedrueckt wird, wird an das Programm
+	 * 'pressed' uebergeben
 	 */
 
 	public void update(int keycode, boolean pressed) {
@@ -84,17 +84,29 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	public void move() {
 		if (pup) {
-			if (owner.getFeld(posx, posy - 1).isFrei())
+			if (owner.getFeld(posx, posy - 1).isFrei()) {
 				posy--;
+				if (system.getamplayer() == 1)
+					countthesteps++;
+			}
 		} else if (pleft) {
-			if (owner.getFeld(posx - 1, posy).isFrei())
+			if (owner.getFeld(posx - 1, posy).isFrei()) {
 				posx--;
+				if (system.getamplayer() == 1)
+					countthesteps++;
+			}
 		} else if (pdown) {
-			if (owner.getFeld(posx, posy + 1).isFrei())
+			if (owner.getFeld(posx, posy + 1).isFrei()) {
 				posy++;
+				if (system.getamplayer() == 1)
+					countthesteps++;
+			}
 		} else if (pright) {
-			if (owner.getFeld(posx + 1, posy).isFrei())
+			if (owner.getFeld(posx + 1, posy).isFrei()) {
 				posx++;
+				if (system.getamplayer() == 1)
+					countthesteps++;
+			}
 		} else if (plant) {
 			if (bombcount > 0) {
 				owner.plantBomb(new Bomb(this, bombstr, bombdelay));

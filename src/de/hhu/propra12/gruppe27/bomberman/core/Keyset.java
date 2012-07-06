@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 /**
  * 
- * @author
- * @version 1.0 Belegung der Tasten f�r Spieler
+ * @author gruppe 27
+ * @version 1.0 Belegung der Tasten fuer Spieler, siehe KeyPlayer
  * 
  */
 
@@ -14,6 +14,10 @@ public class Keyset implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public int KeyUp, KeyDown, KeyLeft, KeyRight, KeyBomb;
+
+	public static final int REMUP = -1, REMLEFT = -2, REMDOWN = -3,
+			REMRIGHT = -4, REMBOMB = -5;
+
 	SysEinst system = SysEinst.getSystem();
 
 	public Keyset(int KeyUp, int KeyDown, int KeyLeft, int KeyRight, int KeyBomb) {
@@ -28,40 +32,56 @@ public class Keyset implements Serializable {
 	/**
 	 * 
 	 * @param presetnumber
-	 *            Tastenbelegung fuer 3 Spieler
+	 *            Tastenbelegung fuer Spieler 1 w = oben, s = unten, a= links,
+	 *            d= rechts, space = Bombe wird gelegt
 	 */
 
 	public Keyset(int presetnumber) {
 
 		if (presetnumber == 1) {
 
-			if (false == system.getboolClient() || false == system.getboolLAN()) {
-				setKeyUp(KeyEvent.VK_W); // Standartbelegung 1 (WASD/SPACE)
-				setKeyLeft(KeyEvent.VK_A);
-				setKeyDown(KeyEvent.VK_S);
-				setKeyRight(KeyEvent.VK_D);
-				setKeyBomb(KeyEvent.VK_SPACE);
-			}
+			setKeyUp(KeyEvent.VK_W);
+			setKeyLeft(KeyEvent.VK_A);
+			setKeyDown(KeyEvent.VK_S);
+			setKeyRight(KeyEvent.VK_D);
+			setKeyBomb(KeyEvent.VK_SPACE);
+
+			/**
+			 * Tastebelegung fuer Spieler 2 Pfeil rechts = rechts, Pfeil links =
+			 * links, Pfeil unten = unten, Pfeil oben = oben, Enter = Bombe wird
+			 * gelegt
+			 */
 
 		} else if (presetnumber == 2) {
 
-			if (true == system.getboolClient() || false == system.getboolLAN()) {
-				setKeyUp(KeyEvent.VK_UP); // Standartbelegung 2
-											// ("Pfeiltasten"/ENTER)
-				setKeyLeft(KeyEvent.VK_LEFT);
-				setKeyDown(KeyEvent.VK_DOWN);
-				setKeyRight(KeyEvent.VK_RIGHT);
-				setKeyBomb(KeyEvent.VK_ENTER);
-			}
-		}
-		// LanPlayer mit diesem Keyset kann nicht über Tasten gesteuert werden
-		else if (presetnumber == -1) {
+			setKeyUp(KeyEvent.VK_UP);
+			setKeyLeft(KeyEvent.VK_LEFT);
+			setKeyDown(KeyEvent.VK_DOWN);
+			setKeyRight(KeyEvent.VK_RIGHT);
+			setKeyBomb(KeyEvent.VK_ENTER);
 
 		}
+		/**
+		 * Player mit diesem Keyset kann nicht ueber Tasten gesteuert werden
+		 * (Keyset fuer RemotePlayer)
+		 */
+
+		else if (presetnumber == -1) {
+			setKeyUp(REMUP);
+			setKeyLeft(REMLEFT);
+			setKeyDown(REMDOWN);
+			setKeyRight(REMRIGHT);
+			setKeyBomb(REMBOMB);
+		}
+
+		/**
+		 * Tastenbelegung fuer Spieler 3 i = Oben, l = rechts, j = links, k =
+		 * unten, Komma = Bombe wird gelegt
+		 */
 
 		else // if (presetnumber == 3)
 		{// ---------------And so on...
-			setKeyUp(KeyEvent.VK_I); // Standartbelegung 3 (IJKL/KOMMA",")
+			setKeyUp(KeyEvent.VK_I);
 			setKeyLeft(KeyEvent.VK_J);
 			setKeyDown(KeyEvent.VK_K);
 			setKeyRight(KeyEvent.VK_L);
@@ -71,6 +91,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
+	 * Werte fuer KEyup werden uebergeben
 	 * 
 	 * @return Keyup
 	 */
@@ -89,6 +110,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
+	 * Werte fuer KeyDown werden uebergeben
 	 * 
 	 * @return KeyDown
 	 */
@@ -107,6 +129,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
+	 * Werte fuer KeyLeft werden uebergeben
 	 * 
 	 * @return KeyLeft
 	 */
@@ -125,6 +148,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
+	 * Werte f�r KeyRight werden uebergeben
 	 * 
 	 * @return KeyRight
 	 */
@@ -143,6 +167,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
+	 * Werte f�r KeyBomb werden uebergeben
 	 * 
 	 * @return KeyBomb
 	 */

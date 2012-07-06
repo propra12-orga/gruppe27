@@ -9,27 +9,24 @@ import de.hhu.propra12.gruppe27.bomberman.gui.menue.WintheGame;
 /**
  * 
  * @author Gruppe 27
- * @version 1.0
- *  Klasse zum erstellen vom Ausgang
- *  Implementiert Serializable
+ * @version 1.0 Klasse zum erstellen vom Ausgang Implementiert Serializable
  * 
  */
 
 public class Exit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-/**
- * 	private int posx, posy;
- */
+	/**
+	 * private int posx, posy;
+	 */
 	private AbstractFeld Feld;
 
 	/**
 	 * Groesse des Feldes
 	 * 
 	 * @param Feld
-	 * mit den Koordinaten x und y
-	 * --> posx = Feld.getX();
-	 *     posy = Feld.getY();
+	 *            mit den Koordinaten x und y --> posx = Feld.getX(); posy =
+	 *            Feld.getY();
 	 */
 
 	public Exit(AbstractFeld Feld) {
@@ -41,8 +38,7 @@ public class Exit implements Serializable {
 	 * Beim Erreichen des Ausgangs --> "Sie haben das ende erreicht"
 	 * 
 	 * @param owner
-	 * --> Startmenue start = new Startmenue();
-	 *     start.menueaufruf();
+	 * 
 	 */
 
 	public void doOnExit(Spielfeld owner) {
@@ -74,11 +70,44 @@ public class Exit implements Serializable {
 
 	/**
 	 * 
+	 * @param owner
+	 * 
+	 */
+
+	public void doOnLastMan(Spielfeld owner) {
+		owner.setVisible(false);
+		owner.t.stop();
+
+		WintheGame wingame = new WintheGame();
+		wingame.winthegame();
+		// System.out.println();
+
+		owner.dispose();
+	}
+
+	/**
+	 * 
+	 * @param owner
+	 * 
+	 */
+
+	public void doOnLastManP2(Spielfeld owner) {
+		owner.setVisible(false);
+		owner.t.stop();
+
+		LosetheGame losegame = new LosetheGame();
+		losegame.losethegame();
+
+		owner.dispose();
+	}
+
+	/**
+	 * 
 	 * @return
 	 */
 
 	public int getX() {
-//		return posx;
+		// return posx;
 		return Feld.getX();
 	}
 
@@ -87,9 +116,9 @@ public class Exit implements Serializable {
 	 * @param posx
 	 */
 
-//	public void setPosx(int posx) {
-//		this.posx = posx;
-//	}
+	// public void setPosx(int posx) {
+	// this.posx = posx;
+	// }
 
 	/**
 	 * 
@@ -97,7 +126,7 @@ public class Exit implements Serializable {
 	 */
 
 	public int getY() {
-//		return posy;
+		// return posy;
 		return Feld.getY();
 	}
 
@@ -106,9 +135,9 @@ public class Exit implements Serializable {
 	 * @param posy
 	 */
 
-//	public void setPosy(int posy) {
-//		this.posy = posy;
-//	}
+	// public void setPosy(int posy) {
+	// this.posy = posy;
+	// }
 
 	/**
 	 * 

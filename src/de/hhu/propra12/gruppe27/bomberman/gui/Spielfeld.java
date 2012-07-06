@@ -36,12 +36,15 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private Level level;
 	Timer t;
 	private PlayerManager Players;
-
 	private BombManager Bombs;
 	private Exit e;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand;
+
+	/*
+	 * Generierung des Spielfeldes
+	 */
 
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
@@ -87,40 +90,61 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setFocusable(true);
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
-		e = new Exit(
-				level.getFeld(system.getfeldx() - 2, system.getfeldy() - 2)); // asugang
-		// level.setFeld(new Path(laenge - 2, breite - 2, level), laenge - 2,
-		// breite - 2);
+
+		// Ausgang wird nur bei Solospiel und im 2 Spielermodus gesetzt
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			setrandomexit();
+		}
+		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		else {
+			e = new Exit(level.getFeld(0, 0));
+		}
+
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		// if (system.getboolLAN()){
-		// // 2 Netzwerkspieler
-		// }
+		// Highscore löschen
+		system.setHighscore(0);
+
+		/*
+		 * Spieler werden zugefuegt
+		 * 
+		 * je nach bool Werten fuer Solo- und 2 Spielermodus oder fuer das
+		 * LanSpiel
+		 */
 
 		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
 					1)));
 
 			if (system.getamplayer() > 1) {
-				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(1, 1, "Spieler2",
-						this, new Keyset(2)).withColor(new Color(255, 0, 0));
+				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(
+						system.getfeldx() - 2, system.getfeldy() - 2,
+						"Spieler2", this, new Keyset(2)).withColor(new Color(
+						255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
 
 		else {
-			Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this, new Keyset(
-					1)));
+			if (system.getboolClient()) {
+				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
+						.getfeldy() - 2, "Spieler1", this, new Keyset(1)));
 
-			LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
-					this, new Keyset(2)).withColor(new Color(255, 0, 0));
-			Players.addPlayer(player2);
+				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
+						this, new Keyset(-1)).withColor(new Color(255, 0, 0));
+				Players.addPlayer(player2);
+			} else {
+				Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this,
+						new Keyset(1)));
 
+				LanPlayer player2 = (LanPlayer) new LanPlayer(
+						system.getfeldx() - 2, system.getfeldy() - 2,
+						"Spieler2", this, new Keyset(-1)).withColor(new Color(
+						255, 0, 0));
+				Players.addPlayer(player2);
+			}
 		}
-		// TODO Abfrage für Netzwerkspieler
-
-		// TODO Netzwerk übergabe von spielfeld
 
 		initImages();
 		this.repaint();
@@ -150,16 +174,41 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		// }
 		// PlayerList.size()
-		// if (Players.checkGameEnde() > 0) {
-		//
-		// // if (Players.countPlayersAlive() < 1) {
-		// // e.doOnKill(this);
-		// // }
-		// if (1 == Players.checkGameEnde())
-		// e.doOnKill(this);
-		// if (2 == Players.checkGameEnde())
-		// e.doOnExit(this);
-		// }
+
+		// Prüfung, ob das Spiel zu Ende ist
+		int intendgame = Players.checkGameEnde();
+		if (intendgame > PlayerManager.ENDE) {
+
+			// Fall, wenn es ein Singleplayerspiel ist
+			if (system.getamplayer() == 1) {
+
+				if (PlayerManager.ALLDEAD == intendgame)
+					e.doOnKill(this);
+				else if (PlayerManager.EXIT == intendgame)
+					System.out.println("Anzahl der Schritte: "
+							+ Players.PlayerList.get(0).getCountthesteps());
+				system.setHighscore(Players.PlayerList.get(0)
+						.getCountthesteps());
+				e.doOnExit(this);
+			}
+
+			// Fall, wenn es der 2Spieler-Modus ist
+			else if (PlayerManager.ALLDEAD == intendgame) {
+
+				// if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+				e.doOnKill(this);
+
+			}
+
+			// Fall, wenn es der Netzwerkmodus ist
+			else if (system.getboolLAN()) {
+				if (PlayerManager.LASTMAN == Players.checkGameEnde())
+					e.doOnLastMan(this);
+				if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
+					e.doOnLastManP2(this);
+
+			}
+		}
 	}
 
 	/**
@@ -241,16 +290,20 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		// implementierung eines ItemManagers
 
 		// g.drawOval(e.getX() * 32, e.getY() * 32, 31, 31);
-		g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-		// Bei bedarf eingangüberzeichnen.
-		if (!getFeld(e.getX(), e.getY()).isFrei()) {
+		// Exit wird nur im Singleplayer-Spiel überschrieben
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
 
-			g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
-					owner);
+			// Bei bedarf eingangüberzeichnen.
+			if (!getFeld(e.getX(), e.getY()).isFrei()) {
 
-			// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
-			// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+				g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
+						owner);
+
+				// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
+				// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
+			}
 		}
 
 	}
@@ -268,6 +321,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		public void keyPressed(KeyEvent e) {
 			Players.updatePlayers(e.getKeyCode(), true);
 			// p2.update(e.getKeyCode(), true);
+			// System.out.println("keypressed " + e.getKeyCode());
 		}
 
 		public void keyReleased(KeyEvent e) {
@@ -316,4 +370,35 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		return e;
 	}
 
+	int exitx;
+	int exity;
+
+	private void setrandomexit() {
+
+		do {
+			this.exitx = randomsetcoordx();
+			this.exity = randomsetcoordy();
+
+		} while ((exitx == 0 || exitx == system.getfeldx() || exity == 0 || exity == system
+				.getfeldy())
+				|| ((exitx == 1 && exity == 1) || (exitx == 1 && exity == 2) || (exitx == 2 && exity == 1))
+				|| ((exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 2)
+						|| (exitx == system.getfeldx() - 3 && exity == system
+								.getfeldy() - 2) || (exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 3)));
+		e = new Exit(level.getFeld(exitx, exity));
+	}
+
+	private int randomsetcoordx() {
+		int x = system.getfeldx();
+		x = (int) (x * Math.random());
+		return x;
+	}
+
+	private int randomsetcoordy() {
+		int y = system.getfeldy();
+		y = (int) ((int) y * Math.random());
+		return y;
+	}
 }

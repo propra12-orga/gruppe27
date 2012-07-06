@@ -9,9 +9,9 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
  * 
  * @author
  * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldg��e = feldx, feldy, denswall = Mauerdichte, randomlvl =
- *         Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unerst�rbare W�nde im Level, namePlayer =
+ *         Spieler, Feldgoesse = feldx, feldy, denswall = Mauerdichte, randomlvl
+ *         = Generiertes Level, spiegelung = Level soll gespiegelt werden,
+ *         standardlvl = Festgelegte unzersoerbare Waende im Level, namePlayer =
  *         Name des Spielers
  */
 
@@ -25,6 +25,7 @@ public class SysEinst implements Serializable {
 	int feldy = 15;
 	int feldybml;
 	int densWall = 1;
+	int highscore;
 	boolean randomlvl = true;
 	boolean spiegelung = false;
 	boolean standardlvl = true;
@@ -63,7 +64,7 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * 
-	 * @return amplayer
+	 * @return amplayer amplayer wird uebergeben
 	 */
 
 	// get-Methoden
@@ -73,6 +74,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldx Werte werden ueberliefert
 	 * 
 	 * @return feldx
 	 */
@@ -82,6 +84,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldxbml Wetre werden uebergeben
 	 * 
 	 * @return feldxbml
 	 */
@@ -90,6 +93,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldy Werte werden uebergeben
 	 * 
 	 * @return feldy
 	 */
@@ -99,6 +103,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldybml Werte werden uebergeben
 	 * 
 	 * @return feldybml
 	 */
@@ -108,6 +113,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * denswall Werte werden uebergeben
 	 * 
 	 * @return denswall
 	 */
@@ -116,7 +122,12 @@ public class SysEinst implements Serializable {
 		return densWall;
 	}
 
+	public int getHighscore() {
+		return highscore;
+	}
+
 	/**
+	 * randomlvl Werte werden uebergeben
 	 * 
 	 * @return randomlvl
 	 */
@@ -126,6 +137,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * spiegelgung Werte werden uebergeben
 	 * 
 	 * @return spiegelung
 	 */
@@ -135,6 +147,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/***
+	 * standardlvl Werte werden uebergeben
 	 * 
 	 * @return standardlvl
 	 */
@@ -144,6 +157,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * bmllevel Werte werden uebergeben
 	 * 
 	 * @return bmllevel
 	 */
@@ -153,6 +167,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolKI Werte werden uebergeben
 	 * 
 	 * @return boolKI
 	 */
@@ -162,6 +177,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolLAN Werte werden uebergeben
 	 * 
 	 * @return boolLAN
 	 */
@@ -171,6 +187,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolClient Werte werden uebergeben
 	 * 
 	 * @return boolClient
 	 */
@@ -179,9 +196,21 @@ public class SysEinst implements Serializable {
 		return boolClient;
 	}
 
+	/**
+	 * sound Werte werden uebergeben
+	 * 
+	 * @return sound
+	 */
+
 	public boolean getSound() {
 		return sound;
 	}
+
+	/**
+	 * MouseOverBool Werte werden uebergben
+	 * 
+	 * @return MouseOverBool
+	 */
 
 	public boolean getMouseOverBool() {
 		// TODO Auto-generated method stub
@@ -189,6 +218,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * levelpath Werte werden uebergeben
 	 * 
 	 * @return levelpath
 	 */
@@ -197,11 +227,18 @@ public class SysEinst implements Serializable {
 		return levelpath;
 	}
 
+	/**
+	 * levelname Werte werden uebergeben
+	 * 
+	 * @return levelname
+	 */
+
 	public String getlevelname() {
 		return levelname;
 	}
 
 	/**
+	 * namePlayer 1 Werte werden uebergeben
 	 * 
 	 * @return namePlayer1
 	 */
@@ -211,6 +248,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer 2 Werte werden uebergeben
 	 * 
 	 * @return namePlayer2
 	 */
@@ -220,6 +258,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer3 Werte werden uebergeben
 	 * 
 	 * @return namePlayer3
 	 */
@@ -229,6 +268,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer4 Werte werden uebergeben
 	 * 
 	 * @return namePlayer4
 	 */
@@ -238,6 +278,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * remotehost Werte werden uebergeben
 	 * 
 	 * @return remotehost
 	 */
@@ -247,6 +288,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * remotehost Werte werden uebergeben
 	 * 
 	 * @return remotehost
 	 */
@@ -258,6 +300,7 @@ public class SysEinst implements Serializable {
 	// set-Methoden
 
 	/**
+	 * amplyers wird aufgerufen
 	 * 
 	 * @param players
 	 */
@@ -267,6 +310,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldx wird aufgerufen
 	 * 
 	 * @param feldx
 	 */
@@ -276,6 +320,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldy wird aufgerufen
 	 * 
 	 * @param feldy
 	 */
@@ -285,6 +330,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldx wird aufgerufen
 	 * 
 	 * @param feldx
 	 */
@@ -294,6 +340,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * feldy wird aufgerufen
 	 * 
 	 * @param feldy
 	 */
@@ -303,6 +350,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * densWall wird aufgerufen
 	 * 
 	 * @param densWall
 	 */
@@ -311,7 +359,12 @@ public class SysEinst implements Serializable {
 		this.densWall = densWall;
 	}
 
+	public void setHighscore(int highscore) {
+		this.highscore = highscore;
+	}
+
 	/**
+	 * lvl wird aufgerufen
 	 * 
 	 * @param lvl
 	 */
@@ -321,6 +374,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * spiegelung wird aufgerufen
 	 * 
 	 * @param spiegelung
 	 */
@@ -330,6 +384,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * lvl wird aufgerufen
 	 * 
 	 * @param lvl
 	 */
@@ -339,6 +394,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * bmllevel wird aufgerufen
 	 * 
 	 * @param bmllevel
 	 */
@@ -348,6 +404,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolKI wird aufgerufen
 	 * 
 	 * @param boolKI
 	 */
@@ -357,6 +414,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolLan wird aufgerufen
 	 * 
 	 * @param boolLAN
 	 */
@@ -366,6 +424,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * boolClient wird aufgerufen
 	 * 
 	 * @param boolClient
 	 */
@@ -374,15 +433,28 @@ public class SysEinst implements Serializable {
 		this.boolClient = boolClient;
 	}
 
+	/**
+	 * sound wird aufgerufen
+	 * 
+	 * @param sound
+	 */
+
 	public void setSound(boolean sound) {
 		this.sound = sound;
 	}
+
+	/**
+	 * MouseOverBool wird aufgerufen
+	 * 
+	 * @param MouseOverBool
+	 */
 
 	public void setMouseOverBool(boolean MouseOverBool) {
 		this.MouseOverBool = MouseOverBool;
 	}
 
 	/**
+	 * namePlayer1 wird aufgerufen
 	 * 
 	 * @param namePlayer1
 	 */
@@ -391,11 +463,18 @@ public class SysEinst implements Serializable {
 		this.levelpath = levelpath;
 	}
 
+	/**
+	 * levelname wird aufgerufen
+	 * 
+	 * @param levelname
+	 */
+
 	public void setlevelname(String levelname) {
 		this.levelname = levelname;
 	}
 
 	/**
+	 * namePlayer1 wird aufgerufen
 	 * 
 	 * @param namePlayer1
 	 */
@@ -405,6 +484,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer2 wird aufgerufen
 	 * 
 	 * @param namePlayer2
 	 */
@@ -414,6 +494,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer3 wird aufgerufen
 	 * 
 	 * @param namePlayer3
 	 */
@@ -423,6 +504,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * namePlayer4 wird aufgerufen
 	 * 
 	 * @param namePlayer4
 	 */
@@ -432,6 +514,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * remotehost wird aufgerufen
 	 * 
 	 * @return remotehost
 	 */
@@ -441,6 +524,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
+	 * remotehost wird aufgerufen
 	 * 
 	 * @return remotehost
 	 */

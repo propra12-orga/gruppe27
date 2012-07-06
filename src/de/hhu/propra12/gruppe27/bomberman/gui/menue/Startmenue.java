@@ -22,7 +22,6 @@ import javax.swing.JToggleButton;
 
 import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
-import de.hhu.propra12.gruppe27.bomberman.core.SysEinstClient;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.OpenFileDialog;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
@@ -30,7 +29,7 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
  * 
- * @author
+ * @author gruppe 27
  * @version 1.0 Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
  *          joinen und hosten, Einstellungen setzen)
  * 
@@ -38,25 +37,13 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 public class Startmenue {
 
-	// static Startmenue startmen;
 	SysEinst system = SysEinst.getSystem();
-	SysEinstClient systemclient = SysEinstClient.getSystemClient();
-
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
 	/**
 	 * Methode um das Menue-Fenster zu oeffnen
-	 * 
-	 * @return
 	 */
-
-	// public static Startmenue getMenue() {
-	// if (startmen == null) {
-	// startmen = new Startmenue();
-	// }
-	// return startmen;
-	// }
 
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -74,7 +61,9 @@ public class Startmenue {
 		c.gridx = 0;
 		c.gridy = 0;
 
-		// Button mit Bild als erstes
+		/**
+		 * Button mit erstem Bild
+		 */
 
 		JButton buttonS0 = new JButton(icon);
 		c.gridx = 0;
@@ -176,13 +165,15 @@ public class Startmenue {
 
 				system.setamplayer(1);
 				system.setboolLAN(false);
-				// Ausgabe der Einstellung-Parameter
-				system.printSysEinst();
 
 				GameWindow s = new GameWindow(0);
 				framemenue.dispose();
 			}
 		});
+
+		/**
+		 * Variablen koennen aus System gezogen werden
+		 */
 
 		buttonS2.addActionListener(new ActionListener() {
 
@@ -191,38 +182,47 @@ public class Startmenue {
 
 				system.setamplayer(2);
 				system.setboolLAN(false);
-				// Ausgabe der Einstellung-Parameter
-				system.printSysEinst();
 
 				GameWindow s = new GameWindow(0);
-				// framemenue.setVisible(false);
-
 				framemenue.dispose();
-				// Variablen können aus "system" gezogen werden
+
 			}
 		});
 
-		// Join Multiplayer
+		/**
+		 * Action Listener fuer Join Multiplayer
+		 */
 		buttonS3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				system.setboolLAN(true);
-				systemclient.setboolClient(true);
+				system.setboolClient(true);
 				System.out.println("sysref clientstart:" + system);
 				system.setamplayer(2);
+
 				try {
-					Client client = new Client();
+					String ip = "localhost";
+					String hostservice = ("rmi://" + ip + ":1099/host");
+					/*
+					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
+					 * String hostservice = "rmi://localhost:1099/host"; Test
+					 * URL String hostservice = "rmi://192.168.0.196:1099/host";
+					 */
+
+					Client client = new Client(1090, "client", hostservice);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
 			}
 		});
 
-		// Host Multiplayer
+		/**
+		 * ActionListener fuer Host Multiplayer
+		 */
+
 		buttonS4.addActionListener(new ActionListener() {
 
 			@Override
@@ -232,7 +232,8 @@ public class Startmenue {
 				system.setboolClient(false);
 				system.setamplayer(2);
 				try {
-					Host host = new Host();
+					// default registry port 1099
+					Host host = new Host(1099, "host");
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -242,11 +243,11 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen f�r Button buttonbmlimport
+		 * Aktionen fuer Button buttonbmlimport
 		 * 
-		 * �ffnet ein OpenFileDialog zum �bergeben des Pfads der zu ladenden
+		 * oeffnet ein OpenFileDialog zum uebergeben des Pfads der zu ladenden
 		 * Datei. Sollte abgebrochen werden, wird der Toggle Button
-		 * zur�ckgesetzt und es wird kein Level geladen.
+		 * zurueckgesetzt und es wird kein Level geladen.
 		 * 
 		 */
 
@@ -285,16 +286,16 @@ public class Startmenue {
 												// Nutzer informieren.
 					}
 
+					/**
+					 * Umbennen des Buttons. Nutzer wird informiert
+					 */
+
 				} catch (IOException eIO) {
 
 					System.out.println("Fehler: " + system.getlevelpath()
 							+ " konnte nicht geladen werden!\n"
 							+ eIO.getMessage());// Konsolenausgabe zum debuggen
-					buttonbmlimport.setText("Fehler beim Laden des Levels!"); // Umbenennen
-																				// des
-																				// Buttons.
-																				// Nutzer
-																				// informieren.
+					buttonbmlimport.setText("Fehler beim Laden des Levels!");
 
 				} catch (NumberFormatException eNFE) {
 
@@ -305,11 +306,7 @@ public class Startmenue {
 									+ eNFE.getMessage());// Konsolenausgabe zum
 															// debuggen
 					buttonbmlimport
-							.setText("Fehler beim einlesen der Levellaenge/-breite!"); // Umbenennen
-																						// des
-																						// Buttons.
-																						// Nutzer
-																						// informieren.
+							.setText("Fehler beim einlesen der Levellaenge/-breite!");
 				}
 
 			}
@@ -349,7 +346,7 @@ public class Startmenue {
 		});
 
 		/**
-		 * Aktionen f�r Button 6
+		 * Aktionen fuer Button 6
 		 * 
 		 * Alle Fenster und das Spiel werden geschlossen
 		 */
@@ -362,9 +359,11 @@ public class Startmenue {
 			}
 		});
 
-		/*
-		 * Mouse Overs (Audio)
+		/**
+		 * MouseOver fuer AudioDatein Beim fahren ueber die Knoepfe erscheint
+		 * ein Sound
 		 */
+
 		if (system.getMouseOverBool()) {
 
 			buttonS1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -434,10 +433,15 @@ public class Startmenue {
 		}
 	}
 
-	/*
-	 * Methode um die Größe des einzulesenden Spielfeldes in die
-	 * Systemeinstellungen zu schreiben
+	/**
+	 * 
+	 * @param Levelpath
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 *             Methode um die Groesse des einzulesenden Spielfeldes in die
+	 *             Systemeinstellungen zu schreiben
 	 */
+
 	public void setfeld(String Levelpath) throws NumberFormatException,
 			IOException {
 
@@ -464,6 +468,14 @@ public class Startmenue {
 		String data = levelfile.getProperty(ToBeLoaded);
 		return data;
 	}
+
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 *            Position des Fensters
+	 */
 
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()

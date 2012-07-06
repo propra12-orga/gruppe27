@@ -12,17 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse f�r das Gewinnen des Spiels
+ * @author gruppe 27
+ * @version 1.0 Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird
+ *          aufgerufen
  * 
  */
 
 public class WintheGame {
 
+	SysEinst system = SysEinst.getSystem();
 	Icon winicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranz.gif");
 
@@ -34,7 +37,7 @@ public class WintheGame {
 
 		final JFrame framewin = new JFrame("Gewonnen");
 		framewin.setVisible(true);
-		framewin.setResizable(false);
+		// framewin.setResizable(false);
 		framewin.setLocationRelativeTo(null);
 		framewin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -56,20 +59,34 @@ public class WintheGame {
 		panelwin.add(buttonW0, c);
 
 		/**
-		 * Button, f�r einen neuen Spielstart
+		 * Button, fuer einen neuen Spielstart
 		 */
 
 		JButton buttonW1 = new JButton("Noch einmal!");
 		c.gridx = 0;
 		c.gridy = 2;
 		// c.gridwidth = 2;
-		panelwin.add(buttonW1, c);
+		if (system.getboolLAN() == false) {
+			panelwin.add(buttonW1, c);
+		}
 
 		/**
-		 * Button, wenn man zur�ck zum Startmen� m�chte
+		 * Button, auf dem der Highscore steht
+		 */
+		// if (system.getamplayer() == 1) {
+		JButton buttonScore = new JButton("Du hast das Ziel innerhalb von "
+				+ system.getHighscore() + "Schritten erreicht");
+		c.gridx = 0;
+		c.gridy = 4;
+		// c.gridwidth = 2;
+		panelwin.add(buttonScore, c);
+		// }
+
+		/**
+		 * Button, wenn man zurueck zum Startmenue moechte
 		 */
 
-		JButton buttonW2 = new JButton("Zur\u00fcck zum Startmenue");
+		JButton buttonW2 = new JButton("Zurueck zum Startmenue");
 		c.gridx = 0;
 		c.gridy = 3;
 		// c.gridwidth = 2;
@@ -85,6 +102,10 @@ public class WintheGame {
 				framewin.dispose();
 			}
 		});
+
+		/**
+		 * Action Listener wird hinzugefuegt
+		 */
 
 		buttonW2.addActionListener(new ActionListener() {
 

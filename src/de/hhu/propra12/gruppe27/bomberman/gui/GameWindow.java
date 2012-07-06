@@ -30,7 +30,6 @@ public class GameWindow extends JFrame {
 		 * Festlegung der Groesse
 		 */
 
-		// this.system = SysEinst.getSystem();
 		this.spielfeld = new Spielfeld(levelnr, this);
 
 		add(spielfeld);
