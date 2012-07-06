@@ -188,36 +188,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 						.getCountthesteps());
 			}
 
-			// // Fall, wenn es ein Singleplayerspiel ist
-			// if (system.getamplayer() == 1) {
-			//
-			// if (PlayerManager.ALLDEAD == intendgame)
-			// e.doOnKill(this);
-			// else if (PlayerManager.EXIT == intendgame) {
-			// System.out.println("Anzahl der Schritte: "
-			// + Players.PlayerList.get(0).getCountthesteps());
-			// e.doOnExit(this);
-			// }
-			// }
-			//
-			// // Fall, wenn es der 2Spieler-Modus ist
-			// else if (PlayerManager.ALLDEAD == intendgame) {
-			//
-			// // if (PlayerManager.ALLDEAD == Players.checkGameEnde())
-			// e.doOnKill(this);
-			// }
-			//
-			// // Fall, wenn es der Netzwerkmodus ist
-			// else if (system.getboolLAN()) {
-			// if (PlayerManager.LASTMAN == Players.checkGameEnde())
-			// e.doOnLastMan(this);
-			// if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
-			// e.doOnLastManP2(this);
-			//
-			// }
-
-			// Fall, wenn es ein Singleplayerspiel ist
-
 			if (PlayerManager.ALLDEAD == intendgame) {
 				e.doOnKill(this);
 			}
