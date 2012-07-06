@@ -12,18 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird aufgerufen
+ * @version 1.0 Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird
+ *          aufgerufen
  * 
  */
 
 public class WintheGame {
 
+	SysEinst system = SysEinst.getSystem();
 	Icon winicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranz.gif");
 
@@ -64,7 +66,9 @@ public class WintheGame {
 		c.gridx = 0;
 		c.gridy = 2;
 		// c.gridwidth = 2;
-		panelwin.add(buttonW1, c);
+		if (system.getboolLAN() == false) {
+			panelwin.add(buttonW1, c);
+		}
 
 		/**
 		 * Button, wenn man zurueck zum Startmenue moechte
@@ -90,7 +94,7 @@ public class WintheGame {
 		/**
 		 * Action Listener wird hinzugefuegt
 		 */
-		
+
 		buttonW2.addActionListener(new ActionListener() {
 
 			@Override
