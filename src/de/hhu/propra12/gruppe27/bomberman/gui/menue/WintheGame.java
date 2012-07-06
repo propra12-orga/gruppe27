@@ -93,6 +93,10 @@ public class WintheGame {
 			// c.gridwidth = 2;
 			panelwin.add(buttonScore, c);
 		}
+		
+		/**
+		 * Goesse des Fensters
+		 */
 
 		framewin.setSize(framewin.getPreferredSize());
 		int height = framewin.getPreferredSize().height;

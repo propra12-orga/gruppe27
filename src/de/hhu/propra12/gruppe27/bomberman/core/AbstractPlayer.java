@@ -66,7 +66,7 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Werte werden an die Methode zurueckgeliefert
 	 * @param playercolor
 	 * @return this
 	 */
@@ -260,10 +260,21 @@ public abstract class AbstractPlayer implements Serializable {
 			g.drawLine(posx * 32 + 32, posy * 32, posx * 32, posy * 32 + 32);
 		}
 	}
+	
+	/**
+	 * 
+	 * @return countthesteps
+	 * Schritte des Spielers werden fuer den Highscore gezaehlt
+	 */
 
 	public int getCountthesteps() {
 		return countthesteps;
 	}
+	
+	/**
+	 * Countthestpes werden werden aus Konstruktur aufgerufen
+	 * @param countthesteps
+	 */
 
 	public void setCountthesteps(int countthesteps) {
 		this.countthesteps = countthesteps;

@@ -526,18 +526,40 @@ public class SysEinst implements Serializable {
 	public void setRemoteClient(IRemoteClient remoteclient) {
 		this.remoteclient = remoteclient;
 	}
+	
+	/**
+	 * 
+	 * @return highscoreP1
+	 * highscore fuer Spieler 1 wird aufgerufen
+	 */
 
 	public int getHighscoreP1() {
 		return highscoreP1;
 	}
+	
+	/**
+	 * Parameter fuer highscore von Spieler 1 wird uebergeben
+	 * @param highscoreP1
+	 */
 
 	public void setHighscoreP1(int highscoreP1) {
 		this.highscoreP1 = highscoreP1;
 	}
+	
+	/**
+	 * 
+	 * @return highscoreP2
+	 * @see Spieler 1
+	 */
 
 	public int getHighscoreP2() {
 		return highscoreP2;
 	}
+	
+	/**
+	 * @see Spieler 1
+	 * @param highscoreP2
+	 */
 
 	public void setHighscoreP2(int highscoreP2) {
 		this.highscoreP2 = highscoreP2;

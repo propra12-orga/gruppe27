@@ -9,6 +9,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level;
  * 
  * @author
  * @version 1.0 Interface IRemoteHost, Definition der Remote-Methode
+ * @see IRemoteClient
  */
 
 public interface IRemoteHost extends Remote {
