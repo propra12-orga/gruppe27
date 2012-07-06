@@ -4,11 +4,8 @@ import java.io.Serializable;
 
 /**
  * @autor gruppe 27
- * @version 1.0 
- * Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
+ * @version 1.0 Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
  */
-
-
 
 public abstract class Level implements Serializable {
 
@@ -28,7 +25,7 @@ public abstract class Level implements Serializable {
 	 * 
 	 * @param laenge
 	 * @param breite
-	 * Initialisierung von Laenge und Breite des Spielfeldes
+	 *            Initialisierung von Laenge und Breite des Spielfeldes
 	 */
 
 	public Level(int laenge, int breite) {
@@ -56,16 +53,16 @@ public abstract class Level implements Serializable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return false Wenn ein zerstoerbares Feld getroffen wird, wird es
-	 *         durch ein normales Feld ersetzt
-	 * @return true wenn explosion etwas getroffen hat und somit nicht fortgesetz werden soll        
+	 * @return false Wenn ein zerstoerbares Feld getroffen wird, wird es durch
+	 *         ein normales Feld ersetzt
+	 * @return true wenn explosion etwas getroffen hat und somit nicht
+	 *         fortgesetz werden soll
 	 */
 
-	
 	public boolean DestroyFeld(int x, int y) {
 		boolean warfrei = laxbr[x][y].frei;
 		if (laxbr[x][y].zerstoer) {
-			if (!laxbr[x][y].frei) { 
+			if (!laxbr[x][y].frei) {
 				laxbr[x][y] = new Path(x, y, this);
 			}
 		}
@@ -78,8 +75,7 @@ public abstract class Level implements Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 * @return DestroyFeld
-	 * DestroyFeld wird zurueckgegeben
+	 * @return DestroyFeld DestroyFeld wird zurueckgegeben
 	 */
 
 	public boolean DestroyFeld(AbstractFeld Feld) {
@@ -90,8 +86,7 @@ public abstract class Level implements Serializable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return laxbr
-	 * laxbr wird zurueckgegeben
+	 * @return laxbr laxbr wird zurueckgegeben
 	 * 
 	 */
 
@@ -104,11 +99,19 @@ public abstract class Level implements Serializable {
 	 * @param input
 	 * @param x
 	 * @param y
-	 * Das FEld wird festgelegt
+	 *            Das FEld wird festgelegt
 	 */
 
 	public void setFeld(AbstractFeld input, int x, int y) {
 		laxbr[x][y] = input;
+	}
+
+	public void setboolxplode(int x, int y, boolean z) {
+		laxbr[x][y].setXplode(z);
+	}
+
+	public boolean getboolxplode(int x, int y) {
+		return laxbr[x][y].isXplode();
 	}
 
 	/**
@@ -125,8 +128,7 @@ public abstract class Level implements Serializable {
 
 	/**
 	 * 
-	 * @return breite
-	 * Breite wird zurueckgegeben
+	 * @return breite Breite wird zurueckgegeben
 	 */
 
 	public int getbreite() {

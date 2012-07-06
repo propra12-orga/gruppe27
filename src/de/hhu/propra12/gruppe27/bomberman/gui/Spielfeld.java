@@ -42,7 +42,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private Exit e;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
-	private transient Image imagezerwand, imageexit, imagewand;
+	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
 	/**
 	 * Generierung des Spielfeldes
@@ -271,12 +271,13 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 *            Bombe zerstoeren + spaeter auch Spieler treffen
+	 *            Bombe zerstoeren
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
 		Bombs.hitBombs(Feld);
-		// TODO Spieler Töten
+		level.setboolxplode(Feld.getX(), Feld.getY(), true);
+
 		Players.hitPlayers(Feld);
 	}
 
@@ -302,8 +303,13 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 							level.getFeld(i, j).getY() * 32, 32, 32, owner);
 				}
 
-				// g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
-				// 32, pg);
+				if (level.getboolxplode(i, j)) {
+					g.drawImage(imagexplode, level.getFeld(i, j).getX() * 32,
+							level.getFeld(i, j).getY() * 32, 32, 32, owner);
+				}
+
+				// zuruecksetzen der Explosionen
+				level.setboolxplode(i, j, false);
 
 			}
 
@@ -318,7 +324,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Players.paintPlayers(g);
 		if (!Bombs.isEmpty())
 			Bombs.paintBombs(g);
-		// TODO auslagerung der Zeichenfunktion des Exit. //TODO
 
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
 			g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
@@ -403,6 +408,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		imageexit = Toolkit.getDefaultToolkit().getImage(
 				"src/de/hhu/propra12/gruppe27/bomberman/graphics/TorTranz.gif");
 
+		imagexplode = Toolkit.getDefaultToolkit().getImage(
+				"src/de/hhu/propra12/gruppe27/bomberman/graphics/Feuer.gif");
 	}
 
 	/**

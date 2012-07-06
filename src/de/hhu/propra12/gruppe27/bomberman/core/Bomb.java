@@ -11,8 +11,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 /**
  * 
  * @author gruppe 27
- * @version 1.0
- * Klasse Bomb, Werte werden serialisierd, Bild der Bombe wird uebergeben
+ * @version 1.0 Klasse Bomb, Werte werden serialisierd, Bild der Bombe wird
+ *          uebergeben
  */
 
 public class Bomb implements Serializable {
@@ -35,7 +35,7 @@ public class Bomb implements Serializable {
 	 * @param owner
 	 * @param bombstr
 	 * @param time
-	 * Bombe gelegt ist true, Kunstruktoren werden aufgerufen
+	 *            Bombe gelegt ist true, Kunstruktoren werden aufgerufen
 	 */
 
 	public Bomb(AbstractPlayer owner, int bombstr, int time) {
@@ -62,7 +62,7 @@ public class Bomb implements Serializable {
 		}
 
 	}
-	
+
 	/**
 	 * Bombe wurde nicht plaziert
 	 */
@@ -86,40 +86,41 @@ public class Bomb implements Serializable {
 			Next = Feld.top();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
+				// Level.Next.setXplode(true);
 				Next = Next.top();
 			}
-			
+
 			/**
 			 * Linkes Feld
 			 */
-			
+
 			Next = Feld.left();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
 				Next = Next.left();
 			}
-			
+
 			/**
-			 * Rechtes Feld 
+			 * Rechtes Feld
 			 */
-			
+
 			Next = Feld.right();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
 				Next = Next.right();
 			}
-			
+
 			/**
 			 * Unteres Feld
 			 */
-			
+
 			Next = Feld.bottom();
 			for (int i = radius; (i > 0) && (Next.owner.DestroyFeld(Next)); i--) {
 				pg.hitThings(Next);
 				Next = Next.bottom();
 			}
 		}
-		
+
 		/**
 		 * Audio Datei wird gespielt wenn Bombe explodiert
 		 */
@@ -129,6 +130,7 @@ public class Bomb implements Serializable {
 
 	/**
 	 * Wenn Bombe geplanted, Werte werden an diese Stelle uebergeben
+	 * 
 	 * @return planted
 	 */
 
@@ -138,15 +140,15 @@ public class Bomb implements Serializable {
 
 	/**
 	 * @param g
-	 *Feld wird erstellt 
+	 *            Feld wird erstellt
 	 */
-	
+
 	public void draw(Graphics g) {
 		// g.drawOval(Feld.getX() * 32, Feld.getY() * 32, 32, 32);
 
 		g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32, 32, pg);
 	}
-	
+
 	/**
 	 * Bombe explodiert
 	 */
