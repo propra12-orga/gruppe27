@@ -40,6 +40,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private PlayerManager Players;
 	private BombManager Bombs;
 	private Exit e;
+	private Special special;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
@@ -102,6 +103,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		else {
 			e = new Exit(level.getFeld(0, 0));
+		}
+		if (system.getamplayer() == 1) {
+			setrandomspec();
 		}
 
 		Bombs = new BombManager(this);
@@ -175,17 +179,15 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * Systemeinstellungen gespeichert
 	 * 
 	 */
-	// if (system.getamplayer() == 1) { --> bei einem Singlespiel
 
 	private void StatusUpdate() {
-
-		// TODO Exithandling
 
 		if (!Bombs.isEmpty())
 			Bombs.CheckBombs();
 
 		int intendgame = Players.checkGameEnde();
 
+		// Prüfen, ob das SPiel zu Ende ist
 		if (intendgame > PlayerManager.ENDE) {
 
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
@@ -233,6 +235,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			} else if (PlayerManager.LASTMANP2 == intendgame)
 				e.doOnLastManP2(this);
 		}
+
+		if (Players.checkspecial()) {
+
+			int newposx, newposy;
+
+			do {
+				newposx = getrandomcoordx();
+				newposy = getrandomcoordy();
+
+			} while (level.getFeld(newposx, newposy).isFrei() == false);
+
+			Players.PlayerList.get(0).setX(newposx);
+			Players.PlayerList.get(0).setY(newposx);
+
+		}
 	}
 
 	/**
@@ -278,7 +295,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	public void hitThings(AbstractFeld Feld) {
 		Bombs.hitBombs(Feld);
 		level.setboolxplode(Feld.getX(), Feld.getY(), true);
-
 		Players.hitPlayers(Feld);
 	}
 
@@ -339,7 +355,16 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
 			}
 		}
+		if (system.getamplayer() == 1) {
+			g.drawImage(imageexit, special.getX() * 32, special.getY() * 32,
+					32, 32, owner);
 
+			if (!getFeld(special.getX(), special.getY()).isFrei()) {
+
+				g.drawImage(imagezerwand, special.getX() * 32,
+						special.getY() * 32, 32, 32, owner);
+			}
+		}
 	}
 
 	@Override
@@ -431,6 +456,29 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	public PlayerManager getPlayers() {
 		return Players;
+	}
+
+	public Special getSpecial() {
+		return special;
+	}
+
+	/**
+	 * Zufaelliges Special wird bestimmt
+	 */
+
+	private void setrandomspec() {
+
+		if (system.getrandomlvl() == true) {
+			setcoords();
+		}
+
+		else {
+			do {
+				setcoords();
+			} while ((exitx % 2) == 0 && (exity % 2) == 0);
+		}
+
+		special = new Special(level.getFeld(exitx, exity));
 	}
 
 	/**

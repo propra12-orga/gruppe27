@@ -59,6 +59,21 @@ public class PlayerManager implements Serializable {
 			LASTMANP2 = 4;
 	SysEinst sys = SysEinst.getSystem();
 
+	public boolean checkspecial() {
+		if (sys.getamplayer() == 1) {
+			for (int i = 0; i < PlayerList.size(); i++) {
+
+				if ((PlayerList.get(i).getX() == owner.getSpecial().getX())
+						&& (PlayerList.get(i).getY() == owner.getSpecial()
+								.getY())) {
+
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public int checkGameEnde() {
 
 		// Ende, wenn niemand mehr lebt
