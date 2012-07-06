@@ -53,10 +53,20 @@ public abstract class AbstractFeld implements Serializable {
 		this.owner = owner;
 
 	}
+	
+	/**
+	 * Wert wird zurueckgeliefert
+	 * @return xplode
+	 */
 
 	public boolean isXplode() {
 		return xplode;
 	}
+	
+	/**
+	 * Parameter xplode wird uebergeben
+	 * @param xplode
+	 */
 
 	public void setXplode(boolean xplode) {
 		this.xplode = xplode;
