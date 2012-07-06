@@ -30,6 +30,7 @@ public class LosetheGame {
 
 	/**
 	 * Einblendung von "Verloren", "Noch einmal" und "Zurueck zum Startmenue"
+	 * Jeweilige Buttons werden benannt und erstellt
 	 */
 
 	public void losethegame() {
@@ -64,6 +65,12 @@ public class LosetheGame {
 		if (system.getboolLAN() == false) {
 			panellose.add(buttonL1, c);
 		}
+		
+		/**
+		 * Ausgabe des Highscores, Schritte die man bis zum Spielende machen konnte
+		 * Anzahl der Schritte die der Gegner bis zu deinem Tod gemacht hat
+		 */
+	
 
 		JButton buttonL2 = new JButton("Zurück zum Startmenue");
 		c.gridx = 0;
@@ -73,13 +80,27 @@ public class LosetheGame {
 
 		if (system.getamplayer() == 1) {
 			JButton buttonScore = new JButton(
-					"Bis zu deiner Vernichtung konntest du dich "
-							+ system.getHighscoreP1() + " Schritte bewegen");
+					"Bis zu deinem Freitod hast du dich "
+							+ system.getHighscoreP1() + " Schritte bewegt");
 			c.gridx = 0;
 			c.gridy = 4;
 			// c.gridwidth = 2;
 			panellose.add(buttonScore, c);
 		}
+
+		else if (system.getboolLAN()) {
+			JButton buttonScore = new JButton(
+					"Dein Gegner hat dich innerhalb von "
+							+ system.getHighscoreP2() + " Schritte vernichtet");
+			c.gridx = 0;
+			c.gridy = 4;
+			// c.gridwidth = 2;
+			panellose.add(buttonScore, c);
+		}
+		
+		/**
+		 * ActionListener fuer Button1 wird definiert
+		 */
 
 		framelose.setSize(framelose.getPreferredSize());
 		int height = framelose.getPreferredSize().height;
@@ -94,6 +115,10 @@ public class LosetheGame {
 				framelose.dispose();
 			}
 		});
+		
+		/**
+		 * Action Listener fuer Button 2 wird definiert
+		 */
 
 		buttonL2.addActionListener(new ActionListener() {
 
@@ -107,6 +132,14 @@ public class LosetheGame {
 		});
 
 	}
+	
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 * Parameter fuer die Groesse des Fensters werden bestimmt
+	 */
 
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()

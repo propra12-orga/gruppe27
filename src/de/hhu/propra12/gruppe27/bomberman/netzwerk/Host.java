@@ -19,8 +19,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author
+ * @author gruppe 27
  * @version 1.0 Klasse Host
+ * Vererbung von IRemoteHost
+ * Spielfeld, RegistryPort und servicename werden uebergeben
  */
 
 public class Host extends UnicastRemoteObject implements IRemoteHost {
@@ -38,7 +40,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	}
 
 	/**
-	 * Client hat sich beim Host angemeldet, �bergabe des Spielfeldes
+	 * Client hat sich beim Host angemeldet, uebergabe des Spielfeldes
 	 */
 
 	@Override
@@ -60,6 +62,8 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		// spielfeld.startgame();
 
 	}
+	
+	
 
 	@Override
 	public Level getLevel() {
@@ -67,8 +71,9 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	}
 
 	/**
-	 * 
+	 * Initialisierung des registryPort und des servicenamen
 	 * @throws RemoteException
+	 * Regestrierung des Hosts
 	 */
 
 	public void publishHost(int registryPort, String servicename)
@@ -117,6 +122,10 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * try fuer die Ausnahmebehandlung
+	 */
 
 	public void tick() {
 		try {
@@ -127,6 +136,10 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		}
 
 	}
+	
+	/**
+	 * Bewegung wird bestimmt
+	 */
 
 	@Override
 	public void movep2c(int direction) throws RemoteException {
@@ -138,6 +151,12 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 				.moveremote(direction);
 
 	}
+	
+	/**
+	 * @see client
+	 * @param direction
+	 * @return
+	 */
 
 	// public int translate(int direction) {
 	// if (direction == KeyEvent.VK_UP) {

@@ -216,6 +216,8 @@ public class Startmenue {
 					e1.printStackTrace();
 				}
 
+				framemenue.dispose();
+
 			}
 		});
 
@@ -238,6 +240,8 @@ public class Startmenue {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
+				framemenue.dispose();
 
 			}
 		});
@@ -449,22 +453,35 @@ public class Startmenue {
 		system.setfeldybml(Integer.parseInt(readFile(Levelpath, "BREITE")));
 
 	}
+	
+	/**
+	 * 
+	 * @param Levelpath
+	 * @param ToBeLoaded
+	 * @return data
+	 * @throws IOException
+	 * Lese Leveldatei aus Pafad ein
+	 * Properties verwenden um Datei zu lesen und Levelstruktur zu importieren
+	 * .bml (BomberManLevel) mit BIS einlesen
+	 * load gehoert zur properties-Lib
+	 * Schliessen des BIS
+	 * Lese die Levelstruktur aus der Property-Datei aus
+	 */
 
-	// Lese Leveldatei aus Pfad ein
+	
 	public static String readFile(String Levelpath, String ToBeLoaded)
 			throws IOException {
 
-		// Properties verwenden um Datei zu lesen und Levelstruktur zu
-		// importieren
+		
 		Properties levelfile = new Properties();
-		// .bml (BomberManLevel) mit BIS einlesen
+		
 		BufferedInputStream stream = new BufferedInputStream(
 				new FileInputStream(Levelpath));
-		// load geh�rt zur properties-Lib
+		
 		levelfile.load(stream);
-		// Schliessen des BIS
+		
 		stream.close();
-		// Lese die Levelstruktur aus der Property-Datei aus
+		
 		String data = levelfile.getProperty(ToBeLoaded);
 		return data;
 	}

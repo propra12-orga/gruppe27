@@ -61,27 +61,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		}
 	}
 
-	/**
-	 * 
-	 * @param levelnr
-	 * @param laenge
-	 * @param breite
-	 * @param spielerzal
-	 * Konstruktur wird erstellt
-	 */
-
+/**
+ * 
+ * @param levelnr
+ * @param owner
+ * Initialisierung von levelnr und Gamewindow
+ */
 	public Spielfeld(int levelnr, GameWindow owner) {
 		this(loadlevel(0), owner);
 	}
 
-	/**
-	 * 
-	 * @param level
-	 * @param laenge
-	 * @param breite
-	 * @param spielerzal
-	 * Konstruktur wird erstellt
-	 */
+/**
+ * 
+ * @param level
+ * @param owner
+ * Initialisierung von levelnr und GameWindow
+ * KeyListener wird hinzugefuegt
+ * Feld mit den Koordinaten x und y
+ */
 
 	
 	public Spielfeld(Level level, GameWindow owner) {
@@ -128,14 +125,14 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 
 		if (system.getboolLAN() == false) {
-			Players.addPlayer(new KeyPlayer(1, 1, "Spieler1", this, new Keyset(
-					1)));
+			Players.addPlayer(new KeyPlayer(1, 1, system.getnamePlayer1(),
+					this, new Keyset(1)));
 
 			if (system.getamplayer() > 1) {
 				KeyPlayer player2 = (KeyPlayer) new KeyPlayer(
 						system.getfeldx() - 2, system.getfeldy() - 2,
-						"Spieler2", this, new Keyset(2)).withColor(new Color(
-						255, 0, 0));
+						system.getnamePlayer2(), this, new Keyset(2))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
@@ -144,19 +141,21 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		else {
 			if (system.getboolClient()) {
 				Players.addPlayer(new LanPlayer(system.getfeldx() - 2, system
-						.getfeldy() - 2, "Spieler1", this, new Keyset(1)));
+						.getfeldy() - 2, system.getnamePlayer1(), this,
+						new Keyset(1)));
 
-				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1, "Spieler2",
-						this, new Keyset(-1)).withColor(new Color(255, 0, 0));
+				LanPlayer player2 = (LanPlayer) new LanPlayer(1, 1,
+						system.getnamePlayer2(), this, new Keyset(-1))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			} else {
-				Players.addPlayer(new LanPlayer(1, 1, "Spieler1", this,
-						new Keyset(1)));
+				Players.addPlayer(new LanPlayer(1, 1, system.getnamePlayer1(),
+						this, new Keyset(1)));
 
 				LanPlayer player2 = (LanPlayer) new LanPlayer(
 						system.getfeldx() - 2, system.getfeldy() - 2,
-						"Spieler2", this, new Keyset(-1)).withColor(new Color(
-						255, 0, 0));
+						system.getnamePlayer2(), this, new Keyset(-1))
+						.withColor(new Color(255, 0, 0));
 				Players.addPlayer(player2);
 			}
 		}
@@ -181,8 +180,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * Pruefung, ob das Spiel zu Ende ist, 
 	 * was passiert, wenn das Spiel zu Ende ist,
 	 * Highscores werden in den Systemeinstellungen gespeichert
-	 * if (system.getamplayer() == 1) { --> bei einem Singlespiel
+	 * 
 	 */
+	 // if (system.getamplayer() == 1) { --> bei einem Singlespiel
 
 	private void StatusUpdate() {
 
@@ -196,17 +196,27 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		if (intendgame > PlayerManager.ENDE) {
 
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
-			system.setHighscoreP2(Players.PlayerList.get(0).getCountthesteps());
+			if (system.getamplayer() > 1) {
+				system.setHighscoreP2(Players.PlayerList.get(1)
+						.getCountthesteps());
+			}
 
+
+			
 			if (system.getamplayer() == 1) {
 
-				if (PlayerManager.ALLDEAD == intendgame)
-					e.doOnKill(this);
-				else if (PlayerManager.EXIT == intendgame) {
-					System.out.println("Anzahl der Schritte: "
-							+ Players.PlayerList.get(0).getCountthesteps());
-					e.doOnExit(this);
-				}
+/**
+ * Anzahl der Schritte fuer den Highscore
+ */
+			if (PlayerManager.ALLDEAD == intendgame) {
+				e.doOnKill(this);
+			}
+
+
+			else if (PlayerManager.EXIT == intendgame) {
+				System.out.println("Anzahl der Schritte: "
+						+ Players.PlayerList.get(0).getCountthesteps());
+				e.doOnExit(this);
 			}
 
 			/**
@@ -215,14 +225,15 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			
 			else if (PlayerManager.ALLDEAD == intendgame) {
 				
-				/**
-				 * if (PlayerManager.ALLDEAD == Players.checkGameEnde())
-				 */
+				// if (PlayerManager.ALLDEAD == Players.checkGameEnde())
+			
 
+
+			else if (PlayerManager.ALLDEAD == intendgame) {
 				e.doOnKill(this);
-
 			}
 
+			
 			/**
 			 * Bei Netzwerkmodus
 			 */
@@ -233,8 +244,24 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
 					e.doOnLastManP2(this);
 
-			}
+			else if (PlayerManager.LASTMAN == intendgame) {
+				if (Players.PlayerList.get(0).isAlive() == true) {
+					system.setMessage2P(system.getnamePlayer1() + " hat "
+							+ system.getnamePlayer2() + " innerhalb von "
+							+ system.getHighscoreP1() + " Schritten getötet");
+				} else {
+					system.setMessage2P(system.getnamePlayer2() + " hat "
+							+ system.getnamePlayer1() + " innerhalb von "
+							+ system.getHighscoreP2() + " Schritten getötet");
+				}
+				e.doOnLastMan(this);
+
+			} else if (PlayerManager.LASTMANP2 == intendgame)
+				e.doOnLastManP2(this);
+
+
 		}
+
 	}
 
 	/**
@@ -307,10 +334,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 					g.drawImage(imagewand, level.getFeld(i, j).getX() * 32,
 							level.getFeld(i, j).getY() * 32, 32, 32, owner);
 				}
-				/**
-				 *  g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
-				 *  32, pg);
-				 */
+				
+				 // g.drawImage(image, Feld.getX() * 32, Feld.getY() * 32, 32,
+				 // 32, pg);
+				
 			}
 
 		/**
@@ -361,6 +388,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private class TAdapter extends KeyAdapter implements Serializable {
 
 		private static final long serialVersionUID = 1L;
+		
+
 
 		public void keyPressed(KeyEvent e) {
 			Players.updatePlayers(e.getKeyCode(), true);

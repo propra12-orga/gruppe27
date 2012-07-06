@@ -18,8 +18,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
  * 
- * @author
- * @version 1.0 Klasse Client
+ * @author gruppe 27
+ * @version 1.0 
+ * Klasse Client, Vererbung von IRemoteClient
+ * URL,Spielfeld etc. wird uebergeben fuer den Client
  */
 
 public class Client extends UnicastRemoteObject implements IRemoteClient {
@@ -62,7 +64,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	/**
 	 * Clientname, registryPort, servicename werden erfragt
-	 * 
+	 * Ausnahme fuer RemoteException
 	 * @throws RemoteException
 	 */
 
@@ -81,12 +83,15 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
+		
+		
 		return str;
 	}
 
 	/**
-	 * 
+	 * catch faengt die Ausnahemen des try-Blocks ab
 	 * @return service
+	 * service Werte werden zurueckgeliefert
 	 */
 
 	public IRemoteHost retrieveService(String hostservice) {
@@ -102,6 +107,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		}
 		return service_;
 	}
+	
+	/**
+	 * Werte von Spielfeld werden uebergeben
+	 */
 
 	@Override
 	public void tick() throws RemoteException {
@@ -109,6 +118,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		spielfeld.repaint();
 
 	}
+	
+	/**
+	 * Initialisierung von Playerindex, Keycode und Boolean pressed
+	 */
 
 	@Override
 	public void hostKeyUpdate(int playerindex, int keycode, boolean pressed)
@@ -116,6 +129,10 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * Bewegung des Spielers
+	 */
 
 	@Override
 	public void movep2h(int direction) throws RemoteException {
@@ -126,6 +143,13 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 				.moveremote(direction);
 
 	}
+	
+	/**
+	 * Parameter fuer die Bewegung 
+	 * @param direction
+	 * @return O!
+	 * 0 wird aufgerufen, sollte allerdings nie vorkommen
+	 */
 
 	// public int translate(int direction) {
 	// if (direction == KeyEvent.VK_UP) {
@@ -157,6 +181,6 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 			return Keyset.REMBOMB;
 		}
 		System.out.println("keine korrekte Uebersetzung moeglich");
-		return 0; // sollte nie vorkommen!
+		return 0; 
 	}
 }

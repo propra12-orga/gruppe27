@@ -66,7 +66,7 @@ public class PlayerManager implements Serializable {
 			return ALLDEAD;
 		}
 		// Ende, wenn der Ausgang betreten wird
-		if (sys.getamplayer() == 1) {
+		else if (sys.getamplayer() == 1) {
 			for (int i = 0; i < PlayerList.size(); i++) {
 
 				if ((PlayerList.get(i).getX() == owner.getExit().getX())
@@ -78,6 +78,10 @@ public class PlayerManager implements Serializable {
 					return EXIT;
 				}
 			}
+		} else if (sys.getamplayer() > 1 && sys.getboolLAN() == false) {
+			if (countPlayersAlive() == 1)
+
+				return LASTMAN;
 		}
 
 		/*

@@ -5,8 +5,10 @@ import java.rmi.RemoteException;
 
 /**
  * 
- * @author
- * @version Interface IRemoteClient, Definition der Remote Mehtode
+ * @author gruppe 27
+ * @version Interface IRemoteClient, Definition der Remote Methode
+ * Initlialisierung von up,left,down,right und bomb
+ * Bewegung des Client
  */
 
 public interface IRemoteClient extends Remote {
