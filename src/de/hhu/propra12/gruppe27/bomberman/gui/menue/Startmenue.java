@@ -149,14 +149,15 @@ public class Startmenue {
 		c.gridy = 9;
 		panel.add(buttonS6, c);
 
-		/**
-		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
-		 */
-
+		// Fenster mittig setzen in guter Groesse
 		framemenue.setSize(framemenue.getPreferredSize());
 		int height = framemenue.getPreferredSize().height;
 		int width = framemenue.getPreferredSize().width;
 		centerWindow(width, height, framemenue);
+
+		/**
+		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
+		 */
 
 		buttonS1.addActionListener(new ActionListener() {
 
@@ -453,35 +454,32 @@ public class Startmenue {
 		system.setfeldybml(Integer.parseInt(readFile(Levelpath, "BREITE")));
 
 	}
-	
+
 	/**
 	 * 
 	 * @param Levelpath
 	 * @param ToBeLoaded
 	 * @return data
 	 * @throws IOException
-	 * Lese Leveldatei aus Pafad ein
-	 * Properties verwenden um Datei zu lesen und Levelstruktur zu importieren
-	 * .bml (BomberManLevel) mit BIS einlesen
-	 * load gehoert zur properties-Lib
-	 * Schliessen des BIS
-	 * Lese die Levelstruktur aus der Property-Datei aus
+	 *             Lese Leveldatei aus Pafad ein Properties verwenden um Datei
+	 *             zu lesen und Levelstruktur zu importieren .bml
+	 *             (BomberManLevel) mit BIS einlesen load gehoert zur
+	 *             properties-Lib Schliessen des BIS Lese die Levelstruktur aus
+	 *             der Property-Datei aus
 	 */
 
-	
 	public static String readFile(String Levelpath, String ToBeLoaded)
 			throws IOException {
 
-		
 		Properties levelfile = new Properties();
-		
+
 		BufferedInputStream stream = new BufferedInputStream(
 				new FileInputStream(Levelpath));
-		
+
 		levelfile.load(stream);
-		
+
 		stream.close();
-		
+
 		String data = levelfile.getProperty(ToBeLoaded);
 		return data;
 	}

@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,8 +16,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse fuer die Einstellungen des Optionsfeldes
+ * @version 1.0 Klasse fuer die Einstellungen des Optionsfeldes
  */
 
 public class Optionfield {
@@ -35,7 +35,7 @@ public class Optionfield {
 
 		final JFrame frameopfield = new JFrame("Spielfeldgroesse");
 		frameopfield.setVisible(true);
-		frameopfield.setResizable(false);
+		// frameopfield.setResizable(false);
 		frameopfield.setLocationRelativeTo(null);
 		frameopfield.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -78,6 +78,9 @@ public class Optionfield {
 		panelopfield.add(buttonopfield3, copfield);
 
 		frameopfield.setSize(frameopfield.getPreferredSize());
+		int height = frameopfield.getPreferredSize().height;
+		int width = frameopfield.getPreferredSize().width;
+		centerWindow(width, height, frameopfield);
 
 		/*
 		 * 
@@ -119,6 +122,12 @@ public class Optionfield {
 				frameopfield.dispose();
 			}
 		});
+	}
 
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 }

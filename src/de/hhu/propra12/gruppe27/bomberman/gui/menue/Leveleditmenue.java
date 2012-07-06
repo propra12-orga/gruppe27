@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -16,8 +17,7 @@ import de.hhu.propra12.gruppe27.bomberman.gui.LevelEditor;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse fuer die Einstellungen des Feldes fuer den Leveleditor
+ * @version 1.0 Klasse fuer die Einstellungen des Feldes fuer den Leveleditor
  */
 
 public class Leveleditmenue {
@@ -36,7 +36,7 @@ public class Leveleditmenue {
 
 		final JFrame frameedit = new JFrame("Spielfeldgroesse");
 		frameedit.setVisible(true);
-		frameedit.setResizable(false);
+		// frameedit.setResizable(false);
 		frameedit.setLocationRelativeTo(null);
 		frameedit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -78,8 +78,11 @@ public class Leveleditmenue {
 		cedit.gridy = 3;
 		paneledit.add(buttonedit3, cedit);
 
-		frameedit.setSize(frameedit.getPreferredSize()); // Frame an Buttons
-															// anpassen
+		frameedit.setSize(frameedit.getPreferredSize());
+		int height = frameedit.getPreferredSize().height;
+		int width = frameedit.getPreferredSize().width;
+		centerWindow(width, height, frameedit);
+
 		/*
 		 * 
 		 * jeweils feldx und feldy setzen je nach ausgewählter Größe
@@ -129,6 +132,12 @@ public class Leveleditmenue {
 				frameedit.dispose();
 			}
 		});
+	}
 
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 }

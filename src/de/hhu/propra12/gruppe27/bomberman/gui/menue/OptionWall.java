@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.gui.menue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,8 +16,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse zur Einstellung der Waende, (Mauerdichte)
+ * @version 1.0 Klasse zur Einstellung der Waende, (Mauerdichte)
  * 
  */
 
@@ -34,11 +34,11 @@ public final class OptionWall {
 	 * geschlossen und zurueck an das Optionsmenue gegeben
 	 */
 
-	public SysEinst optionwall() {
+	public void optionwall() {
 
 		final JFrame framemauer = new JFrame("Mauerdichte");
 		framemauer.setVisible(true);
-		framemauer.setResizable(false);
+		// framemauer.setResizable(false);
 		framemauer.setLocationRelativeTo(null);
 		framemauer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -109,10 +109,12 @@ public final class OptionWall {
 		panelmauer.add(buttonMau11, cmauer);
 
 		framemauer.setSize(framemauer.getPreferredSize());
+		int height = framemauer.getPreferredSize().height;
+		int width = framemauer.getPreferredSize().width;
+		centerWindow(width, height, framemauer);
 
 		buttonMau01.addActionListener(new ActionListener() {
 
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sysopwall.setdensWall(0);
@@ -209,9 +211,13 @@ public final class OptionWall {
 				framemauer.dispose();
 			}
 		});
+	}
 
-		return sysopwall;
-
+	public void centerWindow(int width, int height, JFrame frame) {
+		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		frame.setLocation((screensize.width - width) / 2,
+				(screensize.height - height) / 2);
 	}
 
 }
