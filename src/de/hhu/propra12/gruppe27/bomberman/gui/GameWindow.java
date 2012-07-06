@@ -46,9 +46,9 @@ public class GameWindow extends JFrame {
 				system.getfeldx() - 2, system.getfeldy() - 2)) {
 			System.out
 					.println("Level ist durch die Konsistenzprüfung gefallen!");
-			JOptionPane.showMessageDialog(null, "Level-Konsitenz",
-					"Das Level ist durch die Konsistenzprüfung gefallen!",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"Level ist durch die Konsistenzprüfung gefallen!",
+					"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			System.out.println("Level hat die Konsistenzprüfung bestanden!");
 			add(spielfeld);
