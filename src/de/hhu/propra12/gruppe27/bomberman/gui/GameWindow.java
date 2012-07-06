@@ -36,7 +36,7 @@ public class GameWindow extends JFrame {
 		this.spielfeld = new Spielfeld(levelnr, this);
 		System.out.println("Beginne Level-Consistency-Check");
 
-		/*
+		/**
 		 * Konsistenzprüfung. Sollte der Weg von 1, 1 bis 13, 13 nicht
 		 * erreichbar sein wird der Spieler informiert und das Spielfeld nicht
 		 * geladen.

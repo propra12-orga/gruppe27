@@ -1,37 +1,24 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
-/*    
-
- * A* algorithm implementation.
- * Copyright (C) 2007, 2009 Giuseppe Scrivano <gscrivano@gnu.org>
-
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
-
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
-
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, see <http://www.gnu.org/licenses/>.
- */
-
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * Example.
+/**
+ * 
+ * @author gruppe 27
+ * @version 1.0
+ * Klasse Pathfinder extends AStar
+ * Initialisierung von zielx und ziely
+ *
  */
+
 public class PathFinder extends AStar<PathFinder.Node> {
 	private int[][] map;
 	public static int zielx;
 	public static int ziely;
 
 	/**
-	 * Setter-Methode, um die Ziel-Node des Pathfinder festzusetzen.
+	 * Setter-Methode, um die Ziel-Knoten des Pathfinder festzusetzen.
 	 * 
 	 * @param zielx
 	 *            X-Koordinate
@@ -58,11 +45,15 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	}
 
 	/**
-	 * Setzt Ziel-Node fest.
+	 * Setzt Ziel-Knoten fest.
 	 */
 	protected boolean isGoal(Node node) {
 		return (node.x == zielx) && (node.y == ziely);
 	}
+	
+	/**
+	 * Start Knoten zu erreichendem Knoten
+	 */
 
 	protected Double g(Node from, Node to) {
 
@@ -74,12 +65,17 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 		return Double.MAX_VALUE;
 	}
+	
+	
 
 	protected Double h(Node from, Node to) {
-		/* Use the Manhattan distance heuristic. */
 		return new Double(Math.abs(map[0].length - 1 - to.x)
 				+ Math.abs(map.length - 1 - to.y));
 	}
+	
+	/**
+	 * Initialisierung von Knoten x und y
+	 */
 
 	protected List<Node> generateSuccessors(Node node) {
 		List<Node> ret = new LinkedList<Node>();
@@ -96,19 +92,19 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 	/**
 	 * Prüft, ob das geladene Spielfeld gültig ist. Sollte der StartNode keine
-	 * Verbindung zum ZielNode haben wird false ausgegeben. Am Ende der Prüfung
+	 * Verbindung zum ZielKnoten haben wird false ausgegeben. Am Ende der Prüfung
 	 * wird in der Konsole einLog geschrieben.
 	 * 
 	 * @param map
 	 *            Das Spielfeld als Integer-Array
 	 * @param startx
-	 *            Start-Node(X-Koord.)
+	 *            Start-Knoten(X-Koord.)
 	 * @param starty
-	 *            Start-Node(Y-Koord.)
+	 *            Start-Knoten(Y-Koord.)
 	 * @param zielx
-	 *            Ziel-Node(X-Koord.)
+	 *            Ziel-Knoten(X-Koord.)
 	 * @param ziely
-	 *            Ziel-Node(Y-Koord.)
+	 *            Ziel-Knoten(Y-Koord.)
 	 * @return Gibt True zurück, wenn Konsistenz-Prüfung erfolgreich. False,
 	 *         wenn die Map durchfällt.
 	 */

@@ -102,6 +102,24 @@ public abstract class AbstractPlayer implements Serializable {
 	 * @return posy Position y wird bestimmt
 	 */
 
+	public void setY(int posy) {
+		this.posy = posy;
+	}
+
+	/**
+	 * 
+	 * @return posx Position x wird bestimmt
+	 */
+
+	public void setX(int posx) {
+		this.posx = posx;
+	}
+
+	/**
+	 * 
+	 * @return posy Position y wird bestimmt
+	 */
+
 	public int getY() {
 		return posy;
 	}
