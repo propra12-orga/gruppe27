@@ -205,11 +205,10 @@ public class Startmenue {
 
 				try {
 					String ip = "localhost";
+					// Beispiel: String ip = "192.168.10.118";
 					String hostservice = ("rmi://" + ip + ":1099/host");
 					/*
 					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
-					 * String hostservice = "rmi://localhost:1099/host"; Test
-					 * URL String hostservice = "rmi://192.168.0.196:1099/host";
 					 */
 
 					Client client = new Client(1090, "client", hostservice);
