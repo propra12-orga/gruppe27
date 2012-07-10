@@ -206,12 +206,22 @@ public class Startmenue {
 				try {
 					String ip = "localhost";
 					// Beispiel: String ip = "192.168.10.118";
-					String hostservice = ("rmi://" + ip + ":1099/host");
+
 					/*
 					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
 					 */
 
-					Client client = new Client(1090, "client", hostservice);
+					if (system.getPort() == -1) {
+						system.setPort(1090);
+						system.setPort2(1099);
+					}
+
+					String hostservice = ("rmi://" + ip + ":"
+							+ system.getPort2() + "/host");
+
+					Client client = new Client(system.getPort(), "client",
+							hostservice);
+
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
@@ -234,8 +244,14 @@ public class Startmenue {
 				system.setboolClient(false);
 				system.setamplayer(2);
 				try {
-					// default registry port 1099
-					Host host = new Host(1099, "host");
+
+					if (system.getPort() == -1) {
+						system.setPort(1099);
+						system.setPort2(1090);
+					}
+
+					Host host = new Host(system.getPort(), "host");
+
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

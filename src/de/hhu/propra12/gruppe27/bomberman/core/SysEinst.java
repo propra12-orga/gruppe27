@@ -50,6 +50,8 @@ public class SysEinst implements Serializable {
 	String namePlayer4 = "Spieler 4";
 
 	Registry registry = null;
+	int port = -1;
+	int port2 = -1;
 
 	/**
 	 * 
@@ -595,6 +597,22 @@ public class SysEinst implements Serializable {
 
 	public void setRegistry(Registry registry) {
 		this.registry = registry;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public int getPort2() {
+		return port2;
+	}
+
+	public void setPort2(int port2) {
+		this.port2 = port2;
 	}
 
 	/**
