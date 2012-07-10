@@ -1,6 +1,7 @@
 package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.io.Serializable;
+import java.rmi.registry.Registry;
 
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
@@ -47,6 +48,8 @@ public class SysEinst implements Serializable {
 	String namePlayer2 = "Spieler 2";
 	String namePlayer3 = "Spieler 3";
 	String namePlayer4 = "Spieler 4";
+
+	Registry registry = null;
 
 	/**
 	 * 
@@ -527,26 +530,26 @@ public class SysEinst implements Serializable {
 	public void setRemoteClient(IRemoteClient remoteclient) {
 		this.remoteclient = remoteclient;
 	}
-	
+
 	/**
 	 * 
-	 * @return highscoreP1
-	 * highscore fuer Spieler 1 wird aufgerufen
+	 * @return highscoreP1 highscore fuer Spieler 1 wird aufgerufen
 	 */
 
 	public int getHighscoreP1() {
 		return highscoreP1;
 	}
-	
+
 	/**
 	 * Parameter fuer highscore von Spieler 1 wird uebergeben
+	 * 
 	 * @param highscoreP1
 	 */
 
 	public void setHighscoreP1(int highscoreP1) {
 		this.highscoreP1 = highscoreP1;
 	}
-	
+
 	/**
 	 * 
 	 * @return highscoreP2
@@ -556,7 +559,7 @@ public class SysEinst implements Serializable {
 	public int getHighscoreP2() {
 		return highscoreP2;
 	}
-	
+
 	/**
 	 * @see Spieler 1
 	 * @param highscoreP2
@@ -565,23 +568,33 @@ public class SysEinst implements Serializable {
 	public void setHighscoreP2(int highscoreP2) {
 		this.highscoreP2 = highscoreP2;
 	}
-	
+
 	/**
 	 * Message 2P wird aufgerufen
+	 * 
 	 * @return message2P
 	 */
 
 	public String getMessage2P() {
 		return message2P;
 	}
-	
+
 	/**
 	 * Parameter fuer messge2P wird uebergeben
+	 * 
 	 * @param message2p
 	 */
 
 	public void setMessage2P(String message2p) {
 		this.message2P = message2p;
+	}
+
+	public Registry getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(Registry registry) {
+		this.registry = registry;
 	}
 
 	/**

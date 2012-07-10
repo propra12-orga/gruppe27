@@ -7,6 +7,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractPlayer;
@@ -20,9 +21,8 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 Klasse Host
- * Vererbung von IRemoteHost
- * Spielfeld, RegistryPort und servicename werden uebergeben
+ * @version 1.0 Klasse Host Vererbung von IRemoteHost Spielfeld, RegistryPort
+ *          und servicename werden uebergeben
  */
 
 public class Host extends UnicastRemoteObject implements IRemoteHost {
@@ -32,6 +32,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	String hostservice = "host service not yet published";
 	IRemoteClient service = null;
 	Spielfeld spielfeld;
+	SysEinst system = SysEinst.getSystem();
 
 	public Host(int registryPort, String servicename) throws RemoteException {
 		publishHost(registryPort, servicename);
@@ -62,8 +63,6 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		// spielfeld.startgame();
 
 	}
-	
-	
 
 	@Override
 	public Level getLevel() {
@@ -72,18 +71,25 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 
 	/**
 	 * Initialisierung des registryPort und des servicenamen
+	 * 
 	 * @throws RemoteException
-	 * Regestrierung des Hosts
+	 *             Regestrierung des Hosts
 	 */
 
 	public void publishHost(int registryPort, String servicename)
 			throws RemoteException {
 
 		try {
+			if (system.getRegistry() != null) {
+				UnicastRemoteObject.unexportObject(system.getRegistry(), true);
+			}
 			String ip = InetAddress.getLocalHost().getHostAddress();
 			// LocateRegistry.getRegistry(registryPort);
-			LocateRegistry.createRegistry(registryPort);
+			Registry registry = LocateRegistry.createRegistry(registryPort);
+			system.setRegistry(registry);
+
 			String str = "rmi://" + ip + ":" + registryPort + "/" + servicename;
+
 			Naming.rebind(str, this);
 			// System.out.println("ip host:" + ip);
 			hostservice = str;
@@ -122,7 +128,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * try fuer die Ausnahmebehandlung
 	 */
@@ -136,7 +142,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 		}
 
 	}
-	
+
 	/**
 	 * Bewegung wird bestimmt
 	 */
@@ -151,7 +157,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 				.moveremote(direction);
 
 	}
-	
+
 	/**
 	 * @see client
 	 * @param direction
