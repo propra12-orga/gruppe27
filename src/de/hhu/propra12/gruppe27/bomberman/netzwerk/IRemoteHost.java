@@ -6,9 +6,11 @@ import java.rmi.RemoteException;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 
 /**
+ * Interface IRemoteHost, Definition der Remote-Methode
  * 
- * @author
- * @version 1.0 Interface IRemoteHost, Definition der Remote-Methode
+ * @author gruppe27
+ * 
+ * @version 1.0
  * @see IRemoteClient
  */
 
