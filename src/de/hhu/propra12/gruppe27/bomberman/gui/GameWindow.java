@@ -37,7 +37,7 @@ public class GameWindow extends JFrame {
 		System.out.println("Beginne Level-Consistency-Check");
 
 		/**
-		 * Konsistenzprüfung. Sollte der Weg von 1, 1 bis 13, 13 nicht
+		 * Konsistenzprï¿½fung. Sollte der Weg von 1, 1 bis 13, 13 nicht
 		 * erreichbar sein wird der Spieler informiert und das Spielfeld nicht
 		 * geladen.
 		 */
@@ -45,12 +45,12 @@ public class GameWindow extends JFrame {
 		if (!PathFinder.check(convertMap(spielfeld), 1, 1,
 				system.getfeldx() - 2, system.getfeldy() - 2)) {
 			System.out
-					.println("Level ist durch die Konsistenzprüfung gefallen!");
+					.println("Level ist durch die Konsistenzprï¿½fung gefallen!");
 			JOptionPane.showMessageDialog(null,
-					"Level ist durch die Konsistenzprüfung gefallen!",
+					"Level ist durch die Konsistenzprï¿½fung gefallen!",
 					"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-			System.out.println("Level hat die Konsistenzprüfung bestanden!");
+			System.out.println("Level hat die Konsistenzprï¿½fung bestanden!");
 			add(spielfeld);
 			int width = system.getfeldx() * 32;
 			int height = system.getfeldy() * 32 + 24;
@@ -116,19 +116,31 @@ public class GameWindow extends JFrame {
 	}
 
 	/**
-	 * Konvertiert eine Map in eine Array mit 1 für zerst. Blöcke + freie Wege
-	 * und 0 für unzerst. Blöcke...Wird benötigt, um A*-PathFinder zu verwenden!
+	 * Konvertiert eine Map in eine Array mit 1 fuer zerst. Bloecke + freie Wege
+	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
+	 * verwenden!
 	 * 
 	 * @param owner
 	 *            Spielfeld
-	 * @return Gibt ein Array zurück, dass die Map als 1 und 0 enthält.
+	 * @return Gibt ein Array zurueck, dass die Map als 1 und 0 enthaelt.
 	 */
 	public int[][] convertMap(Spielfeld owner) {
-		int ergebnis[][] = new int[system.getfeldx()][system.getfeldy()];
 
-		for (int i = 0; i < system.getfeldx(); i++) {
+		int ergebx;
+		int ergeby;
+
+		if (system.getbmllevel()) {
+			ergebx = system.getfeldxbml();
+			ergeby = system.getfeldybml();
+		} else {
+			ergebx = system.getfeldx();
+			ergeby = system.getfeldy();
+		}
+		int ergebnis[][] = new int[ergebx][ergeby];
+
+		for (int i = 0; i < ergebx; i++) {
 			System.out.println();
-			for (int j = 0; j < system.getfeldy(); j++) {
+			for (int j = 0; j < ergeby; j++) {
 				if (owner.getFeld(i, j).isFrei()
 						|| owner.getFeld(i, j).isZerstoer()) {
 					ergebnis[i][j] = 1;

@@ -29,8 +29,9 @@ public class LevelGen extends Level implements Serializable {
 	 */
 
 	int dens = system.getdensWall();
-	int feldx = system.getfeldx();
-	int feldy = system.getfeldy();
+	// int feldx = system.getfeldx();
+	// int feldy = system.getfeldy();
+	int feldx, feldy;
 	int exitx;
 	int exity;
 
@@ -54,7 +55,8 @@ public class LevelGen extends Level implements Serializable {
 
 		super(laengex, breitey);
 		name = "Zufallslevel";
-
+		feldx = system.getfeldx();
+		feldy = system.getfeldy();
 		/**
 		 * Feldaufbau
 		 */
@@ -103,6 +105,9 @@ public class LevelGen extends Level implements Serializable {
 
 		super(laengex, breitey);
 
+		feldx = system.getfeldxbml();
+		feldy = system.getfeldybml();
+
 		try {
 			generatebml(system.getlevelpath());
 		} catch (NumberFormatException e) {
@@ -111,6 +116,14 @@ public class LevelGen extends Level implements Serializable {
 			// TODO Fehlerbehandlung
 		}
 
+		// Ausgang wird nur bei einem Solospiel gesetzt
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			setrandomexit();
+		}
+		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		else {
+			e = new Exit(getFeld(0, 0));
+		}
 	}
 
 	/**
@@ -484,7 +497,7 @@ public class LevelGen extends Level implements Serializable {
 	 */
 
 	private int getrandomcoordx() {
-		int x = system.getfeldx();
+		int x = feldx;
 		x = (int) (x * Math.random());
 		return x;
 	}
@@ -495,7 +508,7 @@ public class LevelGen extends Level implements Serializable {
 	 */
 
 	private int getrandomcoordy() {
-		int y = system.getfeldy();
+		int y = feldy;
 		y = (int) ((int) y * Math.random());
 		return y;
 	}

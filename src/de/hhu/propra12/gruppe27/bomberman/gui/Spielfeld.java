@@ -497,7 +497,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	private int getrandomcoordx() {
-		int x = system.getfeldx();
+		int x;
+		if (system.getbmllevel()) {
+			x = system.getfeldxbml();
+		} else {
+			x = system.getfeldx();
+		}
 		x = (int) (x * Math.random());
 		return x;
 	}
@@ -508,7 +513,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	private int getrandomcoordy() {
-		int y = system.getfeldy();
+		int y;
+		if (system.getbmllevel()) {
+			y = system.getfeldybml();
+		} else {
+			y = system.getfeldy();
+		}
 		y = (int) ((int) y * Math.random());
 		return y;
 	}
