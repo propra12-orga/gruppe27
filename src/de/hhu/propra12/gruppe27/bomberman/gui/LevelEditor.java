@@ -28,8 +28,8 @@ import de.hhu.propra12.gruppe27.bomberman.core.Wall;
 /**
  * 
  * @author Gruppe 27
- * @version 1.0 
- * Klasse LevelEditor implementiert Serializable und dient der Einstellung der Level
+ * @version 1.0 Klasse LevelEditor implementiert Serializable und dient der
+ *          Einstellung der Level
  * 
  */
 
@@ -38,8 +38,7 @@ public class LevelEditor extends Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Feldbestimmung
-	 * Koordinaten des Feldes: x und y
+	 * Feldbestimmung Koordinaten des Feldes: x und y
 	 */
 
 	SysEinst system = SysEinst.getSystem();
@@ -59,15 +58,14 @@ public class LevelEditor extends Level implements Serializable {
 	public LevelEditor(int feldx, int feldy) {
 		super(feldx, feldy);
 	}
-	
+
 	/**
-	 *  Frame initialisieren und Sichtbar machen. Feste Groesse. Mittig
-	 *	ausrichten
+	 * Frame initialisieren und Sichtbar machen. Feste Groesse. Mittig
+	 * ausrichten
 	 */
 
 	public void leveleditor() {
 
-	
 		final JFrame frameeditor = new JFrame("Leveleditor");
 		frameeditor.setVisible(true);
 		frameeditor.setResizable(false);
@@ -97,10 +95,10 @@ public class LevelEditor extends Level implements Serializable {
 
 			}
 		}
-		
+
 		/**
 		 * Buttons um die Felder zu setzen F = freies Feld, W = feste Wand, Z =
-		 * zerstoerbarer Block, E = Ausgang, V = versteckter Ausgang
+		 * zerstoerbarer Block
 		 * 
 		 */
 
@@ -117,23 +115,23 @@ public class LevelEditor extends Level implements Serializable {
 		panel.add(buttonW, c);
 		group.add(buttonW);
 
-		JToggleButton buttonZ = new JToggleButton("Zerst\u00f6rbar");
+		JToggleButton buttonZ = new JToggleButton("Zerstoerbar");
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(buttonZ, c);
 		group.add(buttonZ);
 
-		JToggleButton buttonE = new JToggleButton("Ausgang");
-		c.gridx = 0;
-		c.gridy = 3;
-		panel.add(buttonE, c);
-		group.add(buttonE);
-
-		JToggleButton buttonV = new JToggleButton("Versteckt");
-		c.gridx = 0;
-		c.gridy = 4;
-		panel.add(buttonV, c);
-		group.add(buttonV);
+		// JToggleButton buttonE = new JToggleButton("Ausgang");
+		// c.gridx = 0;
+		// c.gridy = 3;
+		// panel.add(buttonE, c);
+		// group.add(buttonE);
+		//
+		// JToggleButton buttonV = new JToggleButton("Versteckt");
+		// c.gridx = 0;
+		// c.gridy = 4;
+		// panel.add(buttonV, c);
+		// group.add(buttonV);
 
 		JButton buttonImp = new JButton("Importieren");
 		c.gridx = 0;
@@ -146,16 +144,14 @@ public class LevelEditor extends Level implements Serializable {
 		panel.add(buttonEx, c);
 
 		frameeditor.setSize(frameeditor.getPreferredSize());
-		
+
 		/**
 		 * ActionListener wird hinzufuegt. Wenn ein Button gedrueckt wird, wird
-		 * ueberprueft, was das aktuelle Label ist und wird umbenannt. Dabei wird
-		 * das Fenster an die neue Buttongroesse angepasst, um zu verhindern, dass
-		 * Buttons ausserhalb des Fensterrands geraten
+		 * ueberprueft, was das aktuelle Label ist und wird umbenannt. Dabei
+		 * wird das Fenster an die neue Buttongroesse angepasst, um zu
+		 * verhindern, dass Buttons ausserhalb des Fensterrands geraten
 		 */
-	
 
-	
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
@@ -182,22 +178,22 @@ public class LevelEditor extends Level implements Serializable {
 							button[k][l].setText("B");
 							frameeditor.setSize(frameeditor.getPreferredSize());
 						}
-						if (3 == intfeld) {
-							laxbrexit(k, l);
-							button[k][l].setText("E");
-							frameeditor.setSize(frameeditor.getPreferredSize());
-						}
-						if (4 == intfeld) {
-							laxbrhidden(k, l);
-							button[k][l].setText("V");
-							frameeditor.setSize(frameeditor.getPreferredSize());
-						}
+						// if (3 == intfeld) {
+						// laxbrexit(k, l);
+						// button[k][l].setText("E");
+						// frameeditor.setSize(frameeditor.getPreferredSize());
+						// }
+						// if (4 == intfeld) {
+						// laxbrhidden(k, l);
+						// button[k][l].setText("V");
+						// frameeditor.setSize(frameeditor.getPreferredSize());
+						// }
 
 					}
 				});
 			}
 		}
-		
+
 		/**
 		 * Action Listener wird hinzugefuegt fuer Feld 0
 		 */
@@ -211,12 +207,11 @@ public class LevelEditor extends Level implements Serializable {
 
 			}
 		});
-		
 
 		/**
 		 * Action Listener wird hinzugefuegt fuer Feld 1
 		 */
-		
+
 		buttonW.addActionListener(new ActionListener() {
 
 			@Override
@@ -229,7 +224,7 @@ public class LevelEditor extends Level implements Serializable {
 		/**
 		 * Action Listener wird hinzugefuegt fuer Feld 2
 		 */
-		
+
 		buttonZ.addActionListener(new ActionListener() {
 
 			@Override
@@ -239,35 +234,35 @@ public class LevelEditor extends Level implements Serializable {
 			}
 		});
 
+		// /**
+		// * Action Listener wird hinzugefuegt fuer Feld 3
+		// */
+		//
+		// buttonE.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		//
+		// intfeld = 3;
+		// }
+		// });
+		//
+		// /**
+		// * Action Listener wird hinzugefuegt fuer Feld 4
+		// */
+		//
+		// buttonV.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		//
+		// intfeld = 4;
+		// }
+		// });
+
 		/**
-		 * Action Listener wird hinzugefuegt fuer Feld 3
-		 */
-		
-		buttonE.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				intfeld = 3;
-			}
-		});
-
-		/**
-		 * Action Listener wird hinzugefuegt fuer Feld 4
-		 */
-		
-		buttonV.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				intfeld = 4;
-			}
-		});
-		
-		/**
-		 * ActionListener wird hinzugefuegt, 
-		 * wenn Datei falsch eingelesen wird, erscheint eine Fehlermeldung
+		 * ActionListener wird hinzugefuegt, wenn Datei falsch eingelesen wird,
+		 * erscheint eine Fehlermeldung
 		 */
 
 		buttonImp.addActionListener(new ActionListener() {
@@ -284,13 +279,10 @@ public class LevelEditor extends Level implements Serializable {
 				}
 			}
 		});
-		
-		
+
 		/**
-		 * ActionListener wird hinzugefuegt
-		 * Leveleigenschaften werden defieniert
+		 * ActionListener wird hinzugefuegt Leveleigenschaften werden defieniert
 		 */
-		
 
 		buttonEx.addActionListener(new ActionListener() {
 
@@ -318,9 +310,10 @@ public class LevelEditor extends Level implements Serializable {
 
 	/**
 	 * Methoden um die einzelnen Felder zu bestimmen
+	 * 
 	 * @param i
 	 * @param j
-	 * Weg, Wand, Block, Exit werden definiert
+	 *            Weg, Wand, Block, Exit werden definiert
 	 */
 
 	public void laxbrpath(int i, int j) {
@@ -374,13 +367,13 @@ public class LevelEditor extends Level implements Serializable {
 					output += 4;
 				}
 			}
-			output += ";"; 
-			
+			output += ";";
+
 			/**
-			 * Um das Ende einer Array Dimension zu deklarieren, wird ein Semikolon eingefuegt. 
-			 * Siehe auch Levelimporter in LevelGen.java
+			 * Um das Ende einer Array Dimension zu deklarieren, wird ein
+			 * Semikolon eingefuegt. Siehe auch Levelimporter in LevelGen.java
 			 */
-			
+
 		}
 		return output;
 	}
@@ -405,17 +398,15 @@ public class LevelEditor extends Level implements Serializable {
 																		// initialisieren
 						new FileOutputStream(filepath)); // FOS initialisieren
 
-				ToBeSaved.store(bos, "Exported BomberMan-Level" + manual); 
-				
+				ToBeSaved.store(bos, "Exported BomberMan-Level" + manual);
+
 				/**
-				 * .store ist eine Properties Methode und uebergibt die Wertde an den OutPutStream
-				 * Datei/Stream wird geschlossen
-				 * Wenn erfolgreich, dann wird true zurueckgegeben
+				 * .store ist eine Properties Methode und uebergibt die Wertde
+				 * an den OutPutStream Datei/Stream wird geschlossen Wenn
+				 * erfolgreich, dann wird true zurueckgegeben
 				 */
-				
 
-
-				bos.close(); 
+				bos.close();
 				return true;
 			} catch (IOException eIO) {
 				System.out.println("Fehler:" + eIO.getMessage());
@@ -427,13 +418,13 @@ public class LevelEditor extends Level implements Serializable {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param Levelpath
-	 * @return false/true
-	 * Damit die Datei nicht immer neu geoeffnet werden muss
-	 * Reihenfolge der Buchstabenkombinationen V, E, Z, W wird festgelegt
+	 * @return false/true Damit die Datei nicht immer neu geoeffnet werden muss
+	 *         Reihenfolge der Buchstabenkombinationen V, E, Z, W wird
+	 *         festgelegt
 	 */
 
 	public boolean importlvl(String Levelpath) {
@@ -474,7 +465,7 @@ public class LevelEditor extends Level implements Serializable {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Startmenue wird festgelegt
 	 */

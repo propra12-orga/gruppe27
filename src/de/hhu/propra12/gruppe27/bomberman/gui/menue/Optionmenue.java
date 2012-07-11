@@ -115,16 +115,16 @@ public class Optionmenue {
 		coption.gridy = 5;
 		optionpanel.add(buttonO4, coption);
 
-		/**
-		 * 
-		 * KI an/aus (Button 5/buttonKI)
-		 */
-
-		JToggleButton buttonKI = new JToggleButton(stringKI
-				+ getBoolState(sys.getboolKI()), sys.getboolKI());
-		coption.gridx = 0;
-		coption.gridy = 6;
-		optionpanel.add(buttonKI, coption);
+		// /** KI ist noch nicht implementiert
+		// *
+		// * KI an/aus (Button 5/buttonKI)
+		// */
+		//
+		// JToggleButton buttonKI = new JToggleButton(stringKI
+		// + getBoolState(sys.getboolKI()), sys.getboolKI());
+		// coption.gridx = 0;
+		// coption.gridy = 6;
+		// optionpanel.add(buttonKI, coption);
 
 		JToggleButton buttonSound = new JToggleButton("Sound "
 				+ getBoolState(sys.getSound()), sys.getSound());
@@ -207,21 +207,21 @@ public class Optionmenue {
 			}
 		});
 
-		/**
-		 * Ein und ausschalten der KI (buttonKI)
-		 */
-
-		buttonKI.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sys.setboolKI(!sys.getboolKI());
-				System.out.println("KI: " + sys.getboolKI());
-
-				JToggleButton buttonKI = (JToggleButton) e.getSource();
-				buttonKI.setText(stringKI + getBoolState(sys.getboolKI()));
-			}
-		});
+		// /** KI ist noch nicht implementiert
+		// * Ein und ausschalten der KI (buttonKI)
+		// */
+		//
+		// buttonKI.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// sys.setboolKI(!sys.getboolKI());
+		// System.out.println("KI: " + sys.getboolKI());
+		//
+		// JToggleButton buttonKI = (JToggleButton) e.getSource();
+		// buttonKI.setText(stringKI + getBoolState(sys.getboolKI()));
+		// }
+		// });
 
 		buttonSound.addActionListener(new ActionListener() {
 
@@ -290,13 +290,13 @@ public class Optionmenue {
 				}
 			});
 
-			buttonKI.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					if (sys.getSound()) {
-						StdAudio.play("data/audio/mouseover.wav");
-					}
-				}
-			});
+			// buttonKI.addMouseListener(new java.awt.event.MouseAdapter() {
+			// public void mouseEntered(java.awt.event.MouseEvent evt) {
+			// if (sys.getSound()) {
+			// StdAudio.play("data/audio/mouseover.wav");
+			// }
+			// }
+			// });
 
 			buttonSound.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
