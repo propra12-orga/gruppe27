@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Properties;
 
+import de.hhu.propra12.gruppe27.bomberman.gui.Exit;
+import de.hhu.propra12.gruppe27.bomberman.gui.Special;
+
 /**
  * 
  * @author Gruppe 27
@@ -28,6 +31,8 @@ public class LevelGen extends Level implements Serializable {
 	int dens = system.getdensWall();
 	int feldx = system.getfeldx();
 	int feldy = system.getfeldy();
+	int exitx;
+	int exity;
 
 	boolean wandoderfrei;
 	boolean zerstoderfest;
@@ -73,6 +78,14 @@ public class LevelGen extends Level implements Serializable {
 
 		} while (false == konsist);
 
+		// Ausgang wird nur bei einem Solospiel gesetzt
+		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
+			setrandomexit();
+		}
+		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		else {
+			e = new Exit(getFeld(0, 0));
+		}
 	}
 
 	/**
@@ -405,6 +418,86 @@ public class LevelGen extends Level implements Serializable {
 		 */
 
 		return data;
+	}
+
+	/**
+	 * Zufaelliges Special wird bestimmt
+	 */
+	private void setrandomspec() {
+
+		if (system.getrandomlvl() == true) {
+			setcoords();
+		}
+
+		else {
+			do {
+				setcoords();
+			} while ((exitx % 2) == 0 && (exity % 2) == 0);
+		}
+		special = new Special(getFeld(exitx, exity));
+	}
+
+	/**
+	 * Zufaelliger Exit wird bestimmt
+	 */
+
+	private void setrandomexit() {
+
+		if (system.getrandomlvl() == true) {
+			setcoords();
+		}
+
+		else {
+			do {
+				setcoords();
+			} while ((exitx % 2) == 0 && (exity % 2) == 0);
+		}
+
+		e = new Exit(getFeld(exitx, exity));
+	}
+
+	/**
+	 * Koordinaten des willkuerlich gesetzten Extis werden bestimmt
+	 */
+
+	private void setcoords() {
+
+		do {
+			this.exitx = getrandomcoordx();
+			this.exity = getrandomcoordy();
+
+		} while ((exitx == 0 || exitx == system.getfeldx() - 1 || exity == 0 || exity == system
+				.getfeldy() - 1)
+				|| ((exitx == 1 && exity == 1) || (exitx == 1 && exity == 2) || (exitx == 2 && exity == 1))
+				|| ((exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 2)
+						|| (exitx == system.getfeldx() - 3 && exity == system
+								.getfeldy() - 2) || (exitx == system.getfeldx() - 2 && exity == system
+						.getfeldy() - 3)));
+
+	}
+
+	/**
+	 * 
+	 * @return x x wird an die Methode zurueck geliefert
+	 * 
+	 */
+
+	private int getrandomcoordx() {
+		int x = system.getfeldx();
+		x = (int) (x * Math.random());
+		return x;
+	}
+
+	/**
+	 * 
+	 * @return y y wird an die Methode zurueck geliefert
+	 */
+
+	private int getrandomcoordy() {
+		int y = system.getfeldy();
+		y = (int) ((int) y * Math.random());
+		return y;
 	}
 
 }

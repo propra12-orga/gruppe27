@@ -1,0 +1,11 @@
+#Exported BomberMan-Level
+#Informationen:
+#0 ist ein begehbarer Weg
+#1 ist ein unzerst\uFFFDrbarer Block
+#2 ist ein zerst\uFFFDrbarer Block
+#3 ist ein Ausgang
+#4 ist ein Versteck
+#Wed Jul 11 04:13:34 CEST 2012
+LAENGE=11
+BREITE=11
+LEVEL=00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;00000000000;
