@@ -3,10 +3,8 @@ package de.hhu.propra12.gruppe27.bomberman.gui;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
-import de.hhu.propra12.gruppe27.bomberman.core.PathFinder;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
@@ -34,31 +32,13 @@ public class GameWindow extends JFrame {
 		 */
 
 		this.spielfeld = new Spielfeld(levelnr, this);
-		System.out.println("Beginne Level-Consistency-Check");
-
-		/**
-		 * Konsistenzpr�fung. Sollte der Weg von 1, 1 bis 13, 13 nicht
-		 * erreichbar sein wird der Spieler informiert und das Spielfeld nicht
-		 * geladen.
-		 */
-
-		if (!PathFinder.check(convertMap(spielfeld), 1, 1,
-				system.getfeldx() - 2, system.getfeldy() - 2)) {
-			System.out
-					.println("Level ist durch die Konsistenzpr�fung gefallen!");
-			JOptionPane.showMessageDialog(null,
-					"Level ist durch die Konsistenzpr�fung gefallen!",
-					"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			System.out.println("Level hat die Konsistenzpr�fung bestanden!");
-			add(spielfeld);
-			int width = system.getfeldx() * 32;
-			int height = system.getfeldy() * 32 + 24;
-			setSize(width, height);
-			setVisible(true);
-			centerWindow(width, height); // Fenster mittig setzen
-			repaint();
-		}
+		add(spielfeld);
+		int width = system.getfeldx() * 32;
+		int height = system.getfeldy() * 32 + 24;
+		setSize(width, height);
+		setVisible(true);
+		centerWindow(width, height); // Fenster mittig setzen
+		repaint();
 	}
 
 	/**
@@ -115,41 +95,4 @@ public class GameWindow extends JFrame {
 				(screensize.height - height) / 2);
 	}
 
-	/**
-	 * Konvertiert eine Map in eine Array mit 1 fuer zerst. Bloecke + freie Wege
-	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
-	 * verwenden!
-	 * 
-	 * @param owner
-	 *            Spielfeld
-	 * @return Gibt ein Array zurueck, dass die Map als 1 und 0 enthaelt.
-	 */
-	public int[][] convertMap(Spielfeld owner) {
-
-		int ergebx;
-		int ergeby;
-
-		if (system.getbmllevel()) {
-			ergebx = system.getfeldxbml();
-			ergeby = system.getfeldybml();
-		} else {
-			ergebx = system.getfeldx();
-			ergeby = system.getfeldy();
-		}
-		int ergebnis[][] = new int[ergebx][ergeby];
-
-		for (int i = 0; i < ergebx; i++) {
-			System.out.println();
-			for (int j = 0; j < ergeby; j++) {
-				if (owner.getFeld(i, j).isFrei()
-						|| owner.getFeld(i, j).isZerstoer()) {
-					ergebnis[i][j] = 1;
-				} else {
-					ergebnis[i][j] = 0;
-				}
-			}
-		}
-
-		return ergebnis;
-	}
 }
