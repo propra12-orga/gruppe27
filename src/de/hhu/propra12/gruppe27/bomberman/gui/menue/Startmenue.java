@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.util.Properties;
 
@@ -208,7 +209,8 @@ public class Startmenue {
 					// Beispiel: String ip = "192.168.10.118";
 
 					/*
-					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
+					 * TODO hier ist eigentlich Benutzereingabe erforderlich! um
+					 * die IP einzugeben
 					 */
 
 					if (system.getPort() == -1) {
@@ -222,6 +224,8 @@ public class Startmenue {
 					Client client = new Client(system.getPort(), "client",
 							hostservice);
 
+				} catch (ConnectException e2) {
+					System.out.println("kein Server vorhanden");
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
