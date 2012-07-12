@@ -91,7 +91,7 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	}
 
 	/**
-	 * Prueft, ob das geladene Spielfeld gültig ist. Sollte der StartNode keine
+	 * Prueft, ob das geladene Spielfeld gueltig ist. Sollte der StartNode keine
 	 * Verbindung zum ZielKnoten haben wird false ausgegeben. Am Ende der
 	 * Pruefung wird in der Konsole einLog geschrieben.
 	 * 
