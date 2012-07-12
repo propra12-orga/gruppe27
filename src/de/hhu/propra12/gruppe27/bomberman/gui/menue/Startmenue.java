@@ -18,6 +18,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -29,17 +30,14 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
- * Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
- * joinen und hosten, Einstellungen setzen)
- * Buttons um Speil zu starten (Solo und 2 Spieler-Modus)
- * Buttons fuer Multiplayer (hosten und verbinden)
- * Datei laden (Button buttonbmlimport) 
- * Level importieren
- * Leveleditor starten (Button5)
- * Optionsmenue oeffnen (Button 6)
- * Spiel beenden bzw. schliessen (Button 7)
+ * Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer joinen und
+ * hosten, Einstellungen setzen) Buttons um Speil zu starten (Solo und 2
+ * Spieler-Modus) Buttons fuer Multiplayer (hosten und verbinden) Datei laden
+ * (Button buttonbmlimport) Level importieren Leveleditor starten (Button5)
+ * Optionsmenue oeffnen (Button 6) Spiel beenden bzw. schliessen (Button 7)
+ * 
  * @author gruppe 27
- * @version 1.0 
+ * @version 1.0
  * 
  */
 
@@ -48,8 +46,6 @@ public class Startmenue {
 	SysEinst system = SysEinst.getSystem();
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
-
-
 
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -67,8 +63,6 @@ public class Startmenue {
 		c.gridx = 0;
 		c.gridy = 0;
 
-		
-
 		JButton buttonS0 = new JButton(icon);
 		c.gridx = 0;
 		c.gridy = 1;
@@ -76,15 +70,11 @@ public class Startmenue {
 		c.weightx = 1.0;
 		panel.add(buttonS0, c);
 
-		
-
 		JButton buttonS1 = new JButton("Spiel starten (Solo)");
 		c.gridx = 0;
 		c.gridy = 2;
 
 		panel.add(buttonS1, c);
-
-		
 
 		JButton buttonS2 = new JButton("Spiel starten (2 Spieler-Modus)");
 		c.gridx = 0;
@@ -92,55 +82,41 @@ public class Startmenue {
 
 		panel.add(buttonS2, c);
 
-		
-
 		JButton buttonS3 = new JButton("Multiplayer (Join Game)");
 		c.gridx = 0;
 		c.gridy = 4;
 		panel.add(buttonS3, c);
-
-		
 
 		JButton buttonS4 = new JButton("Multiplayer (Host Game)");
 		c.gridx = 0;
 		c.gridy = 5;
 		panel.add(buttonS4, c);
 
-		
 		JToggleButton buttonbmlimport = new JToggleButton("Level laden",
 				system.getbmllevel());
 		c.gridx = 0;
 		c.gridy = 6;
 		panel.add(buttonbmlimport, c);
 
-		
-
 		JButton buttonle = new JButton("Leveleditor");
 		c.gridx = 0;
 		c.gridy = 7;
 		panel.add(buttonle, c);
-
-		
 
 		JButton buttonS5 = new JButton("Optionen");
 		c.gridx = 0;
 		c.gridy = 8;
 		panel.add(buttonS5, c);
 
-		
-
 		JButton buttonS6 = new JButton("Spiel verlassen");
 		c.gridx = 0;
 		c.gridy = 9;
 		panel.add(buttonS6, c);
 
-	
 		framemenue.setSize(framemenue.getPreferredSize());
 		int height = framemenue.getPreferredSize().height;
 		int width = framemenue.getPreferredSize().width;
 		centerWindow(width, height, framemenue);
-
-	
 
 		buttonS1.addActionListener(new ActionListener() {
 
@@ -187,7 +163,8 @@ public class Startmenue {
 				system.setamplayer(2);
 
 				try {
-					String ip = "localhost";
+					String ip = JOptionPane
+							.showInputDialog("Bitte Host-IP eingeben (z.B. 127.0.0.1)");
 					// Beispiel: String ip = "192.168.10.118";
 
 					/*
