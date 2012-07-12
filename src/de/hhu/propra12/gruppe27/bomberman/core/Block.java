@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.io.Serializable;
 
 /**
- * 
+ * Die Klasse dient der Erstellung von Bloecken
+ *Ist eine Unterklasse von AbstractFeld und implementiert Serializable
  * @author Gruppe 27
  * @version 1.0
- *  Die Klasse dient der Erstellung von Bloecken
- *  Ist eine Unterklasse von AbstractFeld und implementiert Serializable
+ *  
  */
 
 public class Block extends AbstractFeld implements Serializable {
@@ -39,6 +39,7 @@ public class Block extends AbstractFeld implements Serializable {
 	public Color getColor() {
 		return Color.red;
 	}
+	
 
 	@Override
 	public char toChar() {

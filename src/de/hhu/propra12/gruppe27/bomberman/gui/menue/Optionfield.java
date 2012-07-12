@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
- * 
+ * Klasse fuer die Einstellungen des Optionsfeldes
  * @author gruppe 27
- * @version 1.0 Klasse fuer die Einstellungen des Optionsfeldes
+ * @version 1.0 
  */
 
 public class Optionfield {
@@ -48,9 +48,6 @@ public class Optionfield {
 		copfield.gridx = 0;
 		copfield.gridy = 0;
 
-		/**
-		 * Knoepfe werden definiert Button 1 fuer 11x11
-		 */
 
 		JButton buttonopfield1 = new JButton("Spielfeld: 11 x 11");
 		copfield.gridx = 0;
@@ -59,19 +56,13 @@ public class Optionfield {
 		copfield.weightx = 1.0;
 		panelopfield.add(buttonopfield1, copfield);
 
-		/**
-		 * Button 2 fuer 15x15
-		 */
 
 		JButton buttonopfield2 = new JButton("Spielfeld 15 x 15 (default)");
 		copfield.gridx = 0;
 		copfield.gridy = 2;
 		panelopfield.add(buttonopfield2, copfield);
 
-		/**
-		 * Button 3 fuer 19x19
-		 */
-
+		
 		JButton buttonopfield3 = new JButton("Spieldfeld 19 x 19");
 		copfield.gridx = 0;
 		copfield.gridy = 3;
@@ -82,10 +73,6 @@ public class Optionfield {
 		int width = frameopfield.getPreferredSize().width;
 		centerWindow(width, height, frameopfield);
 
-		/*
-		 * 
-		 * jeweils feldx und feldy setzen je nach ausgewählter Größe
-		 */
 
 		/**
 		 * Aktion der Knoepfe Listener wird ausgefuehrt, damit Knopfdruck
@@ -123,6 +110,14 @@ public class Optionfield {
 			}
 		});
 	}
+	
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param frame
+	 * Parameter fuer das Fenster werden uebergeben
+	 */
 
 	public void centerWindow(int width, int height, JFrame frame) {
 		Dimension screensize = java.awt.Toolkit.getDefaultToolkit()

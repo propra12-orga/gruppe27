@@ -18,10 +18,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
+ * Klasse Client, Vererbung von IRemoteClient URL,Spielfeld etc.
+ * wird uebergeben fuer den Client
  * @author gruppe 27
- * @version 1.0 Klasse Client, Vererbung von IRemoteClient URL,Spielfeld etc.
- *          wird uebergeben fuer den Client
+ * @version 1.0 
  */
 
 public class Client extends UnicastRemoteObject implements IRemoteClient {

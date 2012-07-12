@@ -7,9 +7,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.menue.LosetheGame;
 import de.hhu.propra12.gruppe27.bomberman.gui.menue.WintheGame;
 
 /**
- * 
+ * Klasse zum erstellen vom Ausgang Implementiert Serializable
  * @author Gruppe 27
- * @version 1.0 Klasse zum erstellen vom Ausgang Implementiert Serializable
+ * @version 1.0 
  * 
  */
 
@@ -53,8 +53,9 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter owner wird uebergeben
 	 * @param owner
+	 * Losethegame
 	 * 
 	 */
 
@@ -69,9 +70,9 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter owner wird uebergeben
 	 * @param owner
-	 * 
+	 * Winthegame
 	 */
 
 	public void doOnLastMan(Spielfeld owner) {
@@ -86,9 +87,9 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter owner wird uebergeben
 	 * @param owner
-	 * 
+	 * LosetheGame
 	 */
 
 	public void doOnLastManP2(Spielfeld owner) {
@@ -102,8 +103,8 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Postion x wird aufgerufen
+	 * @return Feld
 	 */
 
 	public int getX() {
@@ -112,7 +113,7 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parmaeter posx wird uebergeben
 	 * @param posx
 	 */
 
@@ -121,8 +122,8 @@ public class Exit implements Serializable {
 	// }
 
 	/**
-	 * 
-	 * @return
+	 * Position y wird aufgerufen
+	 * @return Feld
 	 */
 
 	public int getY() {
@@ -131,7 +132,7 @@ public class Exit implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter posy wird uebergeben
 	 * @param posy
 	 */
 
@@ -140,8 +141,8 @@ public class Exit implements Serializable {
 	// }
 
 	/**
-	 * 
-	 * @return
+	 * Feld wird aufgerufen
+	 * @return Feld
 	 */
 
 	public AbstractFeld getFeld() {

@@ -10,11 +10,11 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Exit;
 import de.hhu.propra12.gruppe27.bomberman.gui.Special;
 
 /**
- * 
+ * Klasse Levelgenerator, Bestimmung der Eigenschaften des
+ * Spielfeldes. Ist eine Unterklasse von Level und implementiert
+ * Serializable
  * @author Gruppe 27
- * @version 1.0 Klasse Levelgenerator, Bestimmung der Eigenschaften des
- *          Spielfeldes. Ist eine Unterklasse von Level und implementiert
- *          Serializable
+ * @version 1.0 
  * 
  */
 
@@ -48,6 +48,7 @@ public class LevelGen extends Level implements Serializable {
 	 *            Breite des Zufalls-Levels.
 	 * @param Spieleranzahl
 	 *            Anzahl, der Spieler, die hinzugefuegt werden.
+	 * Der Ausgang wird nur bei einem Solospiel gesetzt, anosnsten wird der Ausgang auf ein nicht erreichbare Feld gesetzt 
 	 * 
 	 */
 
@@ -57,11 +58,8 @@ public class LevelGen extends Level implements Serializable {
 		name = "Zufallslevel";
 		feldx = system.getfeldx();
 		feldy = system.getfeldy();
-		/**
-		 * Feldaufbau
-		 */
-
-		do {
+		
+        do {
 
 			if (true == system.getstandardlvl()
 					&& false == system.getspiegelung()) {
@@ -80,11 +78,11 @@ public class LevelGen extends Level implements Serializable {
 
 		} while (false == konsist);
 
-		// Ausgang wird nur bei einem Solospiel gesetzt
+		
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
 			setrandomexit();
 		}
-		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		
 		else {
 			e = new Exit(getFeld(0, 0));
 		}
@@ -97,7 +95,7 @@ public class LevelGen extends Level implements Serializable {
 	 * @param Spieleranzahl
 	 * @param bmllevel
 	 *            Laengenkoordinate: x Breitekoordinate: y Initialisierung der
-	 *            Spielerazahl
+	 *            Spieleranzahl
 	 * 
 	 */
 	public LevelGen(int laengex, int breitey, int Spieleranzahl,
@@ -116,11 +114,11 @@ public class LevelGen extends Level implements Serializable {
 			// TODO Fehlerbehandlung
 		}
 
-		// Ausgang wird nur bei einem Solospiel gesetzt
+	
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
 			setrandomexit();
 		}
-		// ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
+		
 		else {
 			e = new Exit(getFeld(0, 0));
 		}
@@ -160,6 +158,7 @@ public class LevelGen extends Level implements Serializable {
 	 * 
 	 * Alle Felder bekommen Eigenschaften zugewiesen und das Spielfeld mit
 	 * unzerstoerbaren Mauern umrandet Methode um alle zu initialisieren
+	 *  Umrandung des Spielfelds durch Bloecke, Rest des Spielfelds fuellen
 	 */
 
 	private void generatelvl() {
@@ -167,18 +166,13 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-				/**
-				 * Umrandung des Spielfelds sind zerstoerbare Bloecke
-				 */
+			
 
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				/**
-				 * Rest des Spielfeldes fuellen
-				 */
 
 				else {
 					wandoderfrei = randomBoolean(1);
@@ -207,22 +201,16 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-				/**
-				 * Aussenwaende
-				 */
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				// Innenblocks
 				else if ((i % 2 == 0) && (j % 2 == 0)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				/**
-				 * Begehbare Felder mit zerstoerbaren Objekten
-				 */
+
 				else {
 					wandoderfrei = randomBoolean(1);
 					if (wandoderfrei == true) {
@@ -244,24 +232,18 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-				/**
-				 * Aussenwaende
-				 */
+				
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				/**
-				 * Innenblocks
-				 */
+				
 				else if ((i % 2 == 0) && (j % 2 == 0)) {
 					laxbr[i][j] = new Wall(i, j, this);
 				}
 
-				/**
-				 * Begehbare Felder mit zerstoerbaren Objekten
-				 */
+				
 				else {
 					wandoderfrei = randomBoolean(1);
 					if (wandoderfrei == true) {
@@ -280,7 +262,7 @@ public class LevelGen extends Level implements Serializable {
 
 	/**
 	 * Spiegelung des Zufall-Spielfeldes Methode um das Zufalls-Soielfeld zu
-	 * spiegeln
+	 * spiegeln, Umrandung des Spielfelds sind unzerstoerbare Bloecke
 	 */
 
 	private void generatespiegelung() {
@@ -288,9 +270,7 @@ public class LevelGen extends Level implements Serializable {
 		for (int i = 0; i < feldx; i++) {
 			for (int j = 0; j < feldy; j++) {
 
-				/**
-				 * Umrandung des Spielfelds sind unzerst. Blöcke
-				 */
+				
 				if ((i == 0) || (i == feldx - 1) || (j == 0)
 						|| (j == feldy - 1)) {
 					laxbr[i][j] = new Wall(i, j, this);
@@ -298,9 +278,7 @@ public class LevelGen extends Level implements Serializable {
 							- i, feldy - 1 - j, this);
 				}
 
-				/**
-				 * Rest des Spielfeldes füllen
-				 */
+				
 				else {
 					wandoderfrei = randomBoolean(1);
 					zerstoderfest = randomBoolean(2);
@@ -326,20 +304,17 @@ public class LevelGen extends Level implements Serializable {
 
 	/**
 	 * Sartfelder werden begehbar gemacht, damit Spieler starten kann Methode um
-	 * die Startfelder frei zu machen Startposition Spieler 1 freimachen
+	 * die Startfelder frei zu machen Startposition Spieler 1 freimachen,
+	 * Startposition Spieler 2 freimachen
+     * wenn der Exit random gesetzt wird und der zweite Spieler an
+	 * gegenueberliegener Position gesetzt ist if (system.getamplayer() > 1 |
+	 * system.getboolKI() == true | system.getboolLAN() == true) {
 	 */
 	private void generatefreistart() {
 		laxbr[1][1] = new Path(1, 1, this);
 		laxbr[1][2] = new Path(1, 2, this);
 		laxbr[2][1] = new Path(2, 1, this);
 
-		/**
-		 * Startposition Spieler 2 freimachen
-		 * 
-		 * wenn der Exit random gesetzt wird und der zweite Spieler an
-		 * gegenüberliegener Position gesetzt ist if (system.getamplayer() > 1 |
-		 * system.getboolKI() == true | system.getboolLAN() == true) {
-		 */
 
 		if (1 < system.getamplayer()) {
 			laxbr[feldx - 2][feldy - 2] = new Path(feldx - 2, feldy - 2, this);
@@ -350,6 +325,7 @@ public class LevelGen extends Level implements Serializable {
 
 	/**
 	 * @return a Startposition und Spielnummer werden festgelegt
+	 * 
 	 */
 
 	public int[] getStartposition(int spielernummer) {
@@ -357,22 +333,23 @@ public class LevelGen extends Level implements Serializable {
 		return a;
 
 	}
+	
+	/**
+	 * Gesamten String einlesen und bis Laenge-1 durchgehen Bei Semikolon
+	 * die erste Dimension um 1 erhoehen
+	 * @param Levelpath
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 * Bei "1" neue feste Wand, bei "2" neue zerstoebrabre Wand, Bei "0" oder allem anderen begehbaren Weg einsetzen
+	 */
 
 	public void generatebml(String Levelpath) throws NumberFormatException,
 			IOException {
 
-		/**
-		 * Damit er die Datei nicht immer neu oeffnen muss.
-		 */
 
 		String input = readFile(Levelpath, "LEVEL");
 		int i = 0;
 		int j = 0;
-
-		/**
-		 * Gesamten String einlesen und bis Laenge-1 durchgehen Bei Semikolon
-		 * die erste Dimension um 1 erhoehen
-		 */
 
 		for (int k = 0; k < (input.length() - 1); k++) {
 
@@ -380,21 +357,15 @@ public class LevelGen extends Level implements Serializable {
 				j++;
 				i = 0;
 			}
-			/**
-			 * Bei "1" neue feste Wand
-			 */
+			
 			else if (input.charAt(k) == '1') {
 				laxbr[i][j] = new Wall(i, j, this);
 				i++;
-				/**
-				 * Bei "2" neue zerst. Wand
-				 */
+				
 			} else if (input.charAt(k) == '2') {
 				laxbr[i][j] = new Block(i, j, this);
 				i++;
-				/**
-				 * Bei "0" oder allem anderem begehbaren Weg einsetzen.
-				 */
+				
 			} else {
 				laxbr[i][j] = new Path(i, j, this);
 				i++;
@@ -402,33 +373,32 @@ public class LevelGen extends Level implements Serializable {
 
 		}
 	}
+	
+	/**
+	 * Lese Leveldatei aus Pfad ein, Properties verwenden, um Datei zu lesen und Levelstruktur zu importieren,
+	 * .bml(Bombermanlevel) mit BIS einlesen Load gehoert zur properties-Lin stream-close () zum schliessen des BIS
+	 * Lese die Levelstrujtur aus der Property-Datei aus
+	 * @param Levelpath
+	 * @param ToBeLoaded
+	 * @return dataa
+	 * @throws IOException
+	 */
 
 	public static String readFile(String Levelpath, String ToBeLoaded)
 			throws IOException {
-		/**
-		 * Lese Leveldatei aus Pfad ein
-		 * 
-		 */
+		
 
 		Properties levelstructure = new Properties();
-		/**
-		 * Properties verwenden, um Datei zu lesen und Levelstruktur zu
-		 * importieren
-		 */
+	
 
 		BufferedInputStream stream = new BufferedInputStream(
 				new FileInputStream(Levelpath));
-		/**
-		 * .bml (BomberManLevel) mit BIS einlesen load gehoert zur
-		 * properties-Lib stream-close() zum schliessen des BIS
-		 */
+	
 
 		levelstructure.load(stream);
 		stream.close();
 		String data = levelstructure.getProperty(ToBeLoaded);
-		/**
-		 * Lese die Levelstrukter aus der Property-Datei aus
-		 */
+		
 
 		return data;
 	}

@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.io.Serializable;
 
 /**
- * 
+ * Klasse Path wird erstellt extends Klasse AbstractFeld
  * @author gruppe 27
  * @version 1.0 
- * Klasse Path wird erstellt extends Klasse AbstractFeld
+ * 
  * 
  */
 

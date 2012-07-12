@@ -4,10 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 
+ * Klasse Pathfinder extends AStar Initialisierung von zielx und
+ * ziely
+ * Setter-Methode, um die Ziel-Knoten des Pathfinder festzusetzen.
+ * @param zielx
+ * X-Koordinate
+ * @param ziely
+ * Y-Koordinate
  * @author gruppe 27
- * @version 1.0 Klasse Pathfinder extends AStar Initialisierung von zielx und
- *          ziely
+ * @version 1.0 
  * 
  */
 
@@ -16,14 +21,6 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	public static int zielx;
 	public static int ziely;
 
-	/**
-	 * Setter-Methode, um die Ziel-Knoten des Pathfinder festzusetzen.
-	 * 
-	 * @param zielx
-	 *            X-Koordinate
-	 * @param ziely
-	 *            Y-Koordinate
-	 */
 
 	public static class Node {
 		public int x;
@@ -38,6 +35,11 @@ public class PathFinder extends AStar<PathFinder.Node> {
 			return "(" + x + ", " + y + ") ";
 		}
 	}
+	
+	/**
+	 * Parameter map wird uebergeben
+	 * @param map
+	 */
 
 	public PathFinder(int[][] map) {
 		this.map = map;
@@ -64,6 +66,7 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 		return Double.MAX_VALUE;
 	}
+	
 
 	protected Double h(Node from, Node to) {
 		return new Double(Math.abs(map[0].length - 1 - to.x)
@@ -88,9 +91,9 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	}
 
 	/**
-	 * Prüft, ob das geladene Spielfeld gültig ist. Sollte der StartNode keine
+	 * Prueft, ob das geladene Spielfeld gültig ist. Sollte der StartNode keine
 	 * Verbindung zum ZielKnoten haben wird false ausgegeben. Am Ende der
-	 * Prüfung wird in der Konsole einLog geschrieben.
+	 * Pruefung wird in der Konsole einLog geschrieben.
 	 * 
 	 * @param map
 	 *            Das Spielfeld als Integer-Array
@@ -102,8 +105,8 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 *            Ziel-Knoten(X-Koord.)
 	 * @param ziely
 	 *            Ziel-Knoten(Y-Koord.)
-	 * @return Gibt True zurück, wenn Konsistenz-Prüfung erfolgreich. False,
-	 *         wenn die Map durchfällt.
+	 * @return Gibt True zurueck, wenn Konsistenz-Pruefung erfolgreich. False,
+	 *         wenn die Map durchfaellt.
 	 */
 	public static boolean check(int[][] map, int startx, int starty, int zielx,
 			int ziely) {

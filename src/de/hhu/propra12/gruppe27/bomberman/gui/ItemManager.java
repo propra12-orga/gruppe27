@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 
 /**
- * 
+ * Klasse fuer die Eigenschaften eines Item
  * @author gruppe 27
- * @version 1.0 Klasse f�r die Eigenschaften eines Item
+ * @version 1.0 
  * 
  */
 
@@ -33,7 +33,7 @@ public class ItemManager {
 
 	/**
 	 * Item wird aufgenommen
-	 * 
+	 * Parameter i wird uebergebn
 	 * @param i
 	 */
 
@@ -43,7 +43,7 @@ public class ItemManager {
 
 	/**
 	 * Groesseneinstellung
-	 * 
+	 * Parameter Feld wird uerbergeben
 	 * @param Feld
 	 */
 
@@ -58,7 +58,7 @@ public class ItemManager {
 
 	/**
 	 * Items werden gezeichnet
-	 * 
+	 * Parameter g wird uebergeben
 	 * @param g
 	 */
 

@@ -18,10 +18,10 @@ import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
- * 
+ * Klasse fuer das Optionsmenue Einstellungen wie Spiegelung,
+ * Standardlvl, Graphik War of Stickmen wird eingefuegt
  * @author gruppe 27
- * @version 1.0 Klasse fuer das Optionsmenue Einstellungen wie Spiegelung,
- *          Standardlvl und KI
+ * @version 1.0 
  */
 
 public class Optionmenue {
@@ -40,7 +40,10 @@ public class Optionmenue {
 	 * 
 	 * @param system
 	 * @return sys Systemeinstellungen koennen getaetigt werden, Buttons werden
-	 *         definiert
+	 * definiert       
+	 * Mauerdichte kann eingestellt werden (Fenster wird geoeffnet) -->
+	 * zerstoerbare Waende
+	 * Spiegelung und Standardlevel koennen ein bzw. ausgestellt werden
 	 */
 
 	public void optionaufruf() {
@@ -67,14 +70,6 @@ public class Optionmenue {
 		coption.weightx = 1.0;
 		optionpanel.add(buttonO0, coption);
 
-		/*
-		 * Button 1 - buttonO1
-		 */
-
-		/**
-		 * Mauerdichte kann eingestellt werden (Fenster wird geoeffnet) -->
-		 * zerstoerbare Waende
-		 */
 
 		JButton buttonO1 = new JButton("Mauerdichte");
 		coption.gridx = 0;
@@ -83,31 +78,18 @@ public class Optionmenue {
 		// coption.weightx = 1.0;
 		optionpanel.add(buttonO1, coption);
 
-		/*
-		 * Button 2 - buttonO2
-		 */
-		/**
-		 * Spielfeldgroesse kann ausgewaehlt werden (Fenster oeffnet sich)
-		 */
-
 		JButton buttonO2 = new JButton("Spielfeldgroesse");
 		coption.gridx = 0;
 		coption.gridy = 3;
 		optionpanel.add(buttonO2, coption);
 
-		/**
-		 * Spiegelung an/aus (Button 3/buttonO3)
-		 */
+		
 		JToggleButton buttonO3 = new JToggleButton(spiegel
 				+ getBoolState(sys.getspiegelung()), sys.getspiegelung());
 		coption.gridx = 0;
 		coption.gridy = 4;
 		optionpanel.add(buttonO3, coption);
 
-		/**
-		 * 
-		 * Standardlevel an/aus (Button 4/buttonO4)
-		 */
 
 		JToggleButton buttonO4 = new JToggleButton(standard
 				+ getBoolState(sys.getstandardlvl()), sys.getstandardlvl());

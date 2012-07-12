@@ -6,10 +6,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
- * 
+ * Klasse LanPlayer und Bestimmung der Faehigkeiten Ist eine
+ * Unterklasse von AbstractPLayer und implementiert Serializable
  * @author Gruppe 27
- * @version 1.0 Klasse LanPlayer und Bestimmung der Faehigkeiten Ist eine
- *          Unterklasse von AbstractPLayer und implementiert Serializable
+ * @version 1.0 
  */
 
 public class LanPlayer extends AbstractPlayer implements Serializable {
@@ -62,7 +62,7 @@ public class LanPlayer extends AbstractPlayer implements Serializable {
 
 	/**
 	 * Bewegungseinstellungen Wenn der Spieler noch am Leben ist und die Tasten
-	 * zur Steuerung oder Ablegung der Bombe dr�ckt, wird 'pressed' an das
+	 * zur Steuerung oder Ablegung der Bombe drueckt, wird 'pressed' an das
 	 * Programm uebergeben. --> h.hostKeyUpdate(index, keycode, pressed)
 	 */
 

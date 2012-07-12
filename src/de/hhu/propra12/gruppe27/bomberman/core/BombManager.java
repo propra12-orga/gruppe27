@@ -7,18 +7,11 @@ import java.util.ArrayList;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
-<<<<<<< HEAD
+ * Klasse BombManager implementiert Serializable
+ * Erstellung einer Bomblist, um den Bestand zu kontrollieren
  * @author gruppe 27
  * @version 1.0
- * Klasse BombManager, Bomblist wird als Array erstellt
-=======
- * @author
- * @version 1.0
- *  Klasse BombManager implementiert Serializable
- *  Erstellung einer Bomblist, um den Bestand zu kontrollieren
->>>>>>> 810be2cc27504a0fa64e187c7f43d24a17b693ea
- * 
+ *  
  */
 
 public class BombManager implements Serializable {

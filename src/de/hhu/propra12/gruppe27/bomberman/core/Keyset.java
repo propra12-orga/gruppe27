@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 /**
- * 
+ * Belegung der Tasten fuer Spieler, siehe KeyPlayer
  * @author gruppe 27
- * @version 1.0 Belegung der Tasten fuer Spieler, siehe KeyPlayer
+ * @version 1.0 
  * 
  */
 
@@ -101,7 +101,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter fuer Keyup werden uebergeben
 	 * @param keyUp
 	 */
 
@@ -120,7 +120,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Paramaeter fuer KeyDown werden uebergeben
 	 * @param keyDown
 	 */
 
@@ -139,7 +139,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter fuer KeyLeft werden uebergeben
 	 * @param keyLeft
 	 */
 
@@ -148,7 +148,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * Werte f�r KeyRight werden uebergeben
+	 * Werte fuer KeyRight werden uebergeben
 	 * 
 	 * @return KeyRight
 	 */
@@ -158,7 +158,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter fuer KeyRight werden uebergeben
 	 * @param keyRight
 	 */
 
@@ -167,7 +167,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * Werte f�r KeyBomb werden uebergeben
+	 * Werte fuer KeyBomb werden uebergeben
 	 * 
 	 * @return KeyBomb
 	 */
@@ -177,7 +177,7 @@ public class Keyset implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Paramaeter fuer KeyBomb werden uebergeben
 	 * @param keyBomb
 	 */
 

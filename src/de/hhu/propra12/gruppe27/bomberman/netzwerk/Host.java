@@ -19,10 +19,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
+ * Klasse Host Vererbung von IRemoteHost Spielfeld, RegistryPort
+ * und servicename werden uebergeben
  * @author gruppe 27
- * @version 1.0 Klasse Host Vererbung von IRemoteHost Spielfeld, RegistryPort
- *          und servicename werden uebergeben
+ * @version 1.0 
  */
 
 public class Host extends UnicastRemoteObject implements IRemoteHost {
@@ -194,7 +194,7 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 			return Keyset.REMBOMB;
 		}
 		System.out.println("keine korrekte Uebersetzung moeglich");
-		return 0; // sollte nie vorkommen!
+		return 0; 
 	}
 
 }

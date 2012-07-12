@@ -3,12 +3,12 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 import java.awt.Color;
 import java.io.Serializable;
 
-// Feld - Aussenwände
+
 
 /**
- * 
+ * Klasse zur Erstellung der nicht zerstoerbaren Waende
  * @author Gruppe 27
- * @verison 1.0 Klasse zur Erstellung der nicht zerstoerbaren Waende
+ * @verison 1.0 
  */
 public class Wall extends AbstractFeld implements Serializable {
 
@@ -31,6 +31,7 @@ public class Wall extends AbstractFeld implements Serializable {
 
 	/**
 	 * @return Color
+	 * Color wird uebergeben
 	 */
 
 	@Override

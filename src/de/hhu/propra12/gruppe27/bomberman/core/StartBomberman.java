@@ -2,6 +2,12 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import de.hhu.propra12.gruppe27.bomberman.gui.menue.Startmenue;
 
+/**
+ * 
+ * @author gruppe 27
+ * @version 1.0
+ */
+
 public class StartBomberman {
 
 	// Systemeinstellungen sind "default" gesetzt

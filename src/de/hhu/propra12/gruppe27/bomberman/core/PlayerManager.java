@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
+ * Klasse des Playermanagers wird augerufen
  * @author gruppe 27
- * @version 1.0 Klasse des Playermanagers Owner wird augerufen
+ * @version 1.0 
  */
 
 public class PlayerManager implements Serializable {
@@ -75,7 +75,7 @@ public class PlayerManager implements Serializable {
 	}
 
 	/**
-	 * Ende wenn niemand mehr lebt Ende wenn der Ausgang betreten wir
+	 * Ende wenn niemand mehr lebt Ende oder wenn der Ausgang betreten wir
 	 * 
 	 * @return ALLDEAD
 	 */
@@ -107,7 +107,7 @@ public class PlayerManager implements Serializable {
 		}
 
 		/**
-		 * im Mehrspielermodus muss abgebrochen werden, wenn nur noch 1 Spieler
+		 * im Mehrspielermodus wir das Spiel beendet, wenn nur noch 1 Spieler
 		 * lebt
 		 */
 		else if (sys.getboolLAN()) {
@@ -183,6 +183,11 @@ public class PlayerManager implements Serializable {
 	public ArrayList<AbstractPlayer> getPlayerList() {
 		return PlayerList;
 	}
+	
+	/**
+	 * Parameter direction wird uebergeben
+	 * @param direction
+	 */
 
 	public void moveremotePlayers(int direction) {
 		for (int i = 0; i < PlayerList.size(); i++) {

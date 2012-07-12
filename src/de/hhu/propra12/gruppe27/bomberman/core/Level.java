@@ -6,8 +6,9 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Exit;
 import de.hhu.propra12.gruppe27.bomberman.gui.Special;
 
 /**
+ * Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
  * @autor gruppe 27
- * @version 1.0 Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
+ * @version 1.0 
  */
 
 public abstract class Level implements Serializable {
@@ -88,7 +89,7 @@ public abstract class Level implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Parameter fuer x und y werden uebergeben
 	 * @param x
 	 * @param y
 	 * @return laxbr laxbr wird zurueckgegeben
@@ -104,7 +105,7 @@ public abstract class Level implements Serializable {
 	 * @param input
 	 * @param x
 	 * @param y
-	 *            Das FEld wird festgelegt
+	 *            Das Feld wird festgelegt
 	 */
 
 	public void setFeld(AbstractFeld input, int x, int y) {
@@ -139,6 +140,11 @@ public abstract class Level implements Serializable {
 	public int getbreite() {
 		return breite;
 	}
+	
+	/**
+	 * Exist wird uebergeben
+	 * @return e
+	 */
 
 	public Exit getExit() {
 		return e;

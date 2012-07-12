@@ -29,10 +29,17 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.Client;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.Host;
 
 /**
- * 
+ * Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
+ * joinen und hosten, Einstellungen setzen)
+ * Buttons um Speil zu starten (Solo und 2 Spieler-Modus)
+ * Buttons fuer Multiplayer (hosten und verbinden)
+ * Datei laden (Button buttonbmlimport) 
+ * Level importieren
+ * Leveleditor starten (Button5)
+ * Optionsmenue oeffnen (Button 6)
+ * Spiel beenden bzw. schliessen (Button 7)
  * @author gruppe 27
- * @version 1.0 Klasse fuer das grafische Startmenue (Spiel starten, Multiplayer
- *          joinen und hosten, Einstellungen setzen)
+ * @version 1.0 
  * 
  */
 
@@ -42,9 +49,7 @@ public class Startmenue {
 	Icon icon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/warofstickmen.gif");
 
-	/**
-	 * Methode um das Menue-Fenster zu oeffnen
-	 */
+
 
 	public void menueaufruf() {
 		final JFrame framemenue = new JFrame(" StartenBomberman Startmenue");
@@ -62,9 +67,7 @@ public class Startmenue {
 		c.gridx = 0;
 		c.gridy = 0;
 
-		/**
-		 * Button mit erstem Bild
-		 */
+		
 
 		JButton buttonS0 = new JButton(icon);
 		c.gridx = 0;
@@ -73,9 +76,7 @@ public class Startmenue {
 		c.weightx = 1.0;
 		panel.add(buttonS0, c);
 
-		/**
-		 * Spiel starten (Button 1/buttonS1) - solo
-		 */
+		
 
 		JButton buttonS1 = new JButton("Spiel starten (Solo)");
 		c.gridx = 0;
@@ -83,9 +84,7 @@ public class Startmenue {
 
 		panel.add(buttonS1, c);
 
-		/**
-		 * Spiel starten (Button 2/buttonS2) - 2Spieler - Modus
-		 */
+		
 
 		JButton buttonS2 = new JButton("Spiel starten (2 Spieler-Modus)");
 		c.gridx = 0;
@@ -93,72 +92,55 @@ public class Startmenue {
 
 		panel.add(buttonS2, c);
 
-		/**
-		 * Multiplayer verbinden (Button 3/buttonS3)
-		 */
+		
 
 		JButton buttonS3 = new JButton("Multiplayer (Join Game)");
 		c.gridx = 0;
 		c.gridy = 4;
 		panel.add(buttonS3, c);
 
-		/**
-		 * Multiplayer hosten (Button 4/buttonS4)
-		 */
+		
 
 		JButton buttonS4 = new JButton("Multiplayer (Host Game)");
 		c.gridx = 0;
 		c.gridy = 5;
 		panel.add(buttonS4, c);
 
-		/**
-		 * Datei laden (Button buttonbmlimport)
-		 * 
-		 * Level importieren
-		 */
+		
 		JToggleButton buttonbmlimport = new JToggleButton("Level laden",
 				system.getbmllevel());
 		c.gridx = 0;
 		c.gridy = 6;
 		panel.add(buttonbmlimport, c);
 
-		/**
-		 * Leveleditor starten (Button 5/buttonle)
-		 */
+		
 
 		JButton buttonle = new JButton("Leveleditor");
 		c.gridx = 0;
 		c.gridy = 7;
 		panel.add(buttonle, c);
 
-		/**
-		 * Optionsmenue oeffnen (Button 6/buttonS5)
-		 * 
-		 */
+		
 
 		JButton buttonS5 = new JButton("Optionen");
 		c.gridx = 0;
 		c.gridy = 8;
 		panel.add(buttonS5, c);
 
-		/**
-		 * Spiel beenden bzw. schliessen (Button 7/buttonS6)
-		 */
+		
 
 		JButton buttonS6 = new JButton("Spiel verlassen");
 		c.gridx = 0;
 		c.gridy = 9;
 		panel.add(buttonS6, c);
 
-		// Fenster mittig setzen in guter Groesse
+	
 		framemenue.setSize(framemenue.getPreferredSize());
 		int height = framemenue.getPreferredSize().height;
 		int width = framemenue.getPreferredSize().width;
 		centerWindow(width, height, framemenue);
 
-		/**
-		 * Aktionen fuer Button 1 Spielfeld wird generiert und gestartet
-		 */
+	
 
 		buttonS1.addActionListener(new ActionListener() {
 

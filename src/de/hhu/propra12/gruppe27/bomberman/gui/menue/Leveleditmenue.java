@@ -15,9 +15,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.LevelEditor;
 
 /**
- * 
+ * Klasse fuer die Einstellungen des Feldes fuer den Leveleditor
  * @author gruppe 27
- * @version 1.0 Klasse fuer die Einstellungen des Feldes fuer den Leveleditor
+ * @version 1.0
  */
 
 public class Leveleditmenue {
@@ -49,9 +49,7 @@ public class Leveleditmenue {
 		cedit.gridx = 0;
 		cedit.gridy = 0;
 
-		/**
-		 * Knoepfe werden definiert Button 1 fuer 11x11
-		 */
+		
 
 		JButton buttonedit1 = new JButton("Spielfeld: 11 x 11");
 		cedit.gridx = 0;
@@ -60,18 +58,14 @@ public class Leveleditmenue {
 		cedit.weightx = 1.0;
 		paneledit.add(buttonedit1, cedit);
 
-		/**
-		 * Button 2 fuer 15x15
-		 */
+		
 
 		JButton buttonedit2 = new JButton("Spielfeld 15 x 15 (default)");
 		cedit.gridx = 0;
 		cedit.gridy = 2;
 		paneledit.add(buttonedit2, cedit);
 
-		/**
-		 * Button 3 fuer 19x19
-		 */
+		
 
 		JButton buttonedit3 = new JButton("Spieldfeld 19 x 19");
 		cedit.gridx = 0;
@@ -83,16 +77,7 @@ public class Leveleditmenue {
 		int width = frameedit.getPreferredSize().width;
 		centerWindow(width, height, frameedit);
 
-		/*
-		 * 
-		 * jeweils feldx und feldy setzen je nach ausgewählter Größe
-		 */
-
-		/**
-		 * Aktion der Knoepfe Listener wird ausgefuehrt, damit Knopfdruck
-		 * bearbeitet werden kann
-		 * 
-		 */
+		
 
 		buttonedit1.addActionListener(new ActionListener() {
 
@@ -106,6 +91,10 @@ public class Leveleditmenue {
 				frameedit.dispose();
 			}
 		});
+		
+		/**
+		 * ActionListener wird hinzugefuegt, fuer Knopfdruck
+		 */
 
 		buttonedit2.addActionListener(new ActionListener() {
 
@@ -119,6 +108,10 @@ public class Leveleditmenue {
 				frameedit.dispose();
 			}
 		});
+		
+		/**
+		 * @see buttonedit2
+		 */
 
 		buttonedit3.addActionListener(new ActionListener() {
 

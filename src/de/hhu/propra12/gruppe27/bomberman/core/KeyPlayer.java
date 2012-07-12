@@ -5,10 +5,10 @@ import java.io.Serializable;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
+ * Klasse Keyplayers und Bestimmung der Faehigkeiten Unterklasse
+ * vom AbstractPlayer, implementiert Serializable
  * @author Gruppe 27
- * @version 1.0 Klasse Keyplayers und Bestimmung der Faehigkeiten Unterklasse
- *          vom AbstractPlayer, implementiert Serializable
+ * @version 1.0 
  */
 
 public class KeyPlayer extends AbstractPlayer implements Serializable {
@@ -78,8 +78,6 @@ public class KeyPlayer extends AbstractPlayer implements Serializable {
 
 	/**
 	 * Die Bewegung des Spieler auf dem Feld ohne festen Bloecken wird definiert
-	 * 
-	 * 
 	 */
 
 	public void move() {

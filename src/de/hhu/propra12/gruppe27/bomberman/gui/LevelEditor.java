@@ -26,10 +26,10 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.core.Wall;
 
 /**
- * 
+ * Klasse LevelEditor implementiert Serializable und dient der
+ * Einstellung der Level
  * @author Gruppe 27
- * @version 1.0 Klasse LevelEditor implementiert Serializable und dient der
- *          Einstellung der Level
+ * @version 1.0 
  * 
  */
 

@@ -8,9 +8,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
-*
+* Klasse zur Erstellung des Spielfensters
 * @author Gruppe 27
-* @version 1.0 Klasse zur Erstellung des Spielfensters
+* @version 1.0 
 *
 */
 public class GameWindow extends JFrame {
@@ -21,15 +21,16 @@ Spielfeld spielfeld = null;
 private static final long serialVersionUID = 1L;
 
 /**
-*
+* Parameter fuer levelnr wird uebergeben
 * @param levelnr
-*/
-public GameWindow(int levelnr) {
-
-/**
 * Festlegung der Groesse (x und y Koordinate) Fenster wird mittig
 * gesetzt this.system = SysEinst.getSystem();
+* Das Fenster wird mittig gesetzt
 */
+
+public GameWindow(int levelnr) {
+
+
 
 this.spielfeld = new Spielfeld(levelnr, this);
 add(spielfeld);
@@ -37,7 +38,7 @@ int width = system.getfeldx() * 32;
 int height = system.getfeldy() * 32 + 24;
 setSize(width, height);
 setVisible(true);
-centerWindow(width, height); // Fenster mittig setzen
+centerWindow(width, height); 
 repaint();
 }
 
@@ -48,6 +49,8 @@ repaint();
 * @param system
 * @param spielfeld
 * Konstruktor fuer Client im Netzwerk
+* Festlegung der Groesse (x und y Koordinate) Fenster wird mittig
+* gesetzt
 */
 
 public GameWindow(Level level) {
@@ -56,10 +59,7 @@ Spielfeld spielfeld = new Spielfeld(level, this);
 system.setfeldx(spielfeld.getsystem().getfeldx());
 system.setfeldy(spielfeld.getsystem().getfeldy());
 
-/**
-* Festlegung der Groesse (x und y Koordinate) Fenster wird mittig
-* gesetzt
-*/
+
 
 this.spielfeld = spielfeld;
 spielfeld.setowner(this);

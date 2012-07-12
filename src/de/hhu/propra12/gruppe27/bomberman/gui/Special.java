@@ -3,11 +3,9 @@ package de.hhu.propra12.gruppe27.bomberman.gui;
 import de.hhu.propra12.gruppe27.bomberman.core.AbstractFeld;
 
 /**
- * 
+ * Klasse Special
  * @author gruppe 27
  * @version 1.0
- * Klasse Special
- *
  */
 
 public class Special {

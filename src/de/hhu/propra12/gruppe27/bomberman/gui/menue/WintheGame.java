@@ -17,10 +17,11 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
- * 
+ * Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird
+ * aufgerufen
+ * "Gewonnen" wird ausgegeben, wenn man das Spiel erfolgreich beendet hat
  * @author gruppe 27
- * @version 1.0 Klasse fuer das Gewinnen des Spiels, Gewinner Bild wird
- *          aufgerufen
+ * @version 1.0 
  * 
  */
 
@@ -30,9 +31,7 @@ public class WintheGame {
 	Icon winicon = new ImageIcon(
 			"src/de/hhu/propra12/gruppe27/bomberman/graphics/GewonnenTranzkleiner.gif");
 
-	/**
-	 * "Gewonnen" wird ausgegeben, wenn man das Spiel erfolgreich beendet hat
-	 */
+	
 
 	public void winthegame() {
 
@@ -73,7 +72,10 @@ public class WintheGame {
 
 		/**
 		 * Button, wenn man zurueck zum Startmenue moechte
+		 * Button, auf dem der Highscore steht
+		 * Schritte die man erreicht hat bis man den Ausgang erreicht hat, Schritte die man gemacht hat bis man seinen Gegner zerstoert hat
 		 */
+		 
 
 		JButton buttonW2 = new JButton("Zurueck zum Startmenue");
 		c.gridx = 0;
@@ -81,10 +83,6 @@ public class WintheGame {
 		// c.gridwidth = 2;
 		panelwin.add(buttonW2, c);
 
-		/**
-		 * Button, auf dem der Highscore steht
-		 * Schritte die man erreicht hat bis man den Ausgang erreicht hat, Schritte die man gemacht hat bis man seinen Gegner zerstoert hat
-		 */
 		if (system.getamplayer() == 1) {
 			JButton buttonScore = new JButton(
 					"Du hast den Ausgang innerhalb von "

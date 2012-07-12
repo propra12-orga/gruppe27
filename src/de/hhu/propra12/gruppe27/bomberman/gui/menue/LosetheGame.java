@@ -17,9 +17,9 @@ import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.gui.GameWindow;
 
 /**
- * 
+ * Klasse fuer verlorenes Spiel Grafik wird uebergeben
  * @author gruppe 27
- * @version 1.0 Klasse fuer verlorenes Spiel Grafik wird uebergeben
+ * @version 1.0 
  */
 
 public class LosetheGame {

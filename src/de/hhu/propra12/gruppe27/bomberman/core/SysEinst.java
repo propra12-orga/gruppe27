@@ -7,13 +7,13 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
 
 /**
- * 
- * @author
- * @verion 1.0 Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
- *         Spieler, Feldgoesse = feldx, feldy, denswall = Mauerdichte, randomlvl
- *         = Generiertes Level, spiegelung = Level soll gespiegelt werden,
- *         standardlvl = Festgelegte unzersoerbare Waende im Level, namePlayer =
- *         Name des Spielers
+ * Einstellungen um ein Spielfeld zu erstellen, player = Anzahl der
+ * Spieler, Feldgoesse = feldx, feldy, denswall = Mauerdichte, randomlvl
+ * = Generiertes Level, spiegelung = Level soll gespiegelt werden,
+ * standardlvl = Festgelegte unzersoerbare Waende im Level, namePlayer =
+ * Name des Spielers
+ * @author gruppe 27
+ * @verion 1.0 
  */
 
 public class SysEinst implements Serializable {

@@ -4,30 +4,27 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 
 /**
- * 
+ * Klasse OpenFileDialog zum auswaehlen einer Datei
+ * Oeffnet ein Fenster zum auswaehlen einer Datei und gibt dessen Pfad zurueck.
+ * Zum Laden gedacht.
+ * @param fenster
+ * @param title
+ * Fenstertitel des FileDialog
+ * @param defDir
+ * Der Pfad der beim Oeffnen des FileDialogs automatisch angezeigt
+ * wird. (Falls vorhanden)
+ * @param fileType
+ * Dateityp, der angezeigt werden soll. "*" dient als Platzhalter
+ * fuer beliebig viele Zeichen.
+ * @return Gibt den totalen Pfad der ausgeaehlten Datei zurueck.
  * @author Gruppe 27
  * @version 1.0
- * Klasse OpenFileDialog zum auswaehlen einer Datei
  *
  */
 
 public class OpenFileDialog {
 
-	/**
-	 * Öffnet ein Fenster zum auswaehlen einer Datei und gibt dessen Pfad zurück.
-	 * Zum Laden gedacht.
-	 * 
-	 * @param fenster
-	 * @param title
-	 *            Fenstertitel des FileDialog
-	 * @param defDir
-	 *            Der Pfad der beim Öffnen des FileDialogs automatisch angezeigt
-	 *            wird. (Falls vorhanden)
-	 * @param fileType
-	 *            Dateityp, der angezeigt werden soll. "*" dient als Platzhalter
-	 *            für beliebig viele Zeichen.
-	 * @return Gibt den totalen Pfad der ausgewählten Datei zurück.
-	 */
+	
 	@SuppressWarnings("deprecation")
 	public String loadFile(Frame fenster, String title, String defDir,
 			String fileType) { 
@@ -46,19 +43,19 @@ public class OpenFileDialog {
 	}
 
 	/**
-	 * Öffnet ein Fenster zum auswählen einer Datei und gibt dessen Pfad zurück.
+	 * Oeffnet ein Fenster zum auswaehlen einer Datei und gibt dessen Pfad zurueck.
 	 * Zum Speichern gedacht.
 	 * 
 	 * @param fenster
 	 * @param title
 	 *            Fenstertitel des FileDialog
 	 * @param defDir
-	 *            Der Pfad der beim Öffnen des FileDialogs automatisch angezeigt
+	 *            Der Pfad der beim oeffnen des FileDialogs automatisch angezeigt
 	 *            wird. (Falls vorhanden)
 	 * @param fileType
 	 *            Dateityp, der angezeigt werden soll. "*" dient als Platzhalter
-	 *            für beliebig viele Zeichen.
-	 * @return
+	 *            fuer beliebig viele Zeichen.
+	 * @return null
 	 */
 	@SuppressWarnings("deprecation")
 	public String saveFile(Frame fenster, String title, String defDir,

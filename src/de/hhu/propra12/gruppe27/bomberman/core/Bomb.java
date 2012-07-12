@@ -9,10 +9,10 @@ import de.hhu.propra12.gruppe27.bomberman.audio.StdAudio;
 import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 
 /**
- * 
+ * Klasse Bomb, Werte werden serialisierd, Bild der Bombe wird
+ * uebergeben
  * @author gruppe 27
- * @version 1.0 Klasse Bomb, Werte werden serialisierd, Bild der Bombe wird
- *          uebergeben
+ * @version 1.0 
  */
 
 public class Bomb implements Serializable {

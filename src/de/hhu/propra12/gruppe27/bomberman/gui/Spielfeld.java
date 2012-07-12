@@ -27,10 +27,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
- * 
+ * Klasse Spielfeld implementiert ActionListener private-Elemente
+ * greifen auf dazugehoerige Klassen zu
+ * Generierung des Levels
+ * Konsistenzpruefung. Sollte der Weg von 1, 1 bis 13, 13 nicht erreichbar
+ * sein wird der Spieler informiert und das Spielfeld nicht geladen.
  * @author Gruppe 27
- * @version 1.0 Klasse Spielfeld implementiert ActionListener private-Elemente
- *          greifen auf dazugehoerige Klassen zu
+ * @version 1.0 
  * 
  */
 
@@ -46,13 +49,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
-	/*
-	 * Generierung des Levels
-	 */
-	/*
-	 * Konsistenzpr�fung. Sollte der Weg von 1, 1 bis 13, 13 nicht erreichbar
-	 * sein wird der Spieler informiert und das Spielfeld nicht geladen.
-	 */
 
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
@@ -95,7 +91,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param levelnr
 	 * @param owner
-	 *            Parameter werden uebergeben
+	 * Parameter owner und levelnr werden uebergeben
 	 */
 
 	public Spielfeld(int levelnr, GameWindow owner) {
@@ -106,8 +102,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param level
 	 * @param owner
-	 *            Initialisierung von levelnr und GameWindow KeyListener wird
-	 *            hinzugefuegt
+	 * Initialisierung von levelnr und GameWindow KeyListener wird
+	 * hinzugefuegt, Special im Solospiel wird gesetzt, Highscore wird geloescht
+	 * Spieler werden hinzugefuegt, je nach bool-Werten fuer Solo- und Zweispielermodus 
+	 * oder fuer das Lan Spiel
 	 */
 
 	public Spielfeld(Level level, GameWindow owner) {
@@ -119,7 +117,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
 
-		// setzt das Special im Solospiel
+		
 		if (system.getamplayer() == 1) {
 			setrandomspec();
 		}
@@ -127,17 +125,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		/**
-		 * Highscore wird geloescht
-		 */
+		
 
 		system.setHighscoreP1(0);
 		system.setHighscoreP2(0);
 
-		/**
-		 * Spieler werden hinzugefuegt, je nach bool-Werten fuer Solo- und
-		 * Zweispielermodus oder fuer das Lan-Spiel
-		 */
+		
 
 		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, system.getnamePlayer1(),
@@ -151,6 +144,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				Players.addPlayer(player2);
 			}
 		}
+		
+	
 
 		else {
 			if (system.getboolClient()) {
@@ -203,7 +198,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		int intendgame = Players.checkGameEnde();
 
-		// Prüfen, ob das SPiel zu Ende ist
+		
 		if (intendgame > PlayerManager.ENDE) {
 
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
@@ -306,7 +301,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 *            Bombe zerstoeren
+	 * Parameter Feld wird uebergeben
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
