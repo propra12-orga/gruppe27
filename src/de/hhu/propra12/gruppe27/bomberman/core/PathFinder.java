@@ -106,12 +106,12 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 *            Ziel-Knoten(Y-Koord.)
 	 * @return Gibt True zurueck, wenn Konsistenz-Pruefung erfolgreich. False,
 	 *         wenn die Map durchfaellt.
-	 * @author K.F.
+	 * Waende werden geprueft, wenn ein Loch besteht wird nicht weiter gemacht
+	 * @author gruppe 27
 	 */
 	public static boolean check(int[][] map, int startx, int starty, int zielx,
 			int ziely) {
-		if (checkWalls(map)) { // Wände prüfen. Gar nicht erst weiter machen,
-								// wenn ein Loch besteht.
+		if (checkWalls(map)) { 
 			PathFinder.zielx = zielx;
 			PathFinder.ziely = ziely;
 			PathFinder pf = new PathFinder(map);
@@ -187,13 +187,13 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	}
 
 	/**
-	 * Prüft ein int[][] Array auf eine eine "1" (Loch) in der Wand. Geht erst
-	 * die beiden senkrechten Wände durch dann die beiden horizontalen Wände.
+	 * Prueft ein int[][] Array auf eine eine "1" (Loch) in der Wand. Geht erst
+	 * die beiden senkrechten Waende durch dann die beiden horizontalen Waende.
 	 * 
 	 * @author K.F.
 	 * @param map
 	 *            int Array aus 1 und 0
-	 * @return Gibt True zurück, wenn alle Wände geprüft wurden und kein Loch
+	 * @return Gibt True zurück, wenn alle Waende geprueft wurden und kein Loch
 	 *         besteht. False, wenn ein Loch gefunden wurde.
 	 */
 	public static boolean checkWalls(int[][] map) {
@@ -201,13 +201,13 @@ public class PathFinder extends AStar<PathFinder.Node> {
 			if ((map[i][0] == 1) || (map[i][map[1].length - 1] == 1)) {
 				System.out.println("Loch in einer senkrechten Wand!\n");
 				return false;
-			} // Horizontale Wände prüfen.
+			} 
 		}
 		for (int j = 0; j < map[1].length; j++) {
 			if ((map[0][j] == 1) || (map[map[0].length - 1][j] == 1)) {
 				System.out.println("Loch in einer horizontalen Wand!\n");
 				return false;
-			} // Senkrechte Wände prüfen.
+			} 
 		}
 		System.out.println("W\u00e4nde: OK!\n");
 		return true;

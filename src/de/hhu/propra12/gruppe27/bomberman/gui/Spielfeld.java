@@ -50,8 +50,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
 	/**
-	 * Lädt aus LevelGen ein generiertes Level-Objekt. Sollte das Level
-	 * konsistent sein wird es zurückgegeben. Wenn nicht wird ein neues Level
+	 * Laedt aus LevelGen ein generiertes Level-Objekt. Sollte das Level
+	 * konsistent sein wird es zurueckgegeben. Wenn nicht wird ein neues Level
 	 * generiert. So lange bis ein konsistentes Level generiert wurde.
 	 * 
 	 * @param levelnr
@@ -59,7 +59,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
-		/* Multiplayer Zufalls-Map prüfen */
+		/* Multiplayer Zufalls-Map pruefen */
 		if ((system.getamplayer() > 1) || (system.getboolLAN())) {
 
 			LevelGen newLevel = new LevelGen(system.getfeldx(),
@@ -67,7 +67,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 			int[][] newLevelArray = PathFinder.convertMap(newLevel);
 			/*
-			 * Wir prüfen alle drei Player-Startpunkte, ob sie erreichbar sind.
+			 * Wir pruefen alle drei Player-Startpunkte, ob sie erreichbar sind.
 			 */
 			if ((PathFinder
 					.check(newLevelArray, 1, 1, system.getfeldx() - 2, 1))
@@ -96,7 +96,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			LevelGen newLevel = new LevelGen(system.getfeldx(),
 					system.getfeldy(), system.getamplayer());
 			/*
-			 * Nur prüfen, ob Exit erreichbar ist, da Solo-Game.
+			 * Nur pruefen, ob Exit erreichbar ist, da Solo-Game.
 			 */
 			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1,
 					newLevel.getExit().getX(), newLevel.getExit().getY())) {
@@ -138,7 +138,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 						"BML-Level ist durch die Konsistenzpruefung gefallen!",
 						"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
 				return null; /*
-							 * Man ist gezwungen etwas zurückzugeben. Verursacht
+							 * Man ist gezwungen etwas zurueckzugeben. Verursacht
 							 * bei inkonsistentem Level eine
 							 * NullPointerException
 							 */

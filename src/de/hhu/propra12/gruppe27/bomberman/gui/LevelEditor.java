@@ -324,7 +324,7 @@ public class LevelEditor extends Level implements Serializable {
 					JOptionPane
 							.showMessageDialog(
 									null,
-									"Ihr erstelltes Level ist inkonsistent!\nBitte überprüfen sie Ihr Level und wiederholen Sie den Vorgang!",
+									"Ihr erstelltes Level ist inkonsistent!\nBitte ueberpruefen sie Ihr Level und wiederholen Sie den Vorgang!",
 									"Level inkonsistent!",
 									JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -404,9 +404,9 @@ public class LevelEditor extends Level implements Serializable {
 	}
 
 	/**
-	 * Konvertiert die Buttons des LevelEditors in 1 und 0 für W, B und F
+	 * Konvertiert die Buttons des LevelEditors in 1 und 0 fuer W, B und F
 	 * 
-	 * @return Gibt ein int Array zurück in Form von 1 und 0.
+	 * @return Gibt ein int Array zurueck in Form von 1 und 0.
 	 */
 	public int[][] convertButtonsToMap() {
 		int[][] ergebnis = new int[feldx][feldy];
