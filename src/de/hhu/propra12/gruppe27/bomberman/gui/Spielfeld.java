@@ -27,13 +27,13 @@ import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
- * Klasse Spielfeld implementiert ActionListener private-Elemente
- * greifen auf dazugehoerige Klassen zu
- * Generierung des Levels
- * Konsistenzpruefung. Sollte der Weg von 1, 1 bis 13, 13 nicht erreichbar
- * sein wird der Spieler informiert und das Spielfeld nicht geladen.
+ * Klasse Spielfeld implementiert ActionListener private-Elemente greifen auf
+ * dazugehoerige Klassen zu Generierung des Levels Konsistenzpruefung. Sollte
+ * der Weg von 1, 1 bis 13, 13 nicht erreichbar sein wird der Spieler informiert
+ * und das Spielfeld nicht geladen.
+ * 
  * @author Gruppe 27
- * @version 1.0 
+ * @version 1.0
  * 
  */
 
@@ -49,15 +49,35 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
-
+	/**
+	 * Lädt aus LevelGen ein generiertes Level-Objekt. Sollte das Level
+	 * konsistent sein wird es zurückgegeben. Wenn nicht wird ein neues Level
+	 * generiert. So lange bis ein konsistentes Level generiert wurde.
+	 * 
+	 * @param levelnr
+	 * @return
+	 */
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
-		if (!system.getbmllevel()) {
+		/* Multiplayer Zufalls-Map prüfen */
+		if ((system.getamplayer() > 1) || (system.getboolLAN())) {
+
 			LevelGen newLevel = new LevelGen(system.getfeldx(),
 					system.getfeldy(), system.getamplayer());
-			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1,
-					newLevel.getExit().getX(), newLevel.getExit().getY())) {
+
+			int[][] newLevelArray = PathFinder.convertMap(newLevel);
+			/*
+			 * Wir prüfen alle drei Player-Startpunkte, ob sie erreichbar sind.
+			 */
+			if ((PathFinder
+					.check(newLevelArray, 1, 1, system.getfeldx() - 2, 1))
+					&& (PathFinder.check(newLevelArray, 1, 1,
+							system.getfeldx() - 2, system.getfeldy() - 2))
+					&& (PathFinder.check(newLevelArray, 1, 1, 1,
+							system.getfeldy() - 2))) {
+
 				return newLevel;
+
 			} else {
 				System.out
 						.println("Zufalls-Level ist durch die Konsistenzpruefung gefallen!");
@@ -69,11 +89,47 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 								JOptionPane.INFORMATION_MESSAGE);
 				return loadlevel(0);
 			}
+			/*
+			 * Non-BML-Check
+			 */
+		} else if (!system.getbmllevel()) {
+			LevelGen newLevel = new LevelGen(system.getfeldx(),
+					system.getfeldy(), system.getamplayer());
+			/*
+			 * Nur prüfen, ob Exit erreichbar ist, da Solo-Game.
+			 */
+			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1,
+					newLevel.getExit().getX(), newLevel.getExit().getY())) {
+
+				return newLevel;
+
+			} else {
+				System.out
+						.println("Zufalls-Level ist durch die Konsistenzpruefung gefallen!");
+				JOptionPane
+						.showMessageDialog(
+								null,
+								"Zufalls-Level ist durch die Konsistenzpruefung gefallen!\nEs wird ein neues generiert!",
+								"Level-Konsitenz",
+								JOptionPane.INFORMATION_MESSAGE);
+				return loadlevel(0);
+			}
+			/*
+			 * BML-Check
+			 */
 		} else {
 			LevelGen newLevel = new LevelGen(system.getfeldxbml(),
 					system.getfeldybml(), system.getamplayer(),
 					system.getbmllevel());
-			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1, 13, 13)) {
+			int[][] newLevelArray = PathFinder.convertMap(newLevel);
+
+			if ((PathFinder.check(newLevelArray, 1, 1,
+					system.getfeldxbml() - 2, 1))
+					&& (PathFinder.check(newLevelArray, 1, 1,
+							system.getfeldx() - 2, system.getfeldybml() - 2))
+					&& (PathFinder.check(newLevelArray, 1, 1, 1,
+							system.getfeldybml() - 2))) {
+
 				return newLevel;
 			} else {
 				System.out
@@ -81,7 +137,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				JOptionPane.showMessageDialog(null,
 						"BML-Level ist durch die Konsistenzpruefung gefallen!",
 						"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
-				return null;
+				return null; /*
+							 * Man ist gezwungen etwas zurückzugeben. Verursacht
+							 * bei inkonsistentem Level eine
+							 * NullPointerException
+							 */
 			}
 
 		}
@@ -91,7 +151,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param levelnr
 	 * @param owner
-	 * Parameter owner und levelnr werden uebergeben
+	 *            Parameter owner und levelnr werden uebergeben
 	 */
 
 	public Spielfeld(int levelnr, GameWindow owner) {
@@ -102,10 +162,11 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param level
 	 * @param owner
-	 * Initialisierung von levelnr und GameWindow KeyListener wird
-	 * hinzugefuegt, Special im Solospiel wird gesetzt, Highscore wird geloescht
-	 * Spieler werden hinzugefuegt, je nach bool-Werten fuer Solo- und Zweispielermodus 
-	 * oder fuer das Lan Spiel
+	 *            Initialisierung von levelnr und GameWindow KeyListener wird
+	 *            hinzugefuegt, Special im Solospiel wird gesetzt, Highscore
+	 *            wird geloescht Spieler werden hinzugefuegt, je nach
+	 *            bool-Werten fuer Solo- und Zweispielermodus oder fuer das Lan
+	 *            Spiel
 	 */
 
 	public Spielfeld(Level level, GameWindow owner) {
@@ -117,7 +178,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
 
-		
 		if (system.getamplayer() == 1) {
 			setrandomspec();
 		}
@@ -125,12 +185,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		Bombs = new BombManager(this);
 		Players = new PlayerManager(this);
 
-		
-
 		system.setHighscoreP1(0);
 		system.setHighscoreP2(0);
-
-		
 
 		if (system.getboolLAN() == false) {
 			Players.addPlayer(new KeyPlayer(1, 1, system.getnamePlayer1(),
@@ -144,8 +200,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 				Players.addPlayer(player2);
 			}
 		}
-		
-	
 
 		else {
 			if (system.getboolClient()) {
@@ -198,7 +252,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 		int intendgame = Players.checkGameEnde();
 
-		
 		if (intendgame > PlayerManager.ENDE) {
 
 			system.setHighscoreP1(Players.PlayerList.get(0).getCountthesteps());
@@ -301,7 +354,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 * Parameter Feld wird uebergeben
+	 *            Parameter Feld wird uebergeben
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
