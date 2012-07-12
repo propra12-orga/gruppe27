@@ -11,15 +11,15 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteClient;
 
 /**
- * 
+ * Klasse AbstractPlayer Eigenschaften fuer die Bombe,Spieler und
+ * Feld werden initialisiert int posx entspricht i am Array, int posy
+ * entspricht y im Array in bobdelay ist zustaendig fuer die
+ * explosionsverzoegerung int bombstr ist gleich die Anzahl der
+ * Bombenstuecke pro Feld int bombanz ist gleich die Bombenanzahl, int
+ * bombcount ist die aktuelle Bombenanzahl int playerWER bestimmt den
+ * Spieler
  * @author gruppe 27
- * @version 1.0 Klasse AbstractPlayer Eigenschaften fuer die Bombe,Spieler und
- *          Feld werden initialisiert int posx entspricht i am Array, int posy
- *          entspricht y im Array in bobdelay ist zustaendig fuer die
- *          explosionsverzoegerung int bombstr ist gleich die Anzahl der
- *          Bombenstuecke pro Feld int bombanz ist gleich die Bombenanzahl, int
- *          bombcount ist die aktuelle Bombenanzahl int playerWER bestimmt den
- *          Spieler
+ * @version 1.0 
  * 
  */
 
@@ -200,6 +200,12 @@ public abstract class AbstractPlayer implements Serializable {
 		}
 
 	}
+	
+	/**
+	 * Parameter fuer direction wird uebergeben
+	 * Die Methode wird bei if vom Host aufgerufen und bei else vom Client
+	 * @param direction
+	 */
 
 	public void moveifremote(int direction) {
 
@@ -210,11 +216,11 @@ public abstract class AbstractPlayer implements Serializable {
 			if (system.getboolLAN()) {
 
 				if (system.getboolClient()) {
-					// Methode vom Host aufrufen
+					
 					system.getRemoteHost().movep2c(direction);
 
 				} else {
-					// Methode vom Client aufrufen
+					
 					system.getRemoteClient().movep2h(direction);
 				}
 			}
@@ -285,7 +291,8 @@ public abstract class AbstractPlayer implements Serializable {
 	/**
 	 * 
 	 * @param g
-	 *            Spieler wird gezeichnet wenn lebend
+	 * Spieler wird gezeichnet wenn lebend
+	 * Bilder werden eingefuegt           
 	 */
 
 	private Image imgSpieler1 = Toolkit

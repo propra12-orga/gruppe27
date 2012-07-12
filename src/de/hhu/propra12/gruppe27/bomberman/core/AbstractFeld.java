@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.io.Serializable;
 
 /**
- * 
+ * Klasse zur Erstellung eines Feldes Koordinaten des Spielfeldes
+ * werden bestimmt, Feld kennt die eigenen Koordinaten
  * @author Gruppe 27
- * @version 1.0 Klasse zur Erstellung eines Feldes Koordinaten des Spielfeldes
- *          werden bestimmt, Feld kennt die eigenen Koordinaten
+ * @version 1.0
  */
  
 public abstract class AbstractFeld implements Serializable {
