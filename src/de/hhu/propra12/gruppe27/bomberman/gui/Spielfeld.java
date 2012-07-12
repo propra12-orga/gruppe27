@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,6 +22,7 @@ import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
 import de.hhu.propra12.gruppe27.bomberman.core.LanPlayer;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.LevelGen;
+import de.hhu.propra12.gruppe27.bomberman.core.PathFinder;
 import de.hhu.propra12.gruppe27.bomberman.core.PlayerManager;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
@@ -44,18 +46,47 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	private SysEinst system = SysEinst.getSystem();
 	private transient Image imagezerwand, imageexit, imagewand, imagexplode;
 
-	/**
+	/*
 	 * Generierung des Levels
+	 */
+	/*
+	 * Konsistenzpr�fung. Sollte der Weg von 1, 1 bis 13, 13 nicht erreichbar
+	 * sein wird der Spieler informiert und das Spielfeld nicht geladen.
 	 */
 
 	private static Level loadlevel(int levelnr) {
 		SysEinst system = SysEinst.getSystem();
-		if (false == system.getbmllevel()) {
-			return new LevelGen(system.getfeldx(), system.getfeldy(),
-					system.getamplayer());
+		if (!system.getbmllevel()) {
+			LevelGen newLevel = new LevelGen(system.getfeldx(),
+					system.getfeldy(), system.getamplayer());
+			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1,
+					newLevel.getExit().getX(), newLevel.getExit().getY())) {
+				return newLevel;
+			} else {
+				System.out
+						.println("Zufalls-Level ist durch die Konsistenzpruefung gefallen!");
+				JOptionPane
+						.showMessageDialog(
+								null,
+								"Zufalls-Level ist durch die Konsistenzpruefung gefallen!\nEs wird ein neues generiert!",
+								"Level-Konsitenz",
+								JOptionPane.INFORMATION_MESSAGE);
+				return loadlevel(0);
+			}
 		} else {
-			return new LevelGen(system.getfeldxbml(), system.getfeldybml(),
-					system.getamplayer(), system.getbmllevel());
+			LevelGen newLevel = new LevelGen(system.getfeldxbml(),
+					system.getfeldybml(), system.getamplayer(),
+					system.getbmllevel());
+			if (PathFinder.check(PathFinder.convertMap(newLevel), 1, 1, 13, 13)) {
+				return newLevel;
+			} else {
+				System.out
+						.println("BML-Level ist durch die Konsistenzpruefung gefallen!");
+				JOptionPane.showMessageDialog(null,
+						"BML-Level ist durch die Konsistenzpruefung gefallen!",
+						"Level-Konsitenz", JOptionPane.INFORMATION_MESSAGE);
+				return null;
+			}
 
 		}
 	}

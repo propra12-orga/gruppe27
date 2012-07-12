@@ -3,10 +3,8 @@ package de.hhu.propra12.gruppe27.bomberman.gui;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
-import de.hhu.propra12.gruppe27.bomberman.core.PathFinder;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 
 /**
@@ -34,6 +32,7 @@ public class GameWindow extends JFrame {
 		 */
 
 		this.spielfeld = new Spielfeld(levelnr, this);
+<<<<<<< HEAD
 		System.out.println("Beginne Level-Consistency-Check");
 
 		/**
@@ -59,6 +58,15 @@ public class GameWindow extends JFrame {
 			centerWindow(width, height); // Fenster mittig setzen
 			repaint();
 		}
+=======
+		add(spielfeld);
+		int width = system.getfeldx() * 32;
+		int height = system.getfeldy() * 32 + 24;
+		setSize(width, height);
+		setVisible(true);
+		centerWindow(width, height); // Fenster mittig setzen
+		repaint();
+>>>>>>> 60e7ab532d50f59258288d393db25eeada05de64
 	}
 
 	/**
@@ -115,6 +123,7 @@ public class GameWindow extends JFrame {
 				(screensize.height - height) / 2);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Konvertiert eine Map in eine Array mit 1 fuer zerst. Bloecke + freie Wege
 	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
@@ -152,4 +161,6 @@ public class GameWindow extends JFrame {
 
 		return ergebnis;
 	}
+=======
+>>>>>>> 60e7ab532d50f59258288d393db25eeada05de64
 }

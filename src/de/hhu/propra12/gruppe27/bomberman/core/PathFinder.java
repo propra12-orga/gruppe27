@@ -6,10 +6,9 @@ import java.util.List;
 /**
  * 
  * @author gruppe 27
- * @version 1.0
- * Klasse Pathfinder extends AStar
- * Initialisierung von zielx und ziely
- *
+ * @version 1.0 Klasse Pathfinder extends AStar Initialisierung von zielx und
+ *          ziely
+ * 
  */
 
 public class PathFinder extends AStar<PathFinder.Node> {
@@ -50,7 +49,7 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	protected boolean isGoal(Node node) {
 		return (node.x == zielx) && (node.y == ziely);
 	}
-	
+
 	/**
 	 * Start Knoten zu erreichendem Knoten
 	 */
@@ -65,14 +64,12 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 		return Double.MAX_VALUE;
 	}
-	
-	
 
 	protected Double h(Node from, Node to) {
 		return new Double(Math.abs(map[0].length - 1 - to.x)
 				+ Math.abs(map.length - 1 - to.y));
 	}
-	
+
 	/**
 	 * Initialisierung von Knoten x und y
 	 */
@@ -92,8 +89,8 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 	/**
 	 * Prüft, ob das geladene Spielfeld gültig ist. Sollte der StartNode keine
-	 * Verbindung zum ZielKnoten haben wird false ausgegeben. Am Ende der Prüfung
-	 * wird in der Konsole einLog geschrieben.
+	 * Verbindung zum ZielKnoten haben wird false ausgegeben. Am Ende der
+	 * Prüfung wird in der Konsole einLog geschrieben.
 	 * 
 	 * @param map
 	 *            Das Spielfeld als Integer-Array
@@ -140,6 +137,44 @@ public class PathFinder extends AStar<PathFinder.Node> {
 			System.out.println();
 			return true;
 		}
+	}
+
+	/**
+	 * Konvertiert eine Map in eine Array mit 1 fuer zerst. Bloecke + freie Wege
+	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
+	 * verwenden!
+	 * 
+	 * @param owner
+	 *            Spielfeld
+	 * @return Gibt ein Array zurueck, dass die Map als 1 und 0 enthaelt.
+	 */
+	public static int[][] convertMap(Level owner) {
+		SysEinst system = SysEinst.getSystem();
+
+		int ergebx;
+		int ergeby;
+
+		if (system.getbmllevel()) {
+			ergebx = system.getfeldxbml();
+			ergeby = system.getfeldybml();
+		} else {
+			ergebx = system.getfeldx();
+			ergeby = system.getfeldy();
+		}
+		int ergebnis[][] = new int[ergebx][ergeby];
+
+		for (int i = 0; i < ergebx; i++) {
+			for (int j = 0; j < ergeby; j++) {
+				if (owner.laxbr[i][j].isFrei()
+						|| owner.laxbr[i][j].isZerstoer()) {
+					ergebnis[i][j] = 1;
+				} else {
+					ergebnis[i][j] = 0;
+				}
+			}
+		}
+
+		return ergebnis;
 	}
 
 }
