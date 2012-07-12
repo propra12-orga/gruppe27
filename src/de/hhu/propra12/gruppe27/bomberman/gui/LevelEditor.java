@@ -15,6 +15,7 @@ import java.util.Properties;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -22,14 +23,16 @@ import de.hhu.propra12.gruppe27.bomberman.core.Block;
 import de.hhu.propra12.gruppe27.bomberman.core.Level;
 import de.hhu.propra12.gruppe27.bomberman.core.LevelGen;
 import de.hhu.propra12.gruppe27.bomberman.core.Path;
+import de.hhu.propra12.gruppe27.bomberman.core.PathFinder;
 import de.hhu.propra12.gruppe27.bomberman.core.SysEinst;
 import de.hhu.propra12.gruppe27.bomberman.core.Wall;
 
 /**
- * Klasse LevelEditor implementiert Serializable und dient der
- * Einstellung der Level
+ * Klasse LevelEditor implementiert Serializable und dient der Einstellung der
+ * Level
+ * 
  * @author Gruppe 27
- * @version 1.0 
+ * @version 1.0
  * 
  */
 
@@ -288,20 +291,42 @@ public class LevelEditor extends Level implements Serializable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int[][] ToBeChecked = convertButtonsToMap();
 
-				Properties levelstructure = new Properties();
-				levelstructure.setProperty("LEVEL", convertButtons());
-				levelstructure.setProperty("LAENGE", Integer.toString(feldx));
-				levelstructure.setProperty("BREITE", Integer.toString(feldy));
+				if ((PathFinder.check(ToBeChecked, 1, 1,
+						ToBeChecked[0].length - 2, 1))
+						&& (PathFinder.check(ToBeChecked, 1, 1,
+								ToBeChecked[0].length - 2,
+								ToBeChecked[1].length - 2))
+						&& (PathFinder.check(ToBeChecked, 1, 1, 1,
+								ToBeChecked[1].length - 2))) {
+					Properties levelstructure = new Properties();
+					levelstructure.setProperty("LEVEL", convertButtons());
+					levelstructure.setProperty("LAENGE",
+							Integer.toString(feldx));
+					levelstructure.setProperty("BREITE",
+							Integer.toString(feldy));
 
-				OpenFileDialog filedialog = new OpenFileDialog();
+					OpenFileDialog filedialog = new OpenFileDialog();
 
-				if (exportlvl(filedialog.saveFile(new Frame(),
-						"Level exportieren...", ".\\data\\levels", "*.bml"),
-						levelstructure)) {
-					System.out.println("Level erfolgreich gespeichert!");
+					if (exportlvl(
+							filedialog.saveFile(new Frame(),
+									"Level exportieren...", ".\\data\\levels",
+									"*.bml"), levelstructure)) {
+						System.out.println("Level erfolgreich gespeichert!");
+					} else {
+						System.out
+								.println("Fehler beim speichern der Leveldatei!");
+					}
 				} else {
-					System.out.println("Fehler beim speichern der Leveldatei!");
+					System.out
+							.println("Das Level ist inkonsistent!Nachricht an den Benutzer raus!\n");
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Ihr erstelltes Level ist inkonsistent!\nBitte überprüfen sie Ihr Level und wiederholen Sie den Vorgang!",
+									"Level inkonsistent!",
+									JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -376,6 +401,29 @@ public class LevelEditor extends Level implements Serializable {
 
 		}
 		return output;
+	}
+
+	/**
+	 * Konvertiert die Buttons des LevelEditors in 1 und 0 für W, B und F
+	 * 
+	 * @return Gibt ein int Array zurück in Form von 1 und 0.
+	 */
+	public int[][] convertButtonsToMap() {
+		int[][] ergebnis = new int[feldx][feldy];
+
+		for (int i = 0; i < feldx; i++) {
+			for (int j = 0; j < feldy; j++) {
+
+				if ((button[j][i].getText() == "F")
+						|| (button[j][i].getText() == "B")) {
+					ergebnis[i][j] = 1;
+				} else {
+					ergebnis[i][j] = 0;
+				}
+			}
+		}
+
+		return ergebnis;
 	}
 
 	/**

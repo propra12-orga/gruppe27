@@ -4,15 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Klasse Pathfinder extends AStar Initialisierung von zielx und
- * ziely
+ * Klasse Pathfinder extends AStar Initialisierung von zielx und ziely
  * Setter-Methode, um die Ziel-Knoten des Pathfinder festzusetzen.
+ * 
  * @param zielx
- * X-Koordinate
+ *            X-Koordinate
  * @param ziely
- * Y-Koordinate
+ *            Y-Koordinate
  * @author gruppe 27
- * @version 1.0 
+ * @version 1.0
  * 
  */
 
@@ -20,7 +20,6 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	private int[][] map;
 	public static int zielx;
 	public static int ziely;
-
 
 	public static class Node {
 		public int x;
@@ -35,9 +34,10 @@ public class PathFinder extends AStar<PathFinder.Node> {
 			return "(" + x + ", " + y + ") ";
 		}
 	}
-	
+
 	/**
 	 * Parameter map wird uebergeben
+	 * 
 	 * @param map
 	 */
 
@@ -66,7 +66,6 @@ public class PathFinder extends AStar<PathFinder.Node> {
 
 		return Double.MAX_VALUE;
 	}
-	
 
 	protected Double h(Node from, Node to) {
 		return new Double(Math.abs(map[0].length - 1 - to.x)
@@ -107,38 +106,44 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 *            Ziel-Knoten(Y-Koord.)
 	 * @return Gibt True zurueck, wenn Konsistenz-Pruefung erfolgreich. False,
 	 *         wenn die Map durchfaellt.
+	 * @author K.F.
 	 */
 	public static boolean check(int[][] map, int startx, int starty, int zielx,
 			int ziely) {
-		PathFinder.zielx = zielx;
-		PathFinder.ziely = ziely;
-		PathFinder pf = new PathFinder(map);
+		if (checkWalls(map)) { // Wände prüfen. Gar nicht erst weiter machen,
+								// wenn ein Loch besteht.
+			PathFinder.zielx = zielx;
+			PathFinder.ziely = ziely;
+			PathFinder pf = new PathFinder(map);
 
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[0].length; j++)
-				System.out.print(map[i][j] + " ");
-			System.out.println();
-		}
+			for (int i = 0; i < map.length; i++) {
+				for (int j = 0; j < map[0].length; j++)
+					System.out.print(map[i][j] + " ");
+				System.out.println();
+			}
 
-		long begin = System.currentTimeMillis();
+			long begin = System.currentTimeMillis();
 
-		List<Node> nodes = pf.compute(new PathFinder.Node(startx, starty));
+			List<Node> nodes = pf.compute(new PathFinder.Node(startx, starty));
 
-		long end = System.currentTimeMillis();
+			long end = System.currentTimeMillis();
 
-		System.out.println("Time = " + (end - begin) + " ms");
-		System.out.println("Expanded = " + pf.getExpandedCounter());
-		System.out.println("Cost = " + pf.getCost());
+			System.out.println("Time = " + (end - begin) + " ms");
+			System.out.println("Expanded = " + pf.getExpandedCounter());
+			System.out.println("Cost = " + pf.getCost());
 
-		if (nodes == null) {
-			System.out.println("No path");
-			return false;
+			if (nodes == null) {
+				System.out.println("No path");
+				return false;
+			} else {
+				System.out.print("Path = ");
+				for (Node n : nodes)
+					System.out.print(n);
+				System.out.println("\n");
+				return true;
+			}
 		} else {
-			System.out.print("Path = ");
-			for (Node n : nodes)
-				System.out.print(n);
-			System.out.println();
-			return true;
+			return false;
 		}
 	}
 
@@ -147,8 +152,9 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
 	 * verwenden!
 	 * 
+	 * @author K.F.
 	 * @param owner
-	 *            Spielfeld
+	 *            Ein Level-Objekt.
 	 * @return Gibt ein Array zurueck, dass die Map als 1 und 0 enthaelt.
 	 */
 	public static int[][] convertMap(Level owner) {
@@ -178,6 +184,33 @@ public class PathFinder extends AStar<PathFinder.Node> {
 		}
 
 		return ergebnis;
+	}
+
+	/**
+	 * Prüft ein int[][] Array auf eine eine "1" (Loch) in der Wand. Geht erst
+	 * die beiden senkrechten Wände durch dann die beiden horizontalen Wände.
+	 * 
+	 * @author K.F.
+	 * @param map
+	 *            int Array aus 1 und 0
+	 * @return Gibt True zurück, wenn alle Wände geprüft wurden und kein Loch
+	 *         besteht. False, wenn ein Loch gefunden wurde.
+	 */
+	public static boolean checkWalls(int[][] map) {
+		for (int i = 0; i < map[0].length; i++) {
+			if ((map[i][0] == 1) || (map[i][map[1].length - 1] == 1)) {
+				System.out.println("Loch in einer senkrechten Wand!\n");
+				return false;
+			} // Horizontale Wände prüfen.
+		}
+		for (int j = 0; j < map[1].length; j++) {
+			if ((map[0][j] == 1) || (map[map[0].length - 1][j] == 1)) {
+				System.out.println("Loch in einer horizontalen Wand!\n");
+				return false;
+			} // Senkrechte Wände prüfen.
+		}
+		System.out.println("W\u00e4nde: OK!\n");
+		return true;
 	}
 
 }

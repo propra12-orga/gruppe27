@@ -126,7 +126,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			if ((PathFinder.check(newLevelArray, 1, 1,
 					system.getfeldxbml() - 2, 1))
 					&& (PathFinder.check(newLevelArray, 1, 1,
-							system.getfeldx() - 2, system.getfeldybml() - 2))
+							system.getfeldxbml() - 2, system.getfeldybml() - 2))
 					&& (PathFinder.check(newLevelArray, 1, 1, 1,
 							system.getfeldybml() - 2))) {
 
