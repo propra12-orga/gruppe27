@@ -2,6 +2,9 @@ package de.hhu.propra12.gruppe27.bomberman.core;
 
 import java.io.Serializable;
 
+import de.hhu.propra12.gruppe27.bomberman.gui.Exit;
+import de.hhu.propra12.gruppe27.bomberman.gui.Special;
+
 /**
  * @autor gruppe 27
  * @version 1.0 Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
@@ -13,6 +16,8 @@ public abstract class Level implements Serializable {
 	int laenge;
 	int breite;
 	String name;
+	protected Exit e;
+	protected Special special;
 	protected AbstractFeld laxbr[][];
 
 	SysEinst system = SysEinst.getSystem();
@@ -133,6 +138,10 @@ public abstract class Level implements Serializable {
 
 	public int getbreite() {
 		return breite;
+	}
+
+	public Exit getExit() {
+		return e;
 	}
 
 }

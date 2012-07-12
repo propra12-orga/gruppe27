@@ -39,7 +39,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	Timer t;
 	private PlayerManager Players;
 	private BombManager Bombs;
-	private Exit e;
 	private Special special;
 	private GameWindow owner;
 	private SysEinst system = SysEinst.getSystem();
@@ -65,9 +64,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param levelnr
 	 * @param owner
-	 * Parameter werden uebergeben
+	 *            Parameter werden uebergeben
 	 */
-	
+
 	public Spielfeld(int levelnr, GameWindow owner) {
 		this(loadlevel(0), owner);
 	}
@@ -77,7 +76,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * @param level
 	 * @param owner
 	 *            Initialisierung von levelnr und GameWindow KeyListener wird
-	 *            hinzugefuegt 
+	 *            hinzugefuegt
 	 */
 
 	public Spielfeld(Level level, GameWindow owner) {
@@ -89,21 +88,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 		this.setSize(system.getfeldx() * 32, system.getfeldy() * 32 + 500);
 		this.setVisible(true);
 
-		/**
-		 * Ausgang wird nur bei einem Solospiel gesetzt
-		 */
-
-		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
-			setrandomexit();
-		}
-
-		/**
-		 * Ansonsten wird der Exit auf ein nicht erreichbares Feld gesetzt
-		 */
-
-		else {
-			e = new Exit(level.getFeld(0, 0));
-		}
+		// setzt das Special im Solospiel
 		if (system.getamplayer() == 1) {
 			setrandomspec();
 		}
@@ -197,28 +182,28 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			}
 
 			if (PlayerManager.ALLDEAD == intendgame) {
-				e.doOnKill(this);
+
+				level.getExit().doOnKill(this);
 			}
 
 			else if (PlayerManager.EXIT == intendgame) {
 				System.out.println("Anzahl der Schritte: "
 						+ Players.PlayerList.get(0).getCountthesteps());
-				e.doOnExit(this);
+				level.getExit().doOnExit(this);
 
 			} else if (PlayerManager.ALLDEAD == intendgame) {
-				e.doOnKill(this);
+				level.getExit().doOnKill(this);
 			}
 
 			/**
-			 * Bei Netzwerkmodus
-			 * Highscore wird ausgegeben
+			 * Bei Netzwerkmodus Highscore wird ausgegeben
 			 */
 
 			else if (system.getboolLAN()) {
 				if (PlayerManager.LASTMAN == Players.checkGameEnde())
-					e.doOnLastMan(this);
+					level.getExit().doOnLastMan(this);
 				if (PlayerManager.LASTMANP2 == Players.checkGameEnde())
-					e.doOnLastManP2(this);
+					level.getExit().doOnLastManP2(this);
 			}
 
 			else if (PlayerManager.LASTMAN == intendgame) {
@@ -231,10 +216,10 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 							+ system.getnamePlayer1() + " innerhalb von "
 							+ system.getHighscoreP2() + " Schritten getötet");
 				}
-				e.doOnLastMan(this);
+				level.getExit().doOnLastMan(this);
 
 			} else if (PlayerManager.LASTMANP2 == intendgame)
-				e.doOnLastManP2(this);
+				level.getExit().doOnLastManP2(this);
 		}
 
 		if (Players.checkspecial()) {
@@ -257,8 +242,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return level Level wird an die Methode zurueck geliefert 
-	 * Koordinaten werden initialisiert
+	 * @return level Level wird an die Methode zurueck geliefert Koordinaten
+	 *         werden initialisiert
 	 */
 
 	public AbstractFeld getFeld(int x, int y) {
@@ -280,7 +265,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param b
-	 * Bombe wird gesetzt
+	 *            Bombe wird gesetzt
 	 */
 
 	public void plantBomb(Bomb b) {
@@ -290,7 +275,7 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	/**
 	 * 
 	 * @param Feld
-	 * Bombe zerstoeren
+	 *            Bombe zerstoeren
 	 */
 
 	public void hitThings(AbstractFeld Feld) {
@@ -300,8 +285,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	/**
-	 * Einstellungen des Levels: Breite, Laenge, Grafiken, Farbe
-	 * Explosion wird zurueckgesetzt
+	 * Einstellungen des Levels: Breite, Laenge, Grafiken, Farbe Explosion wird
+	 * zurueckgesetzt
 	 */
 
 	protected void paintComponent(Graphics g) {
@@ -327,7 +312,6 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 							level.getFeld(i, j).getY() * 32, 32, 32, owner);
 				}
 
-			
 				level.setboolxplode(i, j, false);
 
 			}
@@ -345,25 +329,27 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 			Bombs.paintBombs(g);
 
 		if (false == system.getboolLAN() && 1 == system.getamplayer()) {
-			g.drawImage(imageexit, e.getX() * 32, e.getY() * 32, 32, 32, owner);
+			g.drawImage(imageexit, level.getExit().getX() * 32, level.getExit()
+					.getY() * 32, 32, 32, owner);
 
-			if (!getFeld(e.getX(), e.getY()).isFrei()) {
+			if (!getFeld(level.getExit().getX(), level.getExit().getY())
+					.isFrei()) {
 
-				g.drawImage(imagezerwand, e.getX() * 32, e.getY() * 32, 32, 32,
-						owner);
+				g.drawImage(imagezerwand, level.getExit().getX() * 32, level
+						.getExit().getY() * 32, 32, 32, owner);
 
 				// g.setColor(level.getFeld(e.getX(), e.getY()).getColor());
 				// g.fillRect(e.getX() * 32, e.getY() * 32, 32, 32);
 			}
 		}
 		if (system.getamplayer() == 1) {
-			g.drawImage(imageexit, special.getX() * 32, special.getY() * 32,
-					32, 32, owner);
+			g.drawImage(imageexit, getSpecial().getX() * 32, getSpecial()
+					.getY() * 32, 32, 32, owner);
 
-			if (!getFeld(special.getX(), special.getY()).isFrei()) {
+			if (!getFeld(getSpecial().getX(), getSpecial().getY()).isFrei()) {
 
-				g.drawImage(imagezerwand, special.getX() * 32,
-						special.getY() * 32, 32, 32, owner);
+				g.drawImage(imagezerwand, getSpecial().getX() * 32,
+						getSpecial().getY() * 32, 32, 32, owner);
 			}
 		}
 	}
@@ -376,8 +362,8 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 
 	/**
 	 * 
-	 * @author Gruppe 27 Klasse TAdapter implementiert Serializable
-	 * KeyEvents werden hinzugefuegt
+	 * @author Gruppe 27 Klasse TAdapter implementiert Serializable KeyEvents
+	 *         werden hinzugefuegt
 	 * 
 	 * 
 	 */
@@ -483,39 +469,9 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	}
 
 	/**
-	 * 
-	 * @return e e wird an die Methode zurueck geliefert
-	 */
-
-	public Exit getExit() {
-		return e;
-	}
-
-	int exitx;
-	int exity;
-
-	/**
-	 * Zufaelliger Exit wird bestimmt
-	 */
-
-	private void setrandomexit() {
-
-		if (system.getrandomlvl() == true) {
-			setcoords();
-		}
-
-		else {
-			do {
-				setcoords();
-			} while ((exitx % 2) == 0 && (exity % 2) == 0);
-		}
-
-		e = new Exit(level.getFeld(exitx, exity));
-	}
-
-	/**
 	 * Koordinaten des willkuerlich gesetzten Extis werden bestimmt
 	 */
+	int exitx, exity;
 
 	private void setcoords() {
 
@@ -541,7 +497,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	private int getrandomcoordx() {
-		int x = system.getfeldx();
+		int x;
+		if (system.getbmllevel()) {
+			x = system.getfeldxbml();
+		} else {
+			x = system.getfeldx();
+		}
 		x = (int) (x * Math.random());
 		return x;
 	}
@@ -552,7 +513,12 @@ public class Spielfeld extends JPanel implements ActionListener, Serializable {
 	 */
 
 	private int getrandomcoordy() {
-		int y = system.getfeldy();
+		int y;
+		if (system.getbmllevel()) {
+			y = system.getfeldybml();
+		} else {
+			y = system.getfeldy();
+		}
 		y = (int) ((int) y * Math.random());
 		return y;
 	}

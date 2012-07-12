@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.util.Properties;
 
@@ -205,14 +206,26 @@ public class Startmenue {
 
 				try {
 					String ip = "localhost";
-					String hostservice = ("rmi://" + ip + ":1099/host");
+					// Beispiel: String ip = "192.168.10.118";
+
 					/*
-					 * TODO hier ist eigentlich Benutzereingabe erforderlich!
-					 * String hostservice = "rmi://localhost:1099/host"; Test
-					 * URL String hostservice = "rmi://192.168.0.196:1099/host";
+					 * TODO hier ist eigentlich Benutzereingabe erforderlich! um
+					 * die IP einzugeben
 					 */
 
-					Client client = new Client(1090, "client", hostservice);
+					if (system.getPort() == -1) {
+						system.setPort(1090);
+						system.setPort2(1099);
+					}
+
+					String hostservice = ("rmi://" + ip + ":"
+							+ system.getPort2() + "/host");
+
+					Client client = new Client(system.getPort(), "client",
+							hostservice);
+
+				} catch (ConnectException e2) {
+					System.out.println("kein Server vorhanden");
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
@@ -235,8 +248,14 @@ public class Startmenue {
 				system.setboolClient(false);
 				system.setamplayer(2);
 				try {
-					// default registry port 1099
-					Host host = new Host(1099, "host");
+
+					if (system.getPort() == -1) {
+						system.setPort(1099);
+						system.setPort2(1090);
+					}
+
+					Host host = new Host(system.getPort(), "host");
+
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

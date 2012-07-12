@@ -7,6 +7,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import de.hhu.propra12.gruppe27.bomberman.core.Keyset;
@@ -19,18 +20,15 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Spielfeld;
 /**
  * 
  * @author gruppe 27
- * @version 1.0 
- * Klasse Client, Vererbung von IRemoteClient
- * URL,Spielfeld etc. wird uebergeben fuer den Client
+ * @version 1.0 Klasse Client, Vererbung von IRemoteClient URL,Spielfeld etc.
+ *          wird uebergeben fuer den Client
  */
 
 public class Client extends UnicastRemoteObject implements IRemoteClient {
 
 	private static final long serialVersionUID = 1L;
 	IRemoteHost service;
-	/*
-	 * für 2 systeme wieder reinnehmen SysEinst system = SysEinst.getSystem();
-	 */
+
 	SysEinst system = SysEinst.getSystem();
 
 	Spielfeld spielfeld = null;
@@ -63,8 +61,9 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 	}
 
 	/**
-	 * Clientname, registryPort, servicename werden erfragt
-	 * Ausnahme fuer RemoteException
+	 * Clientname, registryPort, servicename werden erfragt Ausnahme fuer
+	 * RemoteException
+	 * 
 	 * @throws RemoteException
 	 */
 
@@ -72,8 +71,17 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 			throws RemoteException {
 		String str = "client not yet published";
 		try {
+
+			if (system.getRegistry() != null) {
+				UnicastRemoteObject.unexportObject(system.getRegistry(), true);
+			}
+
 			String ip = InetAddress.getLocalHost().getHostAddress();
-			LocateRegistry.createRegistry(registryPort);
+			// LocateRegistry.createRegistry(registryPort);
+
+			Registry registry = LocateRegistry.createRegistry(registryPort);
+			system.setRegistry(registry);
+
 			str = "rmi://" + ip + ":" + registryPort + "/" + servicename;
 			Naming.rebind(str, this);
 			// System.out.println("ip host:" + ip);
@@ -83,15 +91,14 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return str;
 	}
 
 	/**
 	 * catch faengt die Ausnahemen des try-Blocks ab
-	 * @return service
-	 * service Werte werden zurueckgeliefert
+	 * 
+	 * @return service service Werte werden zurueckgeliefert
 	 */
 
 	public IRemoteHost retrieveService(String hostservice) {
@@ -107,7 +114,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		}
 		return service_;
 	}
-	
+
 	/**
 	 * Werte von Spielfeld werden uebergeben
 	 */
@@ -118,7 +125,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		spielfeld.repaint();
 
 	}
-	
+
 	/**
 	 * Initialisierung von Playerindex, Keycode und Boolean pressed
 	 */
@@ -129,7 +136,7 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	/**
 	 * Bewegung des Spielers
 	 */
@@ -143,12 +150,12 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 				.moveremote(direction);
 
 	}
-	
+
 	/**
-	 * Parameter fuer die Bewegung 
+	 * Parameter fuer die Bewegung
+	 * 
 	 * @param direction
-	 * @return O!
-	 * 0 wird aufgerufen, sollte allerdings nie vorkommen
+	 * @return O! 0 wird aufgerufen, sollte allerdings nie vorkommen
 	 */
 
 	// public int translate(int direction) {
@@ -181,6 +188,6 @@ public class Client extends UnicastRemoteObject implements IRemoteClient {
 			return Keyset.REMBOMB;
 		}
 		System.out.println("keine korrekte Uebersetzung moeglich");
-		return 0; 
+		return 0;
 	}
 }

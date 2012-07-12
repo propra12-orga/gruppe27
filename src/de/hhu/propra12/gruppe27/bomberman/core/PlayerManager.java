@@ -73,28 +73,29 @@ public class PlayerManager implements Serializable {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Ende wenn niemand mehr lebt
-	 * Ende wenn der Ausgang betreten wir
+	 * Ende wenn niemand mehr lebt Ende wenn der Ausgang betreten wir
+	 * 
 	 * @return ALLDEAD
 	 */
 
 	public int checkGameEnde() {
 
-		
 		if (countPlayersAlive() < 1) {
 			return ALLDEAD;
 		}
-	
+
 		else if (sys.getamplayer() == 1) {
 			for (int i = 0; i < PlayerList.size(); i++) {
 
-				if ((PlayerList.get(i).getX() == owner.getExit().getX())
-				// TODO rausfinden warum der vergleich der felder nicht
-				// hingehauen
-				// hat (:-/)
-						&& (PlayerList.get(i).getY() == owner.getExit().getY())) {
+				if ((PlayerList.get(i).getX() == owner.getLevel().getExit()
+						.getX())
+						// TODO rausfinden warum der vergleich der felder nicht
+						// hingehauen
+						// hat (:-/)
+						&& (PlayerList.get(i).getY() == owner.getLevel()
+								.getExit().getY())) {
 					System.out.println("X übereinstimmung!");
 					return EXIT;
 				}
