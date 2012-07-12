@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.0 Klasse zur Erstellung eines Feldes Koordinaten des Spielfeldes
  *          werden bestimmt, Feld kennt die eigenen Koordinaten
  */
-
+ 
 public abstract class AbstractFeld implements Serializable {
 
 	private static final long serialVersionUID = 1L;
