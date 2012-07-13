@@ -98,8 +98,8 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return posy Position y wird bestimmt
+	 * Parameter fuer Position y werden uebergeben
+	 * @param posy
 	 */
 
 	public void setY(int posy) {
@@ -107,8 +107,8 @@ public abstract class AbstractPlayer implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return posx Position x wird bestimmt
+	 * Parameter fuer Position x werden uebergeben
+	 * @param posx
 	 */
 
 	public void setX(int posx) {
@@ -288,12 +288,13 @@ public abstract class AbstractPlayer implements Serializable {
 	// TODO überschreiben in abgeleiteten spielern mit bildausgabe an
 	// entsprechender stelle
 
-	/**
+     /**
 	 * 
-	 * @param g
+	 * 
 	 * Spieler wird gezeichnet wenn lebend
 	 * Bilder werden eingefuegt           
 	 */
+
 
 	private Image imgSpieler1 = Toolkit
 			.getDefaultToolkit()

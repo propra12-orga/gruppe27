@@ -24,13 +24,10 @@ public class Leveleditmenue {
 
 	SysEinst system = SysEinst.getSystem();
 
-	/**
-	 * Einstellungen fuer den Leveleditor --> Feldgroesse (3
-	 * Auswahlmoeglichkeiten: 15x15, 19x19, 11x11)
-	 * 
-	 * @param system
-	 * @return sysopfield
-	 */
+/**
+ * Einstellungen fuer den Leveleditor --> Feldgroesse (3
+ * Auswahlmoeglichkeiten: 15x15, 19x19, 11x11)
+ */
 
 	public void leveleditmenue() {
 

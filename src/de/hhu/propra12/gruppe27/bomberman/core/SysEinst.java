@@ -13,7 +13,7 @@ import de.hhu.propra12.gruppe27.bomberman.netzwerk.IRemoteHost;
  * standardlvl = Festgelegte unzersoerbare Waende im Level, namePlayer =
  * Name des Spielers
  * @author gruppe 27
- * @verion 1.0 
+ * @version 1.0 
  */
 
 public class SysEinst implements Serializable {
@@ -314,8 +314,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * feldx wird aufgerufen
-	 * 
+	 * Feld x wird aufgerufen
 	 * @param feldx
 	 */
 
@@ -324,8 +323,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * feldy wird aufgerufen
-	 * 
+	 * Feld y wird aufgerufen
 	 * @param feldy
 	 */
 
@@ -404,8 +402,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * boolKI wird aufgerufen
-	 * 
+	 * Parameter fuer die KI wird aufgerufen
 	 * @param boolKI
 	 */
 
@@ -453,21 +450,19 @@ public class SysEinst implements Serializable {
 		this.MouseOverBool = MouseOverBool;
 	}
 
-	/**
-	 * namePlayer1 wird aufgerufen
-	 * 
-	 * @param namePlayer1
-	 */
+/**
+ * Parameter fuer levelpath wird aufgerufen
+ * @param levelpath
+ */
 
 	public void setlevelpath(String levelpath) {
 		this.levelpath = levelpath;
 	}
 
-	/**
-	 * levelname wird aufgerufen
-	 * 
-	 * @param levelname
-	 */
+/**
+ * Parameter fuer levelname wird aufgerufen
+ * @param levelname
+ */
 
 	public void setlevelname(String levelname) {
 		this.levelname = levelname;
@@ -475,7 +470,6 @@ public class SysEinst implements Serializable {
 
 	/**
 	 * namePlayer1 wird aufgerufen
-	 * 
 	 * @param namePlayer1
 	 */
 
@@ -524,9 +518,8 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * remotehost wird aufgerufen
-	 * 
-	 * @return remotehost
+	 * Parameter remoteclient wird aufgerufen
+	 * @param remoteclient
 	 */
 
 	public void setRemoteClient(IRemoteClient remoteclient) {
@@ -534,8 +527,8 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return highscoreP1 highscore fuer Spieler 1 wird aufgerufen
+	 * Highscore von Spieler 1
+	 * @return highscoreP1
 	 */
 
 	public int getHighscoreP1() {
@@ -555,7 +548,7 @@ public class SysEinst implements Serializable {
 	/**
 	 * 
 	 * @return highscoreP2
-	 * @see Spieler 1
+	 * Highscore fuer Spieler 2
 	 */
 
 	public int getHighscoreP2() {
@@ -563,7 +556,7 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * @see Spieler 1
+	 * Highscore fuer Spieler 2
 	 * @param highscoreP2
 	 */
 

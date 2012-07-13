@@ -51,9 +51,10 @@ public class PlayerManager implements Serializable {
 
 	/**
 	 * 
-	 * @return true liefert true zurueck wenn das spiel zu ende ist(also wenn
-	 *         ein spieler das Ende erreicht)
+	 *true wird uebergeben wenn das spiel zu ende ist(also wenn
+	 *ein spieler das Ende erreicht)
 	 */
+	 
 
 	public final static int ENDE = 0, ALLDEAD = 1, EXIT = 2, LASTMAN = 3,
 			LASTMANP2 = 4;

@@ -26,9 +26,6 @@ public class Optionfield {
 	/**
 	 * Einstellungen fuer das Optionsmenue --> Spielfeldgroesse (3
 	 * Auswahlmoeglichkeiten: 15x15, 19x19, 11x11)
-	 * 
-	 * @param system
-	 * 
 	 */
 
 	public void opfieldEinst() {

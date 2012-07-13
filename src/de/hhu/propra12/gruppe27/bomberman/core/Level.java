@@ -6,9 +6,10 @@ import de.hhu.propra12.gruppe27.bomberman.gui.Exit;
 import de.hhu.propra12.gruppe27.bomberman.gui.Special;
 
 /**
+ * /**
  * Oberklasse fuer alle Level, Leveleigenschaften werden festgelegt
- * @autor gruppe 27
- * @version 1.0 
+ * @author gruppe 27
+ * @version 1.0
  */
 
 public abstract class Level implements Serializable {

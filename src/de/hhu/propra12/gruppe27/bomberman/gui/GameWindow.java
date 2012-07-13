@@ -43,15 +43,9 @@ repaint();
 }
 
 /**
-*
-* @param levelnr
-* @param isclient
-* @param system
-* @param spielfeld
-* Konstruktor fuer Client im Netzwerk
-* Festlegung der Groesse (x und y Koordinate) Fenster wird mittig
-* gesetzt
-*/
+ * Der Kunstruktor ruft den Client auf
+ * @param level
+ */
 
 public GameWindow(Level level) {
 System.out.println("Konstruktor client called");

@@ -37,14 +37,13 @@ public class Optionmenue {
 
 	/**
 	 * Methode um das Optionsmenue aufzurufen
-	 * 
-	 * @param system
-	 * @return sys Systemeinstellungen koennen getaetigt werden, Buttons werden
+	 sys Systemeinstellungen koennen getaetigt werden, Buttons werden
 	 * definiert       
 	 * Mauerdichte kann eingestellt werden (Fenster wird geoeffnet) -->
 	 * zerstoerbare Waende
 	 * Spiegelung und Standardlevel koennen ein bzw. ausgestellt werden
 	 */
+
 
 	public void optionaufruf() {
 

@@ -107,7 +107,6 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 * @return Gibt True zurueck, wenn Konsistenz-Pruefung erfolgreich. False,
 	 *         wenn die Map durchfaellt. Waende werden geprueft, wenn ein Loch
 	 *         besteht wird nicht weiter gemacht
-	 * @author gruppe 27
 	 */
 	public static boolean check(int[][] map, int startx, int starty, int zielx,
 			int ziely) {
@@ -151,10 +150,8 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	 * Konvertiert eine Map in eine Array mit 1 fuer zerst. Bloecke + freie Wege
 	 * und 0 fuer unzerst. Bloecke...Wird benoetigt, um A*-PathFinder zu
 	 * verwenden!
-	 * 
-	 * @author K.F.
 	 * @param owner
-	 *            Ein Level-Objekt.
+	 * Ein Level-Objekt.
 	 * @return Gibt ein Array zurueck, dass die Map als 1 und 0 enthaelt.
 	 */
 	public static int[][] convertMap(Level owner) {
@@ -189,8 +186,6 @@ public class PathFinder extends AStar<PathFinder.Node> {
 	/**
 	 * Prueft ein int[][] Array auf eine eine "1" (Loch) in der Wand. Geht erst
 	 * die beiden senkrechten Waende durch dann die beiden horizontalen Waende.
-	 * 
-	 * @author K.F.
 	 * @param map
 	 *            int Array aus 1 und 0
 	 * @return Gibt True zurueck, wenn alle Waende geprueft wurden und kein Loch

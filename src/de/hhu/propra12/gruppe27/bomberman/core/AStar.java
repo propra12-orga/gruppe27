@@ -119,7 +119,7 @@ public abstract class AStar<T>
 		}
 
 	/**
-	 * @see oben
+	 * paths und mindists werden neu bestimmt
 	 */
 		public AStar(){
 				paths = new PriorityQueue<Path>();

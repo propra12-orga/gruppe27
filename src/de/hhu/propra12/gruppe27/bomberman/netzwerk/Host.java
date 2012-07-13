@@ -159,9 +159,9 @@ public class Host extends UnicastRemoteObject implements IRemoteHost {
 	}
 
 	/**
-	 * @see client
+	 * Parameter fuer die Bewegung
 	 * @param direction
-	 * @return
+	 * @return O! 0 wird aufgerufen, sollte allerdings nie vorkommen
 	 */
 
 	// public int translate(int direction) {

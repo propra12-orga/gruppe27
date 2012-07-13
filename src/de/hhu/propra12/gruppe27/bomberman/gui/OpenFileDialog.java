@@ -16,7 +16,6 @@ import java.awt.Frame;
  * @param fileType
  * Dateityp, der angezeigt werden soll. "*" dient als Platzhalter
  * fuer beliebig viele Zeichen.
- * @return Gibt den totalen Pfad der ausgeaehlten Datei zurueck.
  * @author Gruppe 27
  * @version 1.0
  *

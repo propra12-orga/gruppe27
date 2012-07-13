@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Klasse zur Erstellung der nicht zerstoerbaren Waende
  * @author Gruppe 27
- * @verison 1.0 
+ * @version 1.0 
  */
 public class Wall extends AbstractFeld implements Serializable {
 
