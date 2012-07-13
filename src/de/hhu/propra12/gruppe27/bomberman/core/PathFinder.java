@@ -126,7 +126,8 @@ public class PathFinder extends AStar<PathFinder.Node> {
 			List<Node> nodes = pf.compute(new PathFinder.Node(startx, starty));
 
 			long end = System.currentTimeMillis();
-
+			System.out.println("Start: (" + startx + "|" + starty + ")");
+			System.out.println("Ziel: (" + zielx + "|" + ziely + ")");
 			System.out.println("Time = " + (end - begin) + " ms");
 			System.out.println("Expanded = " + pf.getExpandedCounter());
 			System.out.println("Cost = " + pf.getCost());
