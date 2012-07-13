@@ -334,7 +334,6 @@ public class SysEinst implements Serializable {
 	/**
 	 * feldx wird aufgerufen
 	 * 
-	 * @param feldx
 	 */
 
 	public void setfeldxbml(int feldxbml) {
@@ -344,7 +343,6 @@ public class SysEinst implements Serializable {
 	/**
 	 * feldy wird aufgerufen
 	 * 
-	 * @param feldy
 	 */
 
 	public void setfeldybml(int feldybml) {
@@ -394,7 +392,6 @@ public class SysEinst implements Serializable {
 	/**
 	 * bmllevel wird aufgerufen
 	 * 
-	 * @param bmllevel
 	 */
 
 	public void setbmllevel(boolean bmllvl) {
@@ -508,9 +505,8 @@ public class SysEinst implements Serializable {
 	}
 
 	/**
-	 * remotehost wird aufgerufen
-	 * 
-	 * @return remotehost
+	 * Parameter remotehost wird aufgerufen
+	 * @param remotehost
 	 */
 
 	public void setRemoteHost(IRemoteHost remotehost) {
