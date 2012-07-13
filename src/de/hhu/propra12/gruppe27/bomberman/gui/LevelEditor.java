@@ -295,10 +295,13 @@ public class LevelEditor extends Level implements Serializable {
 
 				if ((PathFinder.check(ToBeChecked, 1, 1,
 						ToBeChecked[0].length - 2, 1))
-						&& (PathFinder.check(ToBeChecked, 1, 1,
+						&& (PathFinder.check(ToBeChecked,
+								ToBeChecked[0].length - 2, 1,
 								ToBeChecked[0].length - 2,
 								ToBeChecked[1].length - 2))
-						&& (PathFinder.check(ToBeChecked, 1, 1, 1,
+						&& (PathFinder.check(ToBeChecked,
+								ToBeChecked[0].length - 2,
+								ToBeChecked[1].length - 2, 1,
 								ToBeChecked[1].length - 2))) {
 					Properties levelstructure = new Properties();
 					levelstructure.setProperty("LEVEL", convertButtons());
